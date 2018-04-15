@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+
+    <!--application.yml 传递参数，不能使用logback 自带的<property>标签 -->
+    <springProperty scope="context" name="appname" source="logback.appname"/>
+    <springProperty scope="context" name="logdir" source="logback.logdir"/>
+    <springProperty scope="context" name="level" source="logback.level"/>
+
+    <contextName>${appname}</contextName>
+    <jmxConfigurator />
+
+    <!-- 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-5level [%contextName] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %logger [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- error输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份) -->
+    <appender name="FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logdir}${appname}-error.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level><!-- WARN以下的拒绝,等于或以上的中立 -->
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><!-- rollover daily -->
+            <FileNamePattern>${logdir}${appname}-err-%d{yyyy-MM-dd}.%i.zip</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize><!-- or whenever the file size reaches 50MB -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-5level [%contextName] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %logger [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 记录所有日志 -->
+    <appender name="FILE-ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logdir}${appname}-all.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>${level}</level><!-- WARN以下的拒绝,等于或以上的中立 -->
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><!-- rollover daily -->
+            <FileNamePattern>${logdir}${appname}-all-%d{yyyy-MM-dd}.%i.zip</FileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize><!-- or whenever the file size reaches 50MB -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-5level [%contextName] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %logger [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="${level}">
+         <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE-ERROR" />
+        <appender-ref ref="FILE-ALL" />
+    </root>
+</configuration>

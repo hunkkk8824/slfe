@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.RolePermissionRelationPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.RolePermissionRelationPO" >
+    <id column="rolePermissionRelationId" property="rolepermissionrelationid" jdbcType="INTEGER" />
+    <result column="roleId" property="roleid" jdbcType="INTEGER" />
+    <result column="permissionId" property="permissionid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createUserId" property="createuserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rolePermissionRelationId, roleId, permissionId, createTime, createUserId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbrolepermissionrelation
+    where rolePermissionRelationId = #{rolepermissionrelationid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbrolepermissionrelation
+    where rolePermissionRelationId = #{rolepermissionrelationid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.RolePermissionRelationPO" >
+    insert into tbrolepermissionrelation (rolePermissionRelationId, roleId, 
+      permissionId, createTime, createUserId
+      )
+    values (#{rolepermissionrelationid,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}, 
+      #{permissionid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.RolePermissionRelationPO" >
+    insert into tbrolepermissionrelation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rolepermissionrelationid != null" >
+        rolePermissionRelationId,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="permissionid != null" >
+        permissionId,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="createuserid != null" >
+        createUserId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rolepermissionrelationid != null" >
+        #{rolepermissionrelationid,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="permissionid != null" >
+        #{permissionid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.RolePermissionRelationPO" >
+    update tbrolepermissionrelation
+    <set >
+      <if test="roleid != null" >
+        roleId = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="permissionid != null" >
+        permissionId = #{permissionid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        createUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rolePermissionRelationId = #{rolepermissionrelationid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.RolePermissionRelationPO" >
+    update tbrolepermissionrelation
+    set roleId = #{roleid,jdbcType=INTEGER},
+      permissionId = #{permissionid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createUserId = #{createuserid,jdbcType=VARCHAR}
+    where rolePermissionRelationId = #{rolepermissionrelationid,jdbcType=INTEGER}
+  </update>
+</mapper>

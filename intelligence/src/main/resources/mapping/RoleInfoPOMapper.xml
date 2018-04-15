@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.RoleInfoPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.RoleInfoPO" >
+    <id column="roleId" property="roleid" jdbcType="INTEGER" />
+    <result column="roleCode" property="rolecode" jdbcType="VARCHAR" />
+    <result column="roleName" property="rolename" jdbcType="VARCHAR" />
+    <result column="productCode" property="productcode" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="lastModifyTime" property="lastmodifytime" jdbcType="TIMESTAMP" />
+    <result column="lastModifyUserId" property="lastmodifyuserid" jdbcType="VARCHAR" />
+    <result column="valid" property="valid" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    roleId, roleCode, roleName, productCode, createTime, createUserId, lastModifyTime, 
+    lastModifyUserId, valid
+  </sql>
+
+  <select id="getRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT
+    r.roleId,
+    r.roleName,
+    r.roleCode,
+    r.productCode,
+    r.createTime,
+    r.createUserId,
+    r.lastModifyTime,
+    r.lastModifyUserId,
+    r.valid
+    FROM tbRoleInfo r INNER JOIN tbUserRoleRelation ur ON r.roleId = ur.roleId
+    WHERE r.valid = 1 AND ur.userId = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbroleinfo
+    where roleId = #{roleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbroleinfo
+    where roleId = #{roleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.RoleInfoPO" >
+    insert into tbroleinfo (roleId, roleCode, roleName, 
+      productCode, createTime, createUserId, 
+      lastModifyTime, lastModifyUserId, valid
+      )
+    values (#{roleid,jdbcType=INTEGER}, #{rolecode,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, 
+      #{productcode,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=VARCHAR}, 
+      #{lastmodifytime,jdbcType=TIMESTAMP}, #{lastmodifyuserid,jdbcType=VARCHAR}, #{valid,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.RoleInfoPO" >
+    insert into tbroleinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="rolecode != null" >
+        roleCode,
+      </if>
+      <if test="rolename != null" >
+        roleName,
+      </if>
+      <if test="productcode != null" >
+        productCode,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="createuserid != null" >
+        createUserId,
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime,
+      </if>
+      <if test="lastmodifyuserid != null" >
+        lastModifyUserId,
+      </if>
+      <if test="valid != null" >
+        valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="rolecode != null" >
+        #{rolecode,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null" >
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null" >
+        #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifytime != null" >
+        #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifyuserid != null" >
+        #{lastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.RoleInfoPO" >
+    update tbroleinfo
+    <set >
+      <if test="rolecode != null" >
+        roleCode = #{rolecode,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null" >
+        roleName = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null" >
+        productCode = #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        createUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifyuserid != null" >
+        lastModifyUserId = #{lastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
+    </set>
+    where roleId = #{roleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.RoleInfoPO" >
+    update tbroleinfo
+    set roleCode = #{rolecode,jdbcType=VARCHAR},
+      roleName = #{rolename,jdbcType=VARCHAR},
+      productCode = #{productcode,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createUserId = #{createuserid,jdbcType=VARCHAR},
+      lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastmodifyuserid,jdbcType=VARCHAR},
+      valid = #{valid,jdbcType=BIT}
+    where roleId = #{roleid,jdbcType=INTEGER}
+  </update>
+</mapper>

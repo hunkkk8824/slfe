@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.VehiclePOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.VehiclePO" >
+    <id column="vehicleId" property="vehicleid" jdbcType="INTEGER" />
+    <result column="vehicleCode" property="vehiclecode" jdbcType="VARCHAR" />
+    <result column="plateNum" property="platenum" jdbcType="VARCHAR" />
+    <result column="plateColorCode" property="platecolorcode" jdbcType="VARCHAR" />
+    <result column="plateColorName" property="platecolorname" jdbcType="VARCHAR" />
+    <result column="simNum" property="simnum" jdbcType="VARCHAR" />
+    <result column="provinceId" property="provinceid" jdbcType="INTEGER" />
+    <result column="provinceName" property="provincename" jdbcType="VARCHAR" />
+    <result column="cityId" property="cityid" jdbcType="INTEGER" />
+    <result column="cityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="districtId" property="districtid" jdbcType="INTEGER" />
+    <result column="districtName" property="districtname" jdbcType="VARCHAR" />
+    <result column="companyId" property="companyid" jdbcType="INTEGER" />
+    <result column="companyName" property="companyname" jdbcType="VARCHAR" />
+    <result column="vehicleTypeId" property="vehicletypeid" jdbcType="INTEGER" />
+    <result column="vehicleTypeCode" property="vehicletypecode" jdbcType="VARCHAR" />
+    <result column="vehicleTypeName" property="vehicletypename" jdbcType="VARCHAR" />
+    <result column="terminalTypeId" property="terminaltypeid" jdbcType="INTEGER" />
+    <result column="terminalTypeName" property="terminaltypename" jdbcType="VARCHAR" />
+    <result column="terminalModel" property="terminalmodel" jdbcType="VARCHAR" />
+    <result column="operatorId" property="operatorid" jdbcType="INTEGER" />
+    <result column="operatorName" property="operatorname" jdbcType="VARCHAR" />
+    <result column="platformCode" property="platformcode" jdbcType="VARCHAR" />
+    <result column="VehicleOperateTypeId" property="vehicleoperatetypeid" jdbcType="INTEGER" />
+    <result column="VehicleOperateTypeCode" property="vehicleoperatetypecode" jdbcType="VARCHAR" />
+    <result column="VehicleOperateTypeName" property="vehicleoperatetypename" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="lastModifyTime" property="lastmodifytime" jdbcType="TIMESTAMP" />
+    <result column="lastModifyUserId" property="lastmodifyuserid" jdbcType="VARCHAR" />
+    <result column="valid" property="valid" jdbcType="BIT" />
+    <result column="operState" property="operstate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vehicleId, vehicleCode, plateNum, plateColorCode, plateColorName, simNum, provinceId, 
+    provinceName, cityId, cityName, districtId, districtName, companyId, companyName, 
+    vehicleTypeId, vehicleTypeCode, vehicleTypeName, terminalTypeId, terminalTypeName, 
+    terminalModel, operatorId, operatorName, platformCode, VehicleOperateTypeId, VehicleOperateTypeCode, 
+    VehicleOperateTypeName, createTime, createUserId, lastModifyTime, lastModifyUserId, 
+    valid, operState
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from tbvehicle
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbvehicle
+    where vehicleId = #{vehicleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbvehicle
+    where vehicleId = #{vehicleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.VehiclePO" >
+    insert into tbvehicle (vehicleId, vehicleCode, plateNum, 
+      plateColorCode, plateColorName, simNum, 
+      provinceId, provinceName, cityId, 
+      cityName, districtId, districtName, 
+      companyId, companyName, vehicleTypeId, 
+      vehicleTypeCode, vehicleTypeName, terminalTypeId, 
+      terminalTypeName, terminalModel, operatorId, 
+      operatorName, platformCode, VehicleOperateTypeId, 
+      VehicleOperateTypeCode, VehicleOperateTypeName, 
+      createTime, createUserId, lastModifyTime, 
+      lastModifyUserId, valid, operState
+      )
+    values (#{vehicleid,jdbcType=INTEGER}, #{vehiclecode,jdbcType=VARCHAR}, #{platenum,jdbcType=VARCHAR}, 
+      #{platecolorcode,jdbcType=VARCHAR}, #{platecolorname,jdbcType=VARCHAR}, #{simnum,jdbcType=VARCHAR}, 
+      #{provinceid,jdbcType=INTEGER}, #{provincename,jdbcType=VARCHAR}, #{cityid,jdbcType=INTEGER}, 
+      #{cityname,jdbcType=VARCHAR}, #{districtid,jdbcType=INTEGER}, #{districtname,jdbcType=VARCHAR}, 
+      #{companyid,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, #{vehicletypeid,jdbcType=INTEGER}, 
+      #{vehicletypecode,jdbcType=VARCHAR}, #{vehicletypename,jdbcType=VARCHAR}, #{terminaltypeid,jdbcType=INTEGER}, 
+      #{terminaltypename,jdbcType=VARCHAR}, #{terminalmodel,jdbcType=VARCHAR}, #{operatorid,jdbcType=INTEGER}, 
+      #{operatorname,jdbcType=VARCHAR}, #{platformcode,jdbcType=VARCHAR}, #{vehicleoperatetypeid,jdbcType=INTEGER}, 
+      #{vehicleoperatetypecode,jdbcType=VARCHAR}, #{vehicleoperatetypename,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=VARCHAR}, #{lastmodifytime,jdbcType=TIMESTAMP}, 
+      #{lastmodifyuserid,jdbcType=VARCHAR}, #{valid,jdbcType=BIT}, #{operstate,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.VehiclePO" >
+    insert into tbvehicle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vehicleid != null" >
+        vehicleId,
+      </if>
+      <if test="vehiclecode != null" >
+        vehicleCode,
+      </if>
+      <if test="platenum != null" >
+        plateNum,
+      </if>
+      <if test="platecolorcode != null" >
+        plateColorCode,
+      </if>
+      <if test="platecolorname != null" >
+        plateColorName,
+      </if>
+      <if test="simnum != null" >
+        simNum,
+      </if>
+      <if test="provinceid != null" >
+        provinceId,
+      </if>
+      <if test="provincename != null" >
+        provinceName,
+      </if>
+      <if test="cityid != null" >
+        cityId,
+      </if>
+      <if test="cityname != null" >
+        cityName,
+      </if>
+      <if test="districtid != null" >
+        districtId,
+      </if>
+      <if test="districtname != null" >
+        districtName,
+      </if>
+      <if test="companyid != null" >
+        companyId,
+      </if>
+      <if test="companyname != null" >
+        companyName,
+      </if>
+      <if test="vehicletypeid != null" >
+        vehicleTypeId,
+      </if>
+      <if test="vehicletypecode != null" >
+        vehicleTypeCode,
+      </if>
+      <if test="vehicletypename != null" >
+        vehicleTypeName,
+      </if>
+      <if test="terminaltypeid != null" >
+        terminalTypeId,
+      </if>
+      <if test="terminaltypename != null" >
+        terminalTypeName,
+      </if>
+      <if test="terminalmodel != null" >
+        terminalModel,
+      </if>
+      <if test="operatorid != null" >
+        operatorId,
+      </if>
+      <if test="operatorname != null" >
+        operatorName,
+      </if>
+      <if test="platformcode != null" >
+        platformCode,
+      </if>
+      <if test="vehicleoperatetypeid != null" >
+        VehicleOperateTypeId,
+      </if>
+      <if test="vehicleoperatetypecode != null" >
+        VehicleOperateTypeCode,
+      </if>
+      <if test="vehicleoperatetypename != null" >
+        VehicleOperateTypeName,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="createuserid != null" >
+        createUserId,
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime,
+      </if>
+      <if test="lastmodifyuserid != null" >
+        lastModifyUserId,
+      </if>
+      <if test="valid != null" >
+        valid,
+      </if>
+      <if test="operstate != null" >
+        operState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vehicleid != null" >
+        #{vehicleid,jdbcType=INTEGER},
+      </if>
+      <if test="vehiclecode != null" >
+        #{vehiclecode,jdbcType=VARCHAR},
+      </if>
+      <if test="platenum != null" >
+        #{platenum,jdbcType=VARCHAR},
+      </if>
+      <if test="platecolorcode != null" >
+        #{platecolorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="platecolorname != null" >
+        #{platecolorname,jdbcType=VARCHAR},
+      </if>
+      <if test="simnum != null" >
+        #{simnum,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="provincename != null" >
+        #{provincename,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="districtid != null" >
+        #{districtid,jdbcType=INTEGER},
+      </if>
+      <if test="districtname != null" >
+        #{districtname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicletypeid != null" >
+        #{vehicletypeid,jdbcType=INTEGER},
+      </if>
+      <if test="vehicletypecode != null" >
+        #{vehicletypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicletypename != null" >
+        #{vehicletypename,jdbcType=VARCHAR},
+      </if>
+      <if test="terminaltypeid != null" >
+        #{terminaltypeid,jdbcType=INTEGER},
+      </if>
+      <if test="terminaltypename != null" >
+        #{terminaltypename,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalmodel != null" >
+        #{terminalmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorid != null" >
+        #{operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="operatorname != null" >
+        #{operatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="platformcode != null" >
+        #{platformcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleoperatetypeid != null" >
+        #{vehicleoperatetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleoperatetypecode != null" >
+        #{vehicleoperatetypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleoperatetypename != null" >
+        #{vehicleoperatetypename,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifytime != null" >
+        #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifyuserid != null" >
+        #{lastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+      <if test="operstate != null" >
+        #{operstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.VehiclePO" >
+    update tbvehicle
+    <set >
+      <if test="vehiclecode != null" >
+        vehicleCode = #{vehiclecode,jdbcType=VARCHAR},
+      </if>
+      <if test="platenum != null" >
+        plateNum = #{platenum,jdbcType=VARCHAR},
+      </if>
+      <if test="platecolorcode != null" >
+        plateColorCode = #{platecolorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="platecolorname != null" >
+        plateColorName = #{platecolorname,jdbcType=VARCHAR},
+      </if>
+      <if test="simnum != null" >
+        simNum = #{simnum,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        provinceId = #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="provincename != null" >
+        provinceName = #{provincename,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        cityId = #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null" >
+        cityName = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="districtid != null" >
+        districtId = #{districtid,jdbcType=INTEGER},
+      </if>
+      <if test="districtname != null" >
+        districtName = #{districtname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        companyId = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="companyname != null" >
+        companyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicletypeid != null" >
+        vehicleTypeId = #{vehicletypeid,jdbcType=INTEGER},
+      </if>
+      <if test="vehicletypecode != null" >
+        vehicleTypeCode = #{vehicletypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicletypename != null" >
+        vehicleTypeName = #{vehicletypename,jdbcType=VARCHAR},
+      </if>
+      <if test="terminaltypeid != null" >
+        terminalTypeId = #{terminaltypeid,jdbcType=INTEGER},
+      </if>
+      <if test="terminaltypename != null" >
+        terminalTypeName = #{terminaltypename,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalmodel != null" >
+        terminalModel = #{terminalmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorid != null" >
+        operatorId = #{operatorid,jdbcType=INTEGER},
+      </if>
+      <if test="operatorname != null" >
+        operatorName = #{operatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="platformcode != null" >
+        platformCode = #{platformcode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleoperatetypeid != null" >
+        VehicleOperateTypeId = #{vehicleoperatetypeid,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleoperatetypecode != null" >
+        VehicleOperateTypeCode = #{vehicleoperatetypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleoperatetypename != null" >
+        VehicleOperateTypeName = #{vehicleoperatetypename,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        createUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifyuserid != null" >
+        lastModifyUserId = #{lastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
+      <if test="operstate != null" >
+        operState = #{operstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where vehicleId = #{vehicleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.VehiclePO" >
+    update tbvehicle
+    set vehicleCode = #{vehiclecode,jdbcType=VARCHAR},
+      plateNum = #{platenum,jdbcType=VARCHAR},
+      plateColorCode = #{platecolorcode,jdbcType=VARCHAR},
+      plateColorName = #{platecolorname,jdbcType=VARCHAR},
+      simNum = #{simnum,jdbcType=VARCHAR},
+      provinceId = #{provinceid,jdbcType=INTEGER},
+      provinceName = #{provincename,jdbcType=VARCHAR},
+      cityId = #{cityid,jdbcType=INTEGER},
+      cityName = #{cityname,jdbcType=VARCHAR},
+      districtId = #{districtid,jdbcType=INTEGER},
+      districtName = #{districtname,jdbcType=VARCHAR},
+      companyId = #{companyid,jdbcType=INTEGER},
+      companyName = #{companyname,jdbcType=VARCHAR},
+      vehicleTypeId = #{vehicletypeid,jdbcType=INTEGER},
+      vehicleTypeCode = #{vehicletypecode,jdbcType=VARCHAR},
+      vehicleTypeName = #{vehicletypename,jdbcType=VARCHAR},
+      terminalTypeId = #{terminaltypeid,jdbcType=INTEGER},
+      terminalTypeName = #{terminaltypename,jdbcType=VARCHAR},
+      terminalModel = #{terminalmodel,jdbcType=VARCHAR},
+      operatorId = #{operatorid,jdbcType=INTEGER},
+      operatorName = #{operatorname,jdbcType=VARCHAR},
+      platformCode = #{platformcode,jdbcType=VARCHAR},
+      VehicleOperateTypeId = #{vehicleoperatetypeid,jdbcType=INTEGER},
+      VehicleOperateTypeCode = #{vehicleoperatetypecode,jdbcType=VARCHAR},
+      VehicleOperateTypeName = #{vehicleoperatetypename,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createUserId = #{createuserid,jdbcType=VARCHAR},
+      lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastmodifyuserid,jdbcType=VARCHAR},
+      valid = #{valid,jdbcType=BIT},
+      operState = #{operstate,jdbcType=INTEGER}
+    where vehicleId = #{vehicleid,jdbcType=INTEGER}
+  </update>
+</mapper>

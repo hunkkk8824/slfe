@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.PermissionInfoPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.PermissionInfoPO" >
+    <id column="permissionId" property="permissionid" jdbcType="INTEGER" />
+    <result column="permissionName" property="permissionname" jdbcType="VARCHAR" />
+    <result column="permissionCode" property="permissioncode" jdbcType="VARCHAR" />
+    <result column="permissionType" property="permissiontype" jdbcType="SMALLINT" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="isIndexDisplay" property="isindexdisplay" jdbcType="BIT" />
+    <result column="menuUrl" property="menuurl" jdbcType="VARCHAR" />
+    <result column="productCode" property="productcode" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="lastModifyTime" property="lastmodifytime" jdbcType="TIMESTAMP" />
+    <result column="lastModifyUserId" property="lastmodifyuserid" jdbcType="VARCHAR" />
+    <result column="valid" property="valid" jdbcType="BIT" />
+    <result column="menuIcon" property="menuicon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    permissionId, permissionName, permissionCode, permissionType, parentId, isIndexDisplay, 
+    menuUrl, productCode, createTime, createUserId, lastModifyTime, lastModifyUserId, 
+    valid, menuIcon
+  </sql>
+
+  <select id="getPermissionsByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT p.*
+    FROM tbPermissionInfo p
+    INNER JOIN tbRolePermissionRelation rp ON rp.permissionId = p.permissionId
+    INNER JOIN tbRoleInfo r ON r.roleId = rp.roleId
+    INNER JOIN tbUserRoleRelation ur ON ur.roleId = r.roleId
+    WHERE p.valid = 1
+    AND r.valid = 1
+    AND ur.userId = #{userId,jdbcType=INTEGER}
+    order by permissionId
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbpermissioninfo
+    where permissionId = #{permissionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbpermissioninfo
+    where permissionId = #{permissionid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.PermissionInfoPO" >
+    insert into tbpermissioninfo (permissionId, permissionName, permissionCode, 
+      permissionType, parentId, isIndexDisplay, 
+      menuUrl, productCode, createTime, 
+      createUserId, lastModifyTime, lastModifyUserId, 
+      valid, menuIcon)
+    values (#{permissionid,jdbcType=INTEGER}, #{permissionname,jdbcType=VARCHAR}, #{permissioncode,jdbcType=VARCHAR}, 
+      #{permissiontype,jdbcType=SMALLINT}, #{parentid,jdbcType=INTEGER}, #{isindexdisplay,jdbcType=BIT}, 
+      #{menuurl,jdbcType=VARCHAR}, #{productcode,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createuserid,jdbcType=VARCHAR}, #{lastmodifytime,jdbcType=TIMESTAMP}, #{lastmodifyuserid,jdbcType=VARCHAR}, 
+      #{valid,jdbcType=BIT}, #{menuicon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.PermissionInfoPO" >
+    insert into tbpermissioninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permissionid != null" >
+        permissionId,
+      </if>
+      <if test="permissionname != null" >
+        permissionName,
+      </if>
+      <if test="permissioncode != null" >
+        permissionCode,
+      </if>
+      <if test="permissiontype != null" >
+        permissionType,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="isindexdisplay != null" >
+        isIndexDisplay,
+      </if>
+      <if test="menuurl != null" >
+        menuUrl,
+      </if>
+      <if test="productcode != null" >
+        productCode,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="createuserid != null" >
+        createUserId,
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime,
+      </if>
+      <if test="lastmodifyuserid != null" >
+        lastModifyUserId,
+      </if>
+      <if test="valid != null" >
+        valid,
+      </if>
+      <if test="menuicon != null" >
+        menuIcon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permissionid != null" >
+        #{permissionid,jdbcType=INTEGER},
+      </if>
+      <if test="permissionname != null" >
+        #{permissionname,jdbcType=VARCHAR},
+      </if>
+      <if test="permissioncode != null" >
+        #{permissioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissiontype != null" >
+        #{permissiontype,jdbcType=SMALLINT},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="isindexdisplay != null" >
+        #{isindexdisplay,jdbcType=BIT},
+      </if>
+      <if test="menuurl != null" >
+        #{menuurl,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null" >
+        #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifytime != null" >
+        #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifyuserid != null" >
+        #{lastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+      <if test="menuicon != null" >
+        #{menuicon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.PermissionInfoPO" >
+    update tbpermissioninfo
+    <set >
+      <if test="permissionname != null" >
+        permissionName = #{permissionname,jdbcType=VARCHAR},
+      </if>
+      <if test="permissioncode != null" >
+        permissionCode = #{permissioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissiontype != null" >
+        permissionType = #{permissiontype,jdbcType=SMALLINT},
+      </if>
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="isindexdisplay != null" >
+        isIndexDisplay = #{isindexdisplay,jdbcType=BIT},
+      </if>
+      <if test="menuurl != null" >
+        menuUrl = #{menuurl,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null" >
+        productCode = #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        createUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifyuserid != null" >
+        lastModifyUserId = #{lastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
+      <if test="menuicon != null" >
+        menuIcon = #{menuicon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where permissionId = #{permissionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.PermissionInfoPO" >
+    update tbpermissioninfo
+    set permissionName = #{permissionname,jdbcType=VARCHAR},
+      permissionCode = #{permissioncode,jdbcType=VARCHAR},
+      permissionType = #{permissiontype,jdbcType=SMALLINT},
+      parentId = #{parentid,jdbcType=INTEGER},
+      isIndexDisplay = #{isindexdisplay,jdbcType=BIT},
+      menuUrl = #{menuurl,jdbcType=VARCHAR},
+      productCode = #{productcode,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createUserId = #{createuserid,jdbcType=VARCHAR},
+      lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastmodifyuserid,jdbcType=VARCHAR},
+      valid = #{valid,jdbcType=BIT},
+      menuIcon = #{menuicon,jdbcType=VARCHAR}
+    where permissionId = #{permissionid,jdbcType=INTEGER}
+  </update>
+</mapper>

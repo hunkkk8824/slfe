@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.UserInfoPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.UserInfoPO" >
+    <id column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userAccount" property="useraccount" jdbcType="VARCHAR" />
+    <result column="cellPhone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="companyId" property="companyid" jdbcType="INTEGER" />
+    <result column="organizationName" property="organizationname" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="realName" property="realname" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="SMALLINT" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="idNumber" property="idnumber" jdbcType="VARCHAR" />
+    <result column="passwordSalt" property="passwordsalt" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="accountPicture" property="accountpicture" jdbcType="VARCHAR" />
+    <result column="accountType" property="accounttype" jdbcType="SMALLINT" />
+    <result column="productCode" property="productcode" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="lastModifyTime" property="lastmodifytime" jdbcType="TIMESTAMP" />
+    <result column="lastModifyUserId" property="lastmodifyuserid" jdbcType="VARCHAR" />
+    <result column="valid" property="valid" jdbcType="BIT" />
+    <result column="organizationType" property="organizationtype" jdbcType="SMALLINT" />
+    <result column="isEmergencyContact" property="isemergencycontact" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId, userAccount, cellPhone, companyId, organizationName, nickName, realName, 
+    gender, birthday, idNumber, passwordSalt, password, accountPicture, accountType, 
+    productCode, createTime, createUserId, lastModifyTime, lastModifyUserId, valid, organizationType, 
+    isEmergencyContact
+  </sql>
+
+  <!--通用查询条件-->
+  <sql id="queryWhere">
+    <where>
+      <if test="useraccount != null" >
+        userAccount = #{useraccount,jdbcType=VARCHAR}
+      </if>
+      <if test="cellphone != null" >
+        and cellPhone = #{cellphone,jdbcType=VARCHAR}
+      </if>
+      <if test="companyid != null" >
+        and companyId = #{companyid,jdbcType=INTEGER}
+      </if>
+      <if test="nickname != null" >
+        and nickName = #{nickname,jdbcType=VARCHAR}
+      </if>
+      <if test="realname != null" >
+        and realName = #{realname,jdbcType=VARCHAR}
+      </if>
+      <if test="gender != null" >
+        and gender = #{gender,jdbcType=TINYINT}
+      </if>
+      <if test="birthday != null" >
+        and birthday = #{birthday,jdbcType=DATE}
+      </if>
+      <if test="idnumber != null" >
+        and idNumber = #{idnumber,jdbcType=VARCHAR}
+      </if>
+      <if test="accountpicture != null" >
+        and accountPicture = #{accountpicture,jdbcType=VARCHAR}
+      </if>
+      <if test="accounttype != null" >
+        and accountType = #{accounttype,jdbcType=SMALLINT}
+      </if>
+      <if test="productcode != null" >
+        and productCode = #{productcode,jdbcType=VARCHAR}
+      </if>
+      <if test="valid != null" >
+        and valid = #{valid,jdbcType=BIT}
+      </if>
+    </where>
+  </sql>
+
+  <select id="findUserByAccountOrCallPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from tbUserInfo
+    where
+    userAccount = #{userName,jdbcType=VARCHAR} or
+    cellPhone = #{userName,jdbcType=VARCHAR}
+
+  </select>
+
+  <select id="getUsersByParams" parameterType="com.selfwork.intelligence.model.po.UserInfoPO" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from tbUserInfo
+    <include refid="queryWhere"/>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbuserinfo
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbuserinfo
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.UserInfoPO" >
+    insert into tbuserinfo (userId, userAccount, cellPhone, 
+      companyId, organizationName, nickName, 
+      realName, gender, birthday, 
+      idNumber, passwordSalt, password, 
+      accountPicture, accountType, productCode, 
+      createTime, createUserId, lastModifyTime, 
+      lastModifyUserId, valid, organizationType, 
+      isEmergencyContact)
+    values (#{userid,jdbcType=INTEGER}, #{useraccount,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}, 
+      #{companyid,jdbcType=INTEGER}, #{organizationname,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{gender,jdbcType=SMALLINT}, #{birthday,jdbcType=DATE}, 
+      #{idnumber,jdbcType=VARCHAR}, #{passwordsalt,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{accountpicture,jdbcType=VARCHAR}, #{accounttype,jdbcType=SMALLINT}, #{productcode,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=VARCHAR}, #{lastmodifytime,jdbcType=TIMESTAMP}, 
+      #{lastmodifyuserid,jdbcType=VARCHAR}, #{valid,jdbcType=BIT}, #{organizationtype,jdbcType=SMALLINT}, 
+      #{isemergencycontact,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.UserInfoPO" >
+    insert into tbuserinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="useraccount != null" >
+        userAccount,
+      </if>
+      <if test="cellphone != null" >
+        cellPhone,
+      </if>
+      <if test="companyid != null" >
+        companyId,
+      </if>
+      <if test="organizationname != null" >
+        organizationName,
+      </if>
+      <if test="nickname != null" >
+        nickName,
+      </if>
+      <if test="realname != null" >
+        realName,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="idnumber != null" >
+        idNumber,
+      </if>
+      <if test="passwordsalt != null" >
+        passwordSalt,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="accountpicture != null" >
+        accountPicture,
+      </if>
+      <if test="accounttype != null" >
+        accountType,
+      </if>
+      <if test="productcode != null" >
+        productCode,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="createuserid != null" >
+        createUserId,
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime,
+      </if>
+      <if test="lastmodifyuserid != null" >
+        lastModifyUserId,
+      </if>
+      <if test="valid != null" >
+        valid,
+      </if>
+      <if test="organizationtype != null" >
+        organizationType,
+      </if>
+      <if test="isemergencycontact != null" >
+        isEmergencyContact,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="useraccount != null" >
+        #{useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="organizationname != null" >
+        #{organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=SMALLINT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="idnumber != null" >
+        #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordsalt != null" >
+        #{passwordsalt,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="accountpicture != null" >
+        #{accountpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="accounttype != null" >
+        #{accounttype,jdbcType=SMALLINT},
+      </if>
+      <if test="productcode != null" >
+        #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifytime != null" >
+        #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifyuserid != null" >
+        #{lastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+      <if test="organizationtype != null" >
+        #{organizationtype,jdbcType=SMALLINT},
+      </if>
+      <if test="isemergencycontact != null" >
+        #{isemergencycontact,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.UserInfoPO" >
+    update tbuserinfo
+    <set >
+      <if test="useraccount != null" >
+        userAccount = #{useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        cellPhone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        companyId = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="organizationname != null" >
+        organizationName = #{organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        realName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=SMALLINT},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="idnumber != null" >
+        idNumber = #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordsalt != null" >
+        passwordSalt = #{passwordsalt,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="accountpicture != null" >
+        accountPicture = #{accountpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="accounttype != null" >
+        accountType = #{accounttype,jdbcType=SMALLINT},
+      </if>
+      <if test="productcode != null" >
+        productCode = #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        createUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmodifytime != null" >
+        lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifyuserid != null" >
+        lastModifyUserId = #{lastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        valid = #{valid,jdbcType=BIT},
+      </if>
+      <if test="organizationtype != null" >
+        organizationType = #{organizationtype,jdbcType=SMALLINT},
+      </if>
+      <if test="isemergencycontact != null" >
+        isEmergencyContact = #{isemergencycontact,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.UserInfoPO" >
+    update tbuserinfo
+    set userAccount = #{useraccount,jdbcType=VARCHAR},
+      cellPhone = #{cellphone,jdbcType=VARCHAR},
+      companyId = #{companyid,jdbcType=INTEGER},
+      organizationName = #{organizationname,jdbcType=VARCHAR},
+      nickName = #{nickname,jdbcType=VARCHAR},
+      realName = #{realname,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=SMALLINT},
+      birthday = #{birthday,jdbcType=DATE},
+      idNumber = #{idnumber,jdbcType=VARCHAR},
+      passwordSalt = #{passwordsalt,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      accountPicture = #{accountpicture,jdbcType=VARCHAR},
+      accountType = #{accounttype,jdbcType=SMALLINT},
+      productCode = #{productcode,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createUserId = #{createuserid,jdbcType=VARCHAR},
+      lastModifyTime = #{lastmodifytime,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastmodifyuserid,jdbcType=VARCHAR},
+      valid = #{valid,jdbcType=BIT},
+      organizationType = #{organizationtype,jdbcType=SMALLINT},
+      isEmergencyContact = #{isemergencycontact,jdbcType=SMALLINT}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

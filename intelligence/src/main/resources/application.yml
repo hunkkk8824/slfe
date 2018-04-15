@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+    http:
+        encoding:
+          force: true
+          charset: UTF-8
+    freemarker:
+        allow-request-override: false
+        cache: false
+        check-template-location: true
+        charset: UTF-8
+        content-type: text/html; charset=utf-8
+        expose-request-attributes: false
+        expose-session-attributes: false
+        expose-spring-macro-helpers: false
+        suffix: .ftl
+        template-loader-path: classpath:/templates
+        request-context-attribute: request
+    mvc:
+       resources:
+         static-path-pattern: classpath:/static/ #设定静态文件路径，js,css等
+
+#多环境配置
+    profiles:
+       active: dev
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.selfwork.intelligence.model
+  jdbc-type-for-null: null
+  lazy-loading-enabled: false
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+logback:
+  logdir: /data/intelligence/logs/
+  appname: selfwork-intelligence
+  level: INFO
+
