@@ -39,12 +39,7 @@
       <if test="valid != null">
         valid = #{valid,jdbcType=BIT}
       </if>
-      <if test="organizationType != null">
-        and organizationType = #{organizationType,jdbcType=INTEGER}
-      </if>
-      <if test="companyId != null">
-        and companyId = #{companyId,jdbcType=INTEGER}
-      </if>
+
       <if test="keyword != null and keyword != ''">
         and (
         userAccount like concat('%',#{keyword,jdbcType=VARCHAR},'%') or

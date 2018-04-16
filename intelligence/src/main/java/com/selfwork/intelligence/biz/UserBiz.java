@@ -3,6 +3,8 @@ package com.selfwork.intelligence.biz;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import com.selfwork.intelligence.common.BaseException;
+import com.selfwork.intelligence.common.PasswordHelper;
 import com.selfwork.intelligence.mapper.PermissionInfoPOMapper;
 import com.selfwork.intelligence.mapper.RoleInfoPOMapper;
 import com.selfwork.intelligence.mapper.UserInfoPOMapper;
@@ -10,6 +12,7 @@ import com.selfwork.intelligence.model.po.PermissionInfoPO;
 import com.selfwork.intelligence.model.po.RoleInfoPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
 
+import com.selfwork.intelligence.model.vo.BaseQueryVo;
 import com.selfwork.intelligence.model.vo.UserQueryVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +37,22 @@ public class UserBiz extends BaseBiz {
     @Autowired
     private PermissionInfoPOMapper permissionMapper;
 
+    @Autowired
+    private PasswordHelper passwordHelper;
+
+    /**
+     * 保存用户
+     *
+     * @param user
+     * @param currentUser
+     */
+    public int save(UserInfoPO user, UserInfoPO currentUser) {
+        // 密码加密
+        passwordHelper.encryptPassword(user);
+        user.setCreateuserid(String.valueOf(currentUser.getUserid()));
+        user.setCreatetime(new Date());
+        return userMapper.insertSelective(user);
+    }
 
     //从数据库获取对应用户名密码的用户
     public UserInfoPO findUser(String username) {

@@ -60,6 +60,12 @@
                         分析报表</a>
                 </li>
 
+                <li>
+                    <a class="J_menuItem" href="${base}/user/index" data-index="5">
+                        <i class="fa fa-user"></i>
+                        用户管理</a>
+                </li>
+
             </ul>
         </div>
     </nav>

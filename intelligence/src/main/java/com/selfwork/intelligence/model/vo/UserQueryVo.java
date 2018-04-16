@@ -2,66 +2,32 @@ package com.selfwork.intelligence.model.vo;
 
 import com.selfwork.intelligence.model.po.UserInfoPO;
 
-public class UserQueryVo {
+public class UserQueryVo extends  BaseQueryVo {
+    /**
+     * 关键字
+     */
+    private String keyword;
 
     /**
-     * 记录条数
+     * 状态
      */
-    private Integer limit = 50;
-    /**
-     * 翻阅
-     */
-    private Integer offset = 0;
+    private Boolean valid;
 
-    /**
-     * 排序方式
-     */
-    private String order ;
-
-    /**
-     * 排序字段
-     */
-    private String sort;
-
-    private UserInfoPO userInfoPO;
-
-    public Integer getLimit() {
-        return limit;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setLimit(Integer limit) {
-        this.limit = limit;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
-    public Integer getOffset() {
-        return offset;
+    public Boolean getValid() {
+        return valid;
     }
 
-    public void setOffset(Integer offset) {
-        this.offset = offset;
+    public void setValid(Boolean valid) {
+        this.valid = valid;
     }
 
-    public UserInfoPO getUserInfoPO() {
-        return userInfoPO;
-    }
-
-    public void setUserInfoPO(UserInfoPO userInfoPO) {
-        this.userInfoPO = userInfoPO;
-    }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = order;
-    }
-
-    public String getSort() {
-        return sort;
-    }
-
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
+    
 }

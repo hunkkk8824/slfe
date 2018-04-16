@@ -3,6 +3,7 @@ package com.selfwork.intelligence.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.UserBiz;
+import com.selfwork.intelligence.common.BaseException;
 import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.po.VehiclePO;
 import com.selfwork.intelligence.model.vo.UserQueryVo;
@@ -62,5 +63,54 @@ public class UserController extends BaseController {
 
     }
 
+    /**
+     * 新增用户
+     *
+     * @return
+     */
+    @RequestMapping("/toAdd")
+    public ModelAndView toAdd() {
+        ModelAndView view = new ModelAndView("sub/user/add");
+        return view;
+    }
+
+    /**
+     * 保存用户信息
+     *
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> save(@RequestBody UserInfoPO user) {
+        Map<String, Object> result = new HashMap<>();
+
+        // 参数验证
+        if (null == user) {
+            return result;
+        }
+
+        // 获取数据
+        try {
+
+            int res = userBiz.save(user, this.getLoginUser());
+            if (res == 0) {
+                logger.error("保存用户失败");
+                result.put("code", 0);
+                result.put("msg", "保存用户成功");
+            }
+            else{
+                result.put("code", -1);
+                result.put("msg", "保存用户失败");
+            }
+
+        } catch (Exception e) {
+            logger.error("保存用户信息系统异常 e:{}", e);
+            result.put("code", -1);
+            result.put("msg", "保存用户失败");
+        }
+
+        return result;
+    }
 
 }
