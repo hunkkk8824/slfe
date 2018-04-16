@@ -4,20 +4,7 @@
 <head>
 
 <#include "head.ftl">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-
-    <title>多源情报系统</title>
-
-    <meta name="keywords" content="多源情报系统">
-    <meta name="description" content="多源情报系统">
-
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html"/>
-    <![endif]-->
-
-    <link rel="shortcut icon" href="favicon.ico">
+    <title>多源情报系统-首页</title>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">

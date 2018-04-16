@@ -4,14 +4,8 @@
 <head>
 
     <#include "../head.ftl">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
 
-    <title>多源情报系统</title>
-
-    <meta name="keywords" content="多源情报系统">
-    <meta name="description" content="多源情报系统">
+    <title>多源情报系统-首页</title>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">

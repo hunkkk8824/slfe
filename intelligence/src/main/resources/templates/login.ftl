@@ -4,16 +4,11 @@
 <head>
 
     <#include "head.ftl">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <title>多源情报系统 - 登录</title>
-    <meta name="keywords" content="多源情报系统">
-    <meta name="description" content="多源情报系统">
+
     <link href="${base}/static/css/login.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
+
     <script>
         if (window.top !== window.self) {
             window.top.location = window.location;

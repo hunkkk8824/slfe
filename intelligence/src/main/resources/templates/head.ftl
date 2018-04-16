@@ -1,5 +1,15 @@
 <#assign base= request.contextPath />
 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta name="keywords" content="多源情报系统">
+<meta name="description" content="多源情报系统">
+<!--[if lt IE 9]>
+ <meta http-equiv="refresh" content="0;ie.html"/>
+ <![endif]-->
+
+<link rel="shortcut icon" href="favicon.ico">
 <!-- 全局css -->
 <link href="${base}/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
 <link href="${base}/static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
