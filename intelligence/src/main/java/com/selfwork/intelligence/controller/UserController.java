@@ -96,12 +96,12 @@ public class UserController extends BaseController {
             int res = userBiz.save(user, this.getLoginUser());
             if (res == 0) {
                 logger.error("保存用户失败");
-                result.put("code", 0);
-                result.put("msg", "保存用户成功");
-            }
-            else{
                 result.put("code", -1);
                 result.put("msg", "保存用户失败");
+            }
+            else{
+                result.put("code", 0);
+                result.put("msg", "保存用户成功");
             }
 
         } catch (Exception e) {

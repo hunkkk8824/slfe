@@ -229,6 +229,7 @@
                             layer.closeAll('loading');
                             var msg = res.msg;
                             var code = parseInt(res.code);
+                            debugger
                             if (code == 0) {
                                 layer.msg("添加成功");
                                 pageReload();
