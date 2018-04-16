@@ -32,6 +32,32 @@
     isEmergencyContact
   </sql>
 
+  <select id="findList" parameterType="com.selfwork.intelligence.model.vo.UserQueryVo" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from tbUserInfo
+    <where>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=BIT}
+      </if>
+      <if test="organizationType != null">
+        and organizationType = #{organizationType,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and companyId = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="keyword != null and keyword != ''">
+        and (
+        userAccount like concat('%',#{keyword,jdbcType=VARCHAR},'%') or
+        cellPhone   like concat('%',#{keyword,jdbcType=VARCHAR},'%') or
+        nickName like concat('%',#{keyword,jdbcType=VARCHAR},'%') or
+        realName like concat('%',#{keyword,jdbcType=VARCHAR},'%') or
+        organizationname like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+        )
+      </if>
+    </where>
+
+  </select>
+
   <!--通用查询条件-->
   <sql id="queryWhere">
     <where>

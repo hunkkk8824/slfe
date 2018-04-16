@@ -1,5 +1,6 @@
 package com.selfwork.intelligence.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.VehicleBiz;
 import com.selfwork.intelligence.model.po.VehiclePO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -25,8 +26,8 @@ public class VehicleController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/getByid/{id}", produces = {"application/json;charset=UTF-8"})
     public VehiclePO getByid(@PathVariable("id") Integer id) throws Exception {
-       // throw new Exception("ff");
-       return vehicleBiz.getByid(id);
+        // throw new Exception("ff");
+        return vehicleBiz.getByid(id);
 
     }
 
@@ -35,7 +36,8 @@ public class VehicleController extends BaseController {
     @RequestMapping(value = "/getAll/{pagenum}", produces = {"application/json;charset=UTF-8"})
     public List<VehiclePO> getAll(@PathVariable("pagenum") int pagenum) {
 
-        return vehicleBiz.getAll(pagenum);
+        PageInfo<VehiclePO> pageInfo = vehicleBiz.getAll(pagenum);
+        return pageInfo.getList();
 
     }
 
@@ -43,7 +45,7 @@ public class VehicleController extends BaseController {
     public ModelAndView vehicleListView(@PathVariable("pagenum") int pagenum) {
 
         ModelAndView view = new ModelAndView("testv");
-        view.addObject("data","855555888");
+        view.addObject("data", "855555888");
 
         return view;
 
@@ -53,7 +55,7 @@ public class VehicleController extends BaseController {
     public ModelAndView add() {
 
         ModelAndView view = new ModelAndView("testv");
-        view.addObject("data","855555888");
+        view.addObject("data", "855555888");
 
         return view;
 

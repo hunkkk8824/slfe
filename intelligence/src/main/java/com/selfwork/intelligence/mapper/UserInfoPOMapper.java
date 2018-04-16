@@ -1,11 +1,19 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.UserInfoPO;
+import com.selfwork.intelligence.model.vo.UserQueryVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface UserInfoPOMapper {
+
+    /**
+     * 列表查询
+     * @param userQueryDto
+     * @return
+     */
+    List<UserInfoPO> findList(UserQueryVo userQueryDto);
 
     List<UserInfoPO> findUserByAccountOrCallPhone(@Param("userName") String userName);
 

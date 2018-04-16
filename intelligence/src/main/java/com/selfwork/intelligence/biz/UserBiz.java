@@ -1,11 +1,18 @@
 package com.selfwork.intelligence.biz;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import com.selfwork.intelligence.mapper.PermissionInfoPOMapper;
 import com.selfwork.intelligence.mapper.RoleInfoPOMapper;
 import com.selfwork.intelligence.mapper.UserInfoPOMapper;
 import com.selfwork.intelligence.model.po.PermissionInfoPO;
 import com.selfwork.intelligence.model.po.RoleInfoPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
+
+import com.selfwork.intelligence.model.vo.UserQueryVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -14,6 +21,8 @@ import java.util.List;
 
 @Service
 public class UserBiz extends BaseBiz {
+
+    public final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserInfoPOMapper userMapper;
@@ -24,13 +33,20 @@ public class UserBiz extends BaseBiz {
     @Autowired
     private PermissionInfoPOMapper permissionMapper;
 
+
     //从数据库获取对应用户名密码的用户
     public UserInfoPO findUser(String username) {
-        List<UserInfoPO> userList = userMapper.findUserByAccountOrCallPhone(username);
-        if (CollectionUtils.isEmpty(userList)) {
-            return null;
+        try {
+            List<UserInfoPO> userList = userMapper.findUserByAccountOrCallPhone(username);
+            if (CollectionUtils.isEmpty(userList)) {
+                return null;
+            }
+            return userList.get(0);
+        }catch (Exception e){
+            logger.error("从数据库获取对应用户名密码的用户失败",e);
         }
-        return userList.get(0);
+
+        return null;
     }
 
 
@@ -56,6 +72,26 @@ public class UserBiz extends BaseBiz {
             return null;
         }
 
+    }
+
+    /**
+     * 分页查询
+     *
+     * @return
+     */
+    public PageInfo<UserInfoPO> findPage(UserQueryVo queryVo) {
+
+        // 查询
+        int pageNumber = (queryVo.getOffset() + queryVo.getLimit()) / queryVo.getLimit();
+        int pageSize = queryVo.getLimit();
+        PageHelper.startPage(pageNumber, pageSize);
+        List<UserInfoPO> list = userMapper.findList(queryVo);
+        if (null == list || list.size() == 0) {
+            logger.error("获取用户分页信息失败");
+            return null;
+        }
+
+        return new PageInfo<>(list);
     }
 
 }
