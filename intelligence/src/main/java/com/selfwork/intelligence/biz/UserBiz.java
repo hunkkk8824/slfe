@@ -102,7 +102,7 @@ public class UserBiz extends BaseBiz {
     public PageInfo<UserInfoPO> findPage(UserQueryVo queryVo) {
 
         // 查询
-        int pageNumber = (queryVo.getOffset() + queryVo.getLimit()) / queryVo.getLimit();
+        int pageNumber = queryVo.getPageNumber();
         int pageSize = queryVo.getLimit();
         PageHelper.startPage(pageNumber, pageSize);
         List<UserInfoPO> list = userMapper.findList(queryVo);

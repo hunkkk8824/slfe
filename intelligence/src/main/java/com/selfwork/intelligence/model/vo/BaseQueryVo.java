@@ -23,6 +23,13 @@ public class BaseQueryVo<T> {
 
     private T queryDto;
 
+    private Integer pageNumber;
+
+    public Integer getPageNumber() {
+        return  (this.offset + this.limit) / this.limit;
+    }
+
+
     public Integer getLimit() {
         return limit;
     }
