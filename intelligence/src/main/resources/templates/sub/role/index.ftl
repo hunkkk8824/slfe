@@ -14,7 +14,7 @@
         <input type="text" name="userName" id="userName" placeholder="用户名称"
                class="input-sm form-control" style="margin-top: 10px; width:150px;">
         <input type="text" name="roleName" id="roleName" placeholder="角色名称" class="input-sm form-control"
-               style="margin-top: 10px; width:250px;"> <span class="input-group-btn"/>
+               style="margin-top: 10px; width:150px;"> <span class="input-group-btn"/>
         <select id="valid" name="valid" class="form-control" style="width:143px;height: 30px;margin-top: 8px;">
             <option value="">全部</option>
             <option value="1">启用</option>
@@ -46,11 +46,6 @@
                 });
             })
 
-            //3.重置按钮事件
-            $('#clear').click(function () {
-                $('#queryForm')[0].reset();
-                $("#selectOption").hide();
-            });
 
             $('#btn_add').on('click', function () {
                 layer.open({
@@ -58,7 +53,7 @@
                     title: '新增角色',
                     fix: false,
                     shadeClose: true,
-                    area: ['300px', '300px'],
+                    area: ['500px', '300px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
