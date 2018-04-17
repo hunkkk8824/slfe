@@ -29,41 +29,46 @@
                     <div class="logo-element">多源情报系统
                     </div>
                 </li>
-                <li>
-                    <a class="J_menuItem" href="${base}/home/page" data-index="0">
-                        <i class="fa fa-bank"></i>
-                        <span class="nav-label">首页</span></a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="${base}/resourcecatalog/index" data-index="1">
-                        <i class="fa fa-columns"></i>
-                        资源目录</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="index_v2.html" data-index="2">
-                        <i class="fa fa-area-chart"></i>
-                        系统运行情况</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="index_v3.html" data-index="3">
-                        <i class="	fa fa-random"></i>
-                        数据交换</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="index_v4.html" data-index="4">
-                        <i class="fa fa-video-camera"></i>
-                        服务监控</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="index_v5.html" data-index="5">
-                        <i class="fa fa-area-chart"></i>
-                        分析报表</a>
-                </li>
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/home/page" data-index="0">-->
+                        <#--<i class="fa fa-bank"></i>-->
+                        <#--<span class="nav-label">首页</span></a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/resourcecatalog/index" data-index="1">-->
+                        <#--<i class="fa fa-columns"></i>-->
+                        <#--资源目录</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="index_v2.html" data-index="2">-->
+                        <#--<i class="fa fa-area-chart"></i>-->
+                        <#--系统运行情况</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="index_v3.html" data-index="3">-->
+                        <#--<i class="	fa fa-random"></i>-->
+                        <#--数据交换</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="index_v4.html" data-index="4">-->
+                        <#--<i class="fa fa-video-camera"></i>-->
+                        <#--服务监控</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="index_v5.html" data-index="5">-->
+                        <#--<i class="fa fa-area-chart"></i>-->
+                        <#--分析报表</a>-->
+                <#--</li>-->
 
                 <li>
                     <a class="J_menuItem" href="${base}/user/index" data-index="5">
                         <i class="fa fa-user"></i>
                         用户管理</a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="${base}/role/index" data-index="5">
+                        <i class="fa fa-users"></i>
+                        角色管理</a>
                 </li>
 
             </ul>

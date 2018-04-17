@@ -17,6 +17,50 @@
     lastModifyUserId, valid
   </sql>
 
+  <select id="findList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.RoleInfoQueryVo">
+    select
+    t.roleId as roleId,
+    t.roleName as roleName,
+    t.roleCode as roleCode,
+    t.productCode as productCode,
+    t.createTime as createTime,
+    t.createUserId as createUserId,
+    t.lastModifyTime as lastModifyTime,
+    t.lastModifyUserId as lastModifyUserId,
+    t.valid as valid
+    from tbRoleInfo t
+    <where>
+
+
+
+      <if test="roleName != null and roleName !=''">
+        t.roleName like concat('%',#{roleName,jdbcType=VARCHAR},'%')
+      </if>
+
+
+      <if test="userId != null and userId > 0">
+        and t.roleId in (SELECT r.roleId from tbUserRoleRelation r where r.userId=#{userId,jdbcType=INTEGER})
+
+      </if>
+
+      <if test="userName != null and userName !=''">
+        and t.roleId in (
+        SELECT r.roleId from tbUserRoleRelation r
+        where r.userId in (select u.userId from tbUserInfo u where u.realName like  concat('%',#{userName,jdbcType=VARCHAR},'%'))
+        )
+      </if>
+
+      <if test="orgId != null and orgId > 0">
+        and t.roleId in(SELECT d.roleId from tbRoleDataPermission d where d.orgId=#{orgId,jdbcType=INTEGER})
+      </if>
+
+
+      <if test="valid != null">
+        and t.valid = #{valid,jdbcType=BIT}
+      </if>
+    </where>
+  </select>
+
   <select id="getRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     SELECT
     r.roleId,

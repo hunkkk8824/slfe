@@ -4,14 +4,16 @@
 <head>
 
 <#include "../../head.ftl">
-    <title>多源情报系统-用户管理</title>
+    <title>多源情报系统-角色管理</title>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
 
     <div class="btn-group hidden-xs" id="toolbar" role="group">
-        <input type="text" name="keyWordInfo" id="keyWordInfo" placeholder="手机号、登录名、企业名称" class="input-sm form-control"
+        <input type="text" name="userName" id="userName" placeholder="用户名称"
+               class="input-sm form-control" style="margin-top: 10px; width:150px;">
+        <input type="text" name="roleName" id="roleName" placeholder="角色名称" class="input-sm form-control"
                style="margin-top: 10px; width:250px;"> <span class="input-group-btn"/>
         <select id="valid" name="valid" class="form-control" style="width:143px;height: 30px;margin-top: 8px;">
             <option value="">全部</option>
@@ -48,20 +50,19 @@
             $('#clear').click(function () {
                 $('#queryForm')[0].reset();
                 $("#selectOption").hide();
-
             });
 
             $('#btn_add').on('click', function () {
                 layer.open({
                     type: 2,
-                    title: '新增用户',
+                    title: '新增角色',
                     fix: false,
                     shadeClose: true,
-                    area: ['800px', '800px'],
+                    area: ['300px', '300px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: base + "/user/toAdd",
+                    content: base + "/role/toAdd",
                     end: function () {
                         $('#query').trigger('click');
                     }
@@ -75,7 +76,8 @@
             var temp = {
                 limit: params.limit,    //页面大小
                 offset: params.offset,   //页码
-                keyword: $('#keyWordInfo').val(),
+                roleName:$('#roleName').val(),
+                userName:$('#userName').val(),
                 valid: $('#valid').val() ? parseInt($('#valid').val()) : null,
 
             };
@@ -87,21 +89,21 @@
 
                 layer.open({
                     type: 2,
-                    title: '角色编辑',
+                    title: '权限编辑',
                     fix: false,
                     shadeClose: true,
                     area: ['420px', '540px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: ["${base}/user/roleEdit?userid=" + row.userid, 'no'],
+                    content: ["${base}/role/permissionEdit?roleid=" + row.userid, 'no'],
                 });
             },
             <#--"click #btn_edit": function (e, value, row, index) {-->
                 <#--var userId = row.userid;-->
                 <#--layer.open({-->
                     <#--type: 2,-->
-                    <#--title: '编辑用户',-->
+                    <#--title: '编辑权限',-->
                     <#--fix: false,-->
                     <#--shadeClose: true,-->
                     <#--area: ['850px', '700px'],-->
@@ -119,7 +121,7 @@
 
         function initTable() {
             $('#table').bootstrapTable({
-                url: base + '/user/getUserList',    //请求后台的URL（*）
+                url: base + '/role/getRoleList',    //请求后台的URL（*）
                 method: 'post',                     //请求方式（*）
                 contentType: "application/json",
                 toolbarAlign: 'right',               //工具栏对齐方式
@@ -129,7 +131,7 @@
                 pagination: true,                   //是否显示分页（*）
                 sortable: true,                    //是否启用排序
                 sortOrder: "asc",                   //排序方式
-                sortName: "userid",                  // 排序字段
+                sortName: "roleid",                  // 排序字段
                 queryParams: queryParams,//传递参数（*）
                 sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
                 pageNumber: 1,                       //初始化加载第一页，默认第一页
@@ -138,68 +140,15 @@
                 strictSearch: true,
                 clickToSelect: true,                //是否启用点击选中行
                 height: 650,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-                uniqueId: "userid",                     //每一行的唯一标识，一般为主键列
+                uniqueId: "roleid",                     //每一行的唯一标识，一般为主键列
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                  //是否显示父子表
                 showRefresh: false,                   //刷新按钮
                 columns: [{
-                    field: 'useraccount',
+                    field: 'rolename',
                     sortable: true,
                     sortOrder: "asc",
-                    title: '账号'
-                }, {
-                    field: 'cellphone',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '手机号'
-                }, {
-                    field: 'organizationname',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '组织名称'
-                }, {
-                    field: 'isemergencycontact',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '紧急联系人',
-                    formatter: function (value, row, index) {
-                        if (value == 1) {
-                            return '是';
-                        } else {
-                            return '否';
-                        }
-                    }
-                }, {
-                    field: 'realname',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '真实名称'
-                }, {
-                    field: 'gender',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '性别',
-                    formatter: function (value, row, index) {
-                        if (value == 1) {
-                            return '男';
-                        } else {
-                            return '女';
-                        }
-                    }
-                }, {
-                    field: 'organizationtype',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '账户类型',
-                    formatter: function (value, row, index) {
-                        if (value == 1) {
-                            return '企业';
-                        } else if (value == 2) {
-                            return '监管单位';
-                        } else {
-                            return '其他';
-                        }
-                    }
+                    title: '角色名'
                 }, {
                     field: 'valid',
                     sortable: true,
@@ -218,7 +167,7 @@
                     formatter: function (value, row, index) {
 
                         return [
-                            '<button  type="button" class="btn btn-default btn-sm btn_editRoles">角色编辑</button> ',
+                            '<button  type="button" class="btn btn-default btn-sm btn_editRoles">权限编辑</button> ',
                             '<button id="btn_edit" type="button" class="btn btn-default btn-sm">编辑</button> ',
                         ].join('');
                     },

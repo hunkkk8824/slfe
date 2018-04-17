@@ -1,9 +1,13 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.RoleInfoPO;
+import com.selfwork.intelligence.model.vo.RoleInfoQueryVo;
+
 import java.util.List;
 
 public interface RoleInfoPOMapper {
+
+    List<RoleInfoPO> findList(RoleInfoQueryVo vo);
 
     List<RoleInfoPO> getRolesByUserId(Integer userId);
     int deleteByPrimaryKey(Integer roleid);
