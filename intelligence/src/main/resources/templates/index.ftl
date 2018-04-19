@@ -30,7 +30,7 @@
                     </div>
                 </li>
                 <#--<li>-->
-                    <#--<a class="J_menuItem" href="${base}/home/page" data-index="0">-->
+                    <#--<a class="J_menuItem" href="${base}/user/index" data-index="0">-->
                         <#--<i class="fa fa-bank"></i>-->
                         <#--<span class="nav-label">首页</span></a>-->
                 <#--</li>-->
@@ -83,7 +83,7 @@
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active J_menuTab" data-id="${base}/home/page">首页</a>
+                    <a href="javascript:;" class="active J_menuTab" data-id="${base}/user/index">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -105,8 +105,8 @@
             <a href="${base}/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${base}/home/page" frameborder="0"
-                    data-id="${base}/home/page" seamless></iframe>
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${base}/user/index" frameborder="0"
+                    data-id="${base}/user/index" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right"> &copy; 2018 All Rights Reserved. 多源情报系统</a>

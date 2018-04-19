@@ -5,25 +5,33 @@
 
 <#include "../../head.ftl">
     <title>多源情报系统-用户管理</title>
+    <style type="text/css">
+        #toolbar input, button,select {
+            float: left;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+    </style>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
 
     <div class="btn-group hidden-xs" id="toolbar" role="group">
-        <input type="text" name="keyWordInfo" id="keyWordInfo" placeholder="手机号、登录名、企业名称" class="input-sm form-control"
-               style="margin-top: 10px; width:250px;"> <span class="input-group-btn"/>
-        <select id="valid" name="valid" class="form-control" style="width:143px;height: 30px;margin-top: 8px;">
+        <input style="width:250px;" name="keyWordInfo" id="keyWordInfo" placeholder="手机号、登录名、企业名称" class="input-sm form-control">
+        <select style="width:143px;height: 30px" id="valid" name="valid" class="form-control" >
             <option value="">全部</option>
             <option value="1">启用</option>
             <option value="0">禁用</option>
         </select>
-        <button id="query" type="button" class="btn btn-sm btn-primary"
-                style="margin-bottom: 10px;background:#63686b;margin:0;margin-top: 10px;float:right;">
-            <i class="iconfont icon-sousuo"></i>搜索
+        <button id="query" type="button" class="btn btn-sm btn-primary">
+         搜索
         </button>
-        <button id="btn_add" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        <button  style="margin-left: 10px" id="btn_add" type="button" class="btn btn-sm btn-primary">
+           新增
         </button>
     </div>
     <table id="table" data-height="400" data-mobile-responsive="true">
@@ -97,24 +105,6 @@
                     content: ["${base}/user/roleEdit?userid=" + row.userid, 'no'],
                 });
             },
-            <#--"click #btn_edit": function (e, value, row, index) {-->
-                <#--var userId = row.userid;-->
-                <#--layer.open({-->
-                    <#--type: 2,-->
-                    <#--title: '编辑用户',-->
-                    <#--fix: false,-->
-                    <#--shadeClose: true,-->
-                    <#--area: ['850px', '700px'],-->
-                    <#--skin: 'layui-layer-rim', //加上边框-->
-                    <#--zIndex: 9999,-->
-                    <#--shift: Math.floor(Math.random() * 6 + 1),-->
-                    <#--content: "${base}/user/toEdit?userId=" + userId,-->
-                    <#--end: function () {-->
-                        <#--$('#query').trigger('click');-->
-                    <#--}-->
-                <#--});-->
-            <#--},-->
-
         };
 
         function initTable() {
@@ -219,7 +209,6 @@
 
                         return [
                             '<button  type="button" class="btn btn-default btn-sm btn_editRoles">角色编辑</button> ',
-                            '<button id="btn_edit" type="button" class="btn btn-default btn-sm">编辑</button> ',
                         ].join('');
                     },
                     events: operateEvents

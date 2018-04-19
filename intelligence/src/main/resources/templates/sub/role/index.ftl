@@ -5,28 +5,39 @@
 
 <#include "../../head.ftl">
     <title>多源情报系统-角色管理</title>
+    <style type="text/css">
+        #toolbar input, button,select {
+            float: left;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+    </style>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
 
     <div class="btn-group hidden-xs" id="toolbar" role="group">
-        <input type="text" name="userName" id="userName" placeholder="用户名称"
-               class="input-sm form-control" style="margin-top: 10px; width:150px;">
-        <input type="text" name="roleName" id="roleName" placeholder="角色名称" class="input-sm form-control"
-               style="margin-top: 10px; width:150px;"> <span class="input-group-btn"/>
-        <select id="valid" name="valid" class="form-control" style="width:143px;height: 30px;margin-top: 8px;">
+        <input name="userName" id="userName" placeholder="用户名称"
+               class="input-sm form-control">
+        <input  name="roleName" id="roleName" placeholder="角色名称" class="input-sm form-control"
+               style="width:150px;">
+
+        <select id="valid" name="valid" class="form-control" style="width:143px;height: 30px">
             <option value="">全部</option>
             <option value="1">启用</option>
             <option value="0">禁用</option>
         </select>
-        <button id="query" type="button" class="btn btn-sm btn-primary"
-                style="margin-bottom: 10px;background:#63686b;margin:0;margin-top: 10px;float:right;">
-            <i class="iconfont icon-sousuo"></i>搜索
+        <button id="query" type="button" class="btn btn-sm btn-primary">
+            搜索
         </button>
-        <button id="btn_add" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        <button style="margin-left: 10px" id="btn_add" type="button" class="btn btn-sm btn-primary">
+            新增
         </button>
+
     </div>
     <table id="table" data-height="400" data-mobile-responsive="true">
 
@@ -71,8 +82,8 @@
             var temp = {
                 limit: params.limit,    //页面大小
                 offset: params.offset,   //页码
-                roleName:$('#roleName').val(),
-                userName:$('#userName').val(),
+                roleName: $('#roleName').val(),
+                userName: $('#userName').val(),
                 valid: $('#valid').val() ? parseInt($('#valid').val()) : null,
 
             };
@@ -94,23 +105,6 @@
                     content: ["${base}/role/permissionEdit?roleid=" + row.userid, 'no'],
                 });
             },
-            <#--"click #btn_edit": function (e, value, row, index) {-->
-                <#--var userId = row.userid;-->
-                <#--layer.open({-->
-                    <#--type: 2,-->
-                    <#--title: '编辑权限',-->
-                    <#--fix: false,-->
-                    <#--shadeClose: true,-->
-                    <#--area: ['850px', '700px'],-->
-                    <#--skin: 'layui-layer-rim', //加上边框-->
-                    <#--zIndex: 9999,-->
-                    <#--shift: Math.floor(Math.random() * 6 + 1),-->
-                    <#--content: "${base}/user/toEdit?userId=" + userId,-->
-                    <#--end: function () {-->
-                        <#--$('#query').trigger('click');-->
-                    <#--}-->
-                <#--});-->
-            <#--},-->
 
         };
 
@@ -163,7 +157,7 @@
 
                         return [
                             '<button  type="button" class="btn btn-default btn-sm btn_editRoles">权限编辑</button> ',
-                            '<button id="btn_edit" type="button" class="btn btn-default btn-sm">编辑</button> ',
+
                         ].join('');
                     },
                     events: operateEvents
