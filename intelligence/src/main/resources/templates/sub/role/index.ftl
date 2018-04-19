@@ -21,7 +21,7 @@
 <div class="example-wrap">
 
     <div class="btn-group hidden-xs" id="toolbar" role="group">
-        <input name="userName" id="userName" placeholder="用户名称"
+        <input style="width:250px;" name="userName" id="userName" placeholder="用户名称"
                class="input-sm form-control">
         <input  name="roleName" id="roleName" placeholder="角色名称" class="input-sm form-control"
                style="width:150px;">

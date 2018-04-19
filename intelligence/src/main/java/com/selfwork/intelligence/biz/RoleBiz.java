@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.mapper.RoleInfoPOMapper;
 import com.selfwork.intelligence.model.po.RoleInfoPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
-import com.selfwork.intelligence.model.vo.RoleInfoQueryVo;
+import com.selfwork.intelligence.model.vo.role.RoleInfoQueryVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

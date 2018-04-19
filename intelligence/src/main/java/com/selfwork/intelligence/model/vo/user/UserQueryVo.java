@@ -1,8 +1,9 @@
-package com.selfwork.intelligence.model.vo;
+package com.selfwork.intelligence.model.vo.user;
 
 import com.selfwork.intelligence.model.po.UserInfoPO;
+import com.selfwork.intelligence.model.vo.BaseQueryVo;
 
-public class UserQueryVo extends  BaseQueryVo {
+public class UserQueryVo extends BaseQueryVo {
     /**
      * 关键字
      */

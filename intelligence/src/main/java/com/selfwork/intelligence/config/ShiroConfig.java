@@ -53,7 +53,7 @@ public class ShiroConfig {
         //配置权限和角色控制
         filterChainDefinitionMap.put("/vehicle/add", "perms[dtjc:*]");
 //        //add这个链接必须要有“权限添加”这个权限和具有“100002”这个角色才可以访问。
-//        filterChainDefinitionMap.put("/update", "roles[100002]，perms[权限添加]");
+//        filterChainDefinitionMap.put("/update", "roles[100002]，perms[10000233]");
 
 
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;

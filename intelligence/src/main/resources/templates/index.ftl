@@ -83,7 +83,7 @@
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active J_menuTab" data-id="${base}/user/index">首页</a>
+                    <a href="javascript:;" class="active J_menuTab" data-id="${base}/user/index">用户管理</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>

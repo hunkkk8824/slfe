@@ -90,4 +90,9 @@
       createUserId = #{createuserid,jdbcType=VARCHAR}
     where userRoleRelationId = #{userrolerelationid,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    delete from tbUserRoleRelation
+    where userId = #{userId,jdbcType=INTEGER}
+  </delete>
 </mapper>

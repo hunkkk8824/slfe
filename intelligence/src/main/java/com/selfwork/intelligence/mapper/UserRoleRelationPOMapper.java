@@ -14,4 +14,6 @@ public interface UserRoleRelationPOMapper {
     int updateByPrimaryKeySelective(UserRoleRelationPO record);
 
     int updateByPrimaryKey(UserRoleRelationPO record);
+
+    int deleteByUserId(Integer userId);
 }

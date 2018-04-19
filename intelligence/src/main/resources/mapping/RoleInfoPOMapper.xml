@@ -17,7 +17,7 @@
     lastModifyUserId, valid
   </sql>
 
-  <select id="findList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.RoleInfoQueryVo">
+  <select id="findList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.role.RoleInfoQueryVo">
     select
     t.roleId as roleId,
     t.roleName as roleName,

@@ -3,7 +3,7 @@ package com.selfwork.intelligence.controller;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.RoleBiz;
 import com.selfwork.intelligence.model.po.RoleInfoPO;
-import com.selfwork.intelligence.model.vo.RoleInfoQueryVo;
+import com.selfwork.intelligence.model.vo.role.RoleInfoQueryVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

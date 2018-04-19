@@ -32,7 +32,7 @@
     isEmergencyContact
   </sql>
 
-  <select id="findList" parameterType="com.selfwork.intelligence.model.vo.UserQueryVo" resultMap="BaseResultMap">
+  <select id="findList" parameterType="com.selfwork.intelligence.model.vo.user.UserQueryVo" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from tbUserInfo
     <where>

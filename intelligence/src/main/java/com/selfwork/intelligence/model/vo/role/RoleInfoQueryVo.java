@@ -1,6 +1,8 @@
-package com.selfwork.intelligence.model.vo;
+package com.selfwork.intelligence.model.vo.role;
 
-public class RoleInfoQueryVo extends  BaseQueryVo {
+import com.selfwork.intelligence.model.vo.BaseQueryVo;
+
+public class RoleInfoQueryVo extends BaseQueryVo {
 
     private String roleName ;
     private Boolean valid;

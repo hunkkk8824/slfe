@@ -1,4 +1,4 @@
-package com.selfwork.intelligence.model.vo;
+package com.selfwork.intelligence.model.vo.user;
 
 public class UserVo {
 

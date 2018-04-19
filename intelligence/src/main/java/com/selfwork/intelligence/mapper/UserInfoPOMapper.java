@@ -1,7 +1,7 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.UserInfoPO;
-import com.selfwork.intelligence.model.vo.UserQueryVo;
+import com.selfwork.intelligence.model.vo.user.UserQueryVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

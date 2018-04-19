@@ -1,7 +1,7 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.RoleInfoPO;
-import com.selfwork.intelligence.model.vo.RoleInfoQueryVo;
+import com.selfwork.intelligence.model.vo.role.RoleInfoQueryVo;
 
 import java.util.List;
 
