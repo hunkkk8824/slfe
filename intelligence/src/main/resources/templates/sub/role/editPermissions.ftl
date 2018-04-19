@@ -39,18 +39,12 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div style="height: 430px">
-<#--<div style="border-bottom: 1px solid #E7EAEC; height: 40px">-->
 
-
-<#--<div style=" margin-left: 350px; margin-top: -33px">-->
-<#--<button id="closeRelateOrg" type="button" class="btn btn-success">搜索</button>-->
-<#--</div>-->
-<#--</div>-->
     <div style="height: 380px; width: 400px" id="roleList">
         <ul id="ul">
-        <#list allRoles as n>
-            <li><label><input type="checkbox" name="check" ${n.checked} value="${n.roleid}"><span
-                    class="roleName">${n.rolename} </span></label></li>
+        <#list allPermission as n>
+            <li><label><input type="checkbox" name="check" ${n.checked} value="${n.permissionid}"><span
+                    class="roleName">${n.permissionname} </span></label></li>
         </#list>
         </ul>
     </div>
@@ -66,21 +60,21 @@
 
 <script type="text/javascript">
 
-    var userid = '${userid}';
+    var roleId = '${roleId}';
 
-    (function (base, userid) {
+    (function (base, roleId) {
 
-        function getCheckedRoles() {
+        function getCheckedPermissions() {
             var arr = $('#ul input:checked');
 
-            var roles = [];
+            var permissions = [];
             $.each(arr, function (i, n) {
-                roles.push({
-                    roleid: parseInt($(n).val())
+                permissions.push({
+                    permissionid: parseInt($(n).val())
                 });
             });
 
-            return roles;
+            return permissions;
         }
 
         function initEvent() {
@@ -93,30 +87,30 @@
             //保存按钮
             $("#btn_saveRoles").click(function () {
 
+                debugger
+                var permissions = getCheckedPermissions();
 
-                var roles = getCheckedRoles();
-
-                if (roles.length == 0) {
-                    layer.msg("请选择角色");
+                if (permissions.length == 0) {
+                    layer.msg("请选择权限");
                     return;
                 }
-                debugger
+
                 var index = layer.load(1);
                 $.ajax({
-                    url:base + '/user/updateRoles',
+                    url:base + '/role/updatePermissions',
                     dataType: 'json',
                     method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify({
-                        userId: userid,
-                        roles: roles,
+                        roleId: roleId,
+                        permissions: permissions,
                     }),
                     success: function (data) {
                         if (data && parseInt(data.code) == 0) {
-                            layer.msg("关联角色成功");
+                            layer.msg("关联权限成功");
                         }
                         else {
-                            layer.msg("关联角色失败，请稍后重试。");
+                            layer.msg("关联权限失败，请稍后重试。");
                         }
                         setTimeout(function () {
                             layer.close(index);
@@ -131,7 +125,7 @@
         $(function () {
             initEvent();
         });
-    })(base, userid);
+    })(base, roleId);
 </script>
 </body>
 

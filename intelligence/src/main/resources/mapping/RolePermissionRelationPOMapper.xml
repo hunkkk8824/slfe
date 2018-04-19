@@ -17,6 +17,11 @@
     from tbrolepermissionrelation
     where rolePermissionRelationId = #{rolepermissionrelationid,jdbcType=INTEGER}
   </select>
+
+  <delete id="deleteByRoleId" parameterType="java.lang.Integer">
+    delete from tbRolePermissionRelation
+    where roleId = #{roleId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tbrolepermissionrelation
     where rolePermissionRelationId = #{rolepermissionrelationid,jdbcType=INTEGER}

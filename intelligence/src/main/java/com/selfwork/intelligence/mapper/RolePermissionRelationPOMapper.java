@@ -14,4 +14,6 @@ public interface RolePermissionRelationPOMapper {
     int updateByPrimaryKeySelective(RolePermissionRelationPO record);
 
     int updateByPrimaryKey(RolePermissionRelationPO record);
+
+    void deleteByRoleId(Integer userId);
 }

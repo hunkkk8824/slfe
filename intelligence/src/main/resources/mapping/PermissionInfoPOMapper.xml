@@ -22,7 +22,13 @@
     menuUrl, productCode, createTime, createUserId, lastModifyTime, lastModifyUserId, 
     valid, menuIcon
   </sql>
-
+  <!--查询所有节点信息-->
+  <select id="findValidList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from tbPermissionInfo
+    WHERE valid=1
+  </select>
   <select id="getPermissionsByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     SELECT p.*
     FROM tbPermissionInfo p
@@ -33,6 +39,15 @@
     AND r.valid = 1
     AND ur.userId = #{userId,jdbcType=INTEGER}
     order by permissionId
+  </select>
+
+  <select id="getPermissionsByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT p.*
+    FROM tbPermissionInfo p
+    left JOIN tbRolePermissionRelation rp ON rp.permissionId = p.permissionId
+    WHERE p.valid = 1
+    AND rp.roleId = #{roleId,jdbcType=INTEGER}
+    ORDER BY permissionId;
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

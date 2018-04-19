@@ -102,7 +102,7 @@
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: ["${base}/role/permissionEdit?roleid=" + row.userid, 'no'],
+                    content: ["${base}/role/toEditPermissions?roleId=" + row.roleid, 'no'],
                 });
             },
 

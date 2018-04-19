@@ -1,6 +1,7 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.PermissionInfoPO;
+import com.selfwork.intelligence.model.vo.role.RoleInfoQueryVo;
 import java.util.List;
 
 public interface PermissionInfoPOMapper {
@@ -17,4 +18,8 @@ public interface PermissionInfoPOMapper {
     int updateByPrimaryKeySelective(PermissionInfoPO record);
 
     int updateByPrimaryKey(PermissionInfoPO record);
+
+    List<PermissionInfoPO> getPermissionsByRoleId(Integer roleId);
+
+    List<PermissionInfoPO> findValidList(RoleInfoQueryVo vo);
 }
