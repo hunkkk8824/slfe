@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.QbSjYsdzzdzzcmbPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPO" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="BATCH_NO" property="batchNo" jdbcType="VARCHAR" />
+    <result column="PH" property="ph" jdbcType="INTEGER" />
+    <result column="PTBH" property="ptbh" jdbcType="INTEGER" />
+    <result column="PTMC" property="ptmc" jdbcType="VARCHAR" />
+    <result column="PTLX" property="ptlx" jdbcType="INTEGER" />
+    <result column="CGQBH" property="cgqbh" jdbcType="INTEGER" />
+    <result column="XYLX" property="xylx" jdbcType="INTEGER" />
+    <result column="HJZT" property="hjzt" jdbcType="INTEGER" />
+    <result column="HJZL" property="hjzl" jdbcType="INTEGER" />
+    <result column="JSSJ" property="jssj" jdbcType="TIMESTAMP" />
+    <result column="SBSJ" property="sbsj" jdbcType="TIMESTAMP" />
+    <result column="ZCXXLY" property="zcxxly" jdbcType="INTEGER" />
+    <result column="SX" property="sx" jdbcType="INTEGER" />
+    <result column="GJ" property="gj" jdbcType="INTEGER" />
+    <result column="JD" property="jd" jdbcType="DECIMAL" />
+    <result column="WD" property="wd" jdbcType="DECIMAL" />
+    <result column="GD" property="gd" jdbcType="DECIMAL" />
+    <result column="JL" property="jl" jdbcType="DECIMAL" />
+    <result column="FW" property="fw" jdbcType="DECIMAL" />
+    <result column="YJ" property="yj" jdbcType="DECIMAL" />
+    <result column="JLWC" property="jlwc" jdbcType="DECIMAL" />
+    <result column="FWWC" property="fwwc" jdbcType="DECIMAL" />
+    <result column="YJWC" property="yjwc" jdbcType="DECIMAL" />
+    <result column="CPCCS" property="cpccs" jdbcType="INTEGER" />
+    <result column="CPDDL" property="cpddl" jdbcType="INTEGER" />
+    <result column="CPHDL" property="cphdl" jdbcType="INTEGER" />
+    <result column="CPLX" property="cplx" jdbcType="INTEGER" />
+    <result column="LDXH" property="ldxh" jdbcType="VARCHAR" />
+    <result column="LDYT" property="ldyt" jdbcType="INTEGER" />
+    <result column="TXSMZQ" property="txsmzq" jdbcType="INTEGER" />
+    <result column="TXSMFS" property="txsmfs" jdbcType="INTEGER" />
+    <result column="JHFS" property="jhfs" jdbcType="INTEGER" />
+    <result column="PLFW" property="plfw" jdbcType="INTEGER" />
+    <result column="WXDJ" property="wxdj" jdbcType="INTEGER" />
+    <result column="KXD" property="kxd" jdbcType="INTEGER" />
+    <result column="DGNGRMS" property="dgngrms" jdbcType="INTEGER" />
+    <result column="DGNGRYS" property="dgngrys" jdbcType="INTEGER" />
+    <result column="HMBGRMS" property="hmbgrms" jdbcType="INTEGER" />
+    <result column="HMBGRYS" property="hmbgrys" jdbcType="INTEGER" />
+    <result column="XBDGRYS" property="xbdgrys" jdbcType="INTEGER" />
+    <result column="WYGDGRYS" property="wygdgrys" jdbcType="INTEGER" />
+    <result column="GRDK" property="grdk" jdbcType="INTEGER" />
+    <result column="DGNFPZT" property="dgnfpzt" jdbcType="INTEGER" />
+    <result column="HMBFPZT" property="hmbfpzt" jdbcType="INTEGER" />
+    <result column="XSBFPZT" property="xsbfpzt" jdbcType="INTEGER" />
+    <result column="SPLX" property="splx" jdbcType="INTEGER" />
+    <result column="MBZP" property="mbzp" jdbcType="INTEGER" />
+    <result column="ZPJBL" property="zpjbl" jdbcType="INTEGER" />
+    <result column="MCKDLX" property="mckdlx" jdbcType="INTEGER" />
+    <result column="MCFD" property="mcfd" jdbcType="DECIMAL" />
+    <result column="MNLX" property="mnlx" jdbcType="INTEGER" />
+    <result column="ZMCGS" property="zmcgs" jdbcType="INTEGER" />
+    <result column="ZMCKD" property="zmckd" jdbcType="DECIMAL" />
+    <result column="QSPL" property="qspl" jdbcType="DECIMAL" />
+    <result column="ZZPL" property="zzpl" jdbcType="DECIMAL" />
+    <result column="ZDPP" property="zdpp" jdbcType="DECIMAL" />
+    <result column="QSXW" property="qsxw" jdbcType="DECIMAL" />
+    <result column="SMZQ" property="smzq" jdbcType="DECIMAL" />
+    <result column="ZBKDSJ" property="zbkdsj" jdbcType="INTEGER" />
+    <result column="ZBDPWZSJ" property="zbdpwzsj" jdbcType="INTEGER" />
+    <result column="ZFBDPC" property="zfbdpc" jdbcType="INTEGER" />
+    <result column="YFWFZSJ" property="yfwfzsj" jdbcType="INTEGER" />
+    <result column="SPJCZ" property="spjcz" jdbcType="DECIMAL" />
+    <result column="SPJCJFC" property="spjcjfc" jdbcType="DECIMAL" />
+    <result column="MCJCZ" property="mcjcz" jdbcType="DECIMAL" />
+    <result column="MCJCJFC" property="mcjcjfc" jdbcType="DECIMAL" />
+    <result column="JCMCS" property="jcmcs" jdbcType="INTEGER" />
+    <result column="PTXH" property="ptxh" jdbcType="VARCHAR" />
+    <result column="JXH" property="jxh" jdbcType="VARCHAR" />
+    <result column="JJM" property="jjm" jdbcType="VARCHAR" />
+    <result column="CFPLCD" property="cfplcd" jdbcType="INTEGER" />
+    <result column="SPZCD" property="spzcd" jdbcType="INTEGER" />
+    <result column="MCKDZCD" property="mckdzcd" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs" extends="BaseResultMap" >
+    <result column="CFPL" property="cfpl" jdbcType="VARBINARY" />
+    <result column="SPZ" property="spz" jdbcType="VARBINARY" />
+    <result column="MCKDZ" property="mckdz" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BATCH_NO, PH, PTBH, PTMC, PTLX, CGQBH, XYLX, HJZT, HJZL, JSSJ, SBSJ, ZCXXLY, 
+    SX, GJ, JD, WD, GD, JL, FW, YJ, JLWC, FWWC, YJWC, CPCCS, CPDDL, CPHDL, CPLX, LDXH, 
+    LDYT, TXSMZQ, TXSMFS, JHFS, PLFW, WXDJ, KXD, DGNGRMS, DGNGRYS, HMBGRMS, HMBGRYS, 
+    XBDGRYS, WYGDGRYS, GRDK, DGNFPZT, HMBFPZT, XSBFPZT, SPLX, MBZP, ZPJBL, MCKDLX, MCFD, 
+    MNLX, ZMCGS, ZMCKD, QSPL, ZZPL, ZDPP, QSXW, SMZQ, ZBKDSJ, ZBDPWZSJ, ZFBDPC, YFWFZSJ, 
+    SPJCZ, SPJCJFC, MCJCZ, MCJCJFC, JCMCS, PTXH, JXH, JJM, CFPLCD, SPZCD, MCKDZCD
+  </sql>
+  <sql id="Blob_Column_List" >
+    CFPL, SPZ, MCKDZ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from qb_sj_ysdzzdzzcmb
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from qb_sj_ysdzzdzzcmb
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs" >
+    insert into qb_sj_ysdzzdzzcmb (ID, BATCH_NO, PH, 
+      PTBH, PTMC, PTLX, CGQBH, 
+      XYLX, HJZT, HJZL, JSSJ, 
+      SBSJ, ZCXXLY, SX, 
+      GJ, JD, WD, GD, 
+      JL, FW, YJ, JLWC, 
+      FWWC, YJWC, CPCCS, 
+      CPDDL, CPHDL, CPLX, 
+      LDXH, LDYT, TXSMZQ, 
+      TXSMFS, JHFS, PLFW, 
+      WXDJ, KXD, DGNGRMS, 
+      DGNGRYS, HMBGRMS, HMBGRYS, 
+      XBDGRYS, WYGDGRYS, GRDK, 
+      DGNFPZT, HMBFPZT, XSBFPZT, 
+      SPLX, MBZP, ZPJBL, 
+      MCKDLX, MCFD, MNLX, 
+      ZMCGS, ZMCKD, QSPL, 
+      ZZPL, ZDPP, QSXW, SMZQ, 
+      ZBKDSJ, ZBDPWZSJ, ZFBDPC, 
+      YFWFZSJ, SPJCZ, SPJCJFC, 
+      MCJCZ, MCJCJFC, JCMCS, 
+      PTXH, JXH, JJM, CFPLCD, 
+      SPZCD, MCKDZCD, CFPL, 
+      SPZ, MCKDZ)
+    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{ph,jdbcType=INTEGER}, 
+      #{ptbh,jdbcType=INTEGER}, #{ptmc,jdbcType=VARCHAR}, #{ptlx,jdbcType=INTEGER}, #{cgqbh,jdbcType=INTEGER}, 
+      #{xylx,jdbcType=INTEGER}, #{hjzt,jdbcType=INTEGER}, #{hjzl,jdbcType=INTEGER}, #{jssj,jdbcType=TIMESTAMP}, 
+      #{sbsj,jdbcType=TIMESTAMP}, #{zcxxly,jdbcType=INTEGER}, #{sx,jdbcType=INTEGER}, 
+      #{gj,jdbcType=INTEGER}, #{jd,jdbcType=DECIMAL}, #{wd,jdbcType=DECIMAL}, #{gd,jdbcType=DECIMAL}, 
+      #{jl,jdbcType=DECIMAL}, #{fw,jdbcType=DECIMAL}, #{yj,jdbcType=DECIMAL}, #{jlwc,jdbcType=DECIMAL}, 
+      #{fwwc,jdbcType=DECIMAL}, #{yjwc,jdbcType=DECIMAL}, #{cpccs,jdbcType=INTEGER}, 
+      #{cpddl,jdbcType=INTEGER}, #{cphdl,jdbcType=INTEGER}, #{cplx,jdbcType=INTEGER}, 
+      #{ldxh,jdbcType=VARCHAR}, #{ldyt,jdbcType=INTEGER}, #{txsmzq,jdbcType=INTEGER}, 
+      #{txsmfs,jdbcType=INTEGER}, #{jhfs,jdbcType=INTEGER}, #{plfw,jdbcType=INTEGER}, 
+      #{wxdj,jdbcType=INTEGER}, #{kxd,jdbcType=INTEGER}, #{dgngrms,jdbcType=INTEGER}, 
+      #{dgngrys,jdbcType=INTEGER}, #{hmbgrms,jdbcType=INTEGER}, #{hmbgrys,jdbcType=INTEGER}, 
+      #{xbdgrys,jdbcType=INTEGER}, #{wygdgrys,jdbcType=INTEGER}, #{grdk,jdbcType=INTEGER}, 
+      #{dgnfpzt,jdbcType=INTEGER}, #{hmbfpzt,jdbcType=INTEGER}, #{xsbfpzt,jdbcType=INTEGER}, 
+      #{splx,jdbcType=INTEGER}, #{mbzp,jdbcType=INTEGER}, #{zpjbl,jdbcType=INTEGER}, 
+      #{mckdlx,jdbcType=INTEGER}, #{mcfd,jdbcType=DECIMAL}, #{mnlx,jdbcType=INTEGER}, 
+      #{zmcgs,jdbcType=INTEGER}, #{zmckd,jdbcType=DECIMAL}, #{qspl,jdbcType=DECIMAL}, 
+      #{zzpl,jdbcType=DECIMAL}, #{zdpp,jdbcType=DECIMAL}, #{qsxw,jdbcType=DECIMAL}, #{smzq,jdbcType=DECIMAL}, 
+      #{zbkdsj,jdbcType=INTEGER}, #{zbdpwzsj,jdbcType=INTEGER}, #{zfbdpc,jdbcType=INTEGER}, 
+      #{yfwfzsj,jdbcType=INTEGER}, #{spjcz,jdbcType=DECIMAL}, #{spjcjfc,jdbcType=DECIMAL}, 
+      #{mcjcz,jdbcType=DECIMAL}, #{mcjcjfc,jdbcType=DECIMAL}, #{jcmcs,jdbcType=INTEGER}, 
+      #{ptxh,jdbcType=VARCHAR}, #{jxh,jdbcType=VARCHAR}, #{jjm,jdbcType=VARCHAR}, #{cfplcd,jdbcType=INTEGER}, 
+      #{spzcd,jdbcType=INTEGER}, #{mckdzcd,jdbcType=INTEGER}, #{cfpl,jdbcType=VARBINARY}, 
+      #{spz,jdbcType=VARBINARY}, #{mckdz,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs" >
+    insert into qb_sj_ysdzzdzzcmb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO,
+      </if>
+      <if test="ph != null" >
+        PH,
+      </if>
+      <if test="ptbh != null" >
+        PTBH,
+      </if>
+      <if test="ptmc != null" >
+        PTMC,
+      </if>
+      <if test="ptlx != null" >
+        PTLX,
+      </if>
+      <if test="cgqbh != null" >
+        CGQBH,
+      </if>
+      <if test="xylx != null" >
+        XYLX,
+      </if>
+      <if test="hjzt != null" >
+        HJZT,
+      </if>
+      <if test="hjzl != null" >
+        HJZL,
+      </if>
+      <if test="jssj != null" >
+        JSSJ,
+      </if>
+      <if test="sbsj != null" >
+        SBSJ,
+      </if>
+      <if test="zcxxly != null" >
+        ZCXXLY,
+      </if>
+      <if test="sx != null" >
+        SX,
+      </if>
+      <if test="gj != null" >
+        GJ,
+      </if>
+      <if test="jd != null" >
+        JD,
+      </if>
+      <if test="wd != null" >
+        WD,
+      </if>
+      <if test="gd != null" >
+        GD,
+      </if>
+      <if test="jl != null" >
+        JL,
+      </if>
+      <if test="fw != null" >
+        FW,
+      </if>
+      <if test="yj != null" >
+        YJ,
+      </if>
+      <if test="jlwc != null" >
+        JLWC,
+      </if>
+      <if test="fwwc != null" >
+        FWWC,
+      </if>
+      <if test="yjwc != null" >
+        YJWC,
+      </if>
+      <if test="cpccs != null" >
+        CPCCS,
+      </if>
+      <if test="cpddl != null" >
+        CPDDL,
+      </if>
+      <if test="cphdl != null" >
+        CPHDL,
+      </if>
+      <if test="cplx != null" >
+        CPLX,
+      </if>
+      <if test="ldxh != null" >
+        LDXH,
+      </if>
+      <if test="ldyt != null" >
+        LDYT,
+      </if>
+      <if test="txsmzq != null" >
+        TXSMZQ,
+      </if>
+      <if test="txsmfs != null" >
+        TXSMFS,
+      </if>
+      <if test="jhfs != null" >
+        JHFS,
+      </if>
+      <if test="plfw != null" >
+        PLFW,
+      </if>
+      <if test="wxdj != null" >
+        WXDJ,
+      </if>
+      <if test="kxd != null" >
+        KXD,
+      </if>
+      <if test="dgngrms != null" >
+        DGNGRMS,
+      </if>
+      <if test="dgngrys != null" >
+        DGNGRYS,
+      </if>
+      <if test="hmbgrms != null" >
+        HMBGRMS,
+      </if>
+      <if test="hmbgrys != null" >
+        HMBGRYS,
+      </if>
+      <if test="xbdgrys != null" >
+        XBDGRYS,
+      </if>
+      <if test="wygdgrys != null" >
+        WYGDGRYS,
+      </if>
+      <if test="grdk != null" >
+        GRDK,
+      </if>
+      <if test="dgnfpzt != null" >
+        DGNFPZT,
+      </if>
+      <if test="hmbfpzt != null" >
+        HMBFPZT,
+      </if>
+      <if test="xsbfpzt != null" >
+        XSBFPZT,
+      </if>
+      <if test="splx != null" >
+        SPLX,
+      </if>
+      <if test="mbzp != null" >
+        MBZP,
+      </if>
+      <if test="zpjbl != null" >
+        ZPJBL,
+      </if>
+      <if test="mckdlx != null" >
+        MCKDLX,
+      </if>
+      <if test="mcfd != null" >
+        MCFD,
+      </if>
+      <if test="mnlx != null" >
+        MNLX,
+      </if>
+      <if test="zmcgs != null" >
+        ZMCGS,
+      </if>
+      <if test="zmckd != null" >
+        ZMCKD,
+      </if>
+      <if test="qspl != null" >
+        QSPL,
+      </if>
+      <if test="zzpl != null" >
+        ZZPL,
+      </if>
+      <if test="zdpp != null" >
+        ZDPP,
+      </if>
+      <if test="qsxw != null" >
+        QSXW,
+      </if>
+      <if test="smzq != null" >
+        SMZQ,
+      </if>
+      <if test="zbkdsj != null" >
+        ZBKDSJ,
+      </if>
+      <if test="zbdpwzsj != null" >
+        ZBDPWZSJ,
+      </if>
+      <if test="zfbdpc != null" >
+        ZFBDPC,
+      </if>
+      <if test="yfwfzsj != null" >
+        YFWFZSJ,
+      </if>
+      <if test="spjcz != null" >
+        SPJCZ,
+      </if>
+      <if test="spjcjfc != null" >
+        SPJCJFC,
+      </if>
+      <if test="mcjcz != null" >
+        MCJCZ,
+      </if>
+      <if test="mcjcjfc != null" >
+        MCJCJFC,
+      </if>
+      <if test="jcmcs != null" >
+        JCMCS,
+      </if>
+      <if test="ptxh != null" >
+        PTXH,
+      </if>
+      <if test="jxh != null" >
+        JXH,
+      </if>
+      <if test="jjm != null" >
+        JJM,
+      </if>
+      <if test="cfplcd != null" >
+        CFPLCD,
+      </if>
+      <if test="spzcd != null" >
+        SPZCD,
+      </if>
+      <if test="mckdzcd != null" >
+        MCKDZCD,
+      </if>
+      <if test="cfpl != null" >
+        CFPL,
+      </if>
+      <if test="spz != null" >
+        SPZ,
+      </if>
+      <if test="mckdz != null" >
+        MCKDZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null" >
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ph != null" >
+        #{ph,jdbcType=INTEGER},
+      </if>
+      <if test="ptbh != null" >
+        #{ptbh,jdbcType=INTEGER},
+      </if>
+      <if test="ptmc != null" >
+        #{ptmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ptlx != null" >
+        #{ptlx,jdbcType=INTEGER},
+      </if>
+      <if test="cgqbh != null" >
+        #{cgqbh,jdbcType=INTEGER},
+      </if>
+      <if test="xylx != null" >
+        #{xylx,jdbcType=INTEGER},
+      </if>
+      <if test="hjzt != null" >
+        #{hjzt,jdbcType=INTEGER},
+      </if>
+      <if test="hjzl != null" >
+        #{hjzl,jdbcType=INTEGER},
+      </if>
+      <if test="jssj != null" >
+        #{jssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sbsj != null" >
+        #{sbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zcxxly != null" >
+        #{zcxxly,jdbcType=INTEGER},
+      </if>
+      <if test="sx != null" >
+        #{sx,jdbcType=INTEGER},
+      </if>
+      <if test="gj != null" >
+        #{gj,jdbcType=INTEGER},
+      </if>
+      <if test="jd != null" >
+        #{jd,jdbcType=DECIMAL},
+      </if>
+      <if test="wd != null" >
+        #{wd,jdbcType=DECIMAL},
+      </if>
+      <if test="gd != null" >
+        #{gd,jdbcType=DECIMAL},
+      </if>
+      <if test="jl != null" >
+        #{jl,jdbcType=DECIMAL},
+      </if>
+      <if test="fw != null" >
+        #{fw,jdbcType=DECIMAL},
+      </if>
+      <if test="yj != null" >
+        #{yj,jdbcType=DECIMAL},
+      </if>
+      <if test="jlwc != null" >
+        #{jlwc,jdbcType=DECIMAL},
+      </if>
+      <if test="fwwc != null" >
+        #{fwwc,jdbcType=DECIMAL},
+      </if>
+      <if test="yjwc != null" >
+        #{yjwc,jdbcType=DECIMAL},
+      </if>
+      <if test="cpccs != null" >
+        #{cpccs,jdbcType=INTEGER},
+      </if>
+      <if test="cpddl != null" >
+        #{cpddl,jdbcType=INTEGER},
+      </if>
+      <if test="cphdl != null" >
+        #{cphdl,jdbcType=INTEGER},
+      </if>
+      <if test="cplx != null" >
+        #{cplx,jdbcType=INTEGER},
+      </if>
+      <if test="ldxh != null" >
+        #{ldxh,jdbcType=VARCHAR},
+      </if>
+      <if test="ldyt != null" >
+        #{ldyt,jdbcType=INTEGER},
+      </if>
+      <if test="txsmzq != null" >
+        #{txsmzq,jdbcType=INTEGER},
+      </if>
+      <if test="txsmfs != null" >
+        #{txsmfs,jdbcType=INTEGER},
+      </if>
+      <if test="jhfs != null" >
+        #{jhfs,jdbcType=INTEGER},
+      </if>
+      <if test="plfw != null" >
+        #{plfw,jdbcType=INTEGER},
+      </if>
+      <if test="wxdj != null" >
+        #{wxdj,jdbcType=INTEGER},
+      </if>
+      <if test="kxd != null" >
+        #{kxd,jdbcType=INTEGER},
+      </if>
+      <if test="dgngrms != null" >
+        #{dgngrms,jdbcType=INTEGER},
+      </if>
+      <if test="dgngrys != null" >
+        #{dgngrys,jdbcType=INTEGER},
+      </if>
+      <if test="hmbgrms != null" >
+        #{hmbgrms,jdbcType=INTEGER},
+      </if>
+      <if test="hmbgrys != null" >
+        #{hmbgrys,jdbcType=INTEGER},
+      </if>
+      <if test="xbdgrys != null" >
+        #{xbdgrys,jdbcType=INTEGER},
+      </if>
+      <if test="wygdgrys != null" >
+        #{wygdgrys,jdbcType=INTEGER},
+      </if>
+      <if test="grdk != null" >
+        #{grdk,jdbcType=INTEGER},
+      </if>
+      <if test="dgnfpzt != null" >
+        #{dgnfpzt,jdbcType=INTEGER},
+      </if>
+      <if test="hmbfpzt != null" >
+        #{hmbfpzt,jdbcType=INTEGER},
+      </if>
+      <if test="xsbfpzt != null" >
+        #{xsbfpzt,jdbcType=INTEGER},
+      </if>
+      <if test="splx != null" >
+        #{splx,jdbcType=INTEGER},
+      </if>
+      <if test="mbzp != null" >
+        #{mbzp,jdbcType=INTEGER},
+      </if>
+      <if test="zpjbl != null" >
+        #{zpjbl,jdbcType=INTEGER},
+      </if>
+      <if test="mckdlx != null" >
+        #{mckdlx,jdbcType=INTEGER},
+      </if>
+      <if test="mcfd != null" >
+        #{mcfd,jdbcType=DECIMAL},
+      </if>
+      <if test="mnlx != null" >
+        #{mnlx,jdbcType=INTEGER},
+      </if>
+      <if test="zmcgs != null" >
+        #{zmcgs,jdbcType=INTEGER},
+      </if>
+      <if test="zmckd != null" >
+        #{zmckd,jdbcType=DECIMAL},
+      </if>
+      <if test="qspl != null" >
+        #{qspl,jdbcType=DECIMAL},
+      </if>
+      <if test="zzpl != null" >
+        #{zzpl,jdbcType=DECIMAL},
+      </if>
+      <if test="zdpp != null" >
+        #{zdpp,jdbcType=DECIMAL},
+      </if>
+      <if test="qsxw != null" >
+        #{qsxw,jdbcType=DECIMAL},
+      </if>
+      <if test="smzq != null" >
+        #{smzq,jdbcType=DECIMAL},
+      </if>
+      <if test="zbkdsj != null" >
+        #{zbkdsj,jdbcType=INTEGER},
+      </if>
+      <if test="zbdpwzsj != null" >
+        #{zbdpwzsj,jdbcType=INTEGER},
+      </if>
+      <if test="zfbdpc != null" >
+        #{zfbdpc,jdbcType=INTEGER},
+      </if>
+      <if test="yfwfzsj != null" >
+        #{yfwfzsj,jdbcType=INTEGER},
+      </if>
+      <if test="spjcz != null" >
+        #{spjcz,jdbcType=DECIMAL},
+      </if>
+      <if test="spjcjfc != null" >
+        #{spjcjfc,jdbcType=DECIMAL},
+      </if>
+      <if test="mcjcz != null" >
+        #{mcjcz,jdbcType=DECIMAL},
+      </if>
+      <if test="mcjcjfc != null" >
+        #{mcjcjfc,jdbcType=DECIMAL},
+      </if>
+      <if test="jcmcs != null" >
+        #{jcmcs,jdbcType=INTEGER},
+      </if>
+      <if test="ptxh != null" >
+        #{ptxh,jdbcType=VARCHAR},
+      </if>
+      <if test="jxh != null" >
+        #{jxh,jdbcType=VARCHAR},
+      </if>
+      <if test="jjm != null" >
+        #{jjm,jdbcType=VARCHAR},
+      </if>
+      <if test="cfplcd != null" >
+        #{cfplcd,jdbcType=INTEGER},
+      </if>
+      <if test="spzcd != null" >
+        #{spzcd,jdbcType=INTEGER},
+      </if>
+      <if test="mckdzcd != null" >
+        #{mckdzcd,jdbcType=INTEGER},
+      </if>
+      <if test="cfpl != null" >
+        #{cfpl,jdbcType=VARBINARY},
+      </if>
+      <if test="spz != null" >
+        #{spz,jdbcType=VARBINARY},
+      </if>
+      <if test="mckdz != null" >
+        #{mckdz,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs" >
+    update qb_sj_ysdzzdzzcmb
+    <set >
+      <if test="batchNo != null" >
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ph != null" >
+        PH = #{ph,jdbcType=INTEGER},
+      </if>
+      <if test="ptbh != null" >
+        PTBH = #{ptbh,jdbcType=INTEGER},
+      </if>
+      <if test="ptmc != null" >
+        PTMC = #{ptmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ptlx != null" >
+        PTLX = #{ptlx,jdbcType=INTEGER},
+      </if>
+      <if test="cgqbh != null" >
+        CGQBH = #{cgqbh,jdbcType=INTEGER},
+      </if>
+      <if test="xylx != null" >
+        XYLX = #{xylx,jdbcType=INTEGER},
+      </if>
+      <if test="hjzt != null" >
+        HJZT = #{hjzt,jdbcType=INTEGER},
+      </if>
+      <if test="hjzl != null" >
+        HJZL = #{hjzl,jdbcType=INTEGER},
+      </if>
+      <if test="jssj != null" >
+        JSSJ = #{jssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sbsj != null" >
+        SBSJ = #{sbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zcxxly != null" >
+        ZCXXLY = #{zcxxly,jdbcType=INTEGER},
+      </if>
+      <if test="sx != null" >
+        SX = #{sx,jdbcType=INTEGER},
+      </if>
+      <if test="gj != null" >
+        GJ = #{gj,jdbcType=INTEGER},
+      </if>
+      <if test="jd != null" >
+        JD = #{jd,jdbcType=DECIMAL},
+      </if>
+      <if test="wd != null" >
+        WD = #{wd,jdbcType=DECIMAL},
+      </if>
+      <if test="gd != null" >
+        GD = #{gd,jdbcType=DECIMAL},
+      </if>
+      <if test="jl != null" >
+        JL = #{jl,jdbcType=DECIMAL},
+      </if>
+      <if test="fw != null" >
+        FW = #{fw,jdbcType=DECIMAL},
+      </if>
+      <if test="yj != null" >
+        YJ = #{yj,jdbcType=DECIMAL},
+      </if>
+      <if test="jlwc != null" >
+        JLWC = #{jlwc,jdbcType=DECIMAL},
+      </if>
+      <if test="fwwc != null" >
+        FWWC = #{fwwc,jdbcType=DECIMAL},
+      </if>
+      <if test="yjwc != null" >
+        YJWC = #{yjwc,jdbcType=DECIMAL},
+      </if>
+      <if test="cpccs != null" >
+        CPCCS = #{cpccs,jdbcType=INTEGER},
+      </if>
+      <if test="cpddl != null" >
+        CPDDL = #{cpddl,jdbcType=INTEGER},
+      </if>
+      <if test="cphdl != null" >
+        CPHDL = #{cphdl,jdbcType=INTEGER},
+      </if>
+      <if test="cplx != null" >
+        CPLX = #{cplx,jdbcType=INTEGER},
+      </if>
+      <if test="ldxh != null" >
+        LDXH = #{ldxh,jdbcType=VARCHAR},
+      </if>
+      <if test="ldyt != null" >
+        LDYT = #{ldyt,jdbcType=INTEGER},
+      </if>
+      <if test="txsmzq != null" >
+        TXSMZQ = #{txsmzq,jdbcType=INTEGER},
+      </if>
+      <if test="txsmfs != null" >
+        TXSMFS = #{txsmfs,jdbcType=INTEGER},
+      </if>
+      <if test="jhfs != null" >
+        JHFS = #{jhfs,jdbcType=INTEGER},
+      </if>
+      <if test="plfw != null" >
+        PLFW = #{plfw,jdbcType=INTEGER},
+      </if>
+      <if test="wxdj != null" >
+        WXDJ = #{wxdj,jdbcType=INTEGER},
+      </if>
+      <if test="kxd != null" >
+        KXD = #{kxd,jdbcType=INTEGER},
+      </if>
+      <if test="dgngrms != null" >
+        DGNGRMS = #{dgngrms,jdbcType=INTEGER},
+      </if>
+      <if test="dgngrys != null" >
+        DGNGRYS = #{dgngrys,jdbcType=INTEGER},
+      </if>
+      <if test="hmbgrms != null" >
+        HMBGRMS = #{hmbgrms,jdbcType=INTEGER},
+      </if>
+      <if test="hmbgrys != null" >
+        HMBGRYS = #{hmbgrys,jdbcType=INTEGER},
+      </if>
+      <if test="xbdgrys != null" >
+        XBDGRYS = #{xbdgrys,jdbcType=INTEGER},
+      </if>
+      <if test="wygdgrys != null" >
+        WYGDGRYS = #{wygdgrys,jdbcType=INTEGER},
+      </if>
+      <if test="grdk != null" >
+        GRDK = #{grdk,jdbcType=INTEGER},
+      </if>
+      <if test="dgnfpzt != null" >
+        DGNFPZT = #{dgnfpzt,jdbcType=INTEGER},
+      </if>
+      <if test="hmbfpzt != null" >
+        HMBFPZT = #{hmbfpzt,jdbcType=INTEGER},
+      </if>
+      <if test="xsbfpzt != null" >
+        XSBFPZT = #{xsbfpzt,jdbcType=INTEGER},
+      </if>
+      <if test="splx != null" >
+        SPLX = #{splx,jdbcType=INTEGER},
+      </if>
+      <if test="mbzp != null" >
+        MBZP = #{mbzp,jdbcType=INTEGER},
+      </if>
+      <if test="zpjbl != null" >
+        ZPJBL = #{zpjbl,jdbcType=INTEGER},
+      </if>
+      <if test="mckdlx != null" >
+        MCKDLX = #{mckdlx,jdbcType=INTEGER},
+      </if>
+      <if test="mcfd != null" >
+        MCFD = #{mcfd,jdbcType=DECIMAL},
+      </if>
+      <if test="mnlx != null" >
+        MNLX = #{mnlx,jdbcType=INTEGER},
+      </if>
+      <if test="zmcgs != null" >
+        ZMCGS = #{zmcgs,jdbcType=INTEGER},
+      </if>
+      <if test="zmckd != null" >
+        ZMCKD = #{zmckd,jdbcType=DECIMAL},
+      </if>
+      <if test="qspl != null" >
+        QSPL = #{qspl,jdbcType=DECIMAL},
+      </if>
+      <if test="zzpl != null" >
+        ZZPL = #{zzpl,jdbcType=DECIMAL},
+      </if>
+      <if test="zdpp != null" >
+        ZDPP = #{zdpp,jdbcType=DECIMAL},
+      </if>
+      <if test="qsxw != null" >
+        QSXW = #{qsxw,jdbcType=DECIMAL},
+      </if>
+      <if test="smzq != null" >
+        SMZQ = #{smzq,jdbcType=DECIMAL},
+      </if>
+      <if test="zbkdsj != null" >
+        ZBKDSJ = #{zbkdsj,jdbcType=INTEGER},
+      </if>
+      <if test="zbdpwzsj != null" >
+        ZBDPWZSJ = #{zbdpwzsj,jdbcType=INTEGER},
+      </if>
+      <if test="zfbdpc != null" >
+        ZFBDPC = #{zfbdpc,jdbcType=INTEGER},
+      </if>
+      <if test="yfwfzsj != null" >
+        YFWFZSJ = #{yfwfzsj,jdbcType=INTEGER},
+      </if>
+      <if test="spjcz != null" >
+        SPJCZ = #{spjcz,jdbcType=DECIMAL},
+      </if>
+      <if test="spjcjfc != null" >
+        SPJCJFC = #{spjcjfc,jdbcType=DECIMAL},
+      </if>
+      <if test="mcjcz != null" >
+        MCJCZ = #{mcjcz,jdbcType=DECIMAL},
+      </if>
+      <if test="mcjcjfc != null" >
+        MCJCJFC = #{mcjcjfc,jdbcType=DECIMAL},
+      </if>
+      <if test="jcmcs != null" >
+        JCMCS = #{jcmcs,jdbcType=INTEGER},
+      </if>
+      <if test="ptxh != null" >
+        PTXH = #{ptxh,jdbcType=VARCHAR},
+      </if>
+      <if test="jxh != null" >
+        JXH = #{jxh,jdbcType=VARCHAR},
+      </if>
+      <if test="jjm != null" >
+        JJM = #{jjm,jdbcType=VARCHAR},
+      </if>
+      <if test="cfplcd != null" >
+        CFPLCD = #{cfplcd,jdbcType=INTEGER},
+      </if>
+      <if test="spzcd != null" >
+        SPZCD = #{spzcd,jdbcType=INTEGER},
+      </if>
+      <if test="mckdzcd != null" >
+        MCKDZCD = #{mckdzcd,jdbcType=INTEGER},
+      </if>
+      <if test="cfpl != null" >
+        CFPL = #{cfpl,jdbcType=VARBINARY},
+      </if>
+      <if test="spz != null" >
+        SPZ = #{spz,jdbcType=VARBINARY},
+      </if>
+      <if test="mckdz != null" >
+        MCKDZ = #{mckdz,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs" >
+    update qb_sj_ysdzzdzzcmb
+    set BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      PH = #{ph,jdbcType=INTEGER},
+      PTBH = #{ptbh,jdbcType=INTEGER},
+      PTMC = #{ptmc,jdbcType=VARCHAR},
+      PTLX = #{ptlx,jdbcType=INTEGER},
+      CGQBH = #{cgqbh,jdbcType=INTEGER},
+      XYLX = #{xylx,jdbcType=INTEGER},
+      HJZT = #{hjzt,jdbcType=INTEGER},
+      HJZL = #{hjzl,jdbcType=INTEGER},
+      JSSJ = #{jssj,jdbcType=TIMESTAMP},
+      SBSJ = #{sbsj,jdbcType=TIMESTAMP},
+      ZCXXLY = #{zcxxly,jdbcType=INTEGER},
+      SX = #{sx,jdbcType=INTEGER},
+      GJ = #{gj,jdbcType=INTEGER},
+      JD = #{jd,jdbcType=DECIMAL},
+      WD = #{wd,jdbcType=DECIMAL},
+      GD = #{gd,jdbcType=DECIMAL},
+      JL = #{jl,jdbcType=DECIMAL},
+      FW = #{fw,jdbcType=DECIMAL},
+      YJ = #{yj,jdbcType=DECIMAL},
+      JLWC = #{jlwc,jdbcType=DECIMAL},
+      FWWC = #{fwwc,jdbcType=DECIMAL},
+      YJWC = #{yjwc,jdbcType=DECIMAL},
+      CPCCS = #{cpccs,jdbcType=INTEGER},
+      CPDDL = #{cpddl,jdbcType=INTEGER},
+      CPHDL = #{cphdl,jdbcType=INTEGER},
+      CPLX = #{cplx,jdbcType=INTEGER},
+      LDXH = #{ldxh,jdbcType=VARCHAR},
+      LDYT = #{ldyt,jdbcType=INTEGER},
+      TXSMZQ = #{txsmzq,jdbcType=INTEGER},
+      TXSMFS = #{txsmfs,jdbcType=INTEGER},
+      JHFS = #{jhfs,jdbcType=INTEGER},
+      PLFW = #{plfw,jdbcType=INTEGER},
+      WXDJ = #{wxdj,jdbcType=INTEGER},
+      KXD = #{kxd,jdbcType=INTEGER},
+      DGNGRMS = #{dgngrms,jdbcType=INTEGER},
+      DGNGRYS = #{dgngrys,jdbcType=INTEGER},
+      HMBGRMS = #{hmbgrms,jdbcType=INTEGER},
+      HMBGRYS = #{hmbgrys,jdbcType=INTEGER},
+      XBDGRYS = #{xbdgrys,jdbcType=INTEGER},
+      WYGDGRYS = #{wygdgrys,jdbcType=INTEGER},
+      GRDK = #{grdk,jdbcType=INTEGER},
+      DGNFPZT = #{dgnfpzt,jdbcType=INTEGER},
+      HMBFPZT = #{hmbfpzt,jdbcType=INTEGER},
+      XSBFPZT = #{xsbfpzt,jdbcType=INTEGER},
+      SPLX = #{splx,jdbcType=INTEGER},
+      MBZP = #{mbzp,jdbcType=INTEGER},
+      ZPJBL = #{zpjbl,jdbcType=INTEGER},
+      MCKDLX = #{mckdlx,jdbcType=INTEGER},
+      MCFD = #{mcfd,jdbcType=DECIMAL},
+      MNLX = #{mnlx,jdbcType=INTEGER},
+      ZMCGS = #{zmcgs,jdbcType=INTEGER},
+      ZMCKD = #{zmckd,jdbcType=DECIMAL},
+      QSPL = #{qspl,jdbcType=DECIMAL},
+      ZZPL = #{zzpl,jdbcType=DECIMAL},
+      ZDPP = #{zdpp,jdbcType=DECIMAL},
+      QSXW = #{qsxw,jdbcType=DECIMAL},
+      SMZQ = #{smzq,jdbcType=DECIMAL},
+      ZBKDSJ = #{zbkdsj,jdbcType=INTEGER},
+      ZBDPWZSJ = #{zbdpwzsj,jdbcType=INTEGER},
+      ZFBDPC = #{zfbdpc,jdbcType=INTEGER},
+      YFWFZSJ = #{yfwfzsj,jdbcType=INTEGER},
+      SPJCZ = #{spjcz,jdbcType=DECIMAL},
+      SPJCJFC = #{spjcjfc,jdbcType=DECIMAL},
+      MCJCZ = #{mcjcz,jdbcType=DECIMAL},
+      MCJCJFC = #{mcjcjfc,jdbcType=DECIMAL},
+      JCMCS = #{jcmcs,jdbcType=INTEGER},
+      PTXH = #{ptxh,jdbcType=VARCHAR},
+      JXH = #{jxh,jdbcType=VARCHAR},
+      JJM = #{jjm,jdbcType=VARCHAR},
+      CFPLCD = #{cfplcd,jdbcType=INTEGER},
+      SPZCD = #{spzcd,jdbcType=INTEGER},
+      MCKDZCD = #{mckdzcd,jdbcType=INTEGER},
+      CFPL = #{cfpl,jdbcType=VARBINARY},
+      SPZ = #{spz,jdbcType=VARBINARY},
+      MCKDZ = #{mckdz,jdbcType=VARBINARY}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPO" >
+    update qb_sj_ysdzzdzzcmb
+    set BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      PH = #{ph,jdbcType=INTEGER},
+      PTBH = #{ptbh,jdbcType=INTEGER},
+      PTMC = #{ptmc,jdbcType=VARCHAR},
+      PTLX = #{ptlx,jdbcType=INTEGER},
+      CGQBH = #{cgqbh,jdbcType=INTEGER},
+      XYLX = #{xylx,jdbcType=INTEGER},
+      HJZT = #{hjzt,jdbcType=INTEGER},
+      HJZL = #{hjzl,jdbcType=INTEGER},
+      JSSJ = #{jssj,jdbcType=TIMESTAMP},
+      SBSJ = #{sbsj,jdbcType=TIMESTAMP},
+      ZCXXLY = #{zcxxly,jdbcType=INTEGER},
+      SX = #{sx,jdbcType=INTEGER},
+      GJ = #{gj,jdbcType=INTEGER},
+      JD = #{jd,jdbcType=DECIMAL},
+      WD = #{wd,jdbcType=DECIMAL},
+      GD = #{gd,jdbcType=DECIMAL},
+      JL = #{jl,jdbcType=DECIMAL},
+      FW = #{fw,jdbcType=DECIMAL},
+      YJ = #{yj,jdbcType=DECIMAL},
+      JLWC = #{jlwc,jdbcType=DECIMAL},
+      FWWC = #{fwwc,jdbcType=DECIMAL},
+      YJWC = #{yjwc,jdbcType=DECIMAL},
+      CPCCS = #{cpccs,jdbcType=INTEGER},
+      CPDDL = #{cpddl,jdbcType=INTEGER},
+      CPHDL = #{cphdl,jdbcType=INTEGER},
+      CPLX = #{cplx,jdbcType=INTEGER},
+      LDXH = #{ldxh,jdbcType=VARCHAR},
+      LDYT = #{ldyt,jdbcType=INTEGER},
+      TXSMZQ = #{txsmzq,jdbcType=INTEGER},
+      TXSMFS = #{txsmfs,jdbcType=INTEGER},
+      JHFS = #{jhfs,jdbcType=INTEGER},
+      PLFW = #{plfw,jdbcType=INTEGER},
+      WXDJ = #{wxdj,jdbcType=INTEGER},
+      KXD = #{kxd,jdbcType=INTEGER},
+      DGNGRMS = #{dgngrms,jdbcType=INTEGER},
+      DGNGRYS = #{dgngrys,jdbcType=INTEGER},
+      HMBGRMS = #{hmbgrms,jdbcType=INTEGER},
+      HMBGRYS = #{hmbgrys,jdbcType=INTEGER},
+      XBDGRYS = #{xbdgrys,jdbcType=INTEGER},
+      WYGDGRYS = #{wygdgrys,jdbcType=INTEGER},
+      GRDK = #{grdk,jdbcType=INTEGER},
+      DGNFPZT = #{dgnfpzt,jdbcType=INTEGER},
+      HMBFPZT = #{hmbfpzt,jdbcType=INTEGER},
+      XSBFPZT = #{xsbfpzt,jdbcType=INTEGER},
+      SPLX = #{splx,jdbcType=INTEGER},
+      MBZP = #{mbzp,jdbcType=INTEGER},
+      ZPJBL = #{zpjbl,jdbcType=INTEGER},
+      MCKDLX = #{mckdlx,jdbcType=INTEGER},
+      MCFD = #{mcfd,jdbcType=DECIMAL},
+      MNLX = #{mnlx,jdbcType=INTEGER},
+      ZMCGS = #{zmcgs,jdbcType=INTEGER},
+      ZMCKD = #{zmckd,jdbcType=DECIMAL},
+      QSPL = #{qspl,jdbcType=DECIMAL},
+      ZZPL = #{zzpl,jdbcType=DECIMAL},
+      ZDPP = #{zdpp,jdbcType=DECIMAL},
+      QSXW = #{qsxw,jdbcType=DECIMAL},
+      SMZQ = #{smzq,jdbcType=DECIMAL},
+      ZBKDSJ = #{zbkdsj,jdbcType=INTEGER},
+      ZBDPWZSJ = #{zbdpwzsj,jdbcType=INTEGER},
+      ZFBDPC = #{zfbdpc,jdbcType=INTEGER},
+      YFWFZSJ = #{yfwfzsj,jdbcType=INTEGER},
+      SPJCZ = #{spjcz,jdbcType=DECIMAL},
+      SPJCJFC = #{spjcjfc,jdbcType=DECIMAL},
+      MCJCZ = #{mcjcz,jdbcType=DECIMAL},
+      MCJCJFC = #{mcjcjfc,jdbcType=DECIMAL},
+      JCMCS = #{jcmcs,jdbcType=INTEGER},
+      PTXH = #{ptxh,jdbcType=VARCHAR},
+      JXH = #{jxh,jdbcType=VARCHAR},
+      JJM = #{jjm,jdbcType=VARCHAR},
+      CFPLCD = #{cfplcd,jdbcType=INTEGER},
+      SPZCD = #{spzcd,jdbcType=INTEGER},
+      MCKDZCD = #{mckdzcd,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

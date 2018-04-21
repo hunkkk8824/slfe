@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.ScoutQbTableBdPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.ScoutQbTableBdPO" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="BATCH_NO" property="batchNo" jdbcType="VARCHAR" />
+    <result column="NCAT" property="ncat" jdbcType="INTEGER" />
+    <result column="INFO_SOURCE" property="infoSource" jdbcType="VARCHAR" />
+    <result column="SEND_UNIT" property="sendUnit" jdbcType="VARCHAR" />
+    <result column="RECV_UNIT" property="recvUnit" jdbcType="VARCHAR" />
+    <result column="SEND_TIME" property="sendTime" jdbcType="VARCHAR" />
+    <result column="STREAM_NO" property="streamNo" jdbcType="INTEGER" />
+    <result column="GRAM_TYPE" property="gramType" jdbcType="INTEGER" />
+    <result column="SECRET_GRADE" property="secretGrade" jdbcType="SMALLINT" />
+    <result column="WRITE_TIME" property="writeTime" jdbcType="VARCHAR" />
+    <result column="SEND_GRAM_TIME" property="sendGramTime" jdbcType="VARCHAR" />
+    <result column="SEND_GRAM_SERIAL" property="sendGramSerial" jdbcType="VARCHAR" />
+    <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+    <result column="SIGNATORY" property="signatory" jdbcType="VARCHAR" />
+    <result column="CAPTION" property="caption" jdbcType="VARCHAR" />
+    <result column="CONTENT_LEN" property="contentLen" jdbcType="INTEGER" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="SUBJECT" property="subject" jdbcType="VARCHAR" />
+    <result column="EIGENVALUE" property="eigenvalue" jdbcType="VARCHAR" />
+    <result column="FJ_DEPICT" property="fjDepict" jdbcType="VARCHAR" />
+    <result column="FJ_TYPE" property="fjType" jdbcType="INTEGER" />
+    <result column="FJ_NAME" property="fjName" jdbcType="VARCHAR" />
+    <result column="FJ_LEN" property="fjLen" jdbcType="INTEGER" />
+    <result column="GRAM_STREAM" property="gramStream" jdbcType="INTEGER" />
+    <result column="RECEIPT_PERSON" property="receiptPerson" jdbcType="VARCHAR" />
+    <result column="RECEIPT_STATUS" property="receiptStatus" jdbcType="SMALLINT" />
+    <result column="ERROR_CAUSE" property="errorCause" jdbcType="VARCHAR" />
+    <result column="FRIORITY" property="friority" jdbcType="SMALLINT" />
+    <result column="TIME_ZONE_VALUE" property="timeZoneValue" jdbcType="DECIMAL" />
+    <result column="READ_FLAG" property="readFlag" jdbcType="SMALLINT" />
+    <result column="REPLAY_FLAG" property="replayFlag" jdbcType="SMALLINT" />
+    <result column="WD_ID" property="wdId" jdbcType="DECIMAL" />
+    <result column="SEND_UUNIT_ID" property="sendUunitId" jdbcType="INTEGER" />
+    <result column="EDIT_CONTENT" property="editContent" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.selfwork.intelligence.model.po.ScoutQbTableBdPO" extends="BaseResultMap" >
+    <result column="FJ_CONTENT" property="fjContent" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BATCH_NO, NCAT, INFO_SOURCE, SEND_UNIT, RECV_UNIT, SEND_TIME, STREAM_NO, GRAM_TYPE, 
+    SECRET_GRADE, WRITE_TIME, SEND_GRAM_TIME, SEND_GRAM_SERIAL, AUTHOR, SIGNATORY, CAPTION, 
+    CONTENT_LEN, CONTENT, SUBJECT, EIGENVALUE, FJ_DEPICT, FJ_TYPE, FJ_NAME, FJ_LEN, GRAM_STREAM, 
+    RECEIPT_PERSON, RECEIPT_STATUS, ERROR_CAUSE, FRIORITY, TIME_ZONE_VALUE, READ_FLAG, 
+    REPLAY_FLAG, WD_ID, SEND_UUNIT_ID, EDIT_CONTENT
+  </sql>
+  <sql id="Blob_Column_List" >
+    FJ_CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from scout_qb_table_bd
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from scout_qb_table_bd
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.ScoutQbTableBdPO" >
+    insert into scout_qb_table_bd (ID, BATCH_NO, NCAT, 
+      INFO_SOURCE, SEND_UNIT, RECV_UNIT, 
+      SEND_TIME, STREAM_NO, GRAM_TYPE, 
+      SECRET_GRADE, WRITE_TIME, SEND_GRAM_TIME, 
+      SEND_GRAM_SERIAL, AUTHOR, SIGNATORY, 
+      CAPTION, CONTENT_LEN, CONTENT, 
+      SUBJECT, EIGENVALUE, FJ_DEPICT, 
+      FJ_TYPE, FJ_NAME, FJ_LEN, 
+      GRAM_STREAM, RECEIPT_PERSON, RECEIPT_STATUS, 
+      ERROR_CAUSE, FRIORITY, TIME_ZONE_VALUE, 
+      READ_FLAG, REPLAY_FLAG, WD_ID, 
+      SEND_UUNIT_ID, EDIT_CONTENT, FJ_CONTENT
+      )
+    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{ncat,jdbcType=INTEGER}, 
+      #{infoSource,jdbcType=VARCHAR}, #{sendUnit,jdbcType=VARCHAR}, #{recvUnit,jdbcType=VARCHAR}, 
+      #{sendTime,jdbcType=VARCHAR}, #{streamNo,jdbcType=INTEGER}, #{gramType,jdbcType=INTEGER}, 
+      #{secretGrade,jdbcType=SMALLINT}, #{writeTime,jdbcType=VARCHAR}, #{sendGramTime,jdbcType=VARCHAR}, 
+      #{sendGramSerial,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{signatory,jdbcType=VARCHAR}, 
+      #{caption,jdbcType=VARCHAR}, #{contentLen,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{eigenvalue,jdbcType=VARCHAR}, #{fjDepict,jdbcType=VARCHAR}, 
+      #{fjType,jdbcType=INTEGER}, #{fjName,jdbcType=VARCHAR}, #{fjLen,jdbcType=INTEGER}, 
+      #{gramStream,jdbcType=INTEGER}, #{receiptPerson,jdbcType=VARCHAR}, #{receiptStatus,jdbcType=SMALLINT}, 
+      #{errorCause,jdbcType=VARCHAR}, #{friority,jdbcType=SMALLINT}, #{timeZoneValue,jdbcType=DECIMAL}, 
+      #{readFlag,jdbcType=SMALLINT}, #{replayFlag,jdbcType=SMALLINT}, #{wdId,jdbcType=DECIMAL}, 
+      #{sendUunitId,jdbcType=INTEGER}, #{editContent,jdbcType=VARCHAR}, #{fjContent,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.ScoutQbTableBdPO" >
+    insert into scout_qb_table_bd
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO,
+      </if>
+      <if test="ncat != null" >
+        NCAT,
+      </if>
+      <if test="infoSource != null" >
+        INFO_SOURCE,
+      </if>
+      <if test="sendUnit != null" >
+        SEND_UNIT,
+      </if>
+      <if test="recvUnit != null" >
+        RECV_UNIT,
+      </if>
+      <if test="sendTime != null" >
+        SEND_TIME,
+      </if>
+      <if test="streamNo != null" >
+        STREAM_NO,
+      </if>
+      <if test="gramType != null" >
+        GRAM_TYPE,
+      </if>
+      <if test="secretGrade != null" >
+        SECRET_GRADE,
+      </if>
+      <if test="writeTime != null" >
+        WRITE_TIME,
+      </if>
+      <if test="sendGramTime != null" >
+        SEND_GRAM_TIME,
+      </if>
+      <if test="sendGramSerial != null" >
+        SEND_GRAM_SERIAL,
+      </if>
+      <if test="author != null" >
+        AUTHOR,
+      </if>
+      <if test="signatory != null" >
+        SIGNATORY,
+      </if>
+      <if test="caption != null" >
+        CAPTION,
+      </if>
+      <if test="contentLen != null" >
+        CONTENT_LEN,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="subject != null" >
+        SUBJECT,
+      </if>
+      <if test="eigenvalue != null" >
+        EIGENVALUE,
+      </if>
+      <if test="fjDepict != null" >
+        FJ_DEPICT,
+      </if>
+      <if test="fjType != null" >
+        FJ_TYPE,
+      </if>
+      <if test="fjName != null" >
+        FJ_NAME,
+      </if>
+      <if test="fjLen != null" >
+        FJ_LEN,
+      </if>
+      <if test="gramStream != null" >
+        GRAM_STREAM,
+      </if>
+      <if test="receiptPerson != null" >
+        RECEIPT_PERSON,
+      </if>
+      <if test="receiptStatus != null" >
+        RECEIPT_STATUS,
+      </if>
+      <if test="errorCause != null" >
+        ERROR_CAUSE,
+      </if>
+      <if test="friority != null" >
+        FRIORITY,
+      </if>
+      <if test="timeZoneValue != null" >
+        TIME_ZONE_VALUE,
+      </if>
+      <if test="readFlag != null" >
+        READ_FLAG,
+      </if>
+      <if test="replayFlag != null" >
+        REPLAY_FLAG,
+      </if>
+      <if test="wdId != null" >
+        WD_ID,
+      </if>
+      <if test="sendUunitId != null" >
+        SEND_UUNIT_ID,
+      </if>
+      <if test="editContent != null" >
+        EDIT_CONTENT,
+      </if>
+      <if test="fjContent != null" >
+        FJ_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null" >
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ncat != null" >
+        #{ncat,jdbcType=INTEGER},
+      </if>
+      <if test="infoSource != null" >
+        #{infoSource,jdbcType=VARCHAR},
+      </if>
+      <if test="sendUnit != null" >
+        #{sendUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="recvUnit != null" >
+        #{recvUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="streamNo != null" >
+        #{streamNo,jdbcType=INTEGER},
+      </if>
+      <if test="gramType != null" >
+        #{gramType,jdbcType=INTEGER},
+      </if>
+      <if test="secretGrade != null" >
+        #{secretGrade,jdbcType=SMALLINT},
+      </if>
+      <if test="writeTime != null" >
+        #{writeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sendGramTime != null" >
+        #{sendGramTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sendGramSerial != null" >
+        #{sendGramSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="signatory != null" >
+        #{signatory,jdbcType=VARCHAR},
+      </if>
+      <if test="caption != null" >
+        #{caption,jdbcType=VARCHAR},
+      </if>
+      <if test="contentLen != null" >
+        #{contentLen,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="eigenvalue != null" >
+        #{eigenvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="fjDepict != null" >
+        #{fjDepict,jdbcType=VARCHAR},
+      </if>
+      <if test="fjType != null" >
+        #{fjType,jdbcType=INTEGER},
+      </if>
+      <if test="fjName != null" >
+        #{fjName,jdbcType=VARCHAR},
+      </if>
+      <if test="fjLen != null" >
+        #{fjLen,jdbcType=INTEGER},
+      </if>
+      <if test="gramStream != null" >
+        #{gramStream,jdbcType=INTEGER},
+      </if>
+      <if test="receiptPerson != null" >
+        #{receiptPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptStatus != null" >
+        #{receiptStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="errorCause != null" >
+        #{errorCause,jdbcType=VARCHAR},
+      </if>
+      <if test="friority != null" >
+        #{friority,jdbcType=SMALLINT},
+      </if>
+      <if test="timeZoneValue != null" >
+        #{timeZoneValue,jdbcType=DECIMAL},
+      </if>
+      <if test="readFlag != null" >
+        #{readFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="replayFlag != null" >
+        #{replayFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="wdId != null" >
+        #{wdId,jdbcType=DECIMAL},
+      </if>
+      <if test="sendUunitId != null" >
+        #{sendUunitId,jdbcType=INTEGER},
+      </if>
+      <if test="editContent != null" >
+        #{editContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fjContent != null" >
+        #{fjContent,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.ScoutQbTableBdPO" >
+    update scout_qb_table_bd
+    <set >
+      <if test="batchNo != null" >
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ncat != null" >
+        NCAT = #{ncat,jdbcType=INTEGER},
+      </if>
+      <if test="infoSource != null" >
+        INFO_SOURCE = #{infoSource,jdbcType=VARCHAR},
+      </if>
+      <if test="sendUnit != null" >
+        SEND_UNIT = #{sendUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="recvUnit != null" >
+        RECV_UNIT = #{recvUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        SEND_TIME = #{sendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="streamNo != null" >
+        STREAM_NO = #{streamNo,jdbcType=INTEGER},
+      </if>
+      <if test="gramType != null" >
+        GRAM_TYPE = #{gramType,jdbcType=INTEGER},
+      </if>
+      <if test="secretGrade != null" >
+        SECRET_GRADE = #{secretGrade,jdbcType=SMALLINT},
+      </if>
+      <if test="writeTime != null" >
+        WRITE_TIME = #{writeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sendGramTime != null" >
+        SEND_GRAM_TIME = #{sendGramTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sendGramSerial != null" >
+        SEND_GRAM_SERIAL = #{sendGramSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        AUTHOR = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="signatory != null" >
+        SIGNATORY = #{signatory,jdbcType=VARCHAR},
+      </if>
+      <if test="caption != null" >
+        CAPTION = #{caption,jdbcType=VARCHAR},
+      </if>
+      <if test="contentLen != null" >
+        CONTENT_LEN = #{contentLen,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        SUBJECT = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="eigenvalue != null" >
+        EIGENVALUE = #{eigenvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="fjDepict != null" >
+        FJ_DEPICT = #{fjDepict,jdbcType=VARCHAR},
+      </if>
+      <if test="fjType != null" >
+        FJ_TYPE = #{fjType,jdbcType=INTEGER},
+      </if>
+      <if test="fjName != null" >
+        FJ_NAME = #{fjName,jdbcType=VARCHAR},
+      </if>
+      <if test="fjLen != null" >
+        FJ_LEN = #{fjLen,jdbcType=INTEGER},
+      </if>
+      <if test="gramStream != null" >
+        GRAM_STREAM = #{gramStream,jdbcType=INTEGER},
+      </if>
+      <if test="receiptPerson != null" >
+        RECEIPT_PERSON = #{receiptPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptStatus != null" >
+        RECEIPT_STATUS = #{receiptStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="errorCause != null" >
+        ERROR_CAUSE = #{errorCause,jdbcType=VARCHAR},
+      </if>
+      <if test="friority != null" >
+        FRIORITY = #{friority,jdbcType=SMALLINT},
+      </if>
+      <if test="timeZoneValue != null" >
+        TIME_ZONE_VALUE = #{timeZoneValue,jdbcType=DECIMAL},
+      </if>
+      <if test="readFlag != null" >
+        READ_FLAG = #{readFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="replayFlag != null" >
+        REPLAY_FLAG = #{replayFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="wdId != null" >
+        WD_ID = #{wdId,jdbcType=DECIMAL},
+      </if>
+      <if test="sendUunitId != null" >
+        SEND_UUNIT_ID = #{sendUunitId,jdbcType=INTEGER},
+      </if>
+      <if test="editContent != null" >
+        EDIT_CONTENT = #{editContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fjContent != null" >
+        FJ_CONTENT = #{fjContent,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.selfwork.intelligence.model.po.ScoutQbTableBdPO" >
+    update scout_qb_table_bd
+    set BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      NCAT = #{ncat,jdbcType=INTEGER},
+      INFO_SOURCE = #{infoSource,jdbcType=VARCHAR},
+      SEND_UNIT = #{sendUnit,jdbcType=VARCHAR},
+      RECV_UNIT = #{recvUnit,jdbcType=VARCHAR},
+      SEND_TIME = #{sendTime,jdbcType=VARCHAR},
+      STREAM_NO = #{streamNo,jdbcType=INTEGER},
+      GRAM_TYPE = #{gramType,jdbcType=INTEGER},
+      SECRET_GRADE = #{secretGrade,jdbcType=SMALLINT},
+      WRITE_TIME = #{writeTime,jdbcType=VARCHAR},
+      SEND_GRAM_TIME = #{sendGramTime,jdbcType=VARCHAR},
+      SEND_GRAM_SERIAL = #{sendGramSerial,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      SIGNATORY = #{signatory,jdbcType=VARCHAR},
+      CAPTION = #{caption,jdbcType=VARCHAR},
+      CONTENT_LEN = #{contentLen,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      SUBJECT = #{subject,jdbcType=VARCHAR},
+      EIGENVALUE = #{eigenvalue,jdbcType=VARCHAR},
+      FJ_DEPICT = #{fjDepict,jdbcType=VARCHAR},
+      FJ_TYPE = #{fjType,jdbcType=INTEGER},
+      FJ_NAME = #{fjName,jdbcType=VARCHAR},
+      FJ_LEN = #{fjLen,jdbcType=INTEGER},
+      GRAM_STREAM = #{gramStream,jdbcType=INTEGER},
+      RECEIPT_PERSON = #{receiptPerson,jdbcType=VARCHAR},
+      RECEIPT_STATUS = #{receiptStatus,jdbcType=SMALLINT},
+      ERROR_CAUSE = #{errorCause,jdbcType=VARCHAR},
+      FRIORITY = #{friority,jdbcType=SMALLINT},
+      TIME_ZONE_VALUE = #{timeZoneValue,jdbcType=DECIMAL},
+      READ_FLAG = #{readFlag,jdbcType=SMALLINT},
+      REPLAY_FLAG = #{replayFlag,jdbcType=SMALLINT},
+      WD_ID = #{wdId,jdbcType=DECIMAL},
+      SEND_UUNIT_ID = #{sendUunitId,jdbcType=INTEGER},
+      EDIT_CONTENT = #{editContent,jdbcType=VARCHAR},
+      FJ_CONTENT = #{fjContent,jdbcType=LONGVARBINARY}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.ScoutQbTableBdPO" >
+    update scout_qb_table_bd
+    set BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      NCAT = #{ncat,jdbcType=INTEGER},
+      INFO_SOURCE = #{infoSource,jdbcType=VARCHAR},
+      SEND_UNIT = #{sendUnit,jdbcType=VARCHAR},
+      RECV_UNIT = #{recvUnit,jdbcType=VARCHAR},
+      SEND_TIME = #{sendTime,jdbcType=VARCHAR},
+      STREAM_NO = #{streamNo,jdbcType=INTEGER},
+      GRAM_TYPE = #{gramType,jdbcType=INTEGER},
+      SECRET_GRADE = #{secretGrade,jdbcType=SMALLINT},
+      WRITE_TIME = #{writeTime,jdbcType=VARCHAR},
+      SEND_GRAM_TIME = #{sendGramTime,jdbcType=VARCHAR},
+      SEND_GRAM_SERIAL = #{sendGramSerial,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      SIGNATORY = #{signatory,jdbcType=VARCHAR},
+      CAPTION = #{caption,jdbcType=VARCHAR},
+      CONTENT_LEN = #{contentLen,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      SUBJECT = #{subject,jdbcType=VARCHAR},
+      EIGENVALUE = #{eigenvalue,jdbcType=VARCHAR},
+      FJ_DEPICT = #{fjDepict,jdbcType=VARCHAR},
+      FJ_TYPE = #{fjType,jdbcType=INTEGER},
+      FJ_NAME = #{fjName,jdbcType=VARCHAR},
+      FJ_LEN = #{fjLen,jdbcType=INTEGER},
+      GRAM_STREAM = #{gramStream,jdbcType=INTEGER},
+      RECEIPT_PERSON = #{receiptPerson,jdbcType=VARCHAR},
+      RECEIPT_STATUS = #{receiptStatus,jdbcType=SMALLINT},
+      ERROR_CAUSE = #{errorCause,jdbcType=VARCHAR},
+      FRIORITY = #{friority,jdbcType=SMALLINT},
+      TIME_ZONE_VALUE = #{timeZoneValue,jdbcType=DECIMAL},
+      READ_FLAG = #{readFlag,jdbcType=SMALLINT},
+      REPLAY_FLAG = #{replayFlag,jdbcType=SMALLINT},
+      WD_ID = #{wdId,jdbcType=DECIMAL},
+      SEND_UUNIT_ID = #{sendUunitId,jdbcType=INTEGER},
+      EDIT_CONTENT = #{editContent,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

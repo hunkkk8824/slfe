@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.ExchangerEtlPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.ExchangerEtlPO" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="EXCHANGER_ID" property="exchangerId" jdbcType="INTEGER" />
+    <result column="DATASET_CODE" property="datasetCode" jdbcType="VARCHAR" />
+    <result column="DATASET_NAME" property="datasetName" jdbcType="VARCHAR" />
+    <result column="ETL_NAME" property="etlName" jdbcType="INTEGER" />
+    <result column="TEMPLATE_NAME" property="templateName" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_PATH" property="templatePath" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR" />
+    <result column="VALID" property="valid" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, EXCHANGER_ID, DATASET_CODE, DATASET_NAME, ETL_NAME, TEMPLATE_NAME, TEMPLATE_PATH, 
+    REMARK, CREATE_USER, CREATE_TIME, LAST_MODIFY_TIME, LAST_MODIFY_USER, VALID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_exchanger_etl
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_exchanger_etl
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.ExchangerEtlPO" >
+    insert into tb_exchanger_etl (ID, EXCHANGER_ID, DATASET_CODE, 
+      DATASET_NAME, ETL_NAME, TEMPLATE_NAME, 
+      TEMPLATE_PATH, REMARK, CREATE_USER, 
+      CREATE_TIME, LAST_MODIFY_TIME, LAST_MODIFY_USER, 
+      VALID)
+    values (#{id,jdbcType=INTEGER}, #{exchangerId,jdbcType=INTEGER}, #{datasetCode,jdbcType=VARCHAR}, 
+      #{datasetName,jdbcType=VARCHAR}, #{etlName,jdbcType=INTEGER}, #{templateName,jdbcType=VARCHAR}, 
+      #{templatePath,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP}, #{lastModifyUser,jdbcType=VARCHAR}, 
+      #{valid,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.ExchangerEtlPO" >
+    insert into tb_exchanger_etl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="exchangerId != null" >
+        EXCHANGER_ID,
+      </if>
+      <if test="datasetCode != null" >
+        DATASET_CODE,
+      </if>
+      <if test="datasetName != null" >
+        DATASET_NAME,
+      </if>
+      <if test="etlName != null" >
+        ETL_NAME,
+      </if>
+      <if test="templateName != null" >
+        TEMPLATE_NAME,
+      </if>
+      <if test="templatePath != null" >
+        TEMPLATE_PATH,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME,
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER,
+      </if>
+      <if test="valid != null" >
+        VALID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="exchangerId != null" >
+        #{exchangerId,jdbcType=INTEGER},
+      </if>
+      <if test="datasetCode != null" >
+        #{datasetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="datasetName != null" >
+        #{datasetName,jdbcType=VARCHAR},
+      </if>
+      <if test="etlName != null" >
+        #{etlName,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null" >
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="templatePath != null" >
+        #{templatePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUser != null" >
+        #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        #{valid,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.ExchangerEtlPO" >
+    update tb_exchanger_etl
+    <set >
+      <if test="exchangerId != null" >
+        EXCHANGER_ID = #{exchangerId,jdbcType=INTEGER},
+      </if>
+      <if test="datasetCode != null" >
+        DATASET_CODE = #{datasetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="datasetName != null" >
+        DATASET_NAME = #{datasetName,jdbcType=VARCHAR},
+      </if>
+      <if test="etlName != null" >
+        ETL_NAME = #{etlName,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null" >
+        TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="templatePath != null" >
+        TEMPLATE_PATH = #{templatePath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null" >
+        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUser != null" >
+        LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null" >
+        VALID = #{valid,jdbcType=BIT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.ExchangerEtlPO" >
+    update tb_exchanger_etl
+    set EXCHANGER_ID = #{exchangerId,jdbcType=INTEGER},
+      DATASET_CODE = #{datasetCode,jdbcType=VARCHAR},
+      DATASET_NAME = #{datasetName,jdbcType=VARCHAR},
+      ETL_NAME = #{etlName,jdbcType=INTEGER},
+      TEMPLATE_NAME = #{templateName,jdbcType=VARCHAR},
+      TEMPLATE_PATH = #{templatePath,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+      LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+      VALID = #{valid,jdbcType=BIT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
