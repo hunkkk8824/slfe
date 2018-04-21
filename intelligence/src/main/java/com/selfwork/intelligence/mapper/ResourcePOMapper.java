@@ -1,6 +1,10 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.ResourcePO;
+import com.selfwork.intelligence.model.vo.dataquality.DataQualitVo;
+import com.selfwork.intelligence.model.vo.dataquality.DataQualityQueryVo;
+
+import java.util.List;
 
 public interface ResourcePOMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +18,6 @@ public interface ResourcePOMapper {
     int updateByPrimaryKeySelective(ResourcePO record);
 
     int updateByPrimaryKey(ResourcePO record);
+
+    List<ResourcePO> findList(DataQualityQueryVo queryVo);
 }

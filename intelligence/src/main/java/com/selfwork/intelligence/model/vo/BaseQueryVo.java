@@ -1,6 +1,6 @@
 package com.selfwork.intelligence.model.vo;
 
-public class BaseQueryVo<T> {
+public class BaseQueryVo {
 
     /**
      * 记录条数
@@ -21,7 +21,7 @@ public class BaseQueryVo<T> {
      */
     private String sort;
 
-    private T queryDto;
+
 
     private Integer pageNumber;
 
@@ -62,11 +62,4 @@ public class BaseQueryVo<T> {
         this.sort = sort;
     }
 
-    public T getQueryDto() {
-        return queryDto;
-    }
-
-    public void setQueryDto(T queryDto) {
-        this.queryDto = queryDto;
-    }
 }

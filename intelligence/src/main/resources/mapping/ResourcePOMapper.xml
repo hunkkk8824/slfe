@@ -1,49 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.selfwork.intelligence.mapper.ResourcePOMapper" >
-  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.ResourcePO" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="CODE" property="code" jdbcType="VARCHAR" />
-    <result column="NAME" property="name" jdbcType="VARCHAR" />
-    <result column="DATASET_CODE" property="datasetCode" jdbcType="VARCHAR" />
-    <result column="DATASET_NAME" property="datasetName" jdbcType="VARCHAR" />
-    <result column="PREIMPORT_TOTAL_COUNT" property="preimportTotalCount" jdbcType="INTEGER" />
-    <result column="IMPORT_SUCCESS_COUNT" property="importSuccessCount" jdbcType="INTEGER" />
-    <result column="IMPORT_STATUS" property="importStatus" jdbcType="SMALLINT" />
-    <result column="COMMIT_USER" property="commitUser" jdbcType="VARCHAR" />
-    <result column="COMMIT_USER_NAME" property="commitUserName" jdbcType="VARCHAR" />
-    <result column="COMMIT_TIME" property="commitTime" jdbcType="TIMESTAMP" />
-    <result column="AUDIT_USER" property="auditUser" jdbcType="VARCHAR" />
-    <result column="AUDIT_USER_NAME" property="auditUserName" jdbcType="VARCHAR" />
-    <result column="AUDIT_TIME" property="auditTime" jdbcType="TIMESTAMP" />
-    <result column="AUDIT_STATUS" property="auditStatus" jdbcType="SMALLINT" />
-    <result column="IS_CANCEL" property="isCancel" jdbcType="BIT" />
-    <result column="QUALITY" property="quality" jdbcType="SMALLINT" />
-    <result column="SOURCE_EXCHANGER_CODE" property="sourceExchangerCode" jdbcType="VARCHAR" />
-    <result column="SOURCE_EXCHANGER_NAME" property="sourceExchangerName" jdbcType="VARCHAR" />
-    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP" />
-    <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR" />
-    <result column="VALID" property="valid" jdbcType="BIT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.selfwork.intelligence.mapper.ResourcePOMapper">
+    <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.ResourcePO">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="CODE" property="code" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="DATASET_CODE" property="datasetCode" jdbcType="VARCHAR"/>
+        <result column="DATASET_NAME" property="datasetName" jdbcType="VARCHAR"/>
+        <result column="PREIMPORT_TOTAL_COUNT" property="preimportTotalCount" jdbcType="INTEGER"/>
+        <result column="IMPORT_SUCCESS_COUNT" property="importSuccessCount" jdbcType="INTEGER"/>
+        <result column="IMPORT_STATUS" property="importStatus" jdbcType="SMALLINT"/>
+        <result column="COMMIT_USER" property="commitUser" jdbcType="VARCHAR"/>
+        <result column="COMMIT_USER_NAME" property="commitUserName" jdbcType="VARCHAR"/>
+        <result column="COMMIT_TIME" property="commitTime" jdbcType="TIMESTAMP"/>
+        <result column="AUDIT_USER" property="auditUser" jdbcType="VARCHAR"/>
+        <result column="AUDIT_USER_NAME" property="auditUserName" jdbcType="VARCHAR"/>
+        <result column="AUDIT_TIME" property="auditTime" jdbcType="TIMESTAMP"/>
+        <result column="AUDIT_STATUS" property="auditStatus" jdbcType="SMALLINT"/>
+        <result column="IS_CANCEL" property="isCancel" jdbcType="BIT"/>
+        <result column="QUALITY" property="quality" jdbcType="SMALLINT"/>
+        <result column="SOURCE_EXCHANGER_CODE" property="sourceExchangerCode" jdbcType="VARCHAR"/>
+        <result column="SOURCE_EXCHANGER_NAME" property="sourceExchangerName" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_MODIFY_TIME" property="lastModifyTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_MODIFY_USER" property="lastModifyUser" jdbcType="VARCHAR"/>
+        <result column="VALID" property="valid" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     ID, CODE, NAME, DATASET_CODE, DATASET_NAME, PREIMPORT_TOTAL_COUNT, IMPORT_SUCCESS_COUNT, 
     IMPORT_STATUS, COMMIT_USER, COMMIT_USER_NAME, COMMIT_TIME, AUDIT_USER, AUDIT_USER_NAME, 
     AUDIT_TIME, AUDIT_STATUS, IS_CANCEL, QUALITY, SOURCE_EXCHANGER_CODE, SOURCE_EXCHANGER_NAME, 
     CREATE_USER, CREATE_TIME, LAST_MODIFY_TIME, LAST_MODIFY_USER, VALID
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_resource
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_resource
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="findList" resultMap="BaseResultMap"
+            parameterType="com.selfwork.intelligence.model.vo.dataquality.DataQualityQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_resource
+        <where>
+            <if test="code != null and code!='' ">
+                AND CODE=#{code,jdbcType=VARCHAR}
+            </if>
+            <if test="quality != null">
+                AND QUALITY= #{quality,jdbcType=SMALLINT}
+            </if>
+            <if test="auditStatus != null">
+                AND AUDIT_STATUS= #{auditStatus,jdbcType=SMALLINT}
+            </if>
+        </where>
+        ORDER by CREATE_TIME desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_resource
     where ID = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.ResourcePO" >
+    <insert id="insert" parameterType="com.selfwork.intelligence.model.po.ResourcePO">
     insert into tb_resource (ID, CODE, NAME, 
       DATASET_CODE, DATASET_NAME, PREIMPORT_TOTAL_COUNT, 
       IMPORT_SUCCESS_COUNT, IMPORT_STATUS, COMMIT_USER, 
@@ -63,233 +81,233 @@
       #{lastModifyTime,jdbcType=TIMESTAMP}, #{lastModifyUser,jdbcType=VARCHAR}, #{valid,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.ResourcePO" >
-    insert into tb_resource
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="code != null" >
-        CODE,
-      </if>
-      <if test="name != null" >
-        NAME,
-      </if>
-      <if test="datasetCode != null" >
-        DATASET_CODE,
-      </if>
-      <if test="datasetName != null" >
-        DATASET_NAME,
-      </if>
-      <if test="preimportTotalCount != null" >
-        PREIMPORT_TOTAL_COUNT,
-      </if>
-      <if test="importSuccessCount != null" >
-        IMPORT_SUCCESS_COUNT,
-      </if>
-      <if test="importStatus != null" >
-        IMPORT_STATUS,
-      </if>
-      <if test="commitUser != null" >
-        COMMIT_USER,
-      </if>
-      <if test="commitUserName != null" >
-        COMMIT_USER_NAME,
-      </if>
-      <if test="commitTime != null" >
-        COMMIT_TIME,
-      </if>
-      <if test="auditUser != null" >
-        AUDIT_USER,
-      </if>
-      <if test="auditUserName != null" >
-        AUDIT_USER_NAME,
-      </if>
-      <if test="auditTime != null" >
-        AUDIT_TIME,
-      </if>
-      <if test="auditStatus != null" >
-        AUDIT_STATUS,
-      </if>
-      <if test="isCancel != null" >
-        IS_CANCEL,
-      </if>
-      <if test="quality != null" >
-        QUALITY,
-      </if>
-      <if test="sourceExchangerCode != null" >
-        SOURCE_EXCHANGER_CODE,
-      </if>
-      <if test="sourceExchangerName != null" >
-        SOURCE_EXCHANGER_NAME,
-      </if>
-      <if test="createUser != null" >
-        CREATE_USER,
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME,
-      </if>
-      <if test="lastModifyTime != null" >
-        LAST_MODIFY_TIME,
-      </if>
-      <if test="lastModifyUser != null" >
-        LAST_MODIFY_USER,
-      </if>
-      <if test="valid != null" >
-        VALID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="code != null" >
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="datasetCode != null" >
-        #{datasetCode,jdbcType=VARCHAR},
-      </if>
-      <if test="datasetName != null" >
-        #{datasetName,jdbcType=VARCHAR},
-      </if>
-      <if test="preimportTotalCount != null" >
-        #{preimportTotalCount,jdbcType=INTEGER},
-      </if>
-      <if test="importSuccessCount != null" >
-        #{importSuccessCount,jdbcType=INTEGER},
-      </if>
-      <if test="importStatus != null" >
-        #{importStatus,jdbcType=SMALLINT},
-      </if>
-      <if test="commitUser != null" >
-        #{commitUser,jdbcType=VARCHAR},
-      </if>
-      <if test="commitUserName != null" >
-        #{commitUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="commitTime != null" >
-        #{commitTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="auditUser != null" >
-        #{auditUser,jdbcType=VARCHAR},
-      </if>
-      <if test="auditUserName != null" >
-        #{auditUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="auditTime != null" >
-        #{auditTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="auditStatus != null" >
-        #{auditStatus,jdbcType=SMALLINT},
-      </if>
-      <if test="isCancel != null" >
-        #{isCancel,jdbcType=BIT},
-      </if>
-      <if test="quality != null" >
-        #{quality,jdbcType=SMALLINT},
-      </if>
-      <if test="sourceExchangerCode != null" >
-        #{sourceExchangerCode,jdbcType=VARCHAR},
-      </if>
-      <if test="sourceExchangerName != null" >
-        #{sourceExchangerName,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyTime != null" >
-        #{lastModifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUser != null" >
-        #{lastModifyUser,jdbcType=VARCHAR},
-      </if>
-      <if test="valid != null" >
-        #{valid,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.ResourcePO" >
-    update tb_resource
-    <set >
-      <if test="code != null" >
-        CODE = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        NAME = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="datasetCode != null" >
-        DATASET_CODE = #{datasetCode,jdbcType=VARCHAR},
-      </if>
-      <if test="datasetName != null" >
-        DATASET_NAME = #{datasetName,jdbcType=VARCHAR},
-      </if>
-      <if test="preimportTotalCount != null" >
-        PREIMPORT_TOTAL_COUNT = #{preimportTotalCount,jdbcType=INTEGER},
-      </if>
-      <if test="importSuccessCount != null" >
-        IMPORT_SUCCESS_COUNT = #{importSuccessCount,jdbcType=INTEGER},
-      </if>
-      <if test="importStatus != null" >
-        IMPORT_STATUS = #{importStatus,jdbcType=SMALLINT},
-      </if>
-      <if test="commitUser != null" >
-        COMMIT_USER = #{commitUser,jdbcType=VARCHAR},
-      </if>
-      <if test="commitUserName != null" >
-        COMMIT_USER_NAME = #{commitUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="commitTime != null" >
-        COMMIT_TIME = #{commitTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="auditUser != null" >
-        AUDIT_USER = #{auditUser,jdbcType=VARCHAR},
-      </if>
-      <if test="auditUserName != null" >
-        AUDIT_USER_NAME = #{auditUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="auditTime != null" >
-        AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="auditStatus != null" >
-        AUDIT_STATUS = #{auditStatus,jdbcType=SMALLINT},
-      </if>
-      <if test="isCancel != null" >
-        IS_CANCEL = #{isCancel,jdbcType=BIT},
-      </if>
-      <if test="quality != null" >
-        QUALITY = #{quality,jdbcType=SMALLINT},
-      </if>
-      <if test="sourceExchangerCode != null" >
-        SOURCE_EXCHANGER_CODE = #{sourceExchangerCode,jdbcType=VARCHAR},
-      </if>
-      <if test="sourceExchangerName != null" >
-        SOURCE_EXCHANGER_NAME = #{sourceExchangerName,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        CREATE_USER = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyTime != null" >
-        LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUser != null" >
-        LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
-      </if>
-      <if test="valid != null" >
-        VALID = #{valid,jdbcType=BIT},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.ResourcePO" >
+    <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.ResourcePO">
+        insert into tb_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="code != null">
+                CODE,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="datasetCode != null">
+                DATASET_CODE,
+            </if>
+            <if test="datasetName != null">
+                DATASET_NAME,
+            </if>
+            <if test="preimportTotalCount != null">
+                PREIMPORT_TOTAL_COUNT,
+            </if>
+            <if test="importSuccessCount != null">
+                IMPORT_SUCCESS_COUNT,
+            </if>
+            <if test="importStatus != null">
+                IMPORT_STATUS,
+            </if>
+            <if test="commitUser != null">
+                COMMIT_USER,
+            </if>
+            <if test="commitUserName != null">
+                COMMIT_USER_NAME,
+            </if>
+            <if test="commitTime != null">
+                COMMIT_TIME,
+            </if>
+            <if test="auditUser != null">
+                AUDIT_USER,
+            </if>
+            <if test="auditUserName != null">
+                AUDIT_USER_NAME,
+            </if>
+            <if test="auditTime != null">
+                AUDIT_TIME,
+            </if>
+            <if test="auditStatus != null">
+                AUDIT_STATUS,
+            </if>
+            <if test="isCancel != null">
+                IS_CANCEL,
+            </if>
+            <if test="quality != null">
+                QUALITY,
+            </if>
+            <if test="sourceExchangerCode != null">
+                SOURCE_EXCHANGER_CODE,
+            </if>
+            <if test="sourceExchangerName != null">
+                SOURCE_EXCHANGER_NAME,
+            </if>
+            <if test="createUser != null">
+                CREATE_USER,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="lastModifyTime != null">
+                LAST_MODIFY_TIME,
+            </if>
+            <if test="lastModifyUser != null">
+                LAST_MODIFY_USER,
+            </if>
+            <if test="valid != null">
+                VALID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="datasetCode != null">
+                #{datasetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="datasetName != null">
+                #{datasetName,jdbcType=VARCHAR},
+            </if>
+            <if test="preimportTotalCount != null">
+                #{preimportTotalCount,jdbcType=INTEGER},
+            </if>
+            <if test="importSuccessCount != null">
+                #{importSuccessCount,jdbcType=INTEGER},
+            </if>
+            <if test="importStatus != null">
+                #{importStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="commitUser != null">
+                #{commitUser,jdbcType=VARCHAR},
+            </if>
+            <if test="commitUserName != null">
+                #{commitUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="commitTime != null">
+                #{commitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditUser != null">
+                #{auditUser,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUserName != null">
+                #{auditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditStatus != null">
+                #{auditStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="isCancel != null">
+                #{isCancel,jdbcType=BIT},
+            </if>
+            <if test="quality != null">
+                #{quality,jdbcType=SMALLINT},
+            </if>
+            <if test="sourceExchangerCode != null">
+                #{sourceExchangerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceExchangerName != null">
+                #{sourceExchangerName,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyTime != null">
+                #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUser != null">
+                #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="valid != null">
+                #{valid,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.ResourcePO">
+        update tb_resource
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="datasetCode != null">
+                DATASET_CODE = #{datasetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="datasetName != null">
+                DATASET_NAME = #{datasetName,jdbcType=VARCHAR},
+            </if>
+            <if test="preimportTotalCount != null">
+                PREIMPORT_TOTAL_COUNT = #{preimportTotalCount,jdbcType=INTEGER},
+            </if>
+            <if test="importSuccessCount != null">
+                IMPORT_SUCCESS_COUNT = #{importSuccessCount,jdbcType=INTEGER},
+            </if>
+            <if test="importStatus != null">
+                IMPORT_STATUS = #{importStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="commitUser != null">
+                COMMIT_USER = #{commitUser,jdbcType=VARCHAR},
+            </if>
+            <if test="commitUserName != null">
+                COMMIT_USER_NAME = #{commitUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="commitTime != null">
+                COMMIT_TIME = #{commitTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditUser != null">
+                AUDIT_USER = #{auditUser,jdbcType=VARCHAR},
+            </if>
+            <if test="auditUserName != null">
+                AUDIT_USER_NAME = #{auditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null">
+                AUDIT_TIME = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditStatus != null">
+                AUDIT_STATUS = #{auditStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="isCancel != null">
+                IS_CANCEL = #{isCancel,jdbcType=BIT},
+            </if>
+            <if test="quality != null">
+                QUALITY = #{quality,jdbcType=SMALLINT},
+            </if>
+            <if test="sourceExchangerCode != null">
+                SOURCE_EXCHANGER_CODE = #{sourceExchangerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceExchangerName != null">
+                SOURCE_EXCHANGER_NAME = #{sourceExchangerName,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                CREATE_USER = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyTime != null">
+                LAST_MODIFY_TIME = #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUser != null">
+                LAST_MODIFY_USER = #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="valid != null">
+                VALID = #{valid,jdbcType=BIT},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.ResourcePO">
     update tb_resource
     set CODE = #{code,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},

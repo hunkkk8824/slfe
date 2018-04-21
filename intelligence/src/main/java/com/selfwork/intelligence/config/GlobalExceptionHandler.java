@@ -10,14 +10,9 @@
 //@ControllerAdvice
 //public class GlobalExceptionHandler {
 //
-//    public static final String DEFAULT_ERROR_VIEW = "errorpage/error";
-//
-//    @ExceptionHandler(value = Exception.class)
-//    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-//        ModelAndView mav = new ModelAndView(DEFAULT_ERROR_VIEW);
-//        mav.addObject("exception", e);
-//        mav.addObject("url", req.getRequestURL());
-//        return mav;
+//    @ExceptionHandler(value = RuntimeException.class)
+//    public void defaultErrorHandler(RuntimeException e) {
+//       //todo log
 //    }
 //
 //}
