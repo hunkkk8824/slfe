@@ -70,7 +70,11 @@
                         <i class="fa fa-users"></i>
                         角色管理</a>
                 </li>
-
+                <li>
+                    <a class="J_menuItem" href="${base}/dataQuality/index" data-index="5">
+                        <i class="fa fa-users"></i>
+                        数据质量管理</a>
+                </li>
             </ul>
         </div>
     </nav>
