@@ -61,18 +61,18 @@
                 <#--</li>-->
 
                 <li>
-                    <a class="J_menuItem" href="${base}/user/index" data-index="5">
+                    <a class="J_menuItem" href="${base}/user/index" data-index="1">
                         <i class="fa fa-user"></i>
                         用户管理</a>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="${base}/role/index" data-index="5">
+                    <a class="J_menuItem" href="${base}/role/index" data-index="2">
                         <i class="fa fa-users"></i>
                         角色管理</a>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="${base}/dataQuality/index" data-index="5">
-                        <i class="fa fa-users"></i>
+                    <a class="J_menuItem" href="${base}/dataQuality/index" data-index="3">
+                        <i class="fa fa-database"></i>
                         数据质量管理</a>
                 </li>
             </ul>
