@@ -38,7 +38,7 @@
         <!--<table tableName="tbRoleInfo" domainObjectName="RoleInfoPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="tbPermissionInfo" domainObjectName="PermissionInfoPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
 
-        <table tableName="tb_resource" domainObjectName="ResourcePO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+        <!--<table tableName="tb_resource" domainObjectName="ResourcePO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
 
     </context>
 </generatorConfiguration>
