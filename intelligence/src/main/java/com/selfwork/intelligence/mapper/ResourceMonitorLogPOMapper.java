@@ -1,6 +1,9 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.ResourceMonitorLogPO;
+import com.selfwork.intelligence.model.vo.monitorlog.MonitorLogQueryVo;
+
+import java.util.List;
 
 public interface ResourceMonitorLogPOMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface ResourceMonitorLogPOMapper {
     int updateByPrimaryKeySelective(ResourceMonitorLogPO record);
 
     int updateByPrimaryKey(ResourceMonitorLogPO record);
+
+    List<ResourceMonitorLogPO> findList(MonitorLogQueryVo queryVo);
 }
