@@ -178,7 +178,7 @@
                     title: '导入日志',
                     fix: false,
                     shadeClose: true,
-                    area: ['820px', '840px'],
+                    area: ['820px', '740px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
