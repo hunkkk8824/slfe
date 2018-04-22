@@ -1,17 +1,17 @@
 package com.selfwork.intelligence.model.vo.dataquality;
 
 public class AuditRequestVo {
-    private Integer id;
+    private Integer resourceId;
 
     //审核状态：0 待审核 1 已审核 2 已驳回
     private Short auditStatus;
 
-    public Integer getId() {
-        return id;
+    public Integer getResourceId() {
+        return resourceId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setResourceId(Integer resourceId) {
+        this.resourceId = resourceId;
     }
 
     public Short getAuditStatus() {

@@ -102,7 +102,7 @@ public class DataQualityBiz extends BaseBiz {
 
         ResourcePO record = new ResourcePO();
         record.setAuditStatus(vo.getAuditStatus());
-        record.setId(vo.getId());
+        record.setId(vo.getResourceId());
         resourcePOMapper.updateByPrimaryKeySelective(record);
 
     }
@@ -110,7 +110,14 @@ public class DataQualityBiz extends BaseBiz {
     public void evaluateQuality(QualityEvaluateRequestVo vo) {
         ResourcePO record = new ResourcePO();
         record.setQuality(vo.getQuality());
-        record.setId(vo.getId());
+        record.setId(vo.getResourceId());
+        resourcePOMapper.updateByPrimaryKeySelective(record);
+    }
+
+    public void cancelResource(CancelResourceRequestVo vo) {
+        ResourcePO record = new ResourcePO();
+        record.setIsCancel(true);
+        record.setId(vo.getResourceId());
         resourcePOMapper.updateByPrimaryKeySelective(record);
     }
 }

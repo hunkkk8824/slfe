@@ -96,6 +96,23 @@ public class DataQualityController extends BaseController {
         return result;
     }
 
+    //撤销
+    @ResponseBody
+    @RequestMapping(value = "/cancelResource", method = RequestMethod.POST)
+    public Map<String, Object> cancelResource(@RequestBody CancelResourceRequestVo vo) {
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 0);
+
+        try {
+            dataQualityBiz.cancelResource(vo);
+        } catch (Exception e) {
+            logger.error("撤销资源异常：" + e.getMessage(), e);
+            result.put("code", -1);
+        }
+        return result;
+    }
+
     //导入日志
     @RequestMapping(value = "/toExportLog")
     public ModelAndView exportLog(@RequestParam Integer resourceId) {

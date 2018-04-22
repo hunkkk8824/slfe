@@ -31,7 +31,8 @@
 <!-- Bootstrap table -->
 <script src="${base}/static/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
 <script src="${base}/static/js/plugins/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
-<script src="${base}/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
+<script src="${base}/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"
+        type="text/javascript"></script>
 <script src="${base}/static/js/plugins/footable/footable.all.min.js"></script>
 <script src="${base}/static/js/plugins/laydate/laydate.js"></script>
 <script type="text/javascript">
@@ -50,4 +51,28 @@
         Good: 2, //"良"
         Excellent: 3,// "优"
     };
+
+    function PostAjax(url, requestData, successCallBack) {
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify(requestData),
+            dataType: "json",
+            contentType: 'application/json',
+            success: function (data) {
+
+                if (parseInt(data.code) == 0) {
+                    layer.msg("操作成功!", {icon: 1});
+                } else {
+                    layer.msg("操作失败!", {icon: 0});
+                }
+
+                if (successCallBack) {
+                    successCallBack();
+                }
+
+            }
+        });
+    }
 </script>

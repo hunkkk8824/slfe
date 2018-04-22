@@ -2,17 +2,18 @@ package com.selfwork.intelligence.model.vo.dataquality;
 
 public class QualityEvaluateRequestVo {
 
-    private Integer id;
+    private Integer resourceId;
 
     //'质量评定：0 未评定1 差2 良3 优',
     private Short quality;
 
-    public Integer getId() {
-        return id;
+
+    public Integer getResourceId() {
+        return resourceId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setResourceId(Integer resourceId) {
+        this.resourceId = resourceId;
     }
 
     public Short getQuality() {
