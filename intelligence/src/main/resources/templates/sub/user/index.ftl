@@ -20,7 +20,7 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
 
-    <div class="btn-group hidden-xs" id="toolbar" role="group">
+    <div class="hidden-xs" id="toolbar" role="group">
         <input style="width:250px;" name="keyWordInfo" id="keyWordInfo" placeholder="手机号、登录名、企业名称" class="input-sm form-control">
         <select style="width:143px;height: 30px" id="valid" name="valid" class="form-control" >
             <option value="">全部</option>

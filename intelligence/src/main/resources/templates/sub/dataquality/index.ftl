@@ -20,7 +20,7 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
 
-    <div class="btn-group hidden-xs" id="toolbar" role="group">
+    <div class="hidden-xs" id="toolbar" role="group">
         <input style="width:250px;" name="code" id="code" placeholder="资源编码"
                class="input-sm form-control">
 
@@ -32,10 +32,10 @@
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
 
-            <#--<option value="0">未评定</option>-->
-            <#--<option value="1">差</option>-->
-            <#--<option value="2">良</option>-->
-            <#--<option value="3">优</option>-->
+        <#--<option value="0">未评定</option>-->
+        <#--<option value="1">差</option>-->
+        <#--<option value="2">良</option>-->
+        <#--<option value="3">优</option>-->
 
         </select>
     <#--质量评定-->
@@ -44,9 +44,9 @@
         <#list qualityEvaluateEnums as item>
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
-            <#--<option value="0">待审核</option>-->
-            <#--<option value="1">已审核</option>-->
-            <#--<option value="2">已驳回</option>-->
+        <#--<option value="0">待审核</option>-->
+        <#--<option value="1">已审核</option>-->
+        <#--<option value="2">已驳回</option>-->
 
 
         </select>
@@ -63,6 +63,18 @@
 
 <script type="text/javascript">
     (function (base) {
+
+        //审核请求参数类
+        function AuditRequest() {
+            this.id;
+            this.auditStatus;
+        }
+
+        //质量评定请求参数类
+        function QualityEvaluateRequest() {
+            this.id;
+            this.quality;
+        }
 
         //初始化事件
         function initEvent() {
@@ -83,27 +95,93 @@
                 offset: params.offset,   //页码
                 code: $('#code').val(),
                 quality: $('#quality').val(),
-                auditStatus:$("#auditStatus").val(),
+                auditStatus: $("#auditStatus").val(),
 
             };
             return temp;
         };
 
-        window.operateEvents = {
-        <#--'click .btn_editRoles': function (e, value, row, index) {-->
+        //审核
+        function audit(request) {
+            $.ajax({
+                type: "POST",
+                url: base + "/dataQuality/audit",
+                data: JSON.stringify(request),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+                    if (parseInt(data.code) == 0) {
+                        layer.msg("操作成功!", {icon: 1});
+                        refreshTable();
+                    } else {
+                        layer.msg("操作失败!", {icon: 0});
+                    }
+                }
+            })
+        }
 
-        <#--layer.open({-->
-        <#--type: 2,-->
-        <#--title: '权限编辑',-->
-        <#--fix: false,-->
-        <#--shadeClose: true,-->
-        <#--area: ['420px', '540px'],-->
-        <#--skin: 'layui-layer-rim', //加上边框-->
-        <#--zIndex: 9999,-->
-        <#--shift: Math.floor(Math.random() * 6 + 1),-->
-        <#--content: ["${base}/role/toEditPermissions?roleId=" + row.roleid, 'no'],-->
-        <#--});-->
-        <#--},-->};
+        function refreshTable() {
+            $('#query').click();
+        }
+        
+        //质量评定
+        function evaluateQuality(request) {
+            debugger
+            $.ajax({
+                type: "POST",
+                url: base + "/dataQuality/evaluateQuality",
+                data: JSON.stringify(request),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+                    if (parseInt(data.code) == 0) {
+                        layer.msg("操作成功!", {icon: 1});
+                        refreshTable();
+                    } else {
+                        layer.msg("操作失败!", {icon: 0});
+                    }
+                }
+            })
+        }
+
+        window.operateEvents = {
+            'click .btn_audit': function (e, value, row, index) {
+
+                var request = new AuditRequest();
+                request.id = row.id;
+
+                layer.confirm('是否合格通过？', {
+                    btn: ['通过', '不通过'], //按钮
+                    shade: false //不显示遮罩
+                }, function () {//通过
+                    request.auditStatus = AuditStatusEnum.Audited;
+                    audit(request);
+                }, function () {//不通过
+                    request.auditStatus = AuditStatusEnum.Dismissal;
+                    audit(request);
+                });
+            },
+            'click .btn_judge': function (e, value, row, index) {
+
+                var request = new QualityEvaluateRequest();
+                request.id = row.id;
+
+                layer.confirm('请评定该资源质量', {
+                    btn: ['优', '良', '差'], //按钮
+                    btn3:function () {//差
+                        request.quality = QualityEvaluateEnum.Difference;
+                        evaluateQuality(request);
+                    },
+                    shade: false //不显示遮罩
+                }, function () {//优
+                    request.quality = QualityEvaluateEnum.Excellent;
+                    evaluateQuality(request);
+                }, function () {//良
+                    request.quality = QualityEvaluateEnum.Good;
+                    evaluateQuality(request);
+                },);
+            },
+        };
 
         function initTable() {
             $('#table').bootstrapTable({
@@ -164,7 +242,7 @@
                     field: 'isCancelStr',
                     title: '是否已撤销'
                 }, {
-                    field: 'quality',
+                    field: 'qualityStr',
                     title: '质量评定'
                 }, {
                     field: 'sourceExchangerCode',
@@ -178,9 +256,11 @@
                     formatter: function (value, row, index) {
 
                         return [
-                            '<button  type="button" class="btn btn-default btn-sm btn_detail">查看</button> ',
-                            '<button  type="button" class="btn btn-default btn-sm btn_audit">审核</button> ',
-                            '<button  type="button" class="btn btn-default btn-sm btn_judge">评定</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_detail">查看</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_audit">审核</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_judge">评定</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_log">导入日志</button> ',
+
                         ].join('');
                     },
                     events: operateEvents

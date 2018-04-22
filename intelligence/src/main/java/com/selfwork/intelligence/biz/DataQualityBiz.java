@@ -6,10 +6,13 @@ import com.selfwork.intelligence.common.BeanUtils;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.ImportStatusEnum;
+import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.mapper.ResourcePOMapper;
 import com.selfwork.intelligence.model.po.ResourcePO;
+import com.selfwork.intelligence.model.vo.dataquality.AuditRequestVo;
 import com.selfwork.intelligence.model.vo.dataquality.DataQualitVo;
 import com.selfwork.intelligence.model.vo.dataquality.DataQualityQueryVo;
+import com.selfwork.intelligence.model.vo.dataquality.QualityEvaluateRequestVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +56,7 @@ public class DataQualityBiz extends BaseBiz {
                 m.setCommitTimeStr(DateUtils.getFormatDateTime(m.getCommitTime()));
                 m.setImportStatusStr(m.getImportStatus() == null ? "" : ImportStatusEnum.getEnum(m.getImportStatus().intValue()).getDisplayName());
                 m.setIsCancelStr(m.getIsCancel() != null && m.getIsCancel() ? "是" : "否");
+                m.setQualityStr(m.getQuality() == null ? "" : QualityEvaluateEnum.getEnum(m.getQuality().intValue()).getDisplayName());
             });
 
             return new PageInfo<>(res);
@@ -61,5 +65,21 @@ public class DataQualityBiz extends BaseBiz {
             return null;
         }
 
+    }
+
+    public void audit(AuditRequestVo vo) {
+
+        ResourcePO record=new ResourcePO();
+        record.setAuditStatus(vo.getAuditStatus());
+        record.setId(vo.getId());
+        resourcePOMapper.updateByPrimaryKeySelective(record);
+
+    }
+
+    public void evaluateQuality(QualityEvaluateRequestVo vo) {
+        ResourcePO record=new ResourcePO();
+        record.setQuality(vo.getQuality());
+        record.setId(vo.getId());
+        resourcePOMapper.updateByPrimaryKeySelective(record);
     }
 }

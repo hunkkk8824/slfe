@@ -6,8 +6,10 @@ import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.model.po.RoleInfoPO;
+import com.selfwork.intelligence.model.vo.dataquality.AuditRequestVo;
 import com.selfwork.intelligence.model.vo.dataquality.DataQualitVo;
 import com.selfwork.intelligence.model.vo.dataquality.DataQualityQueryVo;
+import com.selfwork.intelligence.model.vo.dataquality.QualityEvaluateRequestVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +65,37 @@ public class DataQualityController extends BaseController {
         return result;
     }
 
+    //审核
+    @ResponseBody
+    @RequestMapping(value = "/audit", method = RequestMethod.POST)
+    public Map<String, Object> audit(@RequestBody AuditRequestVo vo) {
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 0);
+
+        try {
+            dataQualityBiz.audit(vo);
+        } catch (Exception e) {
+            logger.error("审核资源信息异常 e:{}" + e.getMessage(), e);
+            result.put("code", -1);
+        }
+        return result;
+    }
+
+    //质量评定
+    @ResponseBody
+    @RequestMapping(value = "/evaluateQuality", method = RequestMethod.POST)
+    public Map<String, Object> evaluateQuality(@RequestBody QualityEvaluateRequestVo vo) {
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 0);
+
+        try {
+            dataQualityBiz.evaluateQuality(vo);
+        } catch (Exception e) {
+            logger.error("质量评定异常 e:{}" + e.getMessage(), e);
+            result.put("code", -1);
+        }
+        return result;
+    }
 }

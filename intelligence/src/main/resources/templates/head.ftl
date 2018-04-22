@@ -37,4 +37,18 @@
 <script src="${base}/static/js/plugins/laydate/laydate.js"></script>
 <script type="text/javascript">
     var base = '${base}';
+
+    //审核状态枚举
+    var AuditStatusEnum = {
+        Unaudited: 0,// "待审核",
+        Audited: 1, //"已审核",
+        Dismissal: 2,// "已驳回",
+    };
+    //质量评定枚举
+    var QualityEvaluateEnum = {
+        UnAssessed: 0,// "未评定",
+        Difference: 1, //"差",
+        Good: 2, //"良"
+        Excellent: 3,// "优"
+    };
 </script>
