@@ -24,32 +24,13 @@
         <input style="width:250px;" name="resourceName" id="resourceName" placeholder="资源名称"
                class="input-sm form-control">
 
+        <input style="width:250px;" name="startTime" id="startTime" placeholder="开始时间"
+               class="input-sm form-control">
 
-    <#--&lt;#&ndash;审核状态&ndash;&gt;-->
-        <#--<select id="auditStatus" name="auditStatus" class="form-control" style="width:143px;height: 30px">-->
-            <#--<option value="">全部</option>-->
-        <#--<#list auditStatusEnums as item>-->
-            <#--<option value="${item.getValue()}">${item.getDisplayName()}</option>-->
-        <#--</#list>-->
+        <input style="width:250px;" name="endTime" id="endTime" placeholder="截止时间"
+               class="input-sm form-control">
 
-        <#--&lt;#&ndash;<option value="0">未评定</option>&ndash;&gt;-->
-        <#--&lt;#&ndash;<option value="1">差</option>&ndash;&gt;-->
-        <#--&lt;#&ndash;<option value="2">良</option>&ndash;&gt;-->
-        <#--&lt;#&ndash;<option value="3">优</option>&ndash;&gt;-->
-
-        <#--</select>-->
-    <#--&lt;#&ndash;质量评定&ndash;&gt;-->
-        <#--<select id="quality" name="quality" class="form-control" style="width:143px;height: 30px">-->
-            <#--<option value="">全部</option>-->
-        <#--<#list qualityEvaluateEnums as item>-->
-            <#--<option value="${item.getValue()}">${item.getDisplayName()}</option>-->
-        <#--</#list>-->
-        <#--&lt;#&ndash;<option value="0">待审核</option>&ndash;&gt;-->
-        <#--&lt;#&ndash;<option value="1">已审核</option>&ndash;&gt;-->
-        <#--&lt;#&ndash;<option value="2">已驳回</option>&ndash;&gt;-->
-
-
-        <#--</select>-->
+    <#--</select>-->
         <button id="query" type="button" class="btn btn-sm btn-primary">
             搜索
         </button>
@@ -65,13 +46,25 @@
     (function (base) {
         //初始化事件
         function initEvent() {
+
+            laydate.render({
+                elem: '#startTime',
+                type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss',
+            });
+
+            laydate.render({
+                elem: '#endTime',
+                type: 'datetime',
+                format: 'yyyy-MM-dd HH:mm:ss',
+            });
+
             //查询按钮事件
             $('#query').click(function () {
                 $('#table').bootstrapTable('refresh', {
                     pageNumber: 1
                 });
             })
-
         };
 
         //得到查询的参数
@@ -81,8 +74,8 @@
                 limit: params.limit,    //页面大小
                 offset: params.offset,   //页码
                 resourceName: $('#resourceName').val(),
-//                quality: $('#quality').val(),
-//                auditStatus: $("#auditStatus").val(),
+                startTime: $('#startTime').val(),
+                endTime: $("#endTime").val(),
 
             };
             return temp;

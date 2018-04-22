@@ -13,11 +13,11 @@ public class MonitorLogQueryVo extends BaseQueryVo {
     /**
      * 开始时间
      */
-    private Date startTime;
+    private String startTime;
     /**
      * 结束时间
      */
-    private Date endTime;
+    private String endTime;
 
     public String getResourceName() {
         return resourceName;
@@ -27,19 +27,19 @@ public class MonitorLogQueryVo extends BaseQueryVo {
         this.resourceName = resourceName;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 }

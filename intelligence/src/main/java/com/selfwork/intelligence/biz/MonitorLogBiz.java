@@ -7,6 +7,7 @@ import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.common.enums.OperatorTypeEnum;
 import com.selfwork.intelligence.mapper.ResourceMonitorLogPOMapper;
 import com.selfwork.intelligence.model.po.ResourceMonitorLogPO;
+import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import com.selfwork.intelligence.model.vo.monitorlog.MonitorLogQueryVo;
 import com.selfwork.intelligence.model.vo.monitorlog.MonitorLogVo;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 
 @Service
-public class MonitorLogBiz extends BaseBiz{
+public class MonitorLogBiz extends BaseBiz {
 
     public final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -56,5 +57,32 @@ public class MonitorLogBiz extends BaseBiz{
             return null;
         }
 
+    }
+
+    /**
+     * 添加监控日志
+     *
+     * @param logVo
+     */
+    public void AppendMonitorLog(AppendMonitorLogVo logVo) {
+        try {
+            if (logVo != null) {
+                ResourceMonitorLogPO po = new ResourceMonitorLogPO();
+                po.setResourceId(logVo.getResourceId());
+                po.setResourceCode(logVo.getResourceCode());
+                po.setResourceName(logVo.getResourceName());
+                po.setSourceExchangerCode(logVo.getSourceExchangerCode());
+                po.setSourceExchangerName(logVo.getSourceExchangerName());
+                po.setOperator(logVo.getOperator());
+                po.setOperatorName(logVo.getOperatorName());
+                po.setOperatorTime(logVo.getOperatorTime());
+                po.setRemark(logVo.getRemark());
+
+                resourceMonitorLogPOMapper.insert(po);
+            }
+
+        } catch (Exception ex) {
+            logger.error("添加监控日志失败", ex);
+        }
     }
 }
