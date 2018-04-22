@@ -112,7 +112,9 @@
 
 
             laydate.render({
-                elem: '#birthday'
+                elem: '#birthday',
+//                type: 'datetime',
+//                format: 'yyyy-MM-dd HH:ss:mm',
             });
 
             jQuery.validator.addMethod("isPassWord", function (value, element) {

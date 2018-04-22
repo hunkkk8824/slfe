@@ -174,4 +174,17 @@
       VALID = #{valid,jdbcType=BIT}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findList" parameterType="com.selfwork.intelligence.model.vo.exchangeConfig.ExchangeConfigQueryVo" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from tb_exchanger
+    <where>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=BIT}
+      </if>
+
+      <if test="keyword != null and keyword != ''">
+        and NAME like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

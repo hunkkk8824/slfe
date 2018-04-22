@@ -75,6 +75,16 @@
                         <i class="fa fa-database"></i>
                         数据质量管理</a>
                 </li>
+                <li>
+                    <a class="J_menuItem" href="${base}/exchangeConfig/index" data-index="3">
+                        <i class="fa fa-database"></i>
+                        交换配置</a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="${base}/exchangeLog/index" data-index="3">
+                        <i class="fa fa-database"></i>
+                        交换日志</a>
+                </li>
             </ul>
         </div>
     </nav>
