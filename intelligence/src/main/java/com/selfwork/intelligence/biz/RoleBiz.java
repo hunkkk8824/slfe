@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class RoleBiz extends BaseBiz {
-    public final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private RoleInfoPOMapper roleMapper;
@@ -45,9 +45,7 @@ public class RoleBiz extends BaseBiz {
     public PageInfo<RoleInfoPO> findPage(RoleInfoQueryVo queryVo) {
 
         // 查询
-        int pageNumber = queryVo.getPageNumber();
-        int pageSize = queryVo.getLimit();
-        PageHelper.startPage(pageNumber, pageSize);
+        this.startPage(queryVo);
         List<RoleInfoPO> list = roleMapper.findList(queryVo);
         if (null == list || list.size() == 0) {
             logger.error("获取角色分页信息失败");

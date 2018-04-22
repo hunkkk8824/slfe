@@ -20,7 +20,7 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
 
-    <div class="btn-group hidden-xs" id="toolbar" role="group">
+    <div class="hidden-xs" id="toolbar" role="group">
         <input style="width:250px;" name="userName" id="userName" placeholder="用户名称"
                class="input-sm form-control">
         <input  name="roleName" id="roleName" placeholder="角色名称" class="input-sm form-control"

@@ -7,6 +7,7 @@ import java.util.Map;
 
 public enum QualityEvaluateEnum implements BaseEnum<QualityEvaluateEnum, Integer> {
 
+    //'质量评定：0 未评定1 差2 良3 优',
     UnAssessed(0, "未评定"),
     Difference(1, "差"),
     Good(2, "良"),

@@ -20,7 +20,7 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
 
-    <div class="btn-group hidden-xs" id="toolbar" role="group">
+    <div class="hidden-xs" id="toolbar" role="group">
         <input style="width:250px;" name="code" id="code" placeholder="资源编码"
                class="input-sm form-control">
 
@@ -32,11 +32,6 @@
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
 
-            <#--<option value="0">未评定</option>-->
-            <#--<option value="1">差</option>-->
-            <#--<option value="2">良</option>-->
-            <#--<option value="3">优</option>-->
-
         </select>
     <#--质量评定-->
         <select id="quality" name="quality" class="form-control" style="width:143px;height: 30px">
@@ -44,10 +39,6 @@
         <#list qualityEvaluateEnums as item>
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
-            <#--<option value="0">待审核</option>-->
-            <#--<option value="1">已审核</option>-->
-            <#--<option value="2">已驳回</option>-->
-
 
         </select>
         <button id="query" type="button" class="btn btn-sm btn-primary">
@@ -63,6 +54,8 @@
 
 <script type="text/javascript">
     (function (base) {
+
+        var baseUrl = base + "/dataQuality";
 
         //初始化事件
         function initEvent() {
@@ -83,27 +76,110 @@
                 offset: params.offset,   //页码
                 code: $('#code').val(),
                 quality: $('#quality').val(),
-                auditStatus:$("#auditStatus").val(),
+                auditStatus: $("#auditStatus").val(),
 
             };
             return temp;
         };
 
-        window.operateEvents = {
-        <#--'click .btn_editRoles': function (e, value, row, index) {-->
+        //审核
+        function audit(request) {
 
-        <#--layer.open({-->
-        <#--type: 2,-->
-        <#--title: '权限编辑',-->
-        <#--fix: false,-->
-        <#--shadeClose: true,-->
-        <#--area: ['420px', '540px'],-->
-        <#--skin: 'layui-layer-rim', //加上边框-->
-        <#--zIndex: 9999,-->
-        <#--shift: Math.floor(Math.random() * 6 + 1),-->
-        <#--content: ["${base}/role/toEditPermissions?roleId=" + row.roleid, 'no'],-->
-        <#--});-->
-        <#--},-->};
+            PostAjax(baseUrl + "/audit", request, refreshTable);
+        }
+
+        function cancelResource(request) {
+            PostAjax(baseUrl + "/cancelResource", request, refreshTable);
+        }
+
+        function refreshTable() {
+            $('#query').click();
+        }
+
+        //质量评定
+        function evaluateQuality(request) {
+
+            PostAjax(baseUrl + "/evaluateQuality", request, refreshTable);
+        }
+
+        window.operateEvents = {
+            'click .btn_audit': function (e, value, row, index) {
+
+                var request = {
+                    resourceId: row.id,
+                    auditStatus: null
+                };
+
+
+                layer.confirm('是否合格通过？', {
+                    btn: ['通过', '不通过'], //按钮
+                    shade: false, //不显示遮罩
+                    btn1: function () {//通过
+                        request.auditStatus = AuditStatusEnum.Audited;
+                        audit(request);
+                    },
+                    btn2: function () {//不通过
+                        request.auditStatus = AuditStatusEnum.Dismissal;
+                        audit(request);
+                    }
+                });
+            },
+            'click .btn_judge': function (e, value, row, index) {
+
+                var request = {
+                    resourceId: row.id,
+                    quality: null
+                };
+
+
+                layer.confirm('请评定该资源质量', {
+                    btn: ['优', '良', '差'], //按钮
+                    shade: false, //不显示遮罩
+                    btn1: function () {//优
+                        request.quality = QualityEvaluateEnum.Excellent;
+                        evaluateQuality(request);
+                    },
+                    btn2: function () {//良
+                        request.quality = QualityEvaluateEnum.Good;
+                        evaluateQuality(request);
+                    },
+                    btn3: function () {//差
+                        request.quality = QualityEvaluateEnum.Difference;
+                        evaluateQuality(request);
+                    }
+                });
+            },
+            'click .btn_log': function (e, value, row, index) {
+
+                layer.open({
+                    type: 2,
+                    title: '导入日志',
+                    fix: false,
+                    shadeClose: true,
+                    area: ['820px', '740px'],
+                    skin: 'layui-layer-rim', //加上边框
+                    zIndex: 9999,
+                    shift: Math.floor(Math.random() * 6 + 1),
+                    content: [base + "/dataQuality/toExportLog?resourceId=" + row.id, 'no'],
+                });
+            },
+            'click .btn_cancelResource': function (e, value, row, index) {
+
+                var request = {
+                    resourceId: row.id
+                }
+
+                layer.confirm('确定撤销', {
+                    btn: ['确认', '取消'], //按钮
+                    shade: false, //不显示遮罩
+                    btn1: function () {//确认
+                        cancelResource(request);
+                    },
+
+                });
+            },
+
+        };
 
         function initTable() {
             $('#table').bootstrapTable({
@@ -164,7 +240,7 @@
                     field: 'isCancelStr',
                     title: '是否已撤销'
                 }, {
-                    field: 'quality',
+                    field: 'qualityStr',
                     title: '质量评定'
                 }, {
                     field: 'sourceExchangerCode',
@@ -178,9 +254,13 @@
                     formatter: function (value, row, index) {
 
                         return [
-                            '<button  type="button" class="btn btn-default btn-sm btn_detail">查看</button> ',
-                            '<button  type="button" class="btn btn-default btn-sm btn_audit">审核</button> ',
-                            '<button  type="button" class="btn btn-default btn-sm btn_judge">评定</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_detail">查看数据</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_log">查看日志</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_audit">审核</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_judge">评定</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_cancelResource">撤销</button> ',
+
+
                         ].join('');
                     },
                     events: operateEvents

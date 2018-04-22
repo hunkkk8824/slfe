@@ -9,6 +9,8 @@ public class DataQualitVo extends ResourcePO {
     private String auditStatusStr;
     private String commitTimeStr;
     private String importStatusStr;
+    private String qualityStr;
+
 
     public String getIsCancelStr() {
         return isCancelStr;
@@ -48,5 +50,13 @@ public class DataQualitVo extends ResourcePO {
 
     public void setImportStatusStr(String importStatusStr) {
         this.importStatusStr = importStatusStr;
+    }
+
+    public String getQualityStr() {
+        return qualityStr;
+    }
+
+    public void setQualityStr(String qualityStr) {
+        this.qualityStr = qualityStr;
     }
 }
