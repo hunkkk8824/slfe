@@ -6,7 +6,7 @@
 <#include "../../head.ftl">
     <title>多源情报系统-用户管理</title>
     <style type="text/css">
-        #toolbar input, button,select {
+        #toolbar input, button, select {
             float: left;
             margin-top: 10px;
             margin-left: 10px;
@@ -21,17 +21,18 @@
 <div class="example-wrap">
 
     <div class="hidden-xs" id="toolbar" role="group">
-        <input style="width:250px;" name="keyWordInfo" id="keyWordInfo" placeholder="手机号、登录名、企业名称" class="input-sm form-control">
-        <select style="width:143px;height: 30px" id="valid" name="valid" class="form-control" >
+        <input style="width:250px;" name="keyWordInfo" id="keyWordInfo" placeholder="手机号、登录名、企业名称"
+               class="input-sm form-control">
+        <select style="width:143px;height: 30px" id="valid" name="valid" class="form-control">
             <option value="">全部</option>
             <option value="1">启用</option>
             <option value="0">禁用</option>
         </select>
         <button id="query" type="button" class="btn btn-sm btn-primary">
-         搜索
+            搜索
         </button>
-        <button  style="margin-left: 10px" id="btn_add" type="button" class="btn btn-sm btn-primary">
-           新增
+        <button style="margin-left: 10px" id="btn_add" type="button" class="btn btn-sm btn-primary">
+            新增
         </button>
     </div>
     <table id="table" data-height="400" data-mobile-responsive="true">
@@ -102,7 +103,7 @@
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: ["${base}/user/toEditRoles?userid=" + row.userid, 'no'],
+                    content: [base + "/user/toEditRoles?userid=" + row.userid, 'no'],
                 });
             },
         };
