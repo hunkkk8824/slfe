@@ -32,11 +32,6 @@
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
 
-        <#--<option value="0">未评定</option>-->
-        <#--<option value="1">差</option>-->
-        <#--<option value="2">良</option>-->
-        <#--<option value="3">优</option>-->
-
         </select>
     <#--质量评定-->
         <select id="quality" name="quality" class="form-control" style="width:143px;height: 30px">
@@ -44,10 +39,6 @@
         <#list qualityEvaluateEnums as item>
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
-        <#--<option value="0">待审核</option>-->
-        <#--<option value="1">已审核</option>-->
-        <#--<option value="2">已驳回</option>-->
-
 
         </select>
         <button id="query" type="button" class="btn btn-sm btn-primary">
@@ -123,7 +114,7 @@
         function refreshTable() {
             $('#query').click();
         }
-        
+
         //质量评定
         function evaluateQuality(request) {
             debugger
@@ -168,7 +159,7 @@
 
                 layer.confirm('请评定该资源质量', {
                     btn: ['优', '良', '差'], //按钮
-                    btn3:function () {//差
+                    btn3: function () {//差
                         request.quality = QualityEvaluateEnum.Difference;
                         evaluateQuality(request);
                     },
@@ -180,7 +171,20 @@
                     request.quality = QualityEvaluateEnum.Good;
                     evaluateQuality(request);
                 },);
-            },
+            }, 'click .btn_log': function (e, value, row, index) {
+
+                layer.open({
+                    type: 2,
+                    title: '导入日志',
+                    fix: false,
+                    shadeClose: true,
+                    area: ['820px', '840px'],
+                    skin: 'layui-layer-rim', //加上边框
+                    zIndex: 9999,
+                    shift: Math.floor(Math.random() * 6 + 1),
+                    content: [base + "/dataQuality/toExportLog?resourceId=" + row.id, 'no'],
+                });
+            }
         };
 
         function initTable() {

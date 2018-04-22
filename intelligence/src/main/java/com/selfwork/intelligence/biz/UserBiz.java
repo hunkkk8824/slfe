@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserBiz extends BaseBiz {
 
-    public final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserInfoPOMapper userMapper;
@@ -111,9 +111,7 @@ public class UserBiz extends BaseBiz {
     public PageInfo<UserInfoPO> findPage(UserQueryVo queryVo) {
 
         // 查询
-        int pageNumber = queryVo.getPageNumber();
-        int pageSize = queryVo.getLimit();
-        PageHelper.startPage(pageNumber, pageSize);
+        this.startPage(queryVo);
         List<UserInfoPO> list = userMapper.findList(queryVo);
         if (null == list || list.size() == 0) {
             logger.error("获取用户分页信息失败");

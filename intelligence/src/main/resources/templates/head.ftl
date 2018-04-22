@@ -31,8 +31,7 @@
 <!-- Bootstrap table -->
 <script src="${base}/static/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
 <script src="${base}/static/js/plugins/bootstrap-table/bootstrap-table.min.js" type="text/javascript"></script>
-<script src="${base}/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"
-        type="text/javascript"></script>
+<script src="${base}/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
 <script src="${base}/static/js/plugins/footable/footable.all.min.js"></script>
 <script src="${base}/static/js/plugins/laydate/laydate.js"></script>
 <script type="text/javascript">
