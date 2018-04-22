@@ -24,6 +24,24 @@
     from tb_resource_monitor_log
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  <select id="findList" resultMap="BaseResultMap"
+          parameterType="com.selfwork.intelligence.model.vo.monitorlog.MonitorLogQueryVo">
+    select
+    <include refid="Base_Column_List"/>
+    from tb_resource_monitor_log
+    <where>
+      <if test="resourceName != null and resourceName!='' ">
+        AND RESOURCE_NAME LIKE concat(#{resourceName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="startTime != null">
+        AND OPERATOR_TIME <![CDATA[ >= ]]> #{startTime,jdbcType=DATE}
+      </if>
+      <if test="endTime != null">
+        AND OPERATOR_TIME <![CDATA[ <= ]]> #{endTime,jdbcType=DATE}
+      </if>
+    </where>
+    ORDER by OPERATOR_TIME desc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_resource_monitor_log
     where ID = #{id,jdbcType=INTEGER}
