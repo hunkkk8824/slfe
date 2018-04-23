@@ -95,14 +95,17 @@
 
                 layer.open({
                     type: 2,
-                    title: '角色编辑',
+                    title: '新增交换配置',
                     fix: false,
                     shadeClose: true,
-                    area: ['420px', '540px'],
+                    area: ['600px', '550px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: ["${base}/user/toEditRoles?userid=" + row.userid, 'no'],
+                    content: base + "/exchangeConfig/toEdit?id=" + row.id,
+                    end: function () {
+                        $('#query').trigger('click');
+                    }
                 });
             },
         };

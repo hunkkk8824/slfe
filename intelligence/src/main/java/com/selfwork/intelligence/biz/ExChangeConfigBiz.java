@@ -41,4 +41,8 @@ public class ExChangeConfigBiz extends BaseBiz {
         exchanger.setValid(Boolean.TRUE);
         exchangerPOMapper.insertSelective(exchanger);
     }
+
+    public ExchangerPO findById(Integer id) {
+        return exchangerPOMapper.selectByPrimaryKey(id);
+    }
 }

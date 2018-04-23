@@ -76,6 +76,15 @@ public class ExchangeConfigController extends BaseController {
     }
 
 
+    @RequestMapping("/toEdit")
+    public ModelAndView toEdit(Integer id) {
+        ModelAndView view = new ModelAndView("sub/exchangeConfig/add");
+        ExchangerPO exchangerPO = exChangeConfigBiz.findById(id);
+        view.addObject("config",exchangerPO);
+        return view;
+    }
+
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> save(@RequestBody ExchangerPO exchanger) {
