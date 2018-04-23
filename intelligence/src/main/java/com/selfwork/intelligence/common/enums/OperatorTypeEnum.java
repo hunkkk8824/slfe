@@ -8,7 +8,8 @@ public enum OperatorTypeEnum implements BaseEnum<OperatorTypeEnum, Integer>{
     APPLY(1, "申请入库"),
     COMPLETE(2, "入库完成"),
     AUDIT(3, "审核通过"),
-    CANCEL(4, "撤销入库"),;
+    CANCEL(4, "撤销入库"),
+    REJECT(5, "驳回"),;
 
     static Map<Integer, OperatorTypeEnum> dataMap = new HashMap<>();
 

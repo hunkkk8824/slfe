@@ -6,22 +6,23 @@ import com.selfwork.intelligence.common.BeanUtils;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.ImportStatusEnum;
+import com.selfwork.intelligence.common.enums.OperatorTypeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.mapper.ResourceEtlLogPOMapper;
 import com.selfwork.intelligence.mapper.ResourcePOMapper;
 import com.selfwork.intelligence.model.po.ResourceEtlLogPO;
 import com.selfwork.intelligence.model.po.ResourcePO;
+import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
+import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.sql.Date;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class DataQualityBiz extends BaseBiz {
@@ -105,8 +106,62 @@ public class DataQualityBiz extends BaseBiz {
         record.setAuditStatus(vo.getAuditStatus());
         record.setId(vo.getResourceId());
         resourcePOMapper.updateByPrimaryKeySelective(record);
-
     }
+
+    public void AppendAuditMonitorLog(AuditRequestVo vo, UserInfoPO user) {
+
+        try {
+            Integer resourceId = vo.getResourceId();
+            Integer auditStatus = vo.getAuditStatus().intValue();
+
+            ResourcePO resource = resourcePOMapper.selectByPrimaryKey(resourceId);
+            Date date = new Date();
+            AppendMonitorLogVo log = new AppendMonitorLogVo();
+            log.setOperator(user.getUseraccount());
+            log.setOperatorName(user.getRealname());
+            log.setOperatorTime(date);
+
+            if (AuditStatusEnum.Audited.getValue().equals(auditStatus)) {
+                log.setOperatorType(OperatorTypeEnum.AUDIT);
+            } else if (AuditStatusEnum.Dismissal.getValue().equals(auditStatus)) {
+                log.setOperatorType(OperatorTypeEnum.REJECT);
+            }
+
+            log.setRemark("审核");
+            log.setResourceCode(resource.getCode());
+            log.setResourceId(String.valueOf(resource.getId()));
+            log.setResourceName(resource.getName());
+            log.setSourceExchangerCode(resource.getSourceExchangerCode());
+            log.setSourceExchangerName(resource.getSourceExchangerName());
+            logBiz.AppendMonitorLog(log);
+        } catch (Exception e) {
+            logger.error("记录审核监控日志失败", e);
+        }
+    }
+
+    public void AppendCancelMonitorLog(CancelResourceRequestVo vo, UserInfoPO user) {
+
+        try {
+            Integer resourceId = vo.getResourceId();
+            ResourcePO resource = resourcePOMapper.selectByPrimaryKey(resourceId);
+            Date date = new Date();
+            AppendMonitorLogVo log = new AppendMonitorLogVo();
+            log.setOperator(user.getUseraccount());
+            log.setOperatorName(user.getRealname());
+            log.setOperatorTime(date);
+            log.setOperatorType(OperatorTypeEnum.CANCEL);
+            log.setRemark("撤销");
+            log.setResourceCode(resource.getCode());
+            log.setResourceId(String.valueOf(resource.getId()));
+            log.setResourceName(resource.getName());
+            log.setSourceExchangerCode(resource.getSourceExchangerCode());
+            log.setSourceExchangerName(resource.getSourceExchangerName());
+            logBiz.AppendMonitorLog(log);
+        } catch (Exception e) {
+            logger.error("记录撤销监控日志失败", e);
+        }
+    }
+
 
     public void evaluateQuality(QualityEvaluateRequestVo vo) {
         ResourcePO record = new ResourcePO();
@@ -121,4 +176,6 @@ public class DataQualityBiz extends BaseBiz {
         record.setId(vo.getResourceId());
         resourcePOMapper.updateByPrimaryKeySelective(record);
     }
+
+
 }

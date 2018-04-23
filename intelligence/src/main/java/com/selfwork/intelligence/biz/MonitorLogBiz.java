@@ -74,6 +74,7 @@ public class MonitorLogBiz extends BaseBiz {
                 po.setSourceExchangerCode(logVo.getSourceExchangerCode());
                 po.setSourceExchangerName(logVo.getSourceExchangerName());
                 po.setOperator(logVo.getOperator());
+                po.setOperatorType(logVo.getOperatorType().getValue().shortValue());
                 po.setOperatorName(logVo.getOperatorName());
                 po.setOperatorTime(logVo.getOperatorTime());
                 po.setRemark(logVo.getRemark());

@@ -8,6 +8,7 @@ import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.model.po.RoleInfoPO;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
+import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,7 @@ public class DataQualityController extends BaseController {
 
         try {
             dataQualityBiz.audit(vo);
+            dataQualityBiz.AppendAuditMonitorLog(vo, this.getLoginUser());
         } catch (Exception e) {
             logger.error("审核资源信息异常：" + e.getMessage(), e);
             result.put("code", -1);
@@ -106,6 +108,7 @@ public class DataQualityController extends BaseController {
 
         try {
             dataQualityBiz.cancelResource(vo);
+            dataQualityBiz.AppendCancelMonitorLog(vo,this.getLoginUser());
         } catch (Exception e) {
             logger.error("撤销资源异常：" + e.getMessage(), e);
             result.put("code", -1);
@@ -134,7 +137,7 @@ public class DataQualityController extends BaseController {
         try {
             PageInfo<ResourceEtlLogVo> pageData = dataQualityBiz.selectByResourceId(vo);
             if (pageData != null) {
-                result.put("total",  pageData.getTotal());
+                result.put("total", pageData.getTotal());
                 result.put("rows", pageData.getList());
             }
         } catch (Exception e) {
