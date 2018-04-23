@@ -77,13 +77,18 @@
                 </li>
                 <li>
                     <a class="J_menuItem" href="${base}/exchangeConfig/index" data-index="3">
-                        <i class="fa fa-database"></i>
+                        <i class="fa fa-gears"></i>
                         交换配置</a>
                 </li>
                 <li>
                     <a class="J_menuItem" href="${base}/exchangeLog/index" data-index="3">
-                        <i class="fa fa-database"></i>
+                        <i class="fa fa-random"></i>
                         交换日志</a>
+                </li>
+                <li>
+                    <a class="J_menuItem" href="${base}/monitorLog/index" data-index="3">
+                        <i class="fa fa-eye"></i>
+                        监控日志</a>
                 </li>
             </ul>
         </div>
