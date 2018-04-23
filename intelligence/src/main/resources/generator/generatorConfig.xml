@@ -64,5 +64,17 @@
         <!--<table tableName="QB_SJ_YSDZZDZZCMB" domainObjectName="QbSjYsdzzdzzcmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="QB_SJ_RHMB" domainObjectName="QbSjRhmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
 
+
+
+
+
+
+
+        <!--<table tableName="qb_sj_rgmb" domainObjectName="QbSjRgmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
+        <!--<table tableName="qb_sj_myb" domainObjectName="QbSjMybPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
+        <!--<table tableName="qb_sj_jztsmb" domainObjectName="QbSjJztsmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
+        <!--<table tableName="qb_sj_dptssmb" domainObjectName="QbSjDptssmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
+        <!--<table tableName="qb_sj_dptdzzmb" domainObjectName="QbSjDptdzzmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
+
     </context>
 </generatorConfiguration>
