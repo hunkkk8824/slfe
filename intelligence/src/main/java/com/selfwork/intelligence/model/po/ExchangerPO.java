@@ -13,6 +13,8 @@ public class ExchangerPO {
 
     private Integer port;
 
+    private String dataName;
+
     private String userName;
 
     private String password;
@@ -121,5 +123,13 @@ public class ExchangerPO {
 
     public void setValid(Boolean valid) {
         this.valid = valid;
+    }
+
+    public String getDataName() {
+        return dataName;
+    }
+
+    public void setDataName(String dataName) {
+        this.dataName = dataName;
     }
 }

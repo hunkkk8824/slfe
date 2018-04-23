@@ -7,6 +7,7 @@
     <result column="NAME" property="name" jdbcType="VARCHAR" />
     <result column="HOST" property="host" jdbcType="VARCHAR" />
     <result column="PORT" property="port" jdbcType="INTEGER" />
+    <result column="DATA_NAME" property="dataName" jdbcType="VARCHAR" />
     <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
     <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
@@ -16,7 +17,7 @@
     <result column="VALID" property="valid" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, CODE, NAME, HOST, PORT, USER_NAME, PASSWORD, CREATE_USER, CREATE_TIME, LAST_MODIFY_TIME, 
+    ID, CODE, NAME, HOST, PORT,DATA_NAME, USER_NAME, PASSWORD, CREATE_USER, CREATE_TIME, LAST_MODIFY_TIME,
     LAST_MODIFY_USER, VALID
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -31,12 +32,12 @@
   </delete>
   <insert id="insert" parameterType="com.selfwork.intelligence.model.po.ExchangerPO" >
     insert into tb_exchanger (ID, CODE, NAME, 
-      HOST, PORT, USER_NAME, 
+      HOST, PORT,DATA_NAME, USER_NAME,
       PASSWORD, CREATE_USER, CREATE_TIME, 
       LAST_MODIFY_TIME, LAST_MODIFY_USER, VALID
       )
     values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{host,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{host,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, #{dataName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastModifyTime,jdbcType=TIMESTAMP}, #{lastModifyUser,jdbcType=VARCHAR}, #{valid,jdbcType=BIT}
       )
@@ -58,6 +59,9 @@
       </if>
       <if test="port != null" >
         PORT,
+      </if>
+      <if test="dataName != null" >
+        DATA_NAME,
       </if>
       <if test="userName != null" >
         USER_NAME,
@@ -97,6 +101,9 @@
       <if test="port != null" >
         #{port,jdbcType=INTEGER},
       </if>
+      <if test="dataName != null" >
+        #{dataName,jdbcType=VARCHAR},
+      </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
@@ -135,6 +142,9 @@
       <if test="port != null" >
         PORT = #{port,jdbcType=INTEGER},
       </if>
+      <if test="dataName != null" >
+        DATA_NAME = #{dataName,jdbcType=VARCHAR},
+      </if>
       <if test="userName != null" >
         USER_NAME = #{userName,jdbcType=VARCHAR},
       </if>
@@ -165,6 +175,7 @@
       NAME = #{name,jdbcType=VARCHAR},
       HOST = #{host,jdbcType=VARCHAR},
       PORT = #{port,jdbcType=INTEGER},
+      DATA_NAME = #{dataName,jdbcType=VARCHAR},
       USER_NAME = #{userName,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
       CREATE_USER = #{createUser,jdbcType=VARCHAR},
