@@ -4,11 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.mapper.ExchangerPOMapper;
 import com.selfwork.intelligence.model.po.ExchangerPO;
+import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.exchangeConfig.ExchangeConfigQueryVo;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +23,6 @@ public class ExChangeConfigBiz extends BaseBiz {
     private ExchangerPOMapper exchangerPOMapper;
 
     public PageInfo<ExchangerPO> findPage(ExchangeConfigQueryVo queryVo) {
-        // 查询
         int pageNumber = queryVo.getPageNumber();
         int pageSize = queryVo.getLimit();
         PageHelper.startPage(pageNumber, pageSize);
@@ -31,5 +32,17 @@ public class ExChangeConfigBiz extends BaseBiz {
             return null;
         }
         return new PageInfo<>(list);
+    }
+
+    public void save(ExchangerPO exchanger, UserInfoPO user) {
+        exchanger.setCode(exchanger.getName());
+        exchanger.setCreateTime(new Date());
+        exchanger.setCreateUser(String.valueOf(user.getUserid()));
+        exchanger.setValid(Boolean.TRUE);
+        exchangerPOMapper.insertSelective(exchanger);
+    }
+
+    public ExchangerPO findById(Integer id) {
+        return exchangerPOMapper.selectByPrimaryKey(id);
     }
 }

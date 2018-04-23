@@ -62,14 +62,14 @@
             $('#btn_add').on('click', function () {
                 layer.open({
                     type: 2,
-                    title: '新增用户',
+                    title: '新增交换配置',
                     fix: false,
                     shadeClose: true,
-                    area: ['800px', '800px'],
+                    area: ['600px', '550px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: base + "/user/toAdd",
+                    content: base + "/exchangeConfig/toAdd",
                     end: function () {
                         $('#query').trigger('click');
                     }
@@ -95,21 +95,24 @@
 
                 layer.open({
                     type: 2,
-                    title: '角色编辑',
+                    title: '新增交换配置',
                     fix: false,
                     shadeClose: true,
-                    area: ['420px', '540px'],
+                    area: ['600px', '550px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: ["${base}/user/toEditRoles?userid=" + row.userid, 'no'],
+                    content: base + "/exchangeConfig/toEdit?id=" + row.id,
+                    end: function () {
+                        $('#query').trigger('click');
+                    }
                 });
             },
         };
 
         function initTable() {
             $('#table').bootstrapTable({
-                url: base + '/exchangeConfig/getExchangeConfigList',    //请求后台的URL（*）
+                url: base + '/exchangeConfig/getList',    //请求后台的URL（*）
                 method: 'post',                     //请求方式（*）
                 contentType: "application/json",
                 toolbarAlign: 'right',               //工具栏对齐方式

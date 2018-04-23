@@ -68,4 +68,43 @@ public class ExchangeConfigController extends BaseController {
         return result;
     }
 
+
+    @RequestMapping("/toAdd")
+    public ModelAndView toAdd() {
+        ModelAndView view = new ModelAndView("sub/exchangeConfig/add");
+        return view;
+    }
+
+
+    @RequestMapping("/toEdit")
+    public ModelAndView toEdit(Integer id) {
+        ModelAndView view = new ModelAndView("sub/exchangeConfig/add");
+        ExchangerPO exchangerPO = exChangeConfigBiz.findById(id);
+        view.addObject("config",exchangerPO);
+        return view;
+    }
+
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> save(@RequestBody ExchangerPO exchanger) {
+        Map<String, Object> result = new HashMap<>();
+
+        // 参数验证
+        if (null == exchanger) {
+            return result;
+        }
+        try {
+            exChangeConfigBiz.save(exchanger,this.getLoginUser());
+            result.put("code", 0);
+            result.put("msg", "保存成功");
+        } catch (Exception e) {
+            logger.error("保存交换配置信息异常 e:{}", e);
+            result.put("code", -1);
+            result.put("msg", "保存交换配置信息失败");
+        }
+
+        return result;
+    }
+
 }
