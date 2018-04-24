@@ -53,7 +53,9 @@
 </div>
 
 <script type="text/javascript">
-    (function (base) {
+
+    var menutype = parseInt('${menutype}');
+    (function (base, menutype) {
 
         var baseUrl = base + "/dataQuality";
 
@@ -253,15 +255,23 @@
                     title: '操作',
                     formatter: function (value, row, index) {
 
-                        return [
+                        var btns = [
                             '<button  type="button" class="btn btn-primary btn-sm btn_detail">查看数据</button> ',
-                            '<button  type="button" class="btn btn-primary btn-sm btn_log">查看日志</button> ',
-                            '<button  type="button" class="btn btn-primary btn-sm btn_audit">审核</button> ',
-                            '<button  type="button" class="btn btn-primary btn-sm btn_judge">评定</button> ',
-                            '<button  type="button" class="btn btn-primary btn-sm btn_cancelResource">撤销</button> ',
+                            '<button  type="button" class="btn btn-primary btn-sm btn_log">查看日志</button> ',];
 
+                        //数据质量管理
 
-                        ].join('');
+                        if (menutype == 1) {
+                            btns.push('<button  type="button" class="btn btn-primary btn-sm btn_audit">审核</button>');
+                            btns.push('<button  type="button" class="btn btn-primary btn-sm btn_judge">评定</button>');
+                        }
+                        else {
+                            //交换日志
+                            btns.push('<button  type="button" class="btn btn-primary btn-sm btn_cancelResource">撤销</button>');
+                        }
+
+                        return btns.join('');
+
                     },
                     events: operateEvents
                 }]
@@ -274,7 +284,7 @@
             initTable();
             initEvent();
         });
-    })(base);
+    })(base, menutype);
 </script>
 </body>
 

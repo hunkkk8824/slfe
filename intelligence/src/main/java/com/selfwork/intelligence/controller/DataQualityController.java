@@ -35,11 +35,12 @@ public class DataQualityController extends BaseController {
     private DataQualityBiz dataQualityBiz;
 
     @RequestMapping(value = "/index")
-    public ModelAndView index() {
+    public ModelAndView index(@RequestParam String menutype) {
 
         ModelAndView view = new ModelAndView("sub/dataQuality/index");
         view.addObject("auditStatusEnums", AuditStatusEnum.values());
         view.addObject("qualityEvaluateEnums", QualityEvaluateEnum.values());
+        view.addObject("menutype",menutype);
         return view;
 
     }
