@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/intelligence/intelligence.iml" filepath="$PROJECT_DIR$/intelligence/intelligence.iml" />
-      <module fileurl="file://$PROJECT_DIR$/intelligence/intelligence.iml" filepath="$PROJECT_DIR$/intelligence/intelligence.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/slef.iml" filepath="$PROJECT_DIR$/.idea/slef.iml" />
     </modules>
   </component>
