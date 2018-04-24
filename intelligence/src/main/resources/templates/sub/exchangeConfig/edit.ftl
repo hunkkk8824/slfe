@@ -30,6 +30,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label"><font color="red">* </font>数据库名：</label>
+            <div class="col-sm-8">
+                <input id="dataName" name="dataName" placeholder="数据库名" class="form-control" type="text" value="${(config.dataName)!}">
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-3 control-label"><font color="red">* </font>用户名：</label>
             <div class="col-sm-8">
                 <input id="userName" name="userName" placeholder="用户名" class="form-control" type="text" value="${config.userName}">
@@ -40,12 +46,13 @@
         <div class="form-group">
             <label class="col-sm-3 control-label"><font color="red">* </font>密码：</label>
             <div class="col-sm-8">
-                <input id="password" name="password" class="form-control" placeholder="密码" type="password">
+                <input id="password" name="password" class="form-control" placeholder="密码" type="password" value="${config.password}">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-8 col-sm-offset-4" style="margin-left: 180px;">
-                <button class="btn btn-primary" type="submit" id="btn_save">保存</button>
+                <button class="btn btn-primary" type="button" id="btn_test">测试</button>
+                <button class="btn btn-primary" type="submit" id="btn_save" style="margin-left:30px;">保存</button>
                 <button class="btn btn-primary" type="button" id="btn_cancel" style="margin-left:30px;">取消</button>
             </div>
         </div>
@@ -64,6 +71,12 @@
                 close();
             });
 
+            $('#btn_test').on('click', function () {
+                console.log($("#exchangeForm").valid());
+                if($("#exchangeForm").valid()){
+                    test();
+                }
+            });
 
             jQuery.validator.addMethod("isPassWord", function (value, element) {
                 var regNull = /^\S*$/;
@@ -84,6 +97,9 @@
                     port: {
                         required: true
                     },
+                    dataName: {
+                        required: true
+                    },
                     userName: {
                         required: true
                     },
@@ -102,6 +118,9 @@
                     port: {
                         required: "请输入端口"
                     },
+                    dataName: {
+                        required: "请输入数据库名"
+                    },
                     userName: {
                         required: "请输入用户名"
                     },
@@ -116,14 +135,15 @@
                         name: $("#name").val(),
                         host: $("#host").val(),
                         port: $("#port").val(),
+                        dataName: $("#dataName").val(),
                         userName: $("#userName").val(),
                         password: $("#password").val()
-                    }
+                    };
                     layer.load(3);
                     debugger
                     $.ajax({
                         type: 'post',
-                        url: base + '/exchangeConfig/update',
+                        url: base + '/exchangeConfig/edit',
                         dataType: 'json',
                         contentType: 'application/json',
                         data: JSON.stringify(data),
@@ -133,10 +153,10 @@
                             var code = parseInt(res.code);
                             debugger
                             if (code == 0) {
-                                layer.msg("修改成功");
+                                layer.msg("修改成功",{icon: 1});
                                 pageReload();
                             } else {
-                                layer.msg("修改失败");
+                                layer.msg("修改失败",{icon: 2});
                             }
                         }, error: function (xhr, status) {
                             layer.closeAll('loading');
@@ -155,6 +175,42 @@
             $("#exchangeForm input").removeClass('error');
 
         };
+
+        var test = function(){
+            var data = {
+                name: $("#name").val(),
+                host: $("#host").val(),
+                port: $("#port").val(),
+                dataName: $("#dataName").val(),
+                userName: $("#userName").val(),
+                password: $("#password").val()
+            }
+
+            layer.load(3);
+            debugger
+            $.ajax({
+                type: 'post',
+                url: base + '/exchangeConfig/test',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (res) {
+                    layer.closeAll('loading');
+                    var msg = res.msg;
+                    var code = parseInt(res.code);
+                    debugger
+                    if (code == 0) {
+                        layer.msg("连接成功",{icon: 1});
+                    } else {
+                        layer.msg("连接失败",{icon: 2});
+                    }
+                }, error: function (xhr, status) {
+                    layer.closeAll('loading');
+                    //提示层
+                    layer.msg("系统出现异常！", {icon: 0});
+                }
+            });
+        }
 
         // 关闭layer
         var close = function () {

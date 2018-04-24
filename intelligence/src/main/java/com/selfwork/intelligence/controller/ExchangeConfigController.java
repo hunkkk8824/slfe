@@ -1,6 +1,7 @@
 package com.selfwork.intelligence.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.selfwork.intelligence.biz.DataBiz;
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.ExChangeConfigBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
@@ -34,6 +35,9 @@ public class ExchangeConfigController extends BaseController {
 
     @Autowired
     private ExChangeConfigBiz exChangeConfigBiz;
+
+    @Autowired
+    private DataBiz dataBiz;
 
     @RequestMapping(value = "/index")
     public ModelAndView index() {
@@ -78,7 +82,7 @@ public class ExchangeConfigController extends BaseController {
 
     @RequestMapping("/toEdit")
     public ModelAndView toEdit(Integer id) {
-        ModelAndView view = new ModelAndView("sub/exchangeConfig/add");
+        ModelAndView view = new ModelAndView("sub/exchangeConfig/edit");
         ExchangerPO exchangerPO = exChangeConfigBiz.findById(id);
         view.addObject("config",exchangerPO);
         return view;
@@ -102,6 +106,56 @@ public class ExchangeConfigController extends BaseController {
             logger.error("保存交换配置信息异常 e:{}", e);
             result.put("code", -1);
             result.put("msg", "保存交换配置信息失败");
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> edit(@RequestBody ExchangerPO exchanger) {
+        Map<String, Object> result = new HashMap<>();
+
+        // 参数验证
+        if (null == exchanger) {
+            return result;
+        }
+        try {
+            exChangeConfigBiz.edit(exchanger,this.getLoginUser());
+            result.put("code", 0);
+            result.put("msg", "修改成功");
+        } catch (Exception e) {
+            logger.error("修改交换配置信息异常 e:{}", e);
+            result.put("code", -1);
+            result.put("msg", "修改交换配置信息失败");
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> test(@RequestBody ExchangerPO exchanger) {
+        Map<String, Object> result = new HashMap<>();
+
+        // 参数验证
+        if (null == exchanger) {
+            return result;
+        }
+        try {
+            boolean success = dataBiz.test(exchanger);
+            if(success){
+                result.put("code", 0);
+                result.put("msg", "连接成功");
+            }else {
+                result.put("code", -1);
+                result.put("msg", "连接失败");
+            }
+
+        } catch (Exception e) {
+            logger.error("修改交换配置信息异常 e:{}", e);
+            result.put("code", -1);
+            result.put("msg", "修改交换配置信息失败");
         }
 
         return result;

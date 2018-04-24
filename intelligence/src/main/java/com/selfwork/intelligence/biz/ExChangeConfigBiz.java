@@ -2,6 +2,8 @@ package com.selfwork.intelligence.biz;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.selfwork.intelligence.common.BaseException;
+import com.selfwork.intelligence.common.enums.ResponseCodeTypeEnum;
 import com.selfwork.intelligence.mapper.ExchangerPOMapper;
 import com.selfwork.intelligence.model.po.ExchangerPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
@@ -44,5 +46,14 @@ public class ExChangeConfigBiz extends BaseBiz {
 
     public ExchangerPO findById(Integer id) {
         return exchangerPOMapper.selectByPrimaryKey(id);
+    }
+
+    public void edit(ExchangerPO exchanger, UserInfoPO loginUser) {
+        exchanger.setLastModifyTime(new Date());
+        exchanger.setLastModifyUser(String.valueOf(loginUser.getUserid()));
+        int update = exchangerPOMapper.updateByPrimaryKeySelective(exchanger);
+        if(update != 1){
+            throw new BaseException(ResponseCodeTypeEnum.DATABASE_EXCEPTION.getValue(),ResponseCodeTypeEnum.DATABASE_EXCEPTION.getDisplayName());
+        }
     }
 }
