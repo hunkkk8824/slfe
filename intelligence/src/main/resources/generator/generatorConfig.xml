@@ -42,31 +42,20 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
         <!--<table tableName="TB_RESOURCE_MONITOR_LOG" domainObjectName="ResourceMonitorLogPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="TB_RESOURCE_ETL_LOG" domainObjectName="ResourceEtlLogPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="TB_EXCHANGER_ETL" domainObjectName="ExchangerEtlPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="TB_EXCHANGER" domainObjectName="ExchangerPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="TB_DATASET" domainObjectName="DatasetPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
+
+
+
         <!--<table tableName="SCOUT_QB_TABLE_BD" domainObjectName="ScoutQbTableBdPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="QB_SJ_YSMB" domainObjectName="QbSjYsmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="QB_SJ_YSDZZTMMB" domainObjectName="QbSjYsdzztmmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="QB_SJ_YSDZZJGMB" domainObjectName="QbSjYsdzzjgmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="QB_SJ_YSDZZDZZCMB" domainObjectName="QbSjYsdzzdzzcmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
         <!--<table tableName="QB_SJ_RHMB" domainObjectName="QbSjRhmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
-
-
-
-
 
 
 

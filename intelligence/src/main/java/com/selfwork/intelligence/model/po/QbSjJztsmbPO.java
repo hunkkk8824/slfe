@@ -1,4 +1,4 @@
-package com.selfwork.intelligence.model.po;
+package com.selfwork.intelligence.model;
 
 import java.math.BigDecimal;
 import java.util.Date;

@@ -19,6 +19,7 @@ import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -29,6 +30,9 @@ public class DataQualityBiz extends BaseBiz {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired  //①  注入上下文
+    private ApplicationContext context;
+
     @Autowired
     private ResourcePOMapper resourcePOMapper;
 
@@ -36,6 +40,7 @@ public class DataQualityBiz extends BaseBiz {
     private ResourceEtlLogPOMapper resourceEtlLogPOMapper;
 
     public PageInfo<ResourceEtlLogVo> selectByResourceId(ResourceEtlLogQueryVo vo) {
+
         try {
 
 
@@ -175,6 +180,10 @@ public class DataQualityBiz extends BaseBiz {
         record.setIsCancel(true);
         record.setId(vo.getResourceId());
         resourcePOMapper.updateByPrimaryKeySelective(record);
+    }
+
+    public void getDetail(String mapperName) {
+        Object mapper = context.getBean(mapperName);
     }
 
 

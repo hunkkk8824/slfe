@@ -1,4 +1,4 @@
-package com.selfwork.intelligence.model.po;
+package com.selfwork.intelligence.model;
 
 public class QbSjMybPO {
     private Integer id;

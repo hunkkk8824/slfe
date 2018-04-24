@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.QbSjMybPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.QbSjMybPO" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="BATCH_NO" property="batchNo" jdbcType="VARCHAR" />
+    <result column="MYLX" property="mylx" jdbcType="DECIMAL" />
+    <result column="XXGSLX" property="xxgslx" jdbcType="DECIMAL" />
+    <result column="XXLX" property="xxlx" jdbcType="DECIMAL" />
+    <result column="MYBH" property="mybh" jdbcType="DECIMAL" />
+    <result column="MYMC" property="mymc" jdbcType="VARCHAR" />
+    <result column="NBBH" property="nbbh" jdbcType="DECIMAL" />
+    <result column="BBH" property="bbh" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BATCH_NO, MYLX, XXGSLX, XXLX, MYBH, MYMC, NBBH, BBH
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from qb_sj_myb
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from qb_sj_myb
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.QbSjMybPO" >
+    insert into qb_sj_myb (ID, BATCH_NO, MYLX, 
+      XXGSLX, XXLX, MYBH, 
+      MYMC, NBBH, BBH)
+    values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{mylx,jdbcType=DECIMAL}, 
+      #{xxgslx,jdbcType=DECIMAL}, #{xxlx,jdbcType=DECIMAL}, #{mybh,jdbcType=DECIMAL}, 
+      #{mymc,jdbcType=VARCHAR}, #{nbbh,jdbcType=DECIMAL}, #{bbh,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.QbSjMybPO" >
+    insert into qb_sj_myb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO,
+      </if>
+      <if test="mylx != null" >
+        MYLX,
+      </if>
+      <if test="xxgslx != null" >
+        XXGSLX,
+      </if>
+      <if test="xxlx != null" >
+        XXLX,
+      </if>
+      <if test="mybh != null" >
+        MYBH,
+      </if>
+      <if test="mymc != null" >
+        MYMC,
+      </if>
+      <if test="nbbh != null" >
+        NBBH,
+      </if>
+      <if test="bbh != null" >
+        BBH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null" >
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mylx != null" >
+        #{mylx,jdbcType=DECIMAL},
+      </if>
+      <if test="xxgslx != null" >
+        #{xxgslx,jdbcType=DECIMAL},
+      </if>
+      <if test="xxlx != null" >
+        #{xxlx,jdbcType=DECIMAL},
+      </if>
+      <if test="mybh != null" >
+        #{mybh,jdbcType=DECIMAL},
+      </if>
+      <if test="mymc != null" >
+        #{mymc,jdbcType=VARCHAR},
+      </if>
+      <if test="nbbh != null" >
+        #{nbbh,jdbcType=DECIMAL},
+      </if>
+      <if test="bbh != null" >
+        #{bbh,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.QbSjMybPO" >
+    update qb_sj_myb
+    <set >
+      <if test="batchNo != null" >
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mylx != null" >
+        MYLX = #{mylx,jdbcType=DECIMAL},
+      </if>
+      <if test="xxgslx != null" >
+        XXGSLX = #{xxgslx,jdbcType=DECIMAL},
+      </if>
+      <if test="xxlx != null" >
+        XXLX = #{xxlx,jdbcType=DECIMAL},
+      </if>
+      <if test="mybh != null" >
+        MYBH = #{mybh,jdbcType=DECIMAL},
+      </if>
+      <if test="mymc != null" >
+        MYMC = #{mymc,jdbcType=VARCHAR},
+      </if>
+      <if test="nbbh != null" >
+        NBBH = #{nbbh,jdbcType=DECIMAL},
+      </if>
+      <if test="bbh != null" >
+        BBH = #{bbh,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.QbSjMybPO" >
+    update qb_sj_myb
+    set BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      MYLX = #{mylx,jdbcType=DECIMAL},
+      XXGSLX = #{xxgslx,jdbcType=DECIMAL},
+      XXLX = #{xxlx,jdbcType=DECIMAL},
+      MYBH = #{mybh,jdbcType=DECIMAL},
+      MYMC = #{mymc,jdbcType=VARCHAR},
+      NBBH = #{nbbh,jdbcType=DECIMAL},
+      BBH = #{bbh,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -127,6 +127,7 @@ public class DataQualityController extends BaseController {
 
     }
 
+    //etl日志
     @ResponseBody
     @RequestMapping(value = "/getExportLog", method = RequestMethod.POST)
     public Map<String, Object> getExportLog(@RequestBody ResourceEtlLogQueryVo vo) {
@@ -146,4 +147,29 @@ public class DataQualityController extends BaseController {
         }
         return result;
     }
+
+    //查看明细
+    @RequestMapping(value = "/toDetail")
+    public ModelAndView toDetail(@RequestParam String datesetCode) {
+
+        ModelAndView view = new ModelAndView("sub/dataQuality/detail");
+        view.addObject("datesetCode",datesetCode);
+        return view;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getDetail", method = RequestMethod.GET)
+    public Map<String, Object> getDetail(@RequestParam String datesetCode) {
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("total", 0);
+        result.put("rows", new ArrayList());
+
+        try {
+        } catch (Exception e) {
+            logger.error("查看明细异常：" + e.getMessage(), e);
+        }
+        return result;
+    }
+
 }
