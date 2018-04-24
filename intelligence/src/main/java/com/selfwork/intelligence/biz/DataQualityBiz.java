@@ -30,8 +30,6 @@ public class DataQualityBiz extends BaseBiz {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired  //①  注入上下文
-    private ApplicationContext context;
 
     @Autowired
     private ResourcePOMapper resourcePOMapper;
@@ -183,7 +181,7 @@ public class DataQualityBiz extends BaseBiz {
     }
 
     public void getDetail(String mapperName) {
-        Object mapper = context.getBean(mapperName);
+//        Object mapper = context.getBean(mapperName);
     }
 
 

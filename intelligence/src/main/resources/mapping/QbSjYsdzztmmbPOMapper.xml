@@ -49,6 +49,12 @@
     JD, WD, GD, FW, YJ, JLWC, FWWC, YJWC, TZYS, QSPL, ZZPL, ZXPL, XHDK, FWKXD, SYFS, 
     XHLX, TPSD, SL, FSYSX, BWLX, GSFS, GRXHTZFS, GRXHYS, GRTXZX, PTXH, JXH, JJM
   </sql>
+  <select id="getListByBatchNO" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from qb_sj_ysdzztmmb
+    where BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

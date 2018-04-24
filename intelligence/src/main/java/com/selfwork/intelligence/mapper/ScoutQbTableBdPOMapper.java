@@ -2,6 +2,8 @@ package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.ScoutQbTableBdPO;
 
+import java.util.List;
+
 public interface ScoutQbTableBdPOMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,6 @@ public interface ScoutQbTableBdPOMapper {
     int updateByPrimaryKeyWithBLOBs(ScoutQbTableBdPO record);
 
     int updateByPrimaryKey(ScoutQbTableBdPO record);
+
+    List<ScoutQbTableBdPO> getListByBatchNO(String batchNO);
 }

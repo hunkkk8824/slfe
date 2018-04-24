@@ -15,6 +15,14 @@
   <sql id="Base_Column_List" >
     ID, BATCH_NO, MYLX, XXGSLX, XXLX, MYBH, MYMC, NBBH, BBH
   </sql>
+
+  <select id="getListByBatchNO" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from qb_sj_myb
+    where BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

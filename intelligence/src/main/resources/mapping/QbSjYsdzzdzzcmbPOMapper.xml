@@ -93,6 +93,14 @@
   <sql id="Blob_Column_List" >
     CFPL, SPZ, MCKDZ
   </sql>
+  <select id="getListByBatchNO" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from qb_sj_ysdzzdzzcmb
+    where BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

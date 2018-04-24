@@ -2,6 +2,8 @@ package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.QbSjYsmbPO;
 
+import java.util.List;
+
 public interface QbSjYsmbPOMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface QbSjYsmbPOMapper {
     int updateByPrimaryKeySelective(QbSjYsmbPO record);
 
     int updateByPrimaryKey(QbSjYsmbPO record);
+
+    List<QbSjYsmbPO> getListByBatchNO(String batchNO);
 }
