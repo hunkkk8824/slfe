@@ -3,16 +3,20 @@ package com.selfwork.intelligence.biz;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.common.BeanUtils;
+import com.selfwork.intelligence.common.Constant;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.ImportStatusEnum;
 import com.selfwork.intelligence.common.enums.OperatorTypeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
-import com.selfwork.intelligence.mapper.ResourceEtlLogPOMapper;
-import com.selfwork.intelligence.mapper.ResourcePOMapper;
-import com.selfwork.intelligence.model.po.ResourceEtlLogPO;
-import com.selfwork.intelligence.model.po.ResourcePO;
-import com.selfwork.intelligence.model.po.UserInfoPO;
+import com.selfwork.intelligence.mapper.*;
+import com.selfwork.intelligence.model.*;
+import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
+import com.selfwork.intelligence.model.QbSjDptssmbPO;
+import com.selfwork.intelligence.model.QbSjJztsmbPO;
+import com.selfwork.intelligence.model.QbSjMybPO;
+import com.selfwork.intelligence.model.QbSjRgmbPO;
+import com.selfwork.intelligence.model.po.*;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
 import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
@@ -30,12 +34,51 @@ public class DataQualityBiz extends BaseBiz {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    private static Map<String, List<ColumnsVo>> columnsMap = new HashMap<>();
+
+    public DataQualityBiz() {
+        columnsMap.put(Constant.QbSjDptdzzmb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjDptssmb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjJztsmb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjMyb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjRgmb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjRhmb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjYsdzzdzzcmb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjYsdzzjgmb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjYsdzztmmb, new ArrayList<>());
+        columnsMap.put(Constant.QbSjYsmb, new ArrayList<>());
+        columnsMap.put(Constant.ScoutQbTableBd, new ArrayList<>());
+    }
 
     @Autowired
     private ResourcePOMapper resourcePOMapper;
 
     @Autowired
     private ResourceEtlLogPOMapper resourceEtlLogPOMapper;
+
+
+    @Autowired
+    private QbSjDptdzzmbPOMapper qbSjDptdzzmb;
+    @Autowired
+    private QbSjDptssmbPOMapper qbSjDptssmb;
+    @Autowired
+    private QbSjJztsmbPOMapper qbSjJztsmb;
+    @Autowired
+    private QbSjMybPOMapper qbSjMyb;
+    @Autowired
+    private QbSjRgmbPOMapper qbSjRgmb;
+    @Autowired
+    private QbSjRhmbPOMapper qbSjRhmb;
+    @Autowired
+    private QbSjYsdzzdzzcmbPOMapper qbSjYsdzzdzzcmb;
+    @Autowired
+    private QbSjYsdzzjgmbPOMapper qbSjYsdzzjgmb;
+    @Autowired
+    private QbSjYsdzztmmbPOMapper qbSjYsdzztmmb;
+    @Autowired
+    private QbSjYsmbPOMapper qbSjYsmb;
+    @Autowired
+    private ScoutQbTableBdPOMapper scoutQbTableBd;
 
     public PageInfo<ResourceEtlLogVo> selectByResourceId(ResourceEtlLogQueryVo vo) {
 
@@ -180,8 +223,72 @@ public class DataQualityBiz extends BaseBiz {
         resourcePOMapper.updateByPrimaryKeySelective(record);
     }
 
-    public void getDetail(String mapperName) {
-//        Object mapper = context.getBean(mapperName);
+    public Map<String, Object> getDetail(DetailQueryVo queryVo) {
+
+        String dataSetCode = queryVo.getDataSetCode();
+        String resourceCode = queryVo.getResourceCode();
+        Map<String, Object> map = new HashMap<>();
+        this.startPage(queryVo);
+
+        if (Constant.ScoutQbTableBd.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<ScoutQbTableBdPO> pageData = new PageInfo<>(scoutQbTableBd.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.ScoutQbTableBd));
+        } else if (Constant.QbSjYsmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjYsmbPO> pageData = new PageInfo<>(qbSjYsmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjYsmb));
+        } else if (Constant.QbSjYsdzztmmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjYsdzztmmbPO> pageData = new PageInfo<>(qbSjYsdzztmmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjYsdzztmmb));
+        } else if (Constant.QbSjYsdzzjgmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjYsdzzjgmbPO> pageData = new PageInfo<>(qbSjYsdzzjgmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjYsdzzjgmb));
+        } else if (Constant.QbSjYsdzzdzzcmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjYsdzzdzzcmbPOWithBLOBs> pageData = new PageInfo<>(qbSjYsdzzdzzcmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjYsdzzdzzcmb));
+        } else if (Constant.QbSjRhmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjRhmbPO> pageData = new PageInfo<>(qbSjRhmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjRhmb));
+        } else if (Constant.QbSjRgmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjRgmbPO> pageData = new PageInfo<>(qbSjRgmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjRgmb));
+        } else if (Constant.QbSjMyb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjMybPO> pageData = new PageInfo<>(qbSjMyb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjMyb));
+        } else if (Constant.QbSjJztsmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjJztsmbPO> pageData = new PageInfo<>(qbSjJztsmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjJztsmb));
+        } else if (Constant.QbSjDptssmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjDptssmbPO> pageData = new PageInfo<>(qbSjDptssmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjDptssmb));
+        } else if (Constant.QbSjDptdzzmb.equalsIgnoreCase(dataSetCode)) {
+            PageInfo<QbSjDptdzzmbPOWithBLOBs> pageData = new PageInfo<>(qbSjDptdzzmb.getListByBatchNO(resourceCode));
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+            map.put("columns", columnsMap.get(Constant.QbSjDptdzzmb));
+        }
+
+        return map;
+
     }
 
 
