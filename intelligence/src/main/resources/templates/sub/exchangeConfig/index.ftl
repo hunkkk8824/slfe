@@ -92,10 +92,9 @@
 
         window.operateEvents = {
             'click .btn_edit': function (e, value, row, index) {
-
                 layer.open({
                     type: 2,
-                    title: '新增交换配置',
+                    title: '编辑交换配置',
                     fix: false,
                     shadeClose: true,
                     area: ['600px', '550px'],
@@ -108,7 +107,49 @@
                     }
                 });
             },
+            'click .btn_delete': function (e, value, row, index) {
+                var msg =  row.valid == 1?"启用":"停用";
+                var valid = row.valid == 0? 1:0;
+                layer.confirm('是否确认删除'+msg+'？', {
+                    btn: ['确认','取消'] //按钮
+                }, function(){
+                    deleteConfig(row.id,valid);
+                }, function(){
+                    // nothing
+                });
+            },
         };
+
+        function deleteConfig(id,valid){
+            layer.load(3);
+            var data = {
+                id: id,
+                valid:valid
+            };
+            $.ajax({
+                type: 'post',
+                url: base + '/exchangeConfig/edit',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (res) {
+                    layer.closeAll('loading');
+                    var msg = res.msg;
+                    var code = parseInt(res.code);
+                    debugger
+                    if (code == 0) {
+                        layer.msg("操作成功",{icon: 1});
+                        pageReload();
+                    } else {
+                        layer.msg("操作失败",{icon: 2});
+                    }
+                }, error: function (xhr, status) {
+                    layer.closeAll('loading');
+                    //提示层
+                    layer.msg("系统出现异常！", {icon: 0});
+                }
+            });
+        }
 
         function initTable() {
             $('#table').bootstrapTable({
@@ -150,6 +191,11 @@
                     sortable: true,
                     sortOrder: "asc",
                     title: '端口'
+                },{
+                    field: 'dataName',
+                    sortable: true,
+                    sortOrder: "asc",
+                    title: '数据库名'
                 }, {
                     field: 'userName',
                     sortable: true,
@@ -171,10 +217,10 @@
                     field: 'Button',
                     title: '操作',
                     formatter: function (value, row, index) {
-
+                        var msg =  row.valid == 1?"启用":"停用";
                         return [
                             '<button  type="button" class="btn btn-default btn-sm btn_edit">修改</button> ',
-                            '<button  type="button" class="btn btn-default btn-sm btn_delete">删除</button> ',
+                            '<button  type="button" class="btn btn-default btn-sm btn_delete">'+msg+'</button> ',
                             '<button  type="button" class="btn btn-default btn-sm btn_config">配置</button> ',
                         ].join('');
                     },
@@ -184,6 +230,19 @@
 
 
         }
+
+        // 页面刷新
+        var pageReload = function (millisec) {
+            var s = 1000;
+            if (!millisec) {
+                s = millisec;
+            }
+            setTimeout(function () {
+                $('#table').bootstrapTable('refresh', {
+                    pageNumber: 1
+                });
+            }, s);
+        };
 
         $(function () {
             initTable();
