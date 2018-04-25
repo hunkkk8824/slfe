@@ -185,4 +185,18 @@
       VALID = #{valid,jdbcType=BIT}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findList" parameterType="com.selfwork.intelligence.model.vo.exchangeConfig.ExchangeEtlQueryVo" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from tb_exchanger_etl
+    <where>
+      and EXCHANGER_ID = #{exchangerId,jdbcType=INTEGER}
+      <if test="valid != null">
+        and valid = #{valid,jdbcType=BIT}
+      </if>
+      <if test="keyword != null and keyword != ''">
+        and NAME like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
 </mapper>
