@@ -59,11 +59,11 @@
 
 
 
-        <!--<table tableName="qb_sj_rgmb" domainObjectName="QbSjRgmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
-        <!--<table tableName="qb_sj_myb" domainObjectName="QbSjMybPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
-        <!--<table tableName="qb_sj_jztsmb" domainObjectName="QbSjJztsmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
-        <!--<table tableName="qb_sj_dptssmb" domainObjectName="QbSjDptssmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
-        <!--<table tableName="qb_sj_dptdzzmb" domainObjectName="QbSjDptdzzmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
+        <!--<TABLE TABLENAME="QB_SJ_RGMB" DOMAINOBJECTNAME="QBSJRGMBPO" ENABLECOUNTBYEXAMPLE="FALSE" ENABLEUPDATEBYEXAMPLE="FALSE" ENABLEDELETEBYEXAMPLE="FALSE" ENABLESELECTBYEXAMPLE="FALSE" SELECTBYEXAMPLEQUERYID="FALSE" ></TABLE>-->
+        <!--<TABLE TABLENAME="QB_SJ_MYB" DOMAINOBJECTNAME="QBSJMYBPO" ENABLECOUNTBYEXAMPLE="FALSE" ENABLEUPDATEBYEXAMPLE="FALSE" ENABLEDELETEBYEXAMPLE="FALSE" ENABLESELECTBYEXAMPLE="FALSE" SELECTBYEXAMPLEQUERYID="FALSE" ></TABLE>-->
+        <!--<TABLE TABLENAME="QB_SJ_JZTSMB" DOMAINOBJECTNAME="QBSJJZTSMBPO" ENABLECOUNTBYEXAMPLE="FALSE" ENABLEUPDATEBYEXAMPLE="FALSE" ENABLEDELETEBYEXAMPLE="FALSE" ENABLESELECTBYEXAMPLE="FALSE" SELECTBYEXAMPLEQUERYID="FALSE" ></TABLE>-->
+        <!--<TABLE TABLENAME="QB_SJ_DPTSSMB" DOMAINOBJECTNAME="QBSJDPTSSMBPO" ENABLECOUNTBYEXAMPLE="FALSE" ENABLEUPDATEBYEXAMPLE="FALSE" ENABLEDELETEBYEXAMPLE="FALSE" ENABLESELECTBYEXAMPLE="FALSE" SELECTBYEXAMPLEQUERYID="FALSE" ></TABLE>-->
+        <!--<TABLE TABLENAME="QB_SJ_DPTDZZMB" domainObjectName="QbSjDptdzzmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
 
     </context>
 </generatorConfiguration>

@@ -40,7 +40,7 @@ public class DataQualityController extends BaseController {
         ModelAndView view = new ModelAndView("sub/dataQuality/index");
         view.addObject("auditStatusEnums", AuditStatusEnum.values());
         view.addObject("qualityEvaluateEnums", QualityEvaluateEnum.values());
-        view.addObject("menutype",menutype);
+        view.addObject("menutype", menutype);
         return view;
 
     }
@@ -109,7 +109,7 @@ public class DataQualityController extends BaseController {
 
         try {
             dataQualityBiz.cancelResource(vo);
-            dataQualityBiz.AppendCancelMonitorLog(vo,this.getLoginUser());
+            dataQualityBiz.AppendCancelMonitorLog(vo, this.getLoginUser());
         } catch (Exception e) {
             logger.error("撤销资源异常：" + e.getMessage(), e);
             result.put("code", -1);
@@ -153,20 +153,22 @@ public class DataQualityController extends BaseController {
     public ModelAndView toDetail(@RequestParam String datesetCode) {
 
         ModelAndView view = new ModelAndView("sub/dataQuality/detail");
-        view.addObject("datesetCode",datesetCode);
+        view.addObject("datesetCode", datesetCode);
         return view;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getDetail", method = RequestMethod.GET)
-    public Map<String, Object> getDetail(@RequestParam String datesetCode) {
+    public Map<String, Object> getDetail(@RequestBody DetailQueryVo queryVo) {
 
         Map<String, Object> result = new HashMap<>();
         result.put("total", 0);
         result.put("rows", new ArrayList());
 
         try {
-        } catch (Exception e) {
+            return dataQualityBiz.getDetail(queryVo);
+        }
+        catch (Exception e){
             logger.error("查看明细异常：" + e.getMessage(), e);
         }
         return result;
