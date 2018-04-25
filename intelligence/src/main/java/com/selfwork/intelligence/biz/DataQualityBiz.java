@@ -8,8 +8,7 @@ import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.ImportStatusEnum;
 import com.selfwork.intelligence.common.enums.OperatorTypeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
-import com.selfwork.intelligence.mapper.ResourceEtlLogPOMapper;
-import com.selfwork.intelligence.mapper.ResourcePOMapper;
+import com.selfwork.intelligence.mapper.*;
 import com.selfwork.intelligence.model.po.ResourceEtlLogPO;
 import com.selfwork.intelligence.model.po.ResourcePO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
@@ -31,11 +30,42 @@ public class DataQualityBiz extends BaseBiz {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
 
+    public DataQualityBiz(){
+
+    }
+
+    @Autowired  //①  注入上下文
+    private ApplicationContext context;
+
     @Autowired
     private ResourcePOMapper resourcePOMapper;
 
     @Autowired
     private ResourceEtlLogPOMapper resourceEtlLogPOMapper;
+
+
+    @Autowired
+    private QbSjDptdzzmbPOMapper qbSjDptdzzmbPOMapper;
+    @Autowired
+    private QbSjDptssmbPOMapper qbSjDptssmbPOMapper;
+    @Autowired
+    private QbSjJztsmbPOMapper qbSjJztsmbPOMapper;
+    @Autowired
+    private QbSjMybPOMapper qbSjMybPOMapper;
+    @Autowired
+    private QbSjRgmbPOMapper qbSjRgmbPOMapper;
+    @Autowired
+    private QbSjRhmbPOMapper qbSjRhmbPOMapper;
+    @Autowired
+    private QbSjYsdzzdzzcmbPOMapper qbSjYsdzzdzzcmbPOMapper;
+    @Autowired
+    private QbSjYsdzzjgmbPOMapper qbSjYsdzzjgmbPOMapper;
+    @Autowired
+    private QbSjYsdzztmmbPOMapper qbSjYsdzztmmbPOMapper;
+    @Autowired
+    private QbSjYsmbPOMapper qbSjYsmbPOMapper;
+    @Autowired
+    private ScoutQbTableBdPOMapper scoutQbTableBdPOMapper;
 
     public PageInfo<ResourceEtlLogVo> selectByResourceId(ResourceEtlLogQueryVo vo) {
 
@@ -181,7 +211,7 @@ public class DataQualityBiz extends BaseBiz {
     }
 
     public void getDetail(String mapperName) {
-//        Object mapper = context.getBean(mapperName);
+
     }
 
 
