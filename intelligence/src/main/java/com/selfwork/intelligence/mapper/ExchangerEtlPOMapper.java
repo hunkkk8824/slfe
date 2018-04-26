@@ -1,6 +1,9 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.ExchangerEtlPO;
+import com.selfwork.intelligence.model.vo.exchangeConfig.ExchangeEtlQueryVo;
+
+import java.util.List;
 
 public interface ExchangerEtlPOMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface ExchangerEtlPOMapper {
     int updateByPrimaryKeySelective(ExchangerEtlPO record);
 
     int updateByPrimaryKey(ExchangerEtlPO record);
+
+    List<ExchangerEtlPO> findList(ExchangeEtlQueryVo queryVo);
 }

@@ -4,7 +4,7 @@
 <head>
 
 <#include "../../head.ftl">
-    <title>多源情报系统-交换配置</title>
+    <title>数据集配置</title>
     <style type="text/css">
         #toolbar input, button,select {
             float: left;
@@ -19,19 +19,19 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
-
+    <input type="hidden" id="exchangerId" value="${exchangerId}"/>
     <div class="btn-group hidden-xs" id="toolbar" role="group">
-        <input style="width:250px;" name="keyWordInfo" id="keyWordInfo" placeholder="交换机名称" class="input-sm form-control">
+        <input style="width:250px;" name="keyWordInfo" id="keyWordInfo" placeholder="数据集名称/数据集编码" class="input-sm form-control">
         <select style="width:143px;height: 30px" id="valid" name="valid" class="form-control" >
             <option value="">全部</option>
             <option value="1">启用</option>
             <option value="0">禁用</option>
         </select>
         <button id="query" type="button" class="btn btn-sm btn-primary">
-         搜索
+            搜索
         </button>
         <button  style="margin-left: 10px" id="btn_add" type="button" class="btn btn-sm btn-primary">
-           新增
+            新增
         </button>
     </div>
     <table id="table" data-height="400" data-mobile-responsive="true">
@@ -60,16 +60,17 @@
             });
 
             $('#btn_add').on('click', function () {
+                var exchangerId = $('#exchangerId').val();
                 layer.open({
                     type: 2,
                     title: '新增交换配置',
                     fix: false,
                     shadeClose: true,
-                    area: ['600px', '550px'],
+                    area: ['600px', '250px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: base + "/exchangeConfig/toAdd",
+                    content: base + "/exchangeConfig/toExchangeEtlAdd?exchangerId="+exchangerId,
                     end: function () {
                         $('#query').trigger('click');
                     }
@@ -83,6 +84,7 @@
             var temp = {
                 limit: params.limit,    //页面大小
                 offset: params.offset,   //页码
+                exchangerId:$('#exchangerId').val(),
                 keyword: $('#keyWordInfo').val(),
                 valid: $('#valid').val() ? parseInt($('#valid').val()) : null,
 
@@ -97,11 +99,11 @@
                     title: '编辑交换配置',
                     fix: false,
                     shadeClose: true,
-                    area: ['600px', '550px'],
+                    area: ['600px', '250px'],
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: base + "/exchangeConfig/toEdit?id=" + row.id,
+                    content: base + "/exchangeConfig/toExchangeEtlEdit?id=" + row.id,
                     end: function () {
                         $('#query').trigger('click');
                     }
@@ -118,23 +120,6 @@
                     // nothing
                 });
             },
-            'click .btn_config': function (e, value, row, index) {
-                var configDlg = layer.open({
-                    type: 2,
-                    title: '编辑数据集配置',
-                    fix: false,
-                    shadeClose: true,
-                    area: ['1000px', '650px'],
-                    skin: 'layui-layer-rim', //加上边框
-                    zIndex: 9999,
-                    shift: Math.floor(Math.random() * 6 + 1),
-                    content: base + "/exchangeConfig/toExchangeEtl?id=" + row.id,
-                    end: function () {
-                       // nothing
-                    }
-                });
-                layer.full(configDlg);
-            },
         };
 
         function deleteConfig(id,valid){
@@ -145,7 +130,7 @@
             };
             $.ajax({
                 type: 'post',
-                url: base + '/exchangeConfig/edit',
+                url: base + '/exchangeConfig/editExchangeEtl',
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify(data),
@@ -170,7 +155,7 @@
 
         function initTable() {
             $('#table').bootstrapTable({
-                url: base + '/exchangeConfig/getList',    //请求后台的URL（*）
+                url: base + '/exchangeConfig/getExchangeEtlList',    //请求后台的URL（*）
                 method: 'post',                     //请求方式（*）
                 contentType: "application/json",
                 toolbarAlign: 'right',               //工具栏对齐方式
@@ -194,31 +179,16 @@
                 detailView: false,                  //是否显示父子表
                 showRefresh: false,                   //刷新按钮
                 columns: [{
-                    field: 'name',
+                    field: 'datasetName',
                     sortable: true,
                     sortOrder: "asc",
-                    title: '交换机名称'
+                    title: '数据集名称'
                 }, {
-                    field: 'host',
+                    field: 'datasetCode',
                     sortable: true,
                     sortOrder: "asc",
-                    title: '主机地址'
+                    title: '数据集编码'
                 }, {
-                    field: 'port',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '端口'
-                },{
-                    field: 'dataName',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '数据库名'
-                }, {
-                    field: 'userName',
-                    sortable: true,
-                    sortOrder: "asc",
-                    title: '用户名'
-                },{
                     field: 'valid',
                     sortable: true,
                     sortOrder: "asc",
@@ -237,8 +207,7 @@
                         var msg =  row.valid == 1?"停用":"启用";
                         return [
                             '<button  type="button" class="btn btn-default btn-sm btn_edit">修改</button> ',
-                            '<button  type="button" class="btn btn-default btn-sm btn_delete">'+msg+'</button> ',
-                            '<button  type="button" class="btn btn-default btn-sm btn_config">配置</button> ',
+                            '<button  type="button" class="btn btn-default btn-sm btn_delete">'+msg+'</button> '
                         ].join('');
                     },
                     events: operateEvents
