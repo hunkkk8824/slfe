@@ -242,8 +242,7 @@ public class DataQualityBiz extends BaseBiz {
         String resourceCode = queryVo.getResourceCode();
         Map<String, Object> map = new HashMap<>();
 
-        Optional<DataSetContainer> optional = containerList.stream().filter(m -> m.getDateSetCode().equals(dataSetCode)).findFirst();
-        DataSetContainer container = optional.get();
+        DataSetContainer container = containerList.stream().filter(m -> m.getDateSetCode().equals(dataSetCode)).findFirst().get();
 
         this.startPage(queryVo);
         List list = container.getBaseQbBiz().getListByBatchNO(resourceCode);
