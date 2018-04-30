@@ -71,17 +71,17 @@ public class DataQualityBiz extends BaseBiz {
 
     public DataQualityBiz() {
 
-        this.setContainerList(Constant.QbSjDptdzzmb, new DataSetContainer<QbSjDptdzzmbPOWithBLOBs>(), qbSjDptdzzmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjDptssmb, new DataSetContainer<QbSjDptssmbPO>(), qbSjDptssmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjJztsmb, new DataSetContainer<QbSjJztsmbPO>(),qbSjJztsmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjMyb, new DataSetContainer<QbSjMybPO>(), qbSjMybBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjRgmb, new DataSetContainer<QbSjRgmbPO>(),qbSjRgmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjRhmb, new DataSetContainer<QbSjRhmbPO>(),qbSjRhmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjYsdzzdzzcmb, new DataSetContainer<QbSjYsdzzdzzcmbPOWithBLOBs>(), qbSjYsdzzdzzcmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjYsdzzjgmb, new DataSetContainer<QbSjYsdzzjgmbPO>(), qbSjYsdzzdzzcmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjYsdzztmmb, new DataSetContainer<QbSjYsdzztmmbPO>(), qbSjYsdzztmmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.QbSjYsmb, new DataSetContainer<QbSjYsmbPO>(), qbSjYsmbBiz, new ArrayList<>());
-        this.setContainerList(Constant.ScoutQbTableBd, new DataSetContainer<ScoutQbTableBdPO>(), scoutQbTableBdBiz, new ArrayList<>());
+        this.setContainerList(Constant.QbSjDptdzzmb, new DataSetContainer<QbSjDptdzzmbPOWithBLOBs>(), qbSjDptdzzmbBiz);
+        this.setContainerList(Constant.QbSjDptssmb, new DataSetContainer<QbSjDptssmbPO>(), qbSjDptssmbBiz);
+        this.setContainerList(Constant.QbSjJztsmb, new DataSetContainer<QbSjJztsmbPO>(),qbSjJztsmbBiz);
+        this.setContainerList(Constant.QbSjMyb, new DataSetContainer<QbSjMybPO>(), qbSjMybBiz);
+        this.setContainerList(Constant.QbSjRgmb, new DataSetContainer<QbSjRgmbPO>(),qbSjRgmbBiz);
+        this.setContainerList(Constant.QbSjRhmb, new DataSetContainer<QbSjRhmbPO>(),qbSjRhmbBiz);
+        this.setContainerList(Constant.QbSjYsdzzdzzcmb, new DataSetContainer<QbSjYsdzzdzzcmbPOWithBLOBs>(), qbSjYsdzzdzzcmbBiz);
+        this.setContainerList(Constant.QbSjYsdzzjgmb, new DataSetContainer<QbSjYsdzzjgmbPO>(), qbSjYsdzzdzzcmbBiz);
+        this.setContainerList(Constant.QbSjYsdzztmmb, new DataSetContainer<QbSjYsdzztmmbPO>(), qbSjYsdzztmmbBiz);
+        this.setContainerList(Constant.QbSjYsmb, new DataSetContainer<QbSjYsmbPO>(), qbSjYsmbBiz);
+        this.setContainerList(Constant.ScoutQbTableBd, new DataSetContainer<ScoutQbTableBdPO>(), scoutQbTableBdBiz);
 
 
     }
@@ -249,16 +249,14 @@ public class DataQualityBiz extends BaseBiz {
         PageInfo pageData = new PageInfo<>(list);
         map.put("rows", pageData.getList());
         map.put("total", pageData.getTotal());
-        map.put("columns", container.getColumns());
+        map.put("columns", container.getBaseQbBiz().getColumns());
         return map;
     }
 
     private void setContainerList(String dateSetCode,
                                   DataSetContainer container,
-                                  IBaseQbBiz baseQbBiz,
-                                  List<ColumnsVo> columns) {
+                                  IBaseQbBiz baseQbBiz) {
         container.setDateSetCode(dateSetCode);
-        container.setColumns(columns);
         container.setBaseQbBiz(baseQbBiz);
         containerList.add(container);
 

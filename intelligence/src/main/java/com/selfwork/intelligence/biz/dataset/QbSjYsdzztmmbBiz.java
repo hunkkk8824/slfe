@@ -3,6 +3,7 @@ package com.selfwork.intelligence.biz.dataset;
 import com.selfwork.intelligence.biz.BaseBiz;
 import com.selfwork.intelligence.mapper.QbSjYsdzztmmbPOMapper;
 import com.selfwork.intelligence.model.po.QbSjYsdzztmmbPO;
+import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,10 @@ public class QbSjYsdzztmmbBiz  extends BaseBiz implements IBaseQbBiz<QbSjYsdzztm
     @Override
     public List<QbSjYsdzztmmbPO> getListByBatchNO(String batchNO) {
         return qbSjYsdzztmmb.getListByBatchNO(batchNO);
+    }
+
+    @Override
+    public List<ColumnsVo> getColumns() {
+        return null;
     }
 }

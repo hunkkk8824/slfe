@@ -1,6 +1,12 @@
 package com.selfwork.intelligence.model.vo.dataquality;
 
 public class ColumnsVo {
+
+    public ColumnsVo(String field, String title) {
+        this.field = field;
+        this.title = title;
+    }
+
     private String field;
     private String title;
 
