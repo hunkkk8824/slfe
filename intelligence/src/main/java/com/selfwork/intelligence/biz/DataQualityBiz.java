@@ -245,11 +245,11 @@ public class DataQualityBiz extends BaseBiz {
         DataSetContainer container = containerList.stream().filter(m -> m.getDateSetCode().equals(dataSetCode)).findFirst().get();
 
         this.startPage(queryVo);
-        List list = container.getBaseQbBiz().getListByBatchNO(resourceCode);
-        PageInfo pageData = new PageInfo<>(list);
+        IBaseQbBiz qbBiz = container.getBaseQbBiz();
+        PageInfo pageData = new PageInfo<>(qbBiz.getListByBatchNO(resourceCode));
         map.put("rows", pageData.getList());
         map.put("total", pageData.getTotal());
-        map.put("columns", container.getBaseQbBiz().getColumns());
+        map.put("columns", qbBiz.getColumns());
         return map;
     }
 
