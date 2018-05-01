@@ -5,6 +5,7 @@ import com.selfwork.intelligence.model.vo.dataquality.AuditRequestVo;
 import com.selfwork.intelligence.model.vo.dataquality.DataQualitVo;
 import com.selfwork.intelligence.model.vo.dataquality.DataQualityQueryVo;
 import com.selfwork.intelligence.model.vo.dataquality.QualityEvaluateRequestVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,4 +24,13 @@ public interface ResourcePOMapper {
 
     List<ResourcePO> findList(DataQualityQueryVo queryVo);
 
+    List<ResourcePO> findPrepareResource();
+
+    /**
+     *
+     * @param datasetCode 表名
+     * @param batchNo 批次号
+     * @return
+     */
+    Integer countByBatchNo(@Param("tableName") String datasetCode, @Param("batchNo") String batchNo);
 }

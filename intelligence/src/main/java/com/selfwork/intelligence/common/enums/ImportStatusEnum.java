@@ -11,7 +11,9 @@ public enum ImportStatusEnum implements BaseEnum<ImportStatusEnum, Integer> {
     UnAssessed(0, "未入库"),
     Difference(1, "预入库"),
     Good(2, "入库成功"),
-    Excellent(3, "入库失败"),;
+    Excellent(3, "入库失败"),
+    IMPORTING(4, "执行中"),
+    ;
 
     static Map<Integer, ImportStatusEnum> dataMap = new HashMap<>();
 

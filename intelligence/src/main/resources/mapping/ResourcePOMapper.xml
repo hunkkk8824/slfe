@@ -334,4 +334,17 @@
       VALID = #{valid,jdbcType=BIT}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="findPrepareResource" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tb_resource
+        where VALID = 1
+        and IS_CANCEL=false
+        and IMPORT_STATUS = 1
+    </select>
+
+    <select id="countByBatchNo" resultType="java.lang.Integer">
+        select count(*) from ${tableName}
+        where BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -862,4 +862,38 @@
       PTXH = #{ptxh,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into qb_sj_rhmb (BATCH_NO, PH, PTBH, PTMC, CGQBH, XYLX, JLBH, ZT, MBS, WS, SX, SXZXD, ZL, ZLZXD,
+    LX, LXZXD, GJ, GJZXD, DT, DTZXD, JMBZ, ZTBZ, RW, BD, ZQ, JD, WD, GD, JL, FW, YJ,
+    JDHX, JDHS, XDSD, ZFXSD, CKJD, CKWD, CKYJ, JDWC, WDWC, GDWC, JLWC, FWWC, YJWC, TYWC,
+    TYCZWC, TYDZWC, WX, WXZXD, SXJ, HJZL, JJM, JXH, PHDZ, SBSD, SBZXD, ZDGZ, GWX, TSLB,
+    MZ, YDZS, MBJZZT, MZGZZT, QJBJ, QH, MBYT, BZ, JSSJ, SBSJ, PTXH)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+        #{item.batchNo,jdbcType=VARCHAR}, #{item.ph,jdbcType=INTEGER},
+        #{item.ptbh,jdbcType=INTEGER}, #{item.ptmc,jdbcType=VARCHAR}, #{item.cgqbh,jdbcType=INTEGER},
+        #{item.xylx,jdbcType=INTEGER}, #{item.jlbh,jdbcType=INTEGER}, #{item.zt,jdbcType=INTEGER}, #{item.mbs,jdbcType=INTEGER},
+        #{item.ws,jdbcType=INTEGER}, #{item.sx,jdbcType=INTEGER}, #{item.sxzxd,jdbcType=INTEGER}, #{item.zl,jdbcType=INTEGER},
+        #{item.zlzxd,jdbcType=INTEGER}, #{item.lx,jdbcType=INTEGER}, #{item.lxzxd,jdbcType=INTEGER}, #{item.gj,jdbcType=INTEGER},
+        #{item.gjzxd,jdbcType=INTEGER}, #{item.dt,jdbcType=INTEGER}, #{item.dtzxd,jdbcType=INTEGER}, #{item.jmbz,jdbcType=INTEGER},
+        #{item.ztbz,jdbcType=INTEGER}, #{item.rw,jdbcType=INTEGER}, #{item.bd,jdbcType=INTEGER}, #{item.zq,jdbcType=DECIMAL},
+        #{item.jd,jdbcType=DECIMAL}, #{item.wd,jdbcType=DECIMAL}, #{item.gd,jdbcType=DECIMAL}, #{item.jl,jdbcType=DECIMAL},
+        #{item.fw,jdbcType=DECIMAL}, #{item.yj,jdbcType=DECIMAL}, #{item.jdhx,jdbcType=DECIMAL}, #{item.jdhs,jdbcType=DECIMAL},
+        #{item.xdsd,jdbcType=DECIMAL}, #{item.zfxsd,jdbcType=DECIMAL}, #{item.ckjd,jdbcType=DECIMAL},
+        #{item.ckwd,jdbcType=DECIMAL}, #{item.ckyj,jdbcType=DECIMAL}, #{item.jdwc,jdbcType=DECIMAL}, #{item.wdwc,jdbcType=DECIMAL},
+        #{item.gdwc,jdbcType=DECIMAL}, #{item.jlwc,jdbcType=DECIMAL}, #{item.fwwc,jdbcType=DECIMAL}, #{item.yjwc,jdbcType=DECIMAL},
+        #{item.tywc,jdbcType=DECIMAL}, #{item.tyczwc,jdbcType=DECIMAL}, #{item.tydzwc,jdbcType=DECIMAL},
+        #{item.wx,jdbcType=DECIMAL}, #{item.wxzxd,jdbcType=INTEGER}, #{item.sxj,jdbcType=DECIMAL}, #{item.hjzl,jdbcType=DECIMAL},
+        #{item.jjm,jdbcType=VARCHAR}, #{item.jxh,jdbcType=VARCHAR}, #{item.phdz,jdbcType=VARCHAR}, #{item.sbsd,jdbcType=INTEGER},
+        #{item.sbzxd,jdbcType=INTEGER}, #{item.zdgz,jdbcType=INTEGER}, #{item.gwx,jdbcType=INTEGER}, #{item.tslb,jdbcType=INTEGER},
+        #{item.mz,jdbcType=INTEGER}, #{item.ydzs,jdbcType=INTEGER}, #{item.mbjzzt,jdbcType=INTEGER}, #{item.mzgzzt,jdbcType=INTEGER},
+        #{item.qjbj,jdbcType=INTEGER}, #{item.qh,jdbcType=INTEGER}, #{item.mbyt,jdbcType=VARCHAR}, #{item.bz,jdbcType=VARCHAR},
+        #{item.jssj,jdbcType=TIMESTAMP}, #{item.sbsj,jdbcType=TIMESTAMP}, #{item.ptxh,jdbcType=VARCHAR}
+      )
+    </foreach>
+
+
+  </insert>
 </mapper>

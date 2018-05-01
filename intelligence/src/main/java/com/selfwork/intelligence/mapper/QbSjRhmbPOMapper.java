@@ -18,4 +18,6 @@ public interface QbSjRhmbPOMapper {
     int updateByPrimaryKey(QbSjRhmbPO record);
 
     List<QbSjRhmbPO> getListByBatchNO(String batchNO);
+
+    Integer insertList(List<QbSjRhmbPO> list);
 }

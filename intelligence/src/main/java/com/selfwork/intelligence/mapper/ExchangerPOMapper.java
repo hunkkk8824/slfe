@@ -19,4 +19,6 @@ public interface ExchangerPOMapper {
     int updateByPrimaryKey(ExchangerPO record);
 
     List<ExchangerPO> findList(ExchangeConfigQueryVo queryVo);
+
+    ExchangerPO findByCode(String code);
 }

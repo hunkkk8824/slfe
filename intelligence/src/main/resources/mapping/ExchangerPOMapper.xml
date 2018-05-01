@@ -198,4 +198,10 @@
       </if>
     </where>
   </select>
+  <select id="findByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from tb_exchanger
+    where CODE = #{id,jdbcType=VARCHAR}
+  </select>
 </mapper>

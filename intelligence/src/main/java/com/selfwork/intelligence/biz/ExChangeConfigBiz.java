@@ -56,4 +56,8 @@ public class ExChangeConfigBiz extends BaseBiz {
             throw new BaseException(ResponseCodeTypeEnum.DATABASE_EXCEPTION.getValue(),ResponseCodeTypeEnum.DATABASE_EXCEPTION.getDisplayName());
         }
     }
+
+    public ExchangerPO findByCode(String sourceExchangerCode) {
+        return exchangerPOMapper.findByCode(sourceExchangerCode);
+    }
 }

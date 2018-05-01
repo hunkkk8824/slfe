@@ -224,6 +224,10 @@ public class DateUtils {
         return getFormatDate(currDate, DATE_FORMAT);
     }
 
+    public static String getFormatTime(Date currDate) {
+        return getFormatDate(currDate, TIME_FORMAT);
+    }
+
     /**
      * 得到格式化后的日期，格式为yyyy-MM-dd，如2006-02-15
      *
@@ -554,6 +558,10 @@ public class DateUtils {
      */
     public static String getCurrDateStr() {
         return getFormatDate(getCurrDate());
+    }
+
+    public static String getCurrTimeStr() {
+        return getFormatTime(getCurrDate());
     }
 
     /**
