@@ -1,0 +1,18 @@
+{
+   "rule":{
+      "ph":{
+         "require":"true"
+      },
+      "hb":{
+         "require":"true"
+      }
+   },
+   "message":{
+      "ph":{
+         "require":"ph不可为空"
+      },
+      "hb":{
+         "require":"hb不可为空"
+      }
+   }
+}
