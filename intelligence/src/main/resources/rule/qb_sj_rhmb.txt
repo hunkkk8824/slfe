@@ -1,18 +1,21 @@
 {
-   "rule":{
-      "ph":{
-         "require":"true"
-      },
-      "hb":{
-         "require":"true"
-      }
-   },
-   "message":{
-      "ph":{
-         "require":"ph不可为空"
-      },
-      "hb":{
-         "require":"hb不可为空"
-      }
-   }
+    "ph":[
+        {
+            "rule":"require",
+            "value":"true",
+            "message":"ph不可为空"
+        },
+        {
+            "rule":"minLength",
+            "value":"6",
+            "message":"ph最短为6个字符"
+        }
+    ],
+    "hb":[
+        {
+            "rule":"require",
+            "value":"true",
+            "message":"hb不可为空"
+        }
+    ]
 }
