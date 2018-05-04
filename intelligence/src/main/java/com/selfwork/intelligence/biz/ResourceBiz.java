@@ -1,11 +1,15 @@
 package com.selfwork.intelligence.biz;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.selfwork.intelligence.biz.dataset.QbSjRhmbBiz;
 import com.selfwork.intelligence.common.Constant;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.common.enums.ImportStatusEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
+import com.selfwork.intelligence.config.ValidateHandler;
 import com.selfwork.intelligence.mapper.ResourcePOMapper;
+import com.selfwork.intelligence.model.bo.ValidateResult;
 import com.selfwork.intelligence.model.po.ExchangerPO;
 import com.selfwork.intelligence.model.po.QbSjRhmbPO;
 import com.selfwork.intelligence.model.po.ResourcePO;
@@ -16,6 +20,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +45,9 @@ public class ResourceBiz extends BaseBiz {
 
     @Autowired
     private QbSjRhmbBiz qbSjRhmbBiz;
+
+    @Autowired
+    private ValidateHandler validateHandler;
 
 
 
@@ -91,10 +99,10 @@ public class ResourceBiz extends BaseBiz {
             total = list.size();
 
             // 数据验证
-            // TODO: 2018/5/1
+            List<Object> validList = this.validateList(datasetCode,list,log);
 
             // 数据写入
-            boolean insert = this.insertData(datasetCode,list,batchNo,log);
+            boolean insert = this.insertData(datasetCode,validList,batchNo,log);
 
             if(insert){
                 // 批次号写入同步数据
@@ -112,6 +120,27 @@ public class ResourceBiz extends BaseBiz {
         log.append(DateUtils.getCurrTimeStr()).append(" 同步结束");
         logger.info(log.toString());
         resourceEtlLogBiz.asynSave(resource.getId(),log.toString());
+    }
+
+    /**
+     * 数据验证
+     * @param list
+     * @param log
+     * @return
+     */
+    private List<Object> validateList(String datasetCode,List<Object> list, StringBuilder log) {
+        List<Object> result = new ArrayList<>();
+        for (Object obj : list) {
+            JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(obj));
+            ValidateResult validateResult = validateHandler.validate(datasetCode,jsonObject);
+            if(validateResult.isPass()){
+                result.add(obj);
+            }else {
+                String id = jsonObject.getString("id");
+                log.append(DateUtils.getCurrTimeStr()).append(" ID[" + id + "],").append(validateResult.getMessage()).append("/r/n");
+            }
+        }
+        return result;
     }
 
     /**
