@@ -62,7 +62,6 @@
         function initTable(columns) {
 
             $('#table').bootstrapTable({
-                classes: 'table table-responsive',
                 url: baseUrl + '/getDetail',    //请求后台的URL（*）
                 method: 'post',                     //请求方式（*）
                 contentType: "application/json",

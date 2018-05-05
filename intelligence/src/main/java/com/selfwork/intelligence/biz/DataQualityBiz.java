@@ -17,6 +17,7 @@ import com.selfwork.intelligence.model.QbSjRgmbPO;
 import com.selfwork.intelligence.model.po.*;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
+import com.selfwork.intelligence.model.vo.dateset.QbSjRhmbVO;
 import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,19 +50,18 @@ public class DataQualityBiz extends BaseBiz {
 
         if (containerList == null) {
             containerList = new ArrayList<>();
-            this.setContainerList(DataSetCodeEnum.QB_SJ_DPTDZZMB.getValue(), new DataSetContainer<QbSjDptdzzmbPOWithBLOBs>(), "qbSjDptdzzmbBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_DPTSSMB.getValue(), new DataSetContainer<QbSjDptssmbPO>(), "qbSjDptssmbBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_JZTSMB.getValue(), new DataSetContainer<QbSjJztsmbPO>(), "qbSjJztsmbBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_MYB.getValue(), new DataSetContainer<QbSjMybPO>(), "qbSjMybBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_RGMB.getValue(), new DataSetContainer<QbSjRgmbPO>(), "qbSjRgmbBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_RHMB.getValue(), new DataSetContainer<QbSjRhmbPO>(), "qbSjRhmbBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZDZZCMB.getValue(), new DataSetContainer<QbSjYsdzzdzzcmbPOWithBLOBs>(), "qbSjYsdzzdzzcmbBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZJGMB.getValue(), new DataSetContainer<QbSjYsdzzjgmbPO>(), "qbSjYsdzzjgmbBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZTMMB.getValue(), new DataSetContainer<QbSjYsdzztmmbPO>(), "qbSjYsdzztmmbBiz");
-            this.setContainerList(DataSetCodeEnum.QB_SJ_YSMB.getValue(), new DataSetContainer<QbSjYsmbPO>(), "qbSjYsmbBiz");
-            this.setContainerList(DataSetCodeEnum.SCOUT_QB_TABLE_BD.getValue(), new DataSetContainer<ScoutQbTableBdPO>(), "scoutQbTableBdBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_DPTDZZMB.getValue(), "qbSjDptdzzmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_DPTSSMB.getValue(), "qbSjDptssmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_JZTSMB.getValue(), "qbSjJztsmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_MYB.getValue(), "qbSjMybBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_RGMB.getValue(), "qbSjRgmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_RHMB.getValue(), "qbSjRhmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZDZZCMB.getValue(), "qbSjYsdzzdzzcmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZJGMB.getValue(), "qbSjYsdzzjgmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZTMMB.getValue(), "qbSjYsdzztmmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_YSMB.getValue(), "qbSjYsmbBiz");
+            this.setContainerList(DataSetCodeEnum.SCOUT_QB_TABLE_BD.getValue(), "scoutQbTableBdBiz");
         }
-
 
     }
 
@@ -244,9 +244,8 @@ public class DataQualityBiz extends BaseBiz {
         return containerList.stream().filter(m -> m.getDateSetCode().equals(dataSetCode)).findFirst().get();
     }
 
-    private void setContainerList(String dateSetCode,
-                                  DataSetContainer container,
-                                  String qbBizName) {
+    private void setContainerList(String dateSetCode, String qbBizName) {
+        DataSetContainer container = new DataSetContainer();
         container.setDateSetCode(dateSetCode);
         container.setQbBizName(qbBizName);
         containerList.add(container);

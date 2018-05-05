@@ -132,9 +132,9 @@
             layer.open({
                 type: 2,
                 title: '资源详情',
-                area: ['1310px', '600px'],
+                area: ['1510px', '600px'],
                 skin: 'layui-layer-rim', //加上边框
-                content: [encodeURI(url),]
+                content: [encodeURI(url),'no']
             });
         }
 
