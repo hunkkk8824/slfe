@@ -24,13 +24,26 @@ public class IndexController extends BaseController {
     //跳转到主页
     @RequestMapping(value = "index")
     public ModelAndView index() {
-        ModelAndView modelAndView=new ModelAndView("index");
+
+        ModelAndView modelAndView=new ModelAndView("portal/index");
         UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
         modelAndView.addObject("userName",user.getRealname());
         modelAndView.addObject("nickname",user.getNickname());
         return modelAndView;
     }
 
+
+    //跳转到主页
+    @RequestMapping(value = "manageindex")
+    public ModelAndView manageindex() {
+
+        ModelAndView modelAndView=new ModelAndView("index");
+        UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
+        modelAndView.addObject("userName",user.getRealname());
+        modelAndView.addObject("nickname",user.getNickname());
+        return modelAndView;
+
+    }
     /**
      * 退出
      *
