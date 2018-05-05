@@ -44,7 +44,6 @@ public class IntelligenceApplicationTests {
 
 	@Test
 	public void  testFindListByExchangeId(){
-		List<ExchangerEtlPO> result = exchangeEtlBiz.findListByExchangeId(1001);
-		String a= "1";
+
 	}
 }
