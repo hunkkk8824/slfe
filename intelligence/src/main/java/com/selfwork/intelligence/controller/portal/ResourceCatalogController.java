@@ -38,7 +38,7 @@ public class ResourceCatalogController {
         ModelAndView view = new ModelAndView("portal/resourcecatalog/index");
 
         view.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
-
+        view.addObject("defaultdataSetCode", DataSetCodeEnum.QB_SJ_RHMB.getValue());
         return view;
 
     }

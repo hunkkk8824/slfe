@@ -91,11 +91,11 @@
                         监控日志</a>
                 </li>
 
-            <#--<li>-->
-                <#--<a class="J_menuItem" href="${base}/resourcecatalog/index" data-index="7">-->
-                    <#--<i class="fa fa-columns"></i>-->
-                    <#--资源目录</a>-->
-            <#--</li>-->
+            <li>
+                <a class="J_menuItem" href="${base}/resourcecatalog/index" data-index="7">
+                    <i class="fa fa-columns"></i>
+                    资源目录</a>
+            </li>
             </ul>
         </div>
     </nav>
