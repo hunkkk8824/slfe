@@ -93,7 +93,7 @@
         $("#exchanger").on("change",function(){
             var exchangerId = $("#exchanger option:selected").data('exchangerid');
             console.log("-------",exchangerId);
-            $.get("/portal/getDatasetByExchangerId", { exchangerId: exchangerId },function(){
+            $.get("/portal/getDatasetByExchangerId", { exchangerId: exchangerId },function(data){
 
             } );
         });
