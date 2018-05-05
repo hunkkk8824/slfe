@@ -6,7 +6,7 @@
 <#include "../../head.ftl">
     <title>多源情报系统-数据明细</title>
     <style type="text/css">
-
+        table>td：width:200%
     </style>
 </head>
 
@@ -62,6 +62,7 @@
         function initTable(columns) {
 
             $('#table').bootstrapTable({
+                classes: 'table table-responsive',
                 url: baseUrl + '/getDetail',    //请求后台的URL（*）
                 method: 'post',                     //请求方式（*）
                 contentType: "application/json",

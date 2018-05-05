@@ -134,7 +134,7 @@
                 title: '资源详情',
                 area: ['1510px', '600px'],
                 skin: 'layui-layer-rim', //加上边框
-                content: [encodeURI(url),'no']
+                content: [encodeURI(url)]
             });
         }
 

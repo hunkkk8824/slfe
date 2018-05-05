@@ -7,9 +7,10 @@ public class ColumnsVo {
         this.title = title;
     }
 
+
     private String field;
     private String title;
-
+    
     public String getField() {
         return field;
     }

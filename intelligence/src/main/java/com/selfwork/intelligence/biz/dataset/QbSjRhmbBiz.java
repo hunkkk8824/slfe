@@ -109,8 +109,8 @@ public class QbSjRhmbBiz extends BaseBiz implements IBaseQbBiz<QbSjRhmbVO> {
         list.add(new ColumnsVo("qh", "群号"));
         list.add(new ColumnsVo("mbyt", "目标意图"));
         list.add(new ColumnsVo("bz", "备注"));
-        list.add(new ColumnsVo("jssjStr", "接收时间"));
-        list.add(new ColumnsVo("sbsjStr", "上报时间"));
+        list.add(new ColumnsVo("jssjStr", "接收时间&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; "));
+        list.add(new ColumnsVo("sbsjStr", "上报时间&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; "));
         list.add(new ColumnsVo("ptxh", "平台型号"));
         return list;
     }
