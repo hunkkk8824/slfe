@@ -38,7 +38,8 @@ public class ResourceController extends BaseController{
         }
         try {
             UserInfoPO user = this.getLoginUser();
-            resourcePO.setCommitUser(user.getRealname());
+            resourcePO.setCommitUser(user.getUseraccount());
+            resourcePO.setCommitUserName(user.getRealname());
             BaseResultVo baseResultVo = resourceBiz.applyDataExchange(resourcePO);
             if(baseResultVo.isSuccessful()){
                 result.put("code", 0);

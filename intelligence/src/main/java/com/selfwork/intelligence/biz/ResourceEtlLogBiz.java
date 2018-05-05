@@ -5,6 +5,8 @@ import com.selfwork.intelligence.model.po.ResourceEtlLogPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by zzc on 2018/5/2.
  */
@@ -21,6 +23,8 @@ public class ResourceEtlLogBiz extends BaseBiz {
                 ResourceEtlLogPO po = new ResourceEtlLogPO();
                 po.setResourceId(String.valueOf(id));
                 po.setLogContent(content);
+                po.setCreateTime(new Date());
+                po.setCreateUser("admin");
                 mapper.insertSelective(po);
             }
         }).start();
