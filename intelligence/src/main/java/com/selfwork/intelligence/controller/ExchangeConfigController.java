@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -256,6 +257,25 @@ public class ExchangeConfigController extends BaseController {
             result.put("msg", "修改交换配置数据集信息失败");
         }
         return result;
+    }
+
+
+    @RequestMapping(value = "/getDatasetByExchangerId")
+    @ResponseBody
+    public List<ExchangerEtlPO> getDatasetByExchangerId(Integer exchangerId) {
+        List<ExchangerEtlPO> list = null;
+
+        // 参数验证
+        if (null == exchangerId) {
+            return list;
+        }
+        try {
+            list = exchangeEtlBiz.findListByExchangeId(exchangerId);
+
+        } catch (Exception e) {
+            logger.error("获取交换机信息 e:{}", e);
+        }
+        return list;
     }
 
 }

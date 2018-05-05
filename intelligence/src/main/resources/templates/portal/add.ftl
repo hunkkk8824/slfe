@@ -24,11 +24,11 @@
                 <div class="layui-inline">
                   <label class="layui-form-label">前置机</label>
                   <div class="layui-input-inline" style="width: 300px;">
-                    <select name="project">
+                    <select name="exchanger" id="exchanger">
 					  <option></option>
-                      <option value="c0001">前置机0001</option>
-                      <option value="c0003">前置机0002</option>
-                      <option value="c0002">前置机0003</option>
+                      <#list exchangerPOs as exchanger>
+                          <option value="${exchanger.code}" data-exchangerid="${exchanger.id}">${exchanger.name}</option>
+                      </#list>
                     </select>
                   </div>
                   
@@ -39,12 +39,11 @@
                 <div class="layui-inline">
                   <label class="layui-form-label">数据集</label>
                   <div class="layui-input-inline" style="width: 300px;">
-                    <select name="experience">
+                    <select name="dataset" id="dataset">
 					  <option></option>
-                      <option value="qb_sj_ysmb">情报数据原始目标报表</option>
-                      <option value="qb_sj_ysdzztmmb">情报_数据_原始电子战通信目标</option>
-                      <option value="qb_sj_ysdzzjgmb">情报_数据_原始电子战激光目标</option>
-                      <option value="qb_sj_ysdzzdzzcmb">情报_数据_电子战电子侦察目标表</option>
+                      <#list dataSets as dataset>
+                          <option value="${dataset.value}">${dataset.displayName}</option>
+                      </#list>
                     </select>
                   </div>
                   
@@ -64,7 +63,6 @@
 
 <#include "common/footer.ftl"/>
 
-<script src="${base}/static/portal/res/layui/layui.js"></script>
 <script>
     layui.config({
         version: "3.0.0"
@@ -82,6 +80,17 @@
         });
         */
     });
+
+    $(function(){
+        $("#exchanger").change(function(){
+            var exchangerId = $("#exchanger option:selected").data('exchangerid');
+            console.log("-------",exchangerId);
+            $.get("/portal/getDatasetByExchangerId", { exchangerId: exchangerId },function(){
+
+            } );
+        });
+    });
+
 
 </script>
 

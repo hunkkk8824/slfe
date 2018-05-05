@@ -15,9 +15,9 @@
             <label class="col-sm-3 control-label"><font color="red">* </font>数据集名称：</label>
             <div class="col-sm-8">
                 <select id="dataset" style="width:350px;height: 30px"  class="form-control">
-                <#list dataSets as dataset>
-                    <option value="${dataset.value}" <#if dataset.value == exchangerEtlPO.datasetCode>selected</#if>>${dataset.displayName}</option>
-                </#list>
+                    <#list dataSets as dataset>
+                        <option value="${dataset.value}" <#if dataset.value == exchangerEtlPO.datasetCode>selected</#if>>${dataset.displayName}</option>
+                    </#list>
                 </select>
             </div>
         </div>

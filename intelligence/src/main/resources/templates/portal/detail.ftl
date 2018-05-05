@@ -136,7 +136,6 @@
 
 <#include "common/footer.ftl"/>
 
-<script src="${base}/static/portal/res/layui/layui.js"></script>
 <script>
 
 layui.config({
