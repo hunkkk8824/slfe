@@ -96,6 +96,13 @@
                     <i class="fa fa-columns"></i>
                     资源目录</a>
             </li>
+
+
+                <li>
+                    <a target="_blank"href="${base}/index" >
+
+                        进入门户页</a>
+                </li>
             </ul>
         </div>
     </nav>
