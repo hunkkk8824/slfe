@@ -59,4 +59,15 @@ public class ExchangeEtlBiz {
     public ExchangerEtlPO findById(Integer id) {
         return exchangerEtlPOmapper.selectByPrimaryKey(id);
     }
+
+    /**
+     * 根据前置机ID获取ETL配置信息
+     * @param exchangeId
+     * @return
+     */
+    public List<ExchangerEtlPO> findListByExchangeId(Integer exchangeId){
+        ExchangeEtlQueryVo queryVo= new ExchangeEtlQueryVo();
+        queryVo.setExchangerId(exchangeId);
+        return exchangerEtlPOmapper.findList(queryVo);
+    }
 }
