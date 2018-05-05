@@ -184,9 +184,9 @@
                     title: '账户类型',
                     formatter: function (value, row, index) {
                         if (value == 1) {
-                            return '企业';
+                            return '前端门户';
                         } else if (value == 2) {
-                            return '监管单位';
+                            return '后台管理员';
                         } else {
                             return '其他';
                         }

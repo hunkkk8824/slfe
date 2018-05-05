@@ -38,15 +38,25 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">是否是紧急联系人：</label>
+            <label class="col-sm-3 control-label">组织类别：</label>
             <div class="col-sm-8">
-                <div class="checkbox-inline">
-                    <label>
-                        <input type="checkbox" name="isemergencycontact" value="1" style="margin-top:5px;">是
-                    </label>
-                </div>
+                <select class="form-control" id="organizationtype" name="organizationtype" >
+                    <option value="1">前端门户</option>
+                    <option value="2">后台管理员</option>
+                </select>
             </div>
         </div>
+        <#---->
+        <#--<div class="form-group">-->
+            <#--<label class="col-sm-3 control-label">是否是紧急联系人：</label>-->
+            <#--<div class="col-sm-8">-->
+                <#--<div class="checkbox-inline">-->
+                    <#--<label>-->
+                        <#--<input type="checkbox" name="isemergencycontact" value="1" style="margin-top:5px;">是-->
+                    <#--</label>-->
+                <#--</div>-->
+            <#--</div>-->
+        <#--</div>-->
         <div class="form-group">
             <label class="col-sm-3 control-label"><font color="red">* </font>性别：</label>
             <div class="col-sm-8">
