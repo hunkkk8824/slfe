@@ -21,6 +21,7 @@ public class ResourceEtlLogBiz extends BaseBiz {
                 ResourceEtlLogPO po = new ResourceEtlLogPO();
                 po.setResourceId(String.valueOf(id));
                 po.setLogContent(content);
+                mapper.insertSelective(po);
             }
         }).start();
     }

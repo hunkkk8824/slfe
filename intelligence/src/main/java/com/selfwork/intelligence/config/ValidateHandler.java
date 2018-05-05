@@ -90,12 +90,15 @@ public class ValidateHandler {
      * @return
      */
     private ValidateResult validateMaxLength(String columnValue, Rule rule) {
+        if(StringUtils.isEmpty(columnValue)){
+            return new ValidateResult(true);
+        }
         int maxLength = NumberUtils.parseNumber(rule.getValue(),Integer.class);
         int columnLength = columnValue.length();
         if(columnLength > maxLength){
             return new ValidateResult(false,rule.getMessage());
         }else {
-            return new ValidateResult(true,null);
+            return new ValidateResult(true);
         }
     }
 
@@ -106,12 +109,15 @@ public class ValidateHandler {
      * @return
      */
     private ValidateResult validateMinLength(String columnValue, Rule rule) {
+        if(StringUtils.isEmpty(columnValue)){
+            return new ValidateResult(false,rule.getMessage());
+        }
         int minLength = NumberUtils.parseNumber(rule.getValue(),Integer.class);
         int columnLength = columnValue.length();
         if(columnLength < minLength){
             return new ValidateResult(false,rule.getMessage());
         }else {
-            return new ValidateResult(true,null);
+            return new ValidateResult(true);
         }
     }
 
@@ -126,10 +132,10 @@ public class ValidateHandler {
             if(StringUtils.isEmpty(columnValue)){
                 return new ValidateResult(false,rule.getMessage());
             }else{
-                return new ValidateResult(true,null);
+                return new ValidateResult(true);
             }
         }else{
-            return new ValidateResult(true,null);
+            return new ValidateResult(true);
         }
     }
 
