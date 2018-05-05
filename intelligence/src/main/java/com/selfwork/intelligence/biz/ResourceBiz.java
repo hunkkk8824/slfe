@@ -157,8 +157,9 @@ public class ResourceBiz extends BaseBiz {
             ExchangerPO exchangePo = exChangeConfigBiz.findByCode(resource.getSourceExchangerCode());
 
             if (exchangePo == null) {
-                log.append(DateUtils.getCurrTimeStr()).append(" 配置交换机信息未找到").append("/r/n");
                 logger.error("resource 配置交换机信息未找到");
+                log.append(DateUtils.getCurrTimeStr()).append(" 配置交换机信息未找到").append("/r/n");
+                resourceEtlLogBiz.asynSave(resource.getId(), log.toString());
                 return;
             }
             // 创建模板
@@ -175,6 +176,7 @@ public class ResourceBiz extends BaseBiz {
                 logger.info("暂无同步数据", resource);
                 log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 暂无同步数据").append("/r/n");
                 this.updateResourceSuccess(resource, datasetCode, batchNo, total, log);
+                resourceEtlLogBiz.asynSave(resource.getId(), log.toString());
                 return;
             }
             total = list.size();
