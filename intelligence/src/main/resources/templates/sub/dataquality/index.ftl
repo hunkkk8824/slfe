@@ -271,7 +271,7 @@
                     field: 'name',
                     title: '资源名称'
                 }, {
-                    field: 'preImportTotalCount',
+                    field: 'preimportTotalCount',
                     title: '预导入总数'
                 }, {
                     field: 'importSuccessCount',
