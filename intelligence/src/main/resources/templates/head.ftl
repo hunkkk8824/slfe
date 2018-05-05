@@ -28,7 +28,7 @@
     }
 
     table th {
-        background-color: #3c3f41;
+        background-color: #2f4050;
     }
 
     table th .th-inner {
