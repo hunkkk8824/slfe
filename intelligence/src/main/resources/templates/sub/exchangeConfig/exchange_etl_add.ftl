@@ -9,20 +9,24 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:auto">
 <div style="margin-left: 2%;margin-top: 2%">
-    <input type="hidden" id="id" value="${id}"/>
+    <input type="hidden" id="exchangerId" value="${exchangerId}"/>
     <form class="form-horizontal m-t" id="exchangeForm" style="margin-left: 15px;margin-right: 15px;margin-top: 5px;">
         <div class="form-group">
             <label class="col-sm-3 control-label"><font color="red">* </font>数据集名称：</label>
             <div class="col-sm-8">
-                <input id="datasetName" name="datasetName" class="form-control" type="text" placeholder="交换机名称">
+                <select id="dataset" style="width:350px;height: 30px"  class="form-control">
+                    <#list dataSets as dataset>
+                        <option value="${dataset.value}">${dataset.displayName}</option>
+                    </#list>
+                </select>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label"><font color="red">* </font>数据集编码：</label>
-            <div class="col-sm-8">
-                <input id="datasetCode" name="datasetCode" class="form-control" placeholder="数据集编码" type="text" >
-            </div>
-        </div>
+        <#--<div class="form-group">-->
+            <#--<label class="col-sm-3 control-label"><font color="red">* </font>数据集编码：</label>-->
+            <#--<div class="col-sm-8">-->
+                <#--<input id="datasetCode" name="datasetCode" class="form-control" placeholder="数据集编码" type="text" >-->
+            <#--</div>-->
+        <#--</div>-->
 
         <div class="form-group">
             <div class="col-sm-8 col-sm-offset-4" style="margin-left: 180px;">
@@ -49,27 +53,24 @@
             // 表单验证绑定
             var validator = $("#exchangeForm").validate({
                 rules: {
-                    datasetCode: {
+                    dataset: {
                         required: true,
-                    },
-                    datasetName: {
-                        required: true
                     }
                 },
                 messages: {
-                    datasetCode: {
-                        required: "请输入交换机名称"
-                    },
-                    datasetName: {
-                        required: "请输入主机地址"
+                    dataset: {
+                        required: "请选择数据集"
                     }
                 },
                 submitHandler: function (form) { //不通过回调
                     console.log("验证通过");
+                    var selectOption = $('#dataset option:selected');
+                    var dataSetCode = selectOption.val();
+                    var datasetName = selectOption.text();
                     var data = {
                         exchangerId:$('#exchangerId').val(),
-                        datasetCode: $("#datasetCode").val(),
-                        datasetName: $("#datasetName").val()
+                        datasetCode: dataSetCode,
+                        datasetName: datasetName
                     }
                     layer.load(3);
                     debugger

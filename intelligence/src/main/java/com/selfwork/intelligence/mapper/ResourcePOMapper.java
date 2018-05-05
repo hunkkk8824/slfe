@@ -1,10 +1,7 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.ResourcePO;
-import com.selfwork.intelligence.model.vo.dataquality.AuditRequestVo;
-import com.selfwork.intelligence.model.vo.dataquality.DataQualitVo;
-import com.selfwork.intelligence.model.vo.dataquality.DataQualityQueryVo;
-import com.selfwork.intelligence.model.vo.dataquality.QualityEvaluateRequestVo;
+import com.selfwork.intelligence.model.vo.dataquality.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -33,4 +30,6 @@ public interface ResourcePOMapper {
      * @return
      */
     Integer countByBatchNo(@Param("tableName") String datasetCode, @Param("batchNo") String batchNo);
+
+    Integer countByCondition(QuantityQueryVo queryVo);
 }

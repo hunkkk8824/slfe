@@ -5,6 +5,7 @@ import com.selfwork.intelligence.biz.DataBiz;
 import com.selfwork.intelligence.biz.ExChangeConfigBiz;
 import com.selfwork.intelligence.biz.ExchangeEtlBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.model.po.ExchangerEtlPO;
 import com.selfwork.intelligence.model.po.ExchangerPO;
@@ -200,6 +201,7 @@ public class ExchangeConfigController extends BaseController {
     @RequestMapping("/toExchangeEtlAdd")
     public ModelAndView toExchangeEtlAdd(Integer exchangerId) {
         ModelAndView view = new ModelAndView("sub/exchangeConfig/exchange_etl_add");
+        view.addObject("dataSets", DataSetCodeEnum.values());
         view.addObject("exchangerId",exchangerId);
         return view;
     }
@@ -230,6 +232,7 @@ public class ExchangeConfigController extends BaseController {
         ModelAndView view = new ModelAndView("sub/exchangeConfig/exchange_etl_edit");
         ExchangerEtlPO exchangerEtlPO = exchangeEtlBiz.findById(id);
         view.addObject("exchangerEtlPO",exchangerEtlPO);
+        view.addObject("dataSets", DataSetCodeEnum.values());
         return view;
     }
 
