@@ -3,6 +3,7 @@ package com.selfwork.intelligence.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
+import com.selfwork.intelligence.biz.ExChangeConfigBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
@@ -31,6 +32,9 @@ public class DataQualityController extends BaseController {
     @Autowired
     private DataQualityBiz dataQualityBiz;
 
+    @Autowired
+    ExChangeConfigBiz exChangeConfigBiz;
+
     @RequestMapping(value = "/index")
     public ModelAndView index(@RequestParam String menutype) {
 
@@ -39,6 +43,9 @@ public class DataQualityController extends BaseController {
         view.addObject("qualityEvaluateEnums", QualityEvaluateEnum.values());
         view.addObject("menutype", menutype);
         view.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
+
+
+        view.addObject("sourceExchangerCodeList", exChangeConfigBiz.findAllEnable());
 
         return view;
 
@@ -51,6 +58,7 @@ public class DataQualityController extends BaseController {
         Map<String, Object> result = new HashMap<>();
         result.put("total", 0);
         result.put("rows", new ArrayList());
+
         try {
             PageInfo<DataQualitVo> pageData = dataQualityBiz.findPage(queryVo);
             if (pageData != null) {
@@ -166,8 +174,7 @@ public class DataQualityController extends BaseController {
 
         try {
             return dataQualityBiz.getDetail(queryVo);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             logger.error("查看明细异常：" + e.getMessage(), e);
         }
         return result;

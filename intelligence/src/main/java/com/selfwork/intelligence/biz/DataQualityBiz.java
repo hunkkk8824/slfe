@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 
 import java.util.*;
@@ -121,6 +122,12 @@ public class DataQualityBiz extends BaseBiz {
 
     public PageInfo<DataQualitVo> findPage(DataQualityQueryVo queryVo) {
         try {
+
+//            if(StringUtils.isEmpty(queryVo.getSourceExchangerCode()))
+//            {
+//                logger.info("没有选择前置交换机");
+//                return null;
+//            }
 
             // 查询
             this.startPage(queryVo);

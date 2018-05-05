@@ -81,4 +81,9 @@
             }
         });
     }
+
+    function isEmpty(str) {
+
+        return !Boolean(str) || str == "undefined" || str == "null";
+    }
 </script>

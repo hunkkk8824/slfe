@@ -4,6 +4,10 @@ import com.selfwork.intelligence.model.vo.BaseQueryVo;
 
 public class DataQualityQueryVo extends BaseQueryVo {
 
+    /**来源交换机编码**/
+    private String sourceExchangerCode;
+
+
     /**数据集编码**/
     private String dataSetCode;
 
@@ -52,5 +56,11 @@ public class DataQualityQueryVo extends BaseQueryVo {
         this.auditStatus = auditStatus;
     }
 
+    public String getSourceExchangerCode() {
+        return sourceExchangerCode;
+    }
 
+    public void setSourceExchangerCode(String sourceExchangerCode) {
+        this.sourceExchangerCode = sourceExchangerCode;
+    }
 }

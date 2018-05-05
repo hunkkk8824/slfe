@@ -46,6 +46,11 @@
         from tb_resource
         <where>
             valid=1
+
+            <if test="sourceExchangerCode != null and sourceExchangerCode!='' ">
+                AND SOURCE_EXCHANGER_CODE=#{sourceExchangerCode,jdbcType=VARCHAR}
+            </if>
+
             <if test="dataSetCode != null and dataSetCode!='' ">
                 AND DATASET_CODE=#{dataSetCode,jdbcType=VARCHAR}
             </if>
