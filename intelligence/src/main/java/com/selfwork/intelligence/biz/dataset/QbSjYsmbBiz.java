@@ -1,25 +1,38 @@
 package com.selfwork.intelligence.biz.dataset;
 
 import com.selfwork.intelligence.biz.BaseBiz;
+import com.selfwork.intelligence.common.BeanUtils;
+import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.mapper.QbSjYsmbPOMapper;
 import com.selfwork.intelligence.model.po.QbSjYsmbPO;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
+import com.selfwork.intelligence.model.vo.dateset.QbSjYsmbVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class QbSjYsmbBiz extends BaseBiz implements IBaseQbBiz<QbSjYsmbPO> {
+public class QbSjYsmbBiz extends BaseBiz implements IBaseQbBiz<QbSjYsmbVO> {
 
 
     @Autowired
     private QbSjYsmbPOMapper qbSjYsmb;
 
     @Override
-    public List<QbSjYsmbPO> getListByBatchNO(String batchNO) {
-        return qbSjYsmb.getListByBatchNO(batchNO);
+    public List<QbSjYsmbVO> getListByBatchNO(String batchNO) {
+
+        List<QbSjYsmbPO> pos =  qbSjYsmb.getListByBatchNO(batchNO);
+
+        return pos.parallelStream().map(po -> {
+            QbSjYsmbVO item = new QbSjYsmbVO();
+            BeanUtils.copy(po, item);
+            item.setJssjStr(DateUtils.getFormatDateTime(po.getJssj()));
+            item.setSbsjStr(DateUtils.getFormatDateTime(po.getSbsj()));
+            return item;
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -79,8 +92,8 @@ public class QbSjYsmbBiz extends BaseBiz implements IBaseQbBiz<QbSjYsmbPO> {
         list.add(new ColumnsVo("jjm", "机舰名"));
         list.add(new ColumnsVo("jxh", "机舷好"));
         list.add(new ColumnsVo("bz", "备注"));
-        list.add(new ColumnsVo("jssj", "接受时间"));
-        list.add(new ColumnsVo("sbsj", "上报时间"));
+        list.add(new ColumnsVo("jssjStr", "接收时间&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; "));
+        list.add(new ColumnsVo("sbsjStr", "上报时间&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; "));
         list.add(new ColumnsVo("ptxh", "平台型号"));
         return list;
     }
