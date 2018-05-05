@@ -153,7 +153,7 @@
 
 <#--<head>-->
 
-<#--<#include "../../head.ftl">-->
+<#--<#include "../../header.ftl">-->
 <#--<title>多源情报系统-资源目录首页</title>-->
 <#--</head>-->
 
