@@ -24,7 +24,7 @@
                 <div class="layui-inline">
                   <label class="layui-form-label">前置机</label>
                   <div class="layui-input-inline" style="width: 300px;">
-                    <select name="exchanger" id="exchanger">
+                    <select name="exchanger" id="exchanger" lay-filter="myselect">
 					  <option></option>
                       <#list exchangerPOs as exchanger>
                           <option value="${exchanger.code}" data-exchangerid="${exchanger.id}">${exchanger.name}</option>
@@ -51,7 +51,7 @@
               </div>
               
               <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="*" lay-submit>立即导入</button>
+                <button class="layui-btn" lay-filter="*" >立即导入</button>
               </div>
             </form>
           </div>
@@ -68,7 +68,7 @@
     layui.cache.user = {
         username: '游客'
         ,uid: -1
-        ,avatar: '../../res/images/avatar/00.jpg'
+        ,avatar: '${base}/static/portal/res/images/avatar/00.jpg'
         ,experience: 83
         ,sex: '男'
     };
@@ -89,13 +89,59 @@
         */
     });
 
-    $(function(){
-        $("#exchanger").on("change",function(){
-            var exchangerId = $("#exchanger option:selected").data('exchangerid');
-            console.log("-------",exchangerId);
-            $.get("/portal/getDatasetByExchangerId", { exchangerId: exchangerId },function(data){
+    layui.use(['layer', 'form'], function() {
+        var layer = layui.layer
+                , form = layui.form;
+        form.on('select(myselect)', function (data) {
+            var code = data.value;
+            $.ajax({
+                type: 'GET',
+                url: '/exchangeConfig/getDatasetByExchangerCode',
+                data: {code:code},
+                dataType:  'json',
+                success: function(result){
+                    $("#dataset").html("");
+                    $.each(result, function(key, val) {
+                        $("#dataset").append($("<option>").val("").text(""));
+                        var option1 = $("<option>").val(val.datasetCode).text(val.datasetName);
+                        $("#dataset").append(option1);
+                        form.render('select');
+                    });
+                    $("#dataset").get(0).selectedIndex=0;
+                }
+            });
+        });
+    });
 
-            } );
+    $(function(){
+        $(".layui-btn").on("click",function(){
+            var exchanger = $("#exchanger option:selected");
+            var dataset = $("#dataset option:selected");
+            var data = {
+                datasetCode:dataset.val(),
+                datasetName:dataset.text(),
+                sourceExchangerCode:exchanger.val(),
+                sourceExchangerName:exchanger.text()
+            };
+
+            if(!data.sourceExchangerCode){
+                layer.msg("请选择交换机!", {icon: 0});
+            }
+
+            if(!data.datasetCode){
+                layer.msg("请选择数据集!", {icon: 0});
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/resource/save',
+                dataType:  'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(result){
+                    // donothing
+                }
+            });
         });
     });
 

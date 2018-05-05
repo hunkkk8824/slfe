@@ -260,17 +260,17 @@ public class ExchangeConfigController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/getDatasetByExchangerId")
+    @RequestMapping(value = "/getDatasetByExchangerCode")
     @ResponseBody
-    public List<ExchangerEtlPO> getDatasetByExchangerId(Integer exchangerId) {
+    public List<ExchangerEtlPO> getDatasetByExchangerCode(String code) {
         List<ExchangerEtlPO> list = null;
 
         // 参数验证
-        if (null == exchangerId) {
+        if (null == code) {
             return list;
         }
         try {
-            list = exchangeEtlBiz.findListByExchangeId(exchangerId);
+            list = exchangeEtlBiz.findListByExchangeCode(code);
 
         } catch (Exception e) {
             logger.error("获取交换机信息 e:{}", e);

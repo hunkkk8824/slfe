@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.common.BaseException;
 import com.selfwork.intelligence.common.enums.ResponseCodeTypeEnum;
 import com.selfwork.intelligence.mapper.ExchangerEtlPOMapper;
+import com.selfwork.intelligence.mapper.ExchangerPOMapper;
 import com.selfwork.intelligence.model.po.ExchangerEtlPO;
 import com.selfwork.intelligence.model.po.ExchangerPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
@@ -27,6 +28,9 @@ public class ExchangeEtlBiz {
 
     @Autowired
     private ExchangerEtlPOMapper exchangerEtlPOmapper;
+
+    @Autowired
+    private ExchangerPOMapper exchangerPOMapper;
 
     public void save(ExchangerEtlPO exchangerEtlPO, UserInfoPO loginUser) {
         exchangerEtlPO.setCreateUser(String.valueOf(loginUser.getUserid()));
@@ -62,12 +66,13 @@ public class ExchangeEtlBiz {
 
     /**
      * 根据前置机ID获取ETL配置信息
-     * @param exchangeId
+     * @param code
      * @return
      */
-    public List<ExchangerEtlPO> findListByExchangeId(Integer exchangeId){
+    public List<ExchangerEtlPO> findListByExchangeCode(String code){
+        ExchangerPO exchangerPO = exchangerPOMapper.findByCode(code);
         ExchangeEtlQueryVo queryVo= new ExchangeEtlQueryVo();
-        queryVo.setExchangerId(exchangeId);
+        queryVo.setExchangerId(exchangerPO.getId());
         return exchangerEtlPOmapper.findList(queryVo);
     }
 }
