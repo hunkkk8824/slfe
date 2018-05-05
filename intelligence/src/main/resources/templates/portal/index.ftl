@@ -33,7 +33,7 @@
             </a>
             <h2>
               <a class="layui-badge">执行中</a>
-              <a href="detail.html">动向情报数据导入</a>
+              <a href="${base}/portal/detail">动向情报数据导入</a>
             </h2>
             <div class="fly-list-info">
               <a href="" link>
@@ -53,7 +53,7 @@
               </a>
             <h2>
               <a class="layui-badge">导入完成</a>
-              <a href="detail.html">动向情报数据导入</a>
+              <a href="${base}/portal/detail">动向情报数据导入</a>
             </h2>
             <div class="fly-list-info">
               <a href="" link>
@@ -73,7 +73,7 @@
              </a>
             <h2>
               <a class="layui-badge">执行中</a>
-              <a href="detail.html">动向情报数据导入</a>
+              <a href="${base}/portal/detail">动向情报数据导入</a>
             </h2>
             <div class="fly-list-info">
               <a href="" link>
@@ -93,7 +93,7 @@
               </a>
             <h2>
               <a class="layui-badge">执行失败</a>
-              <a href="detail.html">动向情报数据导入</a>
+              <a href="${base}/portal/detail">动向情报数据导入</a>
             </h2>
             <div class="fly-list-info">
               <a href="" link>
@@ -114,7 +114,7 @@
               </a>
             <h2>
               <a class="layui-badge">执行中</a>
-              <a href="detail.html">动向情报数据导入</a>
+              <a href="${base}/portal/detail">动向情报数据导入</a>
             </h2>
             <div class="fly-list-info">
               <a href="" link>
@@ -135,13 +135,13 @@
         <div style="text-align: center">
           <div class="laypage-main">
               <span class="laypage-curr">1</span>
-              <a href="/jie/page/2/">2</a>
-              <a href="/jie/page/3/">3</a>
-              <a href="/jie/page/4/">4</a>
-              <a href="/jie/page/5/">5</a>
+              <a href="${base}/jie/page/2/">2</a>
+              <a href="${base}/jie/page/3/">3</a>
+              <a href="${base}/jie/page/4/">4</a>
+              <a href="${base}/jie/page/5/">5</a>
               <span>…</span>
-              <a href="/jie/page/148/" class="laypage-last" title="尾页">尾页</a>
-              <a href="/jie/page/2/" class="laypage-next">下一页</a>
+              <a href="${base}/jie/page/148/" class="laypage-last" title="尾页">尾页</a>
+              <a href="${base}/jie/page/2/" class="laypage-next">下一页</a>
           </div>
         </div>
 

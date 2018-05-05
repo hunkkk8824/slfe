@@ -1,9 +1,13 @@
 package com.selfwork.intelligence.controller;
 
+import com.selfwork.intelligence.biz.UserBiz;
+import com.selfwork.intelligence.common.enums.PermissionTypeEnum;
 import com.selfwork.intelligence.model.po.UserInfoPO;
+import com.selfwork.intelligence.model.vo.user.TreeMenuVo;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.sql.DataSource;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -21,16 +26,35 @@ public class IndexController extends BaseController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    UserBiz userBiz;
     //跳转到主页
     @RequestMapping(value = "index")
     public ModelAndView index() {
+
+        ModelAndView modelAndView=new ModelAndView("portal/index");
+        UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
+        modelAndView.addObject("userName",user.getRealname());
+        modelAndView.addObject("nickname",user.getNickname());
+
+        // 获取用户权限菜单
+        //List<TreeMenuVo> menuList = userBiz.findTreeMenuByUserId(String.valueOf(getLoginUser().getUserid()), PermissionTypeEnum.MENU_PERMISSION.getValue().toString());
+       // modelAndView.addObject("menuList", menuList);
+        return modelAndView;
+    }
+
+
+    //跳转到主页
+    @RequestMapping(value = "manageindex")
+    public ModelAndView manageindex() {
+
         ModelAndView modelAndView=new ModelAndView("index");
         UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
         modelAndView.addObject("userName",user.getRealname());
         modelAndView.addObject("nickname",user.getNickname());
         return modelAndView;
-    }
 
+    }
     /**
      * 退出
      *

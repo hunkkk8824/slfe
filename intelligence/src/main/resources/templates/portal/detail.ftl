@@ -23,11 +23,11 @@
           <span class="layui-badge" style="background-color: #999;">预备导入</span>
           <span class="layui-badge" style="background-color: #5FB878;">导入失败</span> -->
           
-          <div class="fly-admin-box" data-id="123">
-            <span class="layui-btn layui-btn-xs jie-admin" type="del">撤销</span>
-            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">编辑</span> 
-            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">删除</span>  
-          </div>
+          <#--<div class="fly-admin-box" data-id="123">-->
+            <#--<span class="layui-btn layui-btn-xs jie-admin" type="del">撤销</span>-->
+            <#--<span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">编辑</span> -->
+            <#--<span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">删除</span>  -->
+          <#--</div>-->
          
         </div>
         <div class="detail-about">

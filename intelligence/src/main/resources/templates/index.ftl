@@ -29,36 +29,31 @@
                     <div class="logo-element">多源情报系统
                     </div>
                 </li>
-                <#--<li>-->
-                    <#--<a class="J_menuItem" href="${base}/user/index" data-index="0">-->
-                        <#--<i class="fa fa-bank"></i>-->
-                        <#--<span class="nav-label">首页</span></a>-->
-                <#--</li>-->
-                <#--<li>-->
-                    <#--<a class="J_menuItem" href="${base}/resourcecatalog/index" data-index="1">-->
-                        <#--<i class="fa fa-columns"></i>-->
-                        <#--资源目录</a>-->
-                <#--</li>-->
-                <#--<li>-->
-                    <#--<a class="J_menuItem" href="index_v2.html" data-index="2">-->
-                        <#--<i class="fa fa-area-chart"></i>-->
-                        <#--系统运行情况</a>-->
-                <#--</li>-->
-                <#--<li>-->
-                    <#--<a class="J_menuItem" href="index_v3.html" data-index="3">-->
-                        <#--<i class="	fa fa-random"></i>-->
-                        <#--数据交换</a>-->
-                <#--</li>-->
-                <#--<li>-->
-                    <#--<a class="J_menuItem" href="index_v4.html" data-index="4">-->
-                        <#--<i class="fa fa-video-camera"></i>-->
-                        <#--服务监控</a>-->
-                <#--</li>-->
-                <#--<li>-->
-                    <#--<a class="J_menuItem" href="index_v5.html" data-index="5">-->
-                        <#--<i class="fa fa-area-chart"></i>-->
-                        <#--分析报表</a>-->
-                <#--</li>-->
+
+                <#--<c:forEach items="${menuList}" var="menu">-->
+
+                    <#--<c:choose>-->
+                        <#--<c:when test='${"/security/index".equals(menu.url)}'>-->
+                            <#--<li>-->
+                                <#--<a title="${menu.name}" target="_blank" href="${ctx}${menu.url}"><i class="${menu.icon}"-->
+                                                                                                    <#--style="font-size: 18px;"></i>-->
+                                    <#--<span class="nav-label">${menu.name}</span></a>-->
+                            <#--</li>-->
+                        <#--</c:when>-->
+                        <#--<c:otherwise>-->
+
+                            <#--<c:if test="${menu.parentId==1}">-->
+                                <#--<li>-->
+                                    <#--<a title="${menu.name}" class="J_menuItem" href="${ctx}${menu.url}"><i-->
+                                            <#--class="${menu.icon}" style="font-size: 18px;"></i>-->
+                                        <#--<span class="nav-label">${menu.name}</span></a>-->
+                                <#--</li>-->
+                            <#--</c:if>-->
+
+                        <#--</c:otherwise>-->
+                    <#--</c:choose>-->
+
+                <#--</c:forEach>-->
 
                 <li>
                     <a class="J_menuItem" href="${base}/user/index" data-index="1">
@@ -96,6 +91,13 @@
                     <i class="fa fa-columns"></i>
                     资源目录</a>
             </li>
+
+
+                <li>
+                    <a target="_blank"href="${base}/index" >
+
+                        进入门户页</a>
+                </li>
             </ul>
         </div>
     </nav>

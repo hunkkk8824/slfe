@@ -22,6 +22,23 @@
     menuUrl, productCode, createTime, createUserId, lastModifyTime, lastModifyUserId, 
     valid, menuIcon
   </sql>
+
+  <select id="listByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT p.*
+    FROM tbPermissionInfo p
+    INNER JOIN tbRolePermissionRelation rp ON rp.permissionId = p.permissionId
+    INNER JOIN tbRoleInfo r ON r.roleId = rp.roleId
+    INNER JOIN tbUserRoleRelation ur ON ur.roleId = r.roleId
+    WHERE p.valid = 1
+    AND r.valid = 1
+    AND ur.userId = #{userId,jdbcType=INTEGER}
+    <if test="permissionType != null">
+      AND p.permissionType = #{permissionType,jdbcType=INTEGER}
+    </if>
+    order by permissionId
+  </select>
+
+
   <!--查询所有节点信息-->
   <select id="findValidList" resultMap="BaseResultMap">
     select
