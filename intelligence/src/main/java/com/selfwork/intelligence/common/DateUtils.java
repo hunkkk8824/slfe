@@ -23,6 +23,8 @@ public class DateUtils {
 
     private final static String DATE_FORMAT_CN = "yyyy年MM月dd日";
 
+    private final static String TIME_FORMAT_WITH_SSS = "yyyy-MM-dd HH:mm:ss";
+
     private final static String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     private final static String TIME_FORMAT_CN = "yyyy年MM月dd日 HH:mm:ss";
@@ -226,6 +228,10 @@ public class DateUtils {
 
     public static String getFormatTime(Date currDate) {
         return getFormatDate(currDate, TIME_FORMAT);
+    }
+
+    public static String getFormatTimeWithSSS(Date currDate) {
+        return getFormatDate(currDate, TIME_FORMAT_WITH_SSS);
     }
 
     /**
@@ -562,6 +568,10 @@ public class DateUtils {
 
     public static String getCurrTimeStr() {
         return getFormatTime(getCurrDate());
+    }
+
+    public static String getCurrTimeStrWithSSS() {
+        return getFormatTimeWithSSS(getCurrDate());
     }
 
     /**
