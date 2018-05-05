@@ -15,6 +15,7 @@ import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.po.UserRoleRelationPO;
 import com.selfwork.intelligence.model.vo.role.RoleInfoQueryVo;
 import com.selfwork.intelligence.model.vo.role.RoleInfoVo;
+import com.selfwork.intelligence.model.vo.user.TreeMenuVo;
 import com.selfwork.intelligence.model.vo.user.UpdateUserRolesRequest;
 import com.selfwork.intelligence.model.vo.user.UserQueryVo;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -201,6 +203,76 @@ public class UserBiz extends BaseBiz {
         });
 
 
+    }
+
+    /**
+     * create treeMenu by permission
+     *
+     * @param permissionInfoPO
+     * @return
+     */
+    private TreeMenuVo createTreeMenu(PermissionInfoPO permissionInfoPO) {
+        TreeMenuVo dto = new TreeMenuVo();
+        dto.setId(permissionInfoPO.getPermissionid());
+        dto.setName(permissionInfoPO.getPermissionname());
+        dto.setProductCode(permissionInfoPO.getProductcode());
+        dto.setUrl(permissionInfoPO.getMenuurl());
+        dto.setParentId(permissionInfoPO.getParentid());
+        dto.setIcon(permissionInfoPO.getMenuicon());
+        return dto;
+    }
+
+    /**
+     * 获取用户权限菜单
+     *
+     * @param userId
+     * @return
+     */
+
+    public List<TreeMenuVo> findTreeMenuByUserId(String userId, String permissionType) {
+        List<TreeMenuVo> menuList = new ArrayList<>();
+        LinkedHashMap<String, TreeMenuVo> menuMap = new LinkedHashMap<>();
+        // 获取用户所有权限
+        List<PermissionInfoPO> permissionList = permissionMapper.listByUserId(userId, permissionType);
+        if (CollectionUtils.isEmpty(permissionList)) {
+            return menuList;
+        }
+
+        // 组建菜单树
+        permissionList.stream().forEach(permissionInfoPO -> {
+            if (null == permissionInfoPO.getParentid()) {
+                TreeMenuVo dto = createTreeMenu(permissionInfoPO);
+                menuMap.put(String.valueOf(dto.getId()), dto);
+            } else {
+                Integer parentId = permissionInfoPO.getParentid();
+                TreeMenuVo parentDto = menuMap.get(String.valueOf(parentId));
+
+                TreeMenuVo dto = createTreeMenu(permissionInfoPO);
+                if (null != parentDto) {
+                    if (CollectionUtils.isEmpty(parentDto.getChild())) {
+                        List<TreeMenuVo> childList = new ArrayList<>();
+                        childList.add(dto);
+                        parentDto.setChild(childList);
+                    } else {
+                        parentDto.getChild().add(dto);
+                    }
+
+                } else {
+                    menuMap.put(String.valueOf(dto.getId()), dto);
+                }
+            }
+        });
+
+
+        if (menuMap.size() == 0) {
+            return menuList;
+        } else {
+            menuMap.forEach((treeId, treeMenuDto) -> {
+                menuList.add(treeMenuDto);
+            });
+        }
+
+        return menuList;
     }
 
 }

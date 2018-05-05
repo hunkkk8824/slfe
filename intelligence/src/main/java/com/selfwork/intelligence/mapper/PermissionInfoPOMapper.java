@@ -22,4 +22,6 @@ public interface PermissionInfoPOMapper {
     List<PermissionInfoPO> getPermissionsByRoleId(Integer roleId);
 
     List<PermissionInfoPO> findValidList(RoleInfoQueryVo vo);
+
+    List<PermissionInfoPO> listByUserId(String userId, String permissionType);
 }
