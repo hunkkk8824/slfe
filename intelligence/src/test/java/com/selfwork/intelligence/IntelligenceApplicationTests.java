@@ -31,9 +31,9 @@ public class IntelligenceApplicationTests {
 	public void testApplyDataExchange(){
 		ResourcePO po =new ResourcePO();
 		po.setSourceExchangerCode("EX001");
-		po.setSourceExchangerName("前置机001");
-		po.setDatasetCode("DT001");
-		po.setDatasetName("数据集001");
+		po.setSourceExchangerName("EX001");
+		po.setDatasetCode("qb_sj_rhmb");
+		po.setDatasetName("情报_数据_融合目标表");
 		po.setCommitUser("admin");
 		po.setCommitUserName("系统管理员");
 
