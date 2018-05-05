@@ -12,6 +12,8 @@
  <![endif]-->
 
 <link rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" href="${base}/static/portal/res/layui/css/layui.css">
+<link rel="stylesheet" href="${base}/static/portal/res/css/global.css">
 
 <script type="text/javascript">
     var base = '${base}';
