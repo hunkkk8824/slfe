@@ -5,7 +5,7 @@
         </a>
         <ul class="layui-nav fly-nav layui-hide-xs">
             <li class="layui-nav-item">
-                <a href="${base}/index" target="_blank"><i class="iconfont icon-ui"></i>后台</a>
+                <a href="${base}/manageindex" target="_blank"><i class="iconfont icon-ui"></i>后台</a>
             </li>
         </ul>
 
