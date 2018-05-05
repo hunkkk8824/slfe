@@ -229,7 +229,7 @@ public class UserBiz extends BaseBiz {
      * @return
      */
 
-    public List<TreeMenuVo> findTreeMenuByUserId(String userId, String permissionType) {
+    public List<TreeMenuVo> findTreeMenuByUserId(Integer userId, Integer permissionType) {
         List<TreeMenuVo> menuList = new ArrayList<>();
         LinkedHashMap<String, TreeMenuVo> menuMap = new LinkedHashMap<>();
         // 获取用户所有权限

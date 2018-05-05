@@ -2,6 +2,8 @@ package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.PermissionInfoPO;
 import com.selfwork.intelligence.model.vo.role.RoleInfoQueryVo;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface PermissionInfoPOMapper {
@@ -23,5 +25,5 @@ public interface PermissionInfoPOMapper {
 
     List<PermissionInfoPO> findValidList(RoleInfoQueryVo vo);
 
-    List<PermissionInfoPO> listByUserId(String userId, String permissionType);
+    List<PermissionInfoPO> listByUserId(@Param("userId") Integer userId, @Param("permissionType") Integer permissionType);
 }

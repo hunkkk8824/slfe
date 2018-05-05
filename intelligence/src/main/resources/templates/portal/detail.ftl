@@ -32,7 +32,7 @@
         </div>
         <div class="detail-about">
           <a class="fly-avatar" href="../user/home.html">
-            <img src="../../res/images/data.png" alt="创建人">
+            <img src="${base}/static/portal/res/images/data.png" alt="创建人">
           </a>
           <div class="fly-detail-user">
             <a href="" class="fly-link">

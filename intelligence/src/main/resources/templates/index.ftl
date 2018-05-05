@@ -29,72 +29,61 @@
                     <div class="logo-element">多源情报系统
                     </div>
                 </li>
+            <#list menuList as menu>
 
-                <#--<c:forEach items="${menuList}" var="menu">-->
+                <#if menu.parentId==1>
+                    <li>
+                        <a class="J_menuItem" href="${base}${menu.url}" data-index="1">
+                            <i class="${menu.icon}"></i>
+                        ${menu.name}</a>
+                    </li>
 
-                    <#--<c:choose>-->
-                        <#--<c:when test='${"/security/index".equals(menu.url)}'>-->
-                            <#--<li>-->
-                                <#--<a title="${menu.name}" target="_blank" href="${ctx}${menu.url}"><i class="${menu.icon}"-->
-                                                                                                    <#--style="font-size: 18px;"></i>-->
-                                    <#--<span class="nav-label">${menu.name}</span></a>-->
-                            <#--</li>-->
-                        <#--</c:when>-->
-                        <#--<c:otherwise>-->
+                </#if>
 
-                            <#--<c:if test="${menu.parentId==1}">-->
-                                <#--<li>-->
-                                    <#--<a title="${menu.name}" class="J_menuItem" href="${ctx}${menu.url}"><i-->
-                                            <#--class="${menu.icon}" style="font-size: 18px;"></i>-->
-                                        <#--<span class="nav-label">${menu.name}</span></a>-->
-                                <#--</li>-->
-                            <#--</c:if>-->
 
-                        <#--</c:otherwise>-->
-                    <#--</c:choose>-->
+            </#list>
 
-                <#--</c:forEach>-->
 
-                <li>
-                    <a class="J_menuItem" href="${base}/user/index" data-index="1">
-                        <i class="fa fa-user"></i>
-                        用户管理</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="${base}/role/index" data-index="2">
-                        <i class="fa fa-users"></i>
-                        角色管理</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="${base}/dataQuality/index?menutype=1" data-index="3">
-                        <i class="fa fa-database"></i>
-                        数据质量管理</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="${base}/exchangeConfig/index" data-index="4">
-                        <i class="fa fa-gears"></i>
-                        交换配置</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="${base}/dataQuality/index?menutype=2" data-index="5">
-                        <i class="fa fa-random"></i>
-                        交换日志</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="${base}/monitorLog/index" data-index="6">
-                        <i class="fa fa-eye"></i>
-                        监控日志</a>
-                </li>
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/user/index" data-index="1">-->
+                        <#--<i class="fa fa-user"></i>-->
+                        <#--用户管理</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/role/index" data-index="2">-->
+                        <#--<i class="fa fa-users"></i>-->
+                        <#--角色管理</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/dataQuality/index?menutype=1" data-index="3">-->
+                        <#--<i class="fa fa-database"></i>-->
+                        <#--数据质量管理</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/exchangeConfig/index" data-index="4">-->
+                        <#--<i class="fa fa-gears"></i>-->
+                        <#--交换配置</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/dataQuality/index?menutype=2" data-index="5">-->
+                        <#--<i class="fa fa-random"></i>-->
+                        <#--交换日志</a>-->
+                <#--</li>-->
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/monitorLog/index" data-index="6">-->
+                        <#--<i class="fa fa-eye"></i>-->
+                        <#--监控日志</a>-->
+                <#--</li>-->
 
-            <li>
-                <a class="J_menuItem" href="${base}/resourcecatalog/index" data-index="7">
-                    <i class="fa fa-columns"></i>
-                    资源目录</a>
-            </li>
+                <#--<li>-->
+                    <#--<a class="J_menuItem" href="${base}/resourcecatalog/index" data-index="7">-->
+                        <#--<i class="fa fa-columns"></i>-->
+                        <#--资源目录</a>-->
+                <#--</li>-->
 
 
                 <li>
-                    <a target="_blank"href="${base}/index" >
+                    <a target="_blank" href="${base}/index">
 
                         进入门户页</a>
                 </li>
