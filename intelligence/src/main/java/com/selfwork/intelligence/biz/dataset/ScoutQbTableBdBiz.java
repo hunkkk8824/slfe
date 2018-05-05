@@ -26,7 +26,6 @@ public class ScoutQbTableBdBiz extends BaseBiz implements IBaseQbBiz<ScoutQbTabl
     public List<ColumnsVo> getColumns() {
         List<ColumnsVo> list = new ArrayList<>();
 
-        list.add(new ColumnsVo("ncat", "子报类 主键"));
         list.add(new ColumnsVo("infoSource", "信源"));
         list.add(new ColumnsVo("sendUnit", "发报单位"));
         list.add(new ColumnsVo("recvUnit", "收报单位"));

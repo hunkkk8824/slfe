@@ -19,9 +19,10 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 
 <#--数据集群组code-->
-<input type="hidden" id="hd_dataSetCode" value="">
+<input type="hidden" id="hd_dataSetCode" value="${defaultdataSetCode}">
 
-<div class="ibox " id="exchange" style="width: 260px;float: left;margin-top: 10px;">
+
+<div class="ibox " id="exchange" style="width: 18%;height:850px;float: left;background-color:#eae9e7ba">
 
     <div id="jstree1">
         <ul>
@@ -29,22 +30,23 @@
                 <ul>
                 <#list dataSetCodeEnums as item>
 
-                    <li data-jstree='{"type":"html"}' data-code="${item.getValue()}">${tem.getDisplayName()}</li>
+                    <li data-jstree='{"type":"html"}' data-code="${item.getValue()}">${item.getDisplayName()}</li>
                 </#list>
+
 
                 </ul>
             </li>
         </ul>
     </div>
 </div>
-<div class="example-wrap" style="width: auto;float: left;">
+<div class="example-wrap" style="width: 80%;overflow-x:auto;margin-top: 10px;">
 
-
-    <table id="table" data-height="400" data-mobile-responsive="true">
+    <table id="table" data-mobile-responsive="true">
 
     </table>
 
 </div>
+
 
 <script type="text/javascript">
 
@@ -58,22 +60,20 @@
             var temp = {
                 limit: params.limit,    //页面大小
                 offset: params.offset,   //页码
-                dataSetCode: dataSetCode,
-                resourceCode: resourceCode,
-
+                dataSetCode: $("#hd_dataSetCode").val(),
             };
             return temp;
         };
 
 
         //根据表名称或列设置
-        function getColumnsByDataSetCode(code,callBack) {
+        function getColumnsByDataSetCode(callBack) {
 
             $.get(baseUrl + "/getColumnsByDataSetCode", {
-                dataSetCode:$("#hd_dataSetCode").val(),//表名称
+                dataSetCode: $("#hd_dataSetCode").val(),//表名称
             }, function (data) {
 
-                if(callBack){
+                if (callBack) {
                     callBack(data);
                 }
 
@@ -81,9 +81,9 @@
         }
 
 
-
         function initTable(columns) {
 
+            $('#table').bootstrapTable("destroy");
             $('#table').bootstrapTable({
                 classes: 'table table-responsive',
                 url: baseUrl + '/getDetail',    //请求后台的URL（*）
@@ -104,43 +104,51 @@
                 pageList: [15, 25, 50, 100],        //可供选择的每页的行数（*）
                 strictSearch: true,
                 clickToSelect: true,                //是否启用点击选中行
-                height: 800,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                height: 850,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "id",                     //每一行的唯一标识，一般为主键列
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                  //是否显示父子表
                 showRefresh: false,                   //刷新按钮
-                columns:columns,
+                columns: columns,
             });
 
         }
 
+        function jstreeInit() {
+            $('#jstree1').jstree({
+                'core': {
+                    'check_callback': true
+                },
+                'plugins': ['types', 'dnd'],
+
+
+            }).on("changed.jstree", function (e, d) {
+
+                //  console.log(d.node.data.code);
+                $("#hd_dataSetCode").val(d.node.data.code);
+
+                getColumnsByDataSetCode(initTable);
+
+            });
+
+            debugger
+
+            var dataSetCode= $("#hd_dataSetCode").val();
+            $('li[data-code="' +dataSetCode + '"] a').trigger('click');
+        }
+
+
         $(function () {
 
-            getColumnsByDataSetCode(dataSetCode,initTable);
+            getColumnsByDataSetCode(initTable);
+            jstreeInit();
+
 
         });
     })(base);
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
 
-        $('#jstree1').jstree({
-            'core': {
-                'check_callback': true
-            },
-            'plugins': ['types', 'dnd'],
-
-
-        }).on("changed.jstree", function (e, d) {
-
-          //  console.log(d.node.data.code);
-          $("#hd_dataSetCode").val(d.node.data.code);
-        });
-
-    });
-
-</script>
 </body>
 
 </html>
