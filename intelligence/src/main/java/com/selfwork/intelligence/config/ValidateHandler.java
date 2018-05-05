@@ -28,20 +28,20 @@ public class ValidateHandler {
     private RuleConfig ruleConfig;
 
     public ValidateResult validate(String datasetCode,JSONObject jsonObject){
-        ValidateResult result = new ValidateResult(true,null);
+        ValidateResult result = new ValidateResult(true);
 
         Map<String,TableRules> tableRulesMap = ruleConfig.getTableRulesMap();
         if(tableRulesMap==null || tableRulesMap.size() == 0){
             return result;
         }
 
-        if(Constant.QbSjRhmb.equals(datasetCode)){
-            ValidateResult rt = validateByTable(Constant.QbSjRhmb,jsonObject, result, tableRulesMap);
+        if(DataSetCodeEnum.QB_SJ_RHMB.getValue().equals(datasetCode)){
+            ValidateResult rt = validateByTable(DataSetCodeEnum.QB_SJ_RHMB.getValue(),jsonObject, result, tableRulesMap);
             if (rt != null) return rt;
         }else{
             // TODO: 2018/5/5  other table validate
         }
-        return null;
+        return result;
     }
 
     private ValidateResult validateByTable(String tableName,JSONObject jsonObject, ValidateResult result, Map<String, TableRules> tableRulesMap) {
@@ -61,15 +61,13 @@ public class ValidateHandler {
             // 默认不为空
             List<Rule> ruleList = value.getRuleList();
             for (Rule rule : ruleList) {
-                ValidateResult rt = validateByRule(columnValue,rule);
-                if(!rt.isPass()){
+                ValidateResult rt = validateByRule(columnValue, rule);
+                if (!rt.isPass()) {
                     return rt;
                 }
             }
-        }else{
-            // TODO: 2018/5/5  other table validate
         }
-        return null;
+        return new ValidateResult(true);
     }
 
     private ValidateResult validateByRule(String columnValue, Rule rule) {
