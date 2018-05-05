@@ -21,6 +21,7 @@ import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -33,62 +34,36 @@ public class DataQualityBiz extends BaseBiz {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private static List<DataSetContainer> containerList = new ArrayList<>();
-
-    @Autowired
-    QbSjDptdzzmbBiz qbSjDptdzzmbBiz;
-    @Autowired
-    QbSjDptssmbBiz qbSjDptssmbBiz;
-    @Autowired
-    QbSjJztsmbBiz qbSjJztsmbBiz;
-
-    @Autowired
-    QbSjMybBiz qbSjMybBiz;
-
-    @Autowired
-    QbSjRgmbBiz qbSjRgmbBiz;
-
-    @Autowired
-    QbSjRhmbBiz qbSjRhmbBiz;
-
-    @Autowired
-    QbSjYsdzzdzzcmbBiz qbSjYsdzzdzzcmbBiz;
-
-    @Autowired
-    QbSjYsdzzjgmbBiz qbSjYsdzzjgmbBiz;
-
-    @Autowired
-    QbSjYsdzztmmbBiz qbSjYsdzztmmbBiz;
-
-    @Autowired
-    QbSjYsmbBiz qbSjYsmbBiz;
-
-    @Autowired
-    ScoutQbTableBdBiz scoutQbTableBdBiz;
-
-
-    public DataQualityBiz() {
-
-        this.setContainerList(DataSetCodeEnum.QB_SJ_DPTDZZMB.getValue(), new DataSetContainer<QbSjDptdzzmbPOWithBLOBs>(), qbSjDptdzzmbBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_DPTSSMB.getValue(), new DataSetContainer<QbSjDptssmbPO>(), qbSjDptssmbBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_JZTSMB.getValue(), new DataSetContainer<QbSjJztsmbPO>(),qbSjJztsmbBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_MYB.getValue(), new DataSetContainer<QbSjMybPO>(), qbSjMybBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_RGMB.getValue(), new DataSetContainer<QbSjRgmbPO>(),qbSjRgmbBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_RHMB.getValue(), new DataSetContainer<QbSjRhmbPO>(),qbSjRhmbBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZDZZCMB.getValue(), new DataSetContainer<QbSjYsdzzdzzcmbPOWithBLOBs>(), qbSjYsdzzdzzcmbBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZJGMB.getValue(), new DataSetContainer<QbSjYsdzzjgmbPO>(), qbSjYsdzzjgmbBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZTMMB.getValue(), new DataSetContainer<QbSjYsdzztmmbPO>(), qbSjYsdzztmmbBiz);
-        this.setContainerList(DataSetCodeEnum.QB_SJ_YSMB.getValue(), new DataSetContainer<QbSjYsmbPO>(), qbSjYsmbBiz);
-        this.setContainerList(DataSetCodeEnum.SCOUT_QB_TABLE_BD.getValue(), new DataSetContainer<ScoutQbTableBdPO>(), scoutQbTableBdBiz);
-
-
-    }
+    @Autowired  //①  注入上下文
+    private ApplicationContext context;
 
     @Autowired
     private ResourcePOMapper resourcePOMapper;
 
     @Autowired
     private ResourceEtlLogPOMapper resourceEtlLogPOMapper;
+
+    private static List<DataSetContainer> containerList = null;
+
+    public DataQualityBiz() {
+
+        if (containerList == null) {
+            containerList = new ArrayList<>();
+            this.setContainerList(DataSetCodeEnum.QB_SJ_DPTDZZMB.getValue(), new DataSetContainer<QbSjDptdzzmbPOWithBLOBs>(), "qbSjDptdzzmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_DPTSSMB.getValue(), new DataSetContainer<QbSjDptssmbPO>(), "qbSjDptssmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_JZTSMB.getValue(), new DataSetContainer<QbSjJztsmbPO>(), "qbSjJztsmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_MYB.getValue(), new DataSetContainer<QbSjMybPO>(), "qbSjMybBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_RGMB.getValue(), new DataSetContainer<QbSjRgmbPO>(), "qbSjRgmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_RHMB.getValue(), new DataSetContainer<QbSjRhmbPO>(), "qbSjRhmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZDZZCMB.getValue(), new DataSetContainer<QbSjYsdzzdzzcmbPOWithBLOBs>(), "qbSjYsdzzdzzcmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZJGMB.getValue(), new DataSetContainer<QbSjYsdzzjgmbPO>(), "qbSjYsdzzjgmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZTMMB.getValue(), new DataSetContainer<QbSjYsdzztmmbPO>(), "qbSjYsdzztmmbBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_YSMB.getValue(), new DataSetContainer<QbSjYsmbPO>(), "qbSjYsmbBiz");
+            this.setContainerList(DataSetCodeEnum.SCOUT_QB_TABLE_BD.getValue(), new DataSetContainer<ScoutQbTableBdPO>(), "scoutQbTableBdBiz");
+        }
+
+
+    }
 
 
     public PageInfo<ResourceEtlLogVo> selectByResourceId(ResourceEtlLogQueryVo vo) {
@@ -246,22 +221,34 @@ public class DataQualityBiz extends BaseBiz {
         String resourceCode = queryVo.getResourceCode();
         Map<String, Object> map = new HashMap<>();
 
-        DataSetContainer container = containerList.stream().filter(m -> m.getDateSetCode().equals(dataSetCode)).findFirst().get();
+        DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
 
         this.startPage(queryVo);
-        IBaseQbBiz qbBiz = container.getBaseQbBiz();
+        IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
         PageInfo pageData = new PageInfo<>(qbBiz.getListByBatchNO(resourceCode));
         map.put("rows", pageData.getList());
         map.put("total", pageData.getTotal());
-        map.put("columns", qbBiz.getColumns());
         return map;
+    }
+
+
+    public List<ColumnsVo> getColumnsByDataSetCode(String dataSetCode) {
+
+        DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
+        IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
+        return qbBiz.getColumns();
+
+    }
+
+    private DataSetContainer getDataSetContainerByCode(String dataSetCode) {
+        return containerList.stream().filter(m -> m.getDateSetCode().equals(dataSetCode)).findFirst().get();
     }
 
     private void setContainerList(String dateSetCode,
                                   DataSetContainer container,
-                                  IBaseQbBiz baseQbBiz) {
+                                  String qbBizName) {
         container.setDateSetCode(dateSetCode);
-        container.setBaseQbBiz(baseQbBiz);
+        container.setQbBizName(qbBizName);
         containerList.add(container);
 
     }

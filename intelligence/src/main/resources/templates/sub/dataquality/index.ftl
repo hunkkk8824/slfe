@@ -27,7 +27,8 @@
     <div class="hidden-xs" id="toolbar" role="group">
 
     <#--前置交换机-->
-        <select id="sourceExchangerCode" name="sourceExchangerCode" class="form-control" style="width:250px;height: 30px">
+        <select id="sourceExchangerCode" name="sourceExchangerCode" class="form-control"
+                style="width:250px;height: 30px">
             <option value="">全部-前置交换机</option>
         <#list sourceExchangerCodeList as item>
             <option value="${item.code}">${item.name}</option>
@@ -123,6 +124,20 @@
             PostAjax(baseUrl + "/audit", request, refreshTable);
         }
 
+        //查看明细
+        function openDetail(request) {
+
+            var url = baseUrl + "/toDetail?dataSetCode=" + request.dataSetCode + "&&resourceCode=" + request.resourceCode;
+
+            layer.open({
+                type: 2,
+                title: '资源详情',
+                area: ['1310px', '600px'],
+                skin: 'layui-layer-rim', //加上边框
+                content: [encodeURI(url),]
+            });
+        }
+
         function cancelResource(request) {
             PostAjax(baseUrl + "/cancelResource", request, refreshTable);
         }
@@ -213,7 +228,15 @@
 
                 });
             },
+            'click .btn_detail': function (e, value, row, index) {
 
+                var request = {
+                    dataSetCode: row.datasetCode,
+                    resourceCode: row.code,
+                };
+
+                openDetail(request);
+            }
         };
 
         function initTable() {

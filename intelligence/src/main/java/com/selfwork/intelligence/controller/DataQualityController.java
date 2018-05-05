@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -157,11 +158,24 @@ public class DataQualityController extends BaseController {
 
     //查看明细
     @RequestMapping(value = "/toDetail")
-    public ModelAndView toDetail(@RequestParam String datesetCode) {
+    public ModelAndView toDetail(@RequestParam String dataSetCode,@RequestParam String resourceCode) {
 
         ModelAndView view = new ModelAndView("sub/dataQuality/detail");
-        view.addObject("datesetCode", datesetCode);
+        view.addObject("dataSetCode", dataSetCode);//资源明细对应的表名称
+        view.addObject("resourceCode", resourceCode);//批次号
         return view;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getColumnsByDataSetCode", method = RequestMethod.GET)
+    public List<ColumnsVo> getColumnsByDataSetCode(@RequestParam String dataSetCode) {
+
+        try {
+            return dataQualityBiz.getColumnsByDataSetCode(dataSetCode);
+        } catch (Exception e) {
+            logger.error("根据dataSetCode获取列异常："+ e.getMessage());
+        }
+        return new ArrayList<>();
     }
 
     @ResponseBody
@@ -171,7 +185,6 @@ public class DataQualityController extends BaseController {
         Map<String, Object> result = new HashMap<>();
         result.put("total", 0);
         result.put("rows", new ArrayList());
-
         try {
             return dataQualityBiz.getDetail(queryVo);
         } catch (Exception e) {
