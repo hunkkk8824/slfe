@@ -37,9 +37,6 @@ public class IndexController extends BaseController {
         modelAndView.addObject("userName",user.getRealname());
         modelAndView.addObject("nickname",user.getNickname());
 
-        // 获取用户权限菜单
-        //List<TreeMenuVo> menuList = userBiz.findTreeMenuByUserId(String.valueOf(getLoginUser().getUserid()), PermissionTypeEnum.MENU_PERMISSION.getValue().toString());
-       // modelAndView.addObject("menuList", menuList);
         return modelAndView;
     }
 
@@ -52,6 +49,10 @@ public class IndexController extends BaseController {
         UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
         modelAndView.addObject("userName",user.getRealname());
         modelAndView.addObject("nickname",user.getNickname());
+
+        // 获取用户权限菜单
+        List<TreeMenuVo> menuList = userBiz.findTreeMenuByUserId(getLoginUser().getUserid(), PermissionTypeEnum.MENU_PERMISSION.getValue());
+        modelAndView.addObject("menuList", menuList);
         return modelAndView;
 
     }
