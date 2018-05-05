@@ -3,19 +3,26 @@
         {
             "rule":"require",
             "value":"true",
-            "message":"ph不可为空"
+            "message":"批号不可为空"
+        }
+    ],
+    "ptbh":[
+            {
+                "rule":"require",
+                "value":"true",
+                "message":"平台编号不可为空"
+            }
+        ],
+    "ptmc":[
+        {
+            "rule":"require",
+            "value":"true",
+            "message":"平台名称不可为空"
         },
         {
             "rule":"minLength",
             "value":"6",
-            "message":"ph最短为6个字符"
-        }
-    ],
-    "hb":[
-        {
-            "rule":"require",
-            "value":"true",
-            "message":"hb不可为空"
+            "message":"平台名称最短为6个字符"
         }
     ]
 }

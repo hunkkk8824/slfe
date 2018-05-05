@@ -10,6 +10,10 @@ public class ValidateResult {
     public ValidateResult() {
     }
 
+    public ValidateResult(boolean pass) {
+        this.pass = pass;
+    }
+
     public ValidateResult(boolean pass, String message) {
         this.pass = pass;
         this.message = message;
