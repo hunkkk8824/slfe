@@ -26,14 +26,14 @@
 
     <div class="hidden-xs" id="toolbar" role="group">
 
-    <#--前置交换机-->
-        <select id="sourceExchangerCode" name="sourceExchangerCode" class="form-control"
-                style="width:250px;height: 30px">
-            <option value="">全部-前置交换机</option>
-        <#list sourceExchangerCodeList as item>
-            <option value="${item.code}">${item.name}</option>
-        </#list>
-        </select>
+    <#--&lt;#&ndash;前置交换机&ndash;&gt;-->
+        <#--<select id="sourceExchangerCode" name="sourceExchangerCode" class="form-control"-->
+                <#--style="width:250px;height: 30px">-->
+            <#--<option value="">全部-前置交换机</option>-->
+        <#--<#list sourceExchangerCodeList as item>-->
+            <#--<option value="${item.code}">${item.name}</option>-->
+        <#--</#list>-->
+        <#--</select>-->
 
 
     <#--资源编码-->
