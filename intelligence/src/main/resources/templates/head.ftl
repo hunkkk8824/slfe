@@ -27,6 +27,14 @@
         padding: 0;
     }
 
+    table th {
+        background-color: #3c3f41;
+    }
+
+    table th .th-inner {
+        color: white;
+    }
+
     .jstree-open > .jstree-anchor > .fa-folder:before {
         content: "\f07c";
     }

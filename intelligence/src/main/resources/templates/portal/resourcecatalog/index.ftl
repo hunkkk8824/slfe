@@ -12,7 +12,7 @@
             margin-left: 10px;
             margin-bottom: 10px;
             font-size: 12px;
-        }
+        };
     </style>
 </head>
 
@@ -24,13 +24,15 @@
 
 <div class="ibox " id="exchange" style="width: 18%;height:850px;float: left;background-color:#eae9e7ba">
 
+
     <div id="jstree1">
         <ul>
             <li class="jstree-open">数据集群组
                 <ul>
                 <#list dataSetCodeEnums as item>
 
-                    <li data-jstree='{"type":"html"}' data-code="${item.getValue()}">${item.getDisplayName()}</li>
+                    <li data-name="${item.getDisplayName()}"
+                        data-code="${item.getValue()}">${item.getDisplayName()}</li>
                 </#list>
 
 
@@ -69,6 +71,7 @@
         //根据表名称或列设置
         function getColumnsByDataSetCode(callBack) {
 
+            layer.load();
             $.get(baseUrl + "/getColumnsByDataSetCode", {
                 dataSetCode: $("#hd_dataSetCode").val(),//表名称
             }, function (data) {
@@ -110,6 +113,9 @@
                 detailView: false,                  //是否显示父子表
                 showRefresh: false,                   //刷新按钮
                 columns: columns,
+                onLoadSuccess: function (data) {
+                    layer.closeAll();
+                }
             });
 
         }
@@ -125,7 +131,10 @@
             }).on("changed.jstree", function (e, d) {
 
                 //  console.log(d.node.data.code);
-                $("#hd_dataSetCode").val(d.node.data.code);
+                if (d && d.node && d.node.data) {
+                    $("#hd_dataSetCode").val(d.node.data.code);
+                }
+
 
                 getColumnsByDataSetCode(initTable);
 
@@ -133,8 +142,8 @@
 
             debugger
 
-            var dataSetCode= $("#hd_dataSetCode").val();
-            $('li[data-code="' +dataSetCode + '"] a').trigger('click');
+            var dataSetCode = $("#hd_dataSetCode").val();
+            $('li[data-code="' + dataSetCode + '"] a').trigger('click');
         }
 
 
