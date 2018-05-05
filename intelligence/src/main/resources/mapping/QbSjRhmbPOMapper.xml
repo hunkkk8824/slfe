@@ -87,8 +87,8 @@
     from qb_sj_rhmb
     <where>
 
-      <if test="batchNo != null and batchNo!=''">
-        and BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+      <if test="_parameter != null and _parameter!=''">
+        and  BATCH_NO = #{batchNo,jdbcType=VARCHAR}
       </if>
     </where>
   </select>

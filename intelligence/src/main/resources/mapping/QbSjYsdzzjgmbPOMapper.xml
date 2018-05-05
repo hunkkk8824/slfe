@@ -54,14 +54,14 @@
     <include refid="Blob_Column_List" />
     from qb_sj_ysdzzjgmb
     <where>
-      <if test="batchNo != null and batchNo!=''">
+      <if test="_parameter != null and _parameter!=''">
         and  BATCH_NO = #{batchNo,jdbcType=VARCHAR}
       </if>
     </where>
   </select>
 
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />

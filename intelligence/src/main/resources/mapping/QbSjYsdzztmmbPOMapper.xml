@@ -54,7 +54,7 @@
     <include refid="Base_Column_List" />
     from qb_sj_ysdzztmmb
     <where>
-      <if test="batchNo != null and batchNo!=''">
+      <if test="_parameter != null and _parameter!=''">
         and  BATCH_NO = #{batchNo,jdbcType=VARCHAR}
       </if>
     </where>

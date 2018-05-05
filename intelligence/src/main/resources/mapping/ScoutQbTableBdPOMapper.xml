@@ -59,7 +59,7 @@
     <include refid="Blob_Column_List" />
     from scout_qb_table_bd
     <where>
-      <if test="batchNo != null and batchNo!=''">
+      <if test="_parameter != null and _parameter!=''">
         and  BATCH_NO = #{batchNo,jdbcType=VARCHAR}
       </if>
     </where>
