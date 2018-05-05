@@ -11,7 +11,10 @@ public class DataSetContainer<T> {
      * **/
     private String dateSetCode;
 
-    private IBaseQbBiz<T> baseQbBiz;
+    /**
+     * 数据集biz name
+     * **/
+    private String qbBizName;
 
     public String getDateSetCode() {
         return dateSetCode;
@@ -21,11 +24,11 @@ public class DataSetContainer<T> {
         this.dateSetCode = dateSetCode;
     }
 
-    public IBaseQbBiz<T> getBaseQbBiz() {
-        return baseQbBiz;
+    public String getQbBizName() {
+        return qbBizName;
     }
 
-    public void setBaseQbBiz(IBaseQbBiz<T> baseQbBiz) {
-        this.baseQbBiz = baseQbBiz;
+    public void setQbBizName(String qbBizName) {
+        this.qbBizName = qbBizName;
     }
 }
