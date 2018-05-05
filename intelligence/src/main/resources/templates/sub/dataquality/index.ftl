@@ -210,7 +210,7 @@
                     skin: 'layui-layer-rim', //加上边框
                     zIndex: 9999,
                     shift: Math.floor(Math.random() * 6 + 1),
-                    content: [base + "/dataQuality/toExportLog?resourceId=" + row.id, 'no'],
+                    content: [baseUrl + "/toExportLog?resourceId=" + row.id, 'no'],
                 });
             },
             'click .btn_cancelResource': function (e, value, row, index) {
@@ -241,7 +241,7 @@
 
         function initTable() {
             $('#table').bootstrapTable({
-                url: base + '/dataQuality/getList',    //请求后台的URL（*）
+                url: baseUrl + '/getList',    //请求后台的URL（*）
                 method: 'post',                     //请求方式（*）
                 contentType: "application/json",
                 toolbarAlign: 'right',               //工具栏对齐方式
@@ -259,7 +259,7 @@
                 pageList: [15, 25, 50, 100],        //可供选择的每页的行数（*）
                 strictSearch: true,
                 clickToSelect: true,                //是否启用点击选中行
-                height: 650,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                height: 800,                          //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "id",                     //每一行的唯一标识，一般为主键列
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                  //是否显示父子表

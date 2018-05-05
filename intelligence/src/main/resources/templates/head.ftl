@@ -20,6 +20,23 @@
 <link href="${base}/static/css/style.css?v=4.1.0" rel="stylesheet">
 <link href="${base}/static/css/plugins/footable/footable.core.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/laydate/theme/default/laydate.css" media="all">
+<link href="${base}/static/css/plugins/jsTree/style.min.css" rel="stylesheet">
+<style type="text/css">
+
+    select.form-control {
+        padding: 0;
+    }
+
+    .jstree-open > .jstree-anchor > .fa-folder:before {
+        content: "\f07c";
+    }
+
+    .jstree-default .jstree-icon.none {
+        width: 0;
+    }
+
+</style>
+
 
 <!-- 全局js -->
 <script src="${base}/static/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
@@ -35,12 +52,10 @@
         type="text/javascript"></script>
 <script src="${base}/static/js/plugins/footable/footable.all.min.js"></script>
 <script src="${base}/static/js/plugins/laydate/laydate.js"></script>
-<style type="text/css">
 
-    select.form-control {
-        padding: 0;
-    }
-</style>
+<!-- jsTree plugin javascript -->
+<script src="${base}/static/js/plugins/jsTree/jstree.min.js"></script>
+
 <script type="text/javascript">
     var base = '${base}';
 

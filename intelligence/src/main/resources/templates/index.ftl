@@ -76,20 +76,26 @@
                         数据质量管理</a>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="${base}/exchangeConfig/index" data-index="3">
+                    <a class="J_menuItem" href="${base}/exchangeConfig/index" data-index="4">
                         <i class="fa fa-gears"></i>
                         交换配置</a>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="${base}/dataQuality/index?menutype=2" data-index="3">
+                    <a class="J_menuItem" href="${base}/dataQuality/index?menutype=2" data-index="5">
                         <i class="fa fa-random"></i>
                         交换日志</a>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="${base}/monitorLog/index" data-index="3">
+                    <a class="J_menuItem" href="${base}/monitorLog/index" data-index="6">
                         <i class="fa fa-eye"></i>
                         监控日志</a>
                 </li>
+
+            <#--<li>-->
+                <#--<a class="J_menuItem" href="${base}/resourcecatalog/index" data-index="7">-->
+                    <#--<i class="fa fa-columns"></i>-->
+                    <#--资源目录</a>-->
+            <#--</li>-->
             </ul>
         </div>
     </nav>
