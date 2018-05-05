@@ -36,6 +36,22 @@ public class ExChangeConfigBiz extends BaseBiz {
         return new PageInfo<>(list);
     }
 
+    public List<ExchangerPO> findAllEnable() {
+
+        ExchangeConfigQueryVo queryVo = new ExchangeConfigQueryVo();
+        queryVo.setValid(true);
+        queryVo.setLimit(Integer.MAX_VALUE);
+        queryVo.setOffset(1);
+        PageInfo<ExchangerPO> pageInfo = this.findPage(queryVo);
+
+        if (pageInfo != null) {
+            return pageInfo.getList();
+        } else {
+            return null;
+        }
+
+    }
+
     public void save(ExchangerPO exchanger, UserInfoPO user) {
         exchanger.setCode(exchanger.getName());
         exchanger.setCreateTime(new Date());
@@ -52,8 +68,8 @@ public class ExChangeConfigBiz extends BaseBiz {
         exchanger.setLastModifyTime(new Date());
         exchanger.setLastModifyUser(String.valueOf(loginUser.getUserid()));
         int update = exchangerPOMapper.updateByPrimaryKeySelective(exchanger);
-        if(update != 1){
-            throw new BaseException(ResponseCodeTypeEnum.DATABASE_EXCEPTION.getValue(),ResponseCodeTypeEnum.DATABASE_EXCEPTION.getDisplayName());
+        if (update != 1) {
+            throw new BaseException(ResponseCodeTypeEnum.DATABASE_EXCEPTION.getValue(), ResponseCodeTypeEnum.DATABASE_EXCEPTION.getDisplayName());
         }
     }
 

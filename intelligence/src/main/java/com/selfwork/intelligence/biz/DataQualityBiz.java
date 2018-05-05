@@ -6,10 +6,7 @@ import com.selfwork.intelligence.biz.dataset.*;
 import com.selfwork.intelligence.common.BeanUtils;
 import com.selfwork.intelligence.common.Constant;
 import com.selfwork.intelligence.common.DateUtils;
-import com.selfwork.intelligence.common.enums.AuditStatusEnum;
-import com.selfwork.intelligence.common.enums.ImportStatusEnum;
-import com.selfwork.intelligence.common.enums.OperatorTypeEnum;
-import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
+import com.selfwork.intelligence.common.enums.*;
 import com.selfwork.intelligence.mapper.*;
 import com.selfwork.intelligence.model.*;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
@@ -26,8 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
-import javax.swing.text.html.Option;
+
 import java.util.*;
 
 @Service
@@ -71,17 +69,17 @@ public class DataQualityBiz extends BaseBiz {
 
     public DataQualityBiz() {
 
-        this.setContainerList(Constant.QbSjDptdzzmb, new DataSetContainer<QbSjDptdzzmbPOWithBLOBs>(), qbSjDptdzzmbBiz);
-        this.setContainerList(Constant.QbSjDptssmb, new DataSetContainer<QbSjDptssmbPO>(), qbSjDptssmbBiz);
-        this.setContainerList(Constant.QbSjJztsmb, new DataSetContainer<QbSjJztsmbPO>(),qbSjJztsmbBiz);
-        this.setContainerList(Constant.QbSjMyb, new DataSetContainer<QbSjMybPO>(), qbSjMybBiz);
-        this.setContainerList(Constant.QbSjRgmb, new DataSetContainer<QbSjRgmbPO>(),qbSjRgmbBiz);
-        this.setContainerList(Constant.QbSjRhmb, new DataSetContainer<QbSjRhmbPO>(),qbSjRhmbBiz);
-        this.setContainerList(Constant.QbSjYsdzzdzzcmb, new DataSetContainer<QbSjYsdzzdzzcmbPOWithBLOBs>(), qbSjYsdzzdzzcmbBiz);
-        this.setContainerList(Constant.QbSjYsdzzjgmb, new DataSetContainer<QbSjYsdzzjgmbPO>(), qbSjYsdzzdzzcmbBiz);
-        this.setContainerList(Constant.QbSjYsdzztmmb, new DataSetContainer<QbSjYsdzztmmbPO>(), qbSjYsdzztmmbBiz);
-        this.setContainerList(Constant.QbSjYsmb, new DataSetContainer<QbSjYsmbPO>(), qbSjYsmbBiz);
-        this.setContainerList(Constant.ScoutQbTableBd, new DataSetContainer<ScoutQbTableBdPO>(), scoutQbTableBdBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_DPTDZZMB.getValue(), new DataSetContainer<QbSjDptdzzmbPOWithBLOBs>(), qbSjDptdzzmbBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_DPTSSMB.getValue(), new DataSetContainer<QbSjDptssmbPO>(), qbSjDptssmbBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_JZTSMB.getValue(), new DataSetContainer<QbSjJztsmbPO>(),qbSjJztsmbBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_MYB.getValue(), new DataSetContainer<QbSjMybPO>(), qbSjMybBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_RGMB.getValue(), new DataSetContainer<QbSjRgmbPO>(),qbSjRgmbBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_RHMB.getValue(), new DataSetContainer<QbSjRhmbPO>(),qbSjRhmbBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZDZZCMB.getValue(), new DataSetContainer<QbSjYsdzzdzzcmbPOWithBLOBs>(), qbSjYsdzzdzzcmbBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZJGMB.getValue(), new DataSetContainer<QbSjYsdzzjgmbPO>(), qbSjYsdzzjgmbBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZTMMB.getValue(), new DataSetContainer<QbSjYsdzztmmbPO>(), qbSjYsdzztmmbBiz);
+        this.setContainerList(DataSetCodeEnum.QB_SJ_YSMB.getValue(), new DataSetContainer<QbSjYsmbPO>(), qbSjYsmbBiz);
+        this.setContainerList(DataSetCodeEnum.SCOUT_QB_TABLE_BD.getValue(), new DataSetContainer<ScoutQbTableBdPO>(), scoutQbTableBdBiz);
 
 
     }
@@ -124,6 +122,12 @@ public class DataQualityBiz extends BaseBiz {
 
     public PageInfo<DataQualitVo> findPage(DataQualityQueryVo queryVo) {
         try {
+
+//            if(StringUtils.isEmpty(queryVo.getSourceExchangerCode()))
+//            {
+//                logger.info("没有选择前置交换机");
+//                return null;
+//            }
 
             // 查询
             this.startPage(queryVo);

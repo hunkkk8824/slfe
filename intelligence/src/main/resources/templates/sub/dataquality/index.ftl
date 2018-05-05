@@ -18,16 +18,38 @@
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+
+<#--&lt;#&ndash;前置交换机code&ndash;&gt;-->
+<#--<input type="hidden" id="hd_sourceExchangerCode" value="">-->
+
 <div class="example-wrap">
 
     <div class="hidden-xs" id="toolbar" role="group">
+
+    <#--前置交换机-->
+        <select id="sourceExchangerCode" name="sourceExchangerCode" class="form-control" style="width:250px;height: 30px">
+            <option value="">全部-前置交换机</option>
+        <#list sourceExchangerCodeList as item>
+            <option value="${item.code}">${item.name}</option>
+        </#list>
+        </select>
+
+
+    <#--资源编码-->
         <input style="width:250px;" name="code" id="code" placeholder="资源编码"
                class="input-sm form-control">
 
+    <#--数据集编码-->
+        <select id="dataSetCode" name="dataSetCode" class="form-control" style="width:250px;height: 30px">
+            <option value="">全部-数据集编码</option>
+        <#list dataSetCodeEnums as item>
+            <option value="${item.getValue()}">${item.getDisplayName()}</option>
+        </#list>
+        </select>
 
     <#--审核状态-->
         <select id="auditStatus" name="auditStatus" class="form-control" style="width:143px;height: 30px">
-            <option value="">全部</option>
+            <option value="">全部-审核状态</option>
         <#list auditStatusEnums as item>
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
@@ -35,7 +57,7 @@
         </select>
     <#--质量评定-->
         <select id="quality" name="quality" class="form-control" style="width:143px;height: 30px">
-            <option value="">全部</option>
+            <option value="">全部-质量评定</option>
         <#list qualityEvaluateEnums as item>
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
@@ -63,6 +85,15 @@
         function initEvent() {
             //2.查询按钮事件
             $('#query').click(function () {
+
+//                var sourceExchangerCode = $("#hd_sourceExchangerCode").val();
+//                if (isEmpty(sourceExchangerCode)) {
+//
+//                    layer.msg("没有选择前置交换机");
+//                    return;
+//                }
+
+
                 $('#table').bootstrapTable('refresh', {
                     pageNumber: 1
                 });
@@ -76,9 +107,11 @@
             var temp = {
                 limit: params.limit,    //页面大小
                 offset: params.offset,   //页码
-                code: $('#code').val(),
+                code: $('#code').val(),//资源编码
+                dataSetCode: $('#dataSetCode').val(),//数据集编码
                 quality: $('#quality').val(),
                 auditStatus: $("#auditStatus").val(),
+                sourceExchangerCode: $("#sourceExchangerCode").val(),
 
             };
             return temp;
@@ -260,7 +293,6 @@
                             '<button  type="button" class="btn btn-primary btn-sm btn_log">查看日志</button> ',];
 
                         //数据质量管理
-
                         if (menutype == 1) {
                             btns.push('<button  type="button" class="btn btn-primary btn-sm btn_audit">审核</button>');
                             btns.push('<button  type="button" class="btn btn-primary btn-sm btn_judge">评定</button>');

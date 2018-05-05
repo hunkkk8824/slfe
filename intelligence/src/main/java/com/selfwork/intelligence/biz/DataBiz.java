@@ -3,6 +3,7 @@ package com.selfwork.intelligence.biz;
 import com.selfwork.intelligence.common.BaseException;
 import com.selfwork.intelligence.common.BeanUtils;
 import com.selfwork.intelligence.common.Constant;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.ResponseCodeTypeEnum;
 import com.selfwork.intelligence.data.MysqlJdbcTemplateFactory;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPO;
@@ -68,7 +69,7 @@ public class DataBiz {
     }
 
     private BeanPropertyRowMapper getRowMapper(String datasetCode) {
-        if(Constant.QbSjRhmb.equals(datasetCode)){
+        if(DataSetCodeEnum.QB_SJ_RHMB.getValue().equals(datasetCode)){
             return new BeanPropertyRowMapper<QbSjRhmbPO>(QbSjRhmbPO.class);
         }else {
             return new BeanPropertyRowMapper<QbSjDptdzzmbPO>(QbSjDptdzzmbPO.class);

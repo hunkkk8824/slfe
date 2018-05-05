@@ -2,7 +2,7 @@ package com.selfwork.intelligence.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.selfwork.intelligence.common.Constant;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.ValidateTypeEnum;
 import com.selfwork.intelligence.model.bo.ColumnRules;
 import com.selfwork.intelligence.model.bo.Rule;
@@ -66,6 +66,8 @@ public class ValidateHandler {
                     return rt;
                 }
             }
+        }else{
+            // TODO: 2018/5/5  other table validate
         }
         return null;
     }

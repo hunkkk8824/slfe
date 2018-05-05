@@ -6,6 +6,9 @@ import java.util.List;
 
 public class DataSetContainer<T> {
 
+    /**
+     * 数据集编码:表名称
+     * **/
     private String dateSetCode;
 
     private IBaseQbBiz<T> baseQbBiz;

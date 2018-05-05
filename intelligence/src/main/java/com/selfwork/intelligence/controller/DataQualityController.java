@@ -3,23 +3,21 @@ package com.selfwork.intelligence.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
+import com.selfwork.intelligence.biz.ExChangeConfigBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
-import com.selfwork.intelligence.model.po.RoleInfoPO;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
-import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,6 +32,9 @@ public class DataQualityController extends BaseController {
     @Autowired
     private DataQualityBiz dataQualityBiz;
 
+    @Autowired
+    ExChangeConfigBiz exChangeConfigBiz;
+
     @RequestMapping(value = "/index")
     public ModelAndView index(@RequestParam String menutype) {
 
@@ -41,6 +42,11 @@ public class DataQualityController extends BaseController {
         view.addObject("auditStatusEnums", AuditStatusEnum.values());
         view.addObject("qualityEvaluateEnums", QualityEvaluateEnum.values());
         view.addObject("menutype", menutype);
+        view.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
+
+
+        view.addObject("sourceExchangerCodeList", exChangeConfigBiz.findAllEnable());
+
         return view;
 
     }
@@ -52,6 +58,7 @@ public class DataQualityController extends BaseController {
         Map<String, Object> result = new HashMap<>();
         result.put("total", 0);
         result.put("rows", new ArrayList());
+
         try {
             PageInfo<DataQualitVo> pageData = dataQualityBiz.findPage(queryVo);
             if (pageData != null) {
@@ -158,7 +165,7 @@ public class DataQualityController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getDetail", method = RequestMethod.GET)
+    @RequestMapping(value = "/getDetail", method = RequestMethod.POST)
     public Map<String, Object> getDetail(@RequestBody DetailQueryVo queryVo) {
 
         Map<String, Object> result = new HashMap<>();
@@ -167,8 +174,7 @@ public class DataQualityController extends BaseController {
 
         try {
             return dataQualityBiz.getDetail(queryVo);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             logger.error("查看明细异常：" + e.getMessage(), e);
         }
         return result;

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.selfwork.intelligence.biz.dataset.QbSjRhmbBiz;
 import com.selfwork.intelligence.common.Constant;
 import com.selfwork.intelligence.common.DateUtils;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.ImportStatusEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.config.ValidateHandler;
@@ -194,7 +195,7 @@ public class ResourceBiz extends BaseBiz {
         boolean result = false;
         try{
             log.append(DateUtils.getCurrTimeStr()).append(" 开始写入数据").append("/r/n");
-            if(Constant.QbSjRhmb.equals(datasetCode)){
+            if(DataSetCodeEnum.QB_SJ_RHMB.getValue().equals(datasetCode)){
                 List<QbSjRhmbPO> myList = list.stream().parallel().map(obj -> {
                     QbSjRhmbPO o = (QbSjRhmbPO)obj;
                     o.setBatchNo(batchNo);
