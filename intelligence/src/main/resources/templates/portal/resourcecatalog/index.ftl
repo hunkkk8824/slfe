@@ -12,7 +12,9 @@
             margin-left: 10px;
             margin-bottom: 10px;
             font-size: 12px;
-        };
+        }
+
+        ;
     </style>
 </head>
 
@@ -131,12 +133,10 @@
             }).on("changed.jstree", function (e, d) {
 
                 //  console.log(d.node.data.code);
-                if (d && d.node && d.node.data) {
+                if (d && d.node && d.node.data && d.node.data.code) {
                     $("#hd_dataSetCode").val(d.node.data.code);
+                    getColumnsByDataSetCode(initTable);
                 }
-
-
-                getColumnsByDataSetCode(initTable);
 
             });
 
