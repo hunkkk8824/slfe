@@ -46,17 +46,17 @@
                 </select>
             </div>
         </div>
-        <#---->
-        <#--<div class="form-group">-->
-            <#--<label class="col-sm-3 control-label">是否是紧急联系人：</label>-->
-            <#--<div class="col-sm-8">-->
-                <#--<div class="checkbox-inline">-->
-                    <#--<label>-->
-                        <#--<input type="checkbox" name="isemergencycontact" value="1" style="margin-top:5px;">是-->
-                    <#--</label>-->
-                <#--</div>-->
-            <#--</div>-->
-        <#--</div>-->
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">是否是紧急联系人：</label>
+            <div class="col-sm-8">
+                <div class="checkbox-inline">
+                    <label>
+                        <input type="checkbox" name="isemergencycontact" value="1" style="margin-top:5px;">是
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-3 control-label"><font color="red">* </font>性别：</label>
             <div class="col-sm-8">
@@ -200,7 +200,7 @@
                     // }
                 },
                 submitHandler: function (form) { //不通过回调
-
+                    debugger
                     console.log("验证通过");
                     //var data = $(form).serialize();
                     var $isemergencycontact = null;
@@ -230,7 +230,7 @@
                         confirm_password: $("#confirm_password").val(),
                     }
                     layer.load(3);
-                    debugger
+
                     $.ajax({
                         type: 'post',
                         url: base + '/user/save',
