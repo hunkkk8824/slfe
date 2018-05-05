@@ -65,7 +65,11 @@
     ,
     <include refid="Blob_Column_List" />
     from qb_sj_dptssmb
-    where BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+    <where>
+      <if test="batchNo != null and batchNo!=''">
+        and  BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
