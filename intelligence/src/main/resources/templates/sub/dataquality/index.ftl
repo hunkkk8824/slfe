@@ -21,13 +21,18 @@
 <div class="example-wrap">
 
     <div class="hidden-xs" id="toolbar" role="group">
-        <input style="width:250px;" name="code" id="code" placeholder="资源编码"
-               class="input-sm form-control">
 
+        <#--资源编码-->
+        <select id="code" name="code" class="form-control" style="width:250px;height: 30px">
+            <option value="">全部-资源编码</option>
+        <#list dataSetCodeEnums as item>
+            <option value="${item.getValue()}">${item.getDisplayName()}</option>
+        </#list>
+        </select>
 
     <#--审核状态-->
         <select id="auditStatus" name="auditStatus" class="form-control" style="width:143px;height: 30px">
-            <option value="">全部</option>
+            <option value="">全部-审核状态</option>
         <#list auditStatusEnums as item>
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
@@ -35,7 +40,7 @@
         </select>
     <#--质量评定-->
         <select id="quality" name="quality" class="form-control" style="width:143px;height: 30px">
-            <option value="">全部</option>
+            <option value="">全部-质量评定</option>
         <#list qualityEvaluateEnums as item>
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>

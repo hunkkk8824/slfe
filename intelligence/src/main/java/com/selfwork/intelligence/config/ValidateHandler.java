@@ -2,7 +2,7 @@ package com.selfwork.intelligence.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.selfwork.intelligence.common.Constant;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.ValidateTypeEnum;
 import com.selfwork.intelligence.model.bo.ColumnRules;
 import com.selfwork.intelligence.model.bo.Rule;
@@ -34,8 +34,8 @@ public class ValidateHandler {
             return result;
         }
 
-        if(Constant.QbSjRhmb.equals(datasetCode)){
-            TableRules tableRules = tableRulesMap.get(Constant.QbSjRhmb);
+        if(DataSetCodeEnum.QB_SJ_RHMB.getValue().equals(datasetCode)){
+            TableRules tableRules = tableRulesMap.get(DataSetCodeEnum.QB_SJ_RHMB.getValue());
             if(tableRules == null){
                 return result;
             }

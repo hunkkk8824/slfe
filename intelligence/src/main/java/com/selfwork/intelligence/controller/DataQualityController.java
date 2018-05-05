@@ -4,6 +4,7 @@ package com.selfwork.intelligence.controller;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.model.po.RoleInfoPO;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
@@ -41,6 +42,8 @@ public class DataQualityController extends BaseController {
         view.addObject("auditStatusEnums", AuditStatusEnum.values());
         view.addObject("qualityEvaluateEnums", QualityEvaluateEnum.values());
         view.addObject("menutype", menutype);
+        view.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
+
         return view;
 
     }
@@ -158,7 +161,7 @@ public class DataQualityController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getDetail", method = RequestMethod.GET)
+    @RequestMapping(value = "/getDetail", method = RequestMethod.POST)
     public Map<String, Object> getDetail(@RequestBody DetailQueryVo queryVo) {
 
         Map<String, Object> result = new HashMap<>();

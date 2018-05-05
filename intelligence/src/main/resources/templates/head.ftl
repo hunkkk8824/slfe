@@ -35,6 +35,12 @@
         type="text/javascript"></script>
 <script src="${base}/static/js/plugins/footable/footable.all.min.js"></script>
 <script src="${base}/static/js/plugins/laydate/laydate.js"></script>
+<style type="text/css">
+
+    select.form-control {
+        padding: 0;
+    }
+</style>
 <script type="text/javascript">
     var base = '${base}';
 
