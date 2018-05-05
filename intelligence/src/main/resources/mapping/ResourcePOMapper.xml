@@ -45,6 +45,10 @@
         <include refid="Base_Column_List"/>
         from tb_resource
         <where>
+            valid=1
+            <if test="dataSetCode != null and dataSetCode!='' ">
+                AND DATASET_CODE=#{dataSetCode,jdbcType=VARCHAR}
+            </if>
             <if test="code != null and code!='' ">
                 AND CODE=#{code,jdbcType=VARCHAR}
             </if>
@@ -336,7 +340,8 @@
   </update>
 
     <select id="findPrepareResource" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from tb_resource
         where VALID = 1
         and IS_CANCEL=false

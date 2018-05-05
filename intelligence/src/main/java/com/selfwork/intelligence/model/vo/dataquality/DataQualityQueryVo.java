@@ -4,6 +4,9 @@ import com.selfwork.intelligence.model.vo.BaseQueryVo;
 
 public class DataQualityQueryVo extends BaseQueryVo {
 
+    /**数据集编码**/
+    private String dataSetCode;
+
     /**资源编码**/
     private String code;
 
@@ -16,6 +19,14 @@ public class DataQualityQueryVo extends BaseQueryVo {
      *审核状态：AuditStatusEnum
      * **/
     private Integer auditStatus;
+
+    public String getDataSetCode() {
+        return dataSetCode;
+    }
+
+    public void setDataSetCode(String dataSetCode) {
+        this.dataSetCode = dataSetCode;
+    }
 
     public String getCode() {
         return code;

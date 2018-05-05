@@ -2,15 +2,12 @@ package com.selfwork.intelligence.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataBiz;
-import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.ExChangeConfigBiz;
 import com.selfwork.intelligence.biz.ExchangeEtlBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.model.po.ExchangerEtlPO;
 import com.selfwork.intelligence.model.po.ExchangerPO;
-import com.selfwork.intelligence.model.vo.dataquality.DataQualitVo;
-import com.selfwork.intelligence.model.vo.dataquality.DataQualityQueryVo;
 import com.selfwork.intelligence.model.vo.exchangeConfig.ExchangeConfigQueryVo;
 import com.selfwork.intelligence.model.vo.exchangeConfig.ExchangeEtlQueryVo;
 import org.slf4j.Logger;

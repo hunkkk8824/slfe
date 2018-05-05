@@ -23,8 +23,12 @@
     <div class="hidden-xs" id="toolbar" role="group">
 
         <#--资源编码-->
-        <select id="code" name="code" class="form-control" style="width:250px;height: 30px">
-            <option value="">全部-资源编码</option>
+            <input style="width:250px;" name="code" id="code" placeholder="资源编码"
+                   class="input-sm form-control">
+
+        <#--数据集编码-->
+        <select id="dataSetCode" name="dataSetCode" class="form-control" style="width:250px;height: 30px">
+            <option value="">全部-数据集编码</option>
         <#list dataSetCodeEnums as item>
             <option value="${item.getValue()}">${item.getDisplayName()}</option>
         </#list>
@@ -81,7 +85,8 @@
             var temp = {
                 limit: params.limit,    //页面大小
                 offset: params.offset,   //页码
-                code: $('#code').val(),
+                code: $('#code').val(),//资源编码
+                dataSetCode:$('#dataSetCode').val(),//数据集编码
                 quality: $('#quality').val(),
                 auditStatus: $("#auditStatus").val(),
 
