@@ -1,4 +1,4 @@
-package com.selfwork.intelligence.controller;
+package com.selfwork.intelligence.controller.portal;
 
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
@@ -35,78 +35,14 @@ public class ResourceCatalogController {
     @RequestMapping(value = "/index")
     public ModelAndView index() {
 
-        ModelAndView view = new ModelAndView("sub/resourcecatalog/index");
-        view.addObject("auditStatusEnums", AuditStatusEnum.values());
-        view.addObject("qualityEvaluateEnums", QualityEvaluateEnum.values());
+        ModelAndView view = new ModelAndView("portal/resourcecatalog/index");
+
         view.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
 
-
-        view.addObject("sourceExchangerCodeList", exChangeConfigBiz.findAllEnable());
-
         return view;
 
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/getList", method = RequestMethod.POST)
-    public Map<String, Object> getList(@RequestBody DataQualityQueryVo queryVo) {
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("total", 0);
-        result.put("rows", new ArrayList());
-
-        try {
-            PageInfo<DataQualitVo> pageData = dataQualityBiz.findPage(queryVo);
-            if (pageData != null) {
-                result.put("total", pageData.getTotal());
-                result.put("rows", pageData.getList());
-            }
-        } catch (Exception e) {
-            logger.error("获取资源信息异常：" + e.getMessage(), e);
-        }
-        return result;
-    }
-
-    //查看明细
-    @RequestMapping(value = "/toDetail")
-    public ModelAndView toDetail(@RequestParam String dataSetCode,@RequestParam String resourceCode) {
-
-        ModelAndView view = new ModelAndView("sub/resourcecatalog/detail");
-        view.addObject("dataSetCode", dataSetCode);//资源明细对应的表名称
-        view.addObject("resourceCode", resourceCode);//批次号
-        return view;
-    }
-
-    //导入日志
-    @RequestMapping(value = "/toExportLog")
-    public ModelAndView exportLog(@RequestParam Integer resourceId) {
-
-        ModelAndView view = new ModelAndView("sub/resourcecatalog/exportLog");
-        view.addObject("resourceId", resourceId);
-        return view;
-
-    }
-
-    //etl日志
-    @ResponseBody
-    @RequestMapping(value = "/getExportLog", method = RequestMethod.POST)
-    public Map<String, Object> getExportLog(@RequestBody ResourceEtlLogQueryVo vo) {
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("total", 0);
-        result.put("rows", new ArrayList());
-
-        try {
-            PageInfo<ResourceEtlLogVo> pageData = dataQualityBiz.selectByResourceId(vo);
-            if (pageData != null) {
-                result.put("total", pageData.getTotal());
-                result.put("rows", pageData.getList());
-            }
-        } catch (Exception e) {
-            logger.error("获取导入日志异常：" + e.getMessage(), e);
-        }
-        return result;
-    }
 
     @ResponseBody
     @RequestMapping(value = "/getColumnsByDataSetCode", method = RequestMethod.GET)

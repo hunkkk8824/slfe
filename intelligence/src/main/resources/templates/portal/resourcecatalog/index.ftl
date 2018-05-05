@@ -18,17 +18,19 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 
-<#--前置交换机code-->
-<input type="hidden" id="hd_sourceExchangerCode" value="">
+<#--数据集群组code-->
+<input type="hidden" id="hd_dataSetCode" value="">
 
 <div class="ibox " id="exchange" style="width: 260px;float: left;margin-top: 10px;">
 
     <div id="jstree1">
         <ul>
-            <li class="jstree-open">前置机群组
+            <li class="jstree-open">数据集群组
                 <ul>
-                    <li data-jstree='{"type":"html"}' data-code="前置机001">前置机001</li>
-                    <li data-jstree='{"type":"html"}' data-code="前置机001">前置机002</li>
+                <#list dataSetCodeEnums as item>
+
+                    <li data-jstree='{"type":"html"}' data-code="${item.getValue()}">${tem.getDisplayName()}</li>
+                </#list>
 
                 </ul>
             </li>
@@ -38,42 +40,6 @@
 <div class="example-wrap" style="width: auto;float: left;">
 
 
-    <div class="hidden-xs" id="toolbar" role="group">
-
-
-    <#--资源编码-->
-        <input style="margin-left: 0;width:250px;" name="code" id="code" placeholder="资源编码"
-               class="input-sm form-control">
-
-    <#--数据集编码-->
-        <select id="dataSetCode" name="dataSetCode" class="form-control" style="width:250px;height: 30px">
-            <option value="">全部-数据集编码</option>
-        <#list dataSetCodeEnums as item>
-            <option value="${item.getValue()}">${item.getDisplayName()}</option>
-        </#list>
-        </select>
-
-    <#--审核状态-->
-        <select id="auditStatus" name="auditStatus" class="form-control" style="width:143px;height: 30px">
-            <option value="">全部-审核状态</option>
-        <#list auditStatusEnums as item>
-            <option value="${item.getValue()}">${item.getDisplayName()}</option>
-        </#list>
-
-        </select>
-    <#--质量评定-->
-        <select id="quality" name="quality" class="form-control" style="width:143px;height: 30px">
-            <option value="">全部-质量评定</option>
-        <#list qualityEvaluateEnums as item>
-            <option value="${item.getValue()}">${item.getDisplayName()}</option>
-        </#list>
-
-        </select>
-        <button id="query" type="button" class="btn btn-sm btn-primary">
-            搜索
-        </button>
-
-    </div>
     <table id="table" data-height="400" data-mobile-responsive="true">
 
     </table>
@@ -86,93 +52,41 @@
 
         var baseUrl = base + "/resourcecatalog";
 
-        //初始化事件
-        function initEvent() {
-            //2.查询按钮事件
-            $('#query').click(function () {
-
-                var sourceExchangerCode = $("#hd_sourceExchangerCode").val();
-                if (isEmpty(sourceExchangerCode)) {
-
-                    layer.msg("没有选择前置交换机");
-                    return;
-                }
-
-
-                $('#table').bootstrapTable('refresh', {
-                    pageNumber: 1
-                });
-            })
-
-        };
-
         //得到查询的参数
         function queryParams(params) {
 
             var temp = {
                 limit: params.limit,    //页面大小
                 offset: params.offset,   //页码
-                code: $('#code').val(),//资源编码
-                dataSetCode: $('#dataSetCode').val(),//数据集编码
-                quality: $('#quality').val(),
-                auditStatus: $("#auditStatus").val(),
-                sourceExchangerCode: $("#hd_sourceExchangerCode").val(),
+                dataSetCode: dataSetCode,
+                resourceCode: resourceCode,
 
             };
             return temp;
         };
 
 
-        //查看明细
-        function openDetail(request) {
+        //根据表名称或列设置
+        function getColumnsByDataSetCode(code,callBack) {
 
-            var url = baseUrl + "/toDetail?dataSetCode=" + request.dataSetCode + "&&resourceCode=" + request.resourceCode;
+            $.get(baseUrl + "/getColumnsByDataSetCode", {
+                dataSetCode:$("#hd_dataSetCode").val(),//表名称
+            }, function (data) {
 
-            layer.open({
-                type: 2,
-                title: '资源详情',
-                area: ['1510px', '600px'],
-                skin: 'layui-layer-rim', //加上边框
-                content: [encodeURI(url)]
+                if(callBack){
+                    callBack(data);
+                }
+
             });
         }
 
 
-        function refreshTable() {
-            $('#query').click();
-        }
 
+        function initTable(columns) {
 
-        window.operateEvents = {
-
-            'click .btn_detail': function (e, value, row, index) {
-
-                var request = {
-                    dataSetCode: row.datasetCode,
-                    resourceCode: row.code,
-                };
-
-                openDetail(request);
-            },
-            'click .btn_log': function (e, value, row, index) {
-
-                layer.open({
-                    type: 2,
-                    title: '导入日志',
-                    fix: false,
-                    shadeClose: true,
-                    area: ['820px', '740px'],
-                    skin: 'layui-layer-rim', //加上边框
-                    zIndex: 9999,
-                    shift: Math.floor(Math.random() * 6 + 1),
-                    content: [baseUrl + "/toExportLog?resourceId=" + row.id, 'no'],
-                });
-            },
-        };
-
-        function initTable() {
             $('#table').bootstrapTable({
-                url: baseUrl + '/getList',    //请求后台的URL（*）
+                classes: 'table table-responsive',
+                url: baseUrl + '/getDetail',    //请求后台的URL（*）
                 method: 'post',                     //请求方式（*）
                 contentType: "application/json",
                 toolbarAlign: 'right',               //工具栏对齐方式
@@ -186,7 +100,7 @@
                 queryParams: queryParams,//传递参数（*）
                 sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
                 pageNumber: 1,                       //初始化加载第一页，默认第一页
-                pageSize: 15,                       //每页的记录行数（*）
+                pageSize: 15,                      //每页的记录行数（*）
                 pageList: [15, 25, 50, 100],        //可供选择的每页的行数（*）
                 strictSearch: true,
                 clickToSelect: true,                //是否启用点击选中行
@@ -195,70 +109,15 @@
                 cardView: false,                    //是否显示详细视图
                 detailView: false,                  //是否显示父子表
                 showRefresh: false,                   //刷新按钮
-                columns: [{
-                    field: 'code',
-                    title: '资源编码'
-                }, {
-                    field: 'name',
-                    title: '资源名称'
-                }, {
-                    field: 'preImportTotalCount',
-                    title: '预导入总数'
-                }, {
-                    field: 'importSuccessCount',
-                    title: '导入成功数'
-                }, {
-                    field: 'importStatusStr',
-                    title: '导入状态'
-                }, {
-                    field: 'commitUserName',
-                    title: '提交人名称'
-                }, {
-                    field: 'commitTimeStr',
-                    title: '提交时间'
-                }, {
-                    field: 'auditUserName',
-                    title: '审核人名称'
-                }, {
-                    field: 'auditTimeStr',
-                    title: '审核时间'
-                }, {
-                    field: 'auditStatusStr',
-                    title: '审核状态'
-                }, {
-                    field: 'isCancelStr',
-                    title: '是否已撤销'
-                }, {
-                    field: 'qualityStr',
-                    title: '质量评定'
-                }, {
-                    field: 'sourceExchangerCode',
-                    title: '来源交换机编码'
-                }, {
-                    field: 'sourceExchangerName',
-                    title: '来源交换机名称'
-                }, {
-                    field: 'Button',
-                    title: '操作',
-                    formatter: function (value, row, index) {
-
-                        var btns = [
-                            '<button  type="button" class="btn btn-primary btn-sm btn_detail">查看数据</button> ',
-                            '<button  type="button" class="btn btn-primary btn-sm btn_log">查看日志</button> ',];
-
-                        return btns.join('');
-
-                    },
-                    events: operateEvents
-                }]
+                columns:columns,
             });
-
 
         }
 
         $(function () {
-            initTable();
-            initEvent();
+
+            getColumnsByDataSetCode(dataSetCode,initTable);
+
         });
     })(base);
 </script>
@@ -276,7 +135,7 @@
         }).on("changed.jstree", function (e, d) {
 
           //  console.log(d.node.data.code);
-          $("#hd_sourceExchangerCode").val(d.node.data.code);
+          $("#hd_dataSetCode").val(d.node.data.code);
         });
 
     });
