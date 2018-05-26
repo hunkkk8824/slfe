@@ -2,6 +2,7 @@ package com.selfwork.intelligence;
 
 import com.alibaba.fastjson.JSONReader;
 import com.selfwork.intelligence.model.DemoUser;
+import org.apache.shiro.util.StringUtils;
 import org.junit.Test;
 
 import java.io.StringReader;
@@ -181,8 +182,10 @@ public class FastJsonTest {
 
     @Test
     public void test (){
-        String name = "ffff.txt";
-        String a = name.split("\\.")[0];
-        System.out.println(a);
+//        String name = "ffff.txt";
+//        String a = name.split("\\.")[0];
+//        System.out.println(a);
+
+     String []aa=   StringUtils.split("roles[admin],[qyadmin]", ',', '[', ']', true, true);
     }
 }

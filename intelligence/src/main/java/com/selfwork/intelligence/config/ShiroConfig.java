@@ -52,9 +52,33 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/lo/logout", "logout");
 
         //配置权限和角色控制
+
+        //门户
         filterChainDefinitionMap.put("/portal/add", "roles[admin]");
-//        //add这个链接必须要有“权限添加”这个权限和具有“100002”这个角色才可以访问。
+
+
+        //其他
+        filterChainDefinitionMap.put("/user/**", "roles[admin]");
+        filterChainDefinitionMap.put("/role/**", "roles[admin]");
+        filterChainDefinitionMap.put("/resource/**", "roles[admin]");
+
+
+        //数据质量管理
+        filterChainDefinitionMap.put("/dataQuality/audit", "roles[admin]");
+        filterChainDefinitionMap.put("/dataQuality/evaluateQuality", "roles[admin]");
+        filterChainDefinitionMap.put("/dataQuality/cancelResource", "roles[admin]");
+
+
+        //交换配置
+        filterChainDefinitionMap.put("/exchangeConfig/save", "roles[admin]");
+        filterChainDefinitionMap.put("/exchangeConfig/edit", "roles[admin]");
+        filterChainDefinitionMap.put("/exchangeConfig/saveExchangeEtl", "roles[admin]");
+        filterChainDefinitionMap.put("/exchangeConfig/editExchangeEtl", "roles[admin]");
+
+
 //        filterChainDefinitionMap.put("/update", "roles[kljk]，perms[yyy]");
+
+
 
 
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
