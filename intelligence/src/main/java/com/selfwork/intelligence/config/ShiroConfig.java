@@ -38,6 +38,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/lo/login");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
+
         // 未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/errorpage/403.html");
 
@@ -51,7 +52,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/lo/logout", "logout");
 
         //配置权限和角色控制
-        filterChainDefinitionMap.put("/vehicle/add", "perms[dtjc:*]");
+        filterChainDefinitionMap.put("/portal/add", "roles[admin]");
 //        //add这个链接必须要有“权限添加”这个权限和具有“100002”这个角色才可以访问。
 //        filterChainDefinitionMap.put("/update", "roles[kljk]，perms[yyy]");
 
