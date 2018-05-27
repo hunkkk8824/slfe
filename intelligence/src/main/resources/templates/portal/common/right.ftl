@@ -1,49 +1,13 @@
 <div class="layui-col-md4">
     <dl class="fly-panel fly-list-one">
         <dt class="fly-panel-title">资源分类</dt>
+    <#list dataSetCodeEnums as item>
         <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>动向情报</a>
+            <a target="_blank" href="${base}/resourcecatalog/index?defaultdataSetCode=${item.getValue()}"><i class="layui-icon">&#xe60a;</i>${item.getDisplayName()}</a>
         </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报数据原始目标</a>
 
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_原始电子战通信目标</a>
+    </#list>
 
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_原始电子战激光目标</a>
-
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_电子战电子侦察目标</a>
-
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_融合目标</a>
-
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_人工目标</a>
-
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_密语</a>
-
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_技侦态势目标</a>
-
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_多平台水声目标</a>
-
-        </dd>
-        <dd>
-            <a href=""><i class="layui-icon">&#xe60a;</i>情报_数据_多平台电子战目标</a>
-
-        </dd>
 
         <!-- 无数据时 -->
         <!--

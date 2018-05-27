@@ -29,7 +29,7 @@
     <div class="layui-container">
         <ul class="layui-clear">
             <li class="layui-hide-xs layui-this"><a href="/portal/index">首页</a></li>
-            <li><a href="/resourcecatalog/index">资源目录</a></li>
+            <li><a href="/resourcecatalog/index" target="_blank">资源目录</a></li>
             <li><a href="/portal/add">数据交换</a></li>
             <#--<li><a href="">系统运行情况</a></li>-->
             <#--<li><a href="">数据服务监控</a></li>-->

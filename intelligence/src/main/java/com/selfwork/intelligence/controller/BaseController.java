@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class BaseController {
 
 
-    public UserInfoPO getLoginUser() {
+    protected UserInfoPO getLoginUser() {
         return (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
     }
 

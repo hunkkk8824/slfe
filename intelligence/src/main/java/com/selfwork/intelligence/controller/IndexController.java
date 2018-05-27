@@ -1,6 +1,7 @@
 package com.selfwork.intelligence.controller;
 
 import com.selfwork.intelligence.biz.UserBiz;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.PermissionTypeEnum;
 import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.user.TreeMenuVo;
@@ -36,7 +37,7 @@ public class IndexController extends BaseController {
         UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
         modelAndView.addObject("userName",user.getRealname());
         modelAndView.addObject("nickname",user.getNickname());
-
+        modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         return modelAndView;
     }
 

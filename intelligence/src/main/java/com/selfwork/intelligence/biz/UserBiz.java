@@ -51,6 +51,16 @@ public class UserBiz extends BaseBiz {
     @Autowired
     private UserRoleRelationPOMapper userRoleRelationPOMapper;
 
+    //是否为游客账户
+    public long touristRolsCount(Integer userid) {
+        List<RoleInfoPO> roleInfoPOS = getRolesByUserId(userid);
+        if (!CollectionUtils.isEmpty(roleInfoPOS)) {
+            return roleInfoPOS.stream().filter(role -> "gust".equals(role.getRolecode())).count();
+        } else {
+            return 0;
+        }
+    }
+
     /**
      * 保存用户
      *
@@ -187,7 +197,7 @@ public class UserBiz extends BaseBiz {
 
 
         if (request == null || CollectionUtils.isEmpty(request.getRoles())) {
-            return ;
+            return;
         }
 
         userRoleRelationPOMapper.deleteByUserId(request.getUserId());

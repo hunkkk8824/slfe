@@ -43,7 +43,7 @@
                 <p class="m-t-md">登录到多源情报系统</p>
                 <input id="username" type="text" class="form-control uname" placeholder="用户名"  />
                 <input id="password" type="password" class="form-control pword m-b" placeholder="密码" />
-                <#--<a href="">忘记密码了？</a>-->
+                <a id="a_tourist" href="javascript:void(0)">您可以以游客模式访问</a>
                 <button id="ajaxLogin" type="button" class="btn btn-success btn-block">登录</button>
             </form>
         </div>
@@ -58,10 +58,9 @@
 
 <script>
 
-    $("#ajaxLogin").click(function () {
 
-        var username = $("#username").val();
-        var password = $("#password").val();
+    function login(username,password) {
+
         $.post("/lo/ajaxLogin", {
             "username": username,
             "password": password
@@ -72,6 +71,17 @@
                 layer.msg(result.message);
             }
         });
+    }
+    $("#a_tourist").click(function () {
+
+        login("tourist","123456");
+    });
+
+    $("#ajaxLogin").click(function () {
+
+        var username = $("#username").val();
+        var password = $("#password").val();
+        login(username,password);
     });
 </script>
 </html>

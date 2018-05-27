@@ -23,7 +23,6 @@
 <#--数据集群组code-->
 <input type="hidden" id="hd_dataSetCode" value="${defaultdataSetCode}">
 
-
 <div class="ibox " id="exchange" style="width: 18%;height:850px;float: left;background-color:#eae9e7ba">
 
 
@@ -54,7 +53,8 @@
 
 <script type="text/javascript">
 
-    (function (base) {
+    var isTourist = parseInt('${touristRoleCount}') > 0;
+    (function (base, isTourist) {
 
         var baseUrl = base + "/resourcecatalog";
 
@@ -135,7 +135,9 @@
                 //  console.log(d.node.data.code);
                 if (d && d.node && d.node.data && d.node.data.code) {
                     $("#hd_dataSetCode").val(d.node.data.code);
-                    getColumnsByDataSetCode(initTable);
+
+                    initData();
+
                 }
 
             });
@@ -146,15 +148,24 @@
             $('li[data-code="' + dataSetCode + '"] a').trigger('click');
         }
 
+        function initData(){
+            //游客模式
+            if (isTourist) {
+
+            }
+            else {
+                getColumnsByDataSetCode(initTable);
+            }
+        }
 
         $(function () {
 
-            getColumnsByDataSetCode(initTable);
+            initData();
             jstreeInit();
 
 
         });
-    })(base);
+    })(base,isTourist);
 </script>
 
 

@@ -3,15 +3,18 @@ package com.selfwork.intelligence.controller.portal;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.ExChangeConfigBiz;
+import com.selfwork.intelligence.biz.UserBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
+import com.selfwork.intelligence.controller.BaseController;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +25,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/resourcecatalog")
-public class ResourceCatalogController {
+public class ResourceCatalogController extends BaseController {
 
     public final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -32,13 +35,17 @@ public class ResourceCatalogController {
     @Autowired
     ExChangeConfigBiz exChangeConfigBiz;
 
+    @Autowired
+    UserBiz userBiz;
+
     @RequestMapping(value = "/index")
-    public ModelAndView index() {
+    public ModelAndView index(@RequestParam(required = false) String defaultdataSetCode) {
 
         ModelAndView view = new ModelAndView("portal/resourcecatalog/index");
 
         view.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
-        view.addObject("defaultdataSetCode", DataSetCodeEnum.QB_SJ_RHMB.getValue());
+        view.addObject("defaultdataSetCode", StringUtils.isEmpty(defaultdataSetCode) ? DataSetCodeEnum.QB_SJ_RHMB.getValue() : defaultdataSetCode);
+        view.addObject("touristRoleCount", userBiz.touristRolsCount(this.getLoginUser().getUserid()));
         return view;
 
     }
@@ -51,7 +58,7 @@ public class ResourceCatalogController {
         try {
             return dataQualityBiz.getColumnsByDataSetCode(dataSetCode);
         } catch (Exception e) {
-            logger.error("根据dataSetCode获取列异常："+ e.getMessage());
+            logger.error("根据dataSetCode获取列异常：" + e.getMessage());
         }
         return new ArrayList<>();
     }
