@@ -3,6 +3,7 @@ package com.selfwork.intelligence.controller.portal;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.ExChangeConfigBiz;
+import com.selfwork.intelligence.biz.ResourcecatalogDescBiz;
 import com.selfwork.intelligence.biz.UserBiz;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
@@ -37,6 +38,9 @@ public class ResourceCatalogController extends BaseController {
 
     @Autowired
     UserBiz userBiz;
+
+    @Autowired
+    ResourcecatalogDescBiz resourcecatalogDescBiz;
 
     @RequestMapping(value = "/index")
     public ModelAndView index(@RequestParam(required = false) String defaultdataSetCode) {
@@ -85,7 +89,7 @@ public class ResourceCatalogController extends BaseController {
         Map<String, Object> result = new HashMap<>();
         result.put("data", "");
         try {
-            String data = dataQualityBiz.getTouristContent(dataSetCode);
+            String data = resourcecatalogDescBiz.getTouristContent(dataSetCode);
             result.put("data", data);
         } catch (Exception e) {
             logger.error("获取游客模式内容异常：" + e.getMessage(), e);

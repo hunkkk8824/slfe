@@ -7,6 +7,16 @@ public class DataSetDescPO {
 
     private String content;
 
+    private String datasetName;
+
+    public String getDatasetName() {
+        return datasetName;
+    }
+
+    public void setDatasetName(String datasetName) {
+        this.datasetName = datasetName;
+    }
+
     public Integer getId() {
         return id;
     }

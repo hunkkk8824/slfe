@@ -1,6 +1,9 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.DataSetDescPO;
+import com.selfwork.intelligence.model.vo.catalogdesc.CatalogDescQueryVo;
+
+import java.util.List;
 
 public interface DataSetDescPOMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,4 +20,6 @@ public interface DataSetDescPOMapper {
     int updateByPrimaryKeyWithBLOBs(DataSetDescPO record);
 
     int updateByPrimaryKey(DataSetDescPO record);
+
+    List<DataSetDescPO> findList(CatalogDescQueryVo queryVo);
 }

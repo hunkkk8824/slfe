@@ -1,93 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.selfwork.intelligence.mapper.DataSetDescPOMapper" >
-  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.DataSetDescPO" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="dataset_code" property="datasetCode" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.selfwork.intelligence.model.DataSetDescPO" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, dataset_code
+<mapper namespace="com.selfwork.intelligence.mapper.DataSetDescPOMapper">
+    <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.DataSetDescPO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="dataset_code" property="datasetCode" jdbcType="VARCHAR"/>
+        <result column="dataset_name" property="datasetName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.selfwork.intelligence.model.DataSetDescPO" extends="BaseResultMap">
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, dataset_code,dataset_name
   </sql>
-  <sql id="Blob_Column_List" >
+    <sql id="Blob_Column_List">
     content
   </sql>
 
-
-  <select id="selectByDataSetCode" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from tbdatasetdesc
-    where dataset_code = #{dataSetCode,jdbcType=VARCHAR}
-  </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from tbdatasetdesc
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="findList" resultMap="BaseResultMap"
+            parameterType="com.selfwork.intelligence.model.vo.catalogdesc.CatalogDescQueryVo">
+        select
+        <include refid="Base_Column_List"/>
+        from tbdatasetdesc
+    </select>
+    <select id="selectByDataSetCode" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tbdatasetdesc
+        where dataset_code = #{dataSetCode,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tbdatasetdesc
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbdatasetdesc
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.selfwork.intelligence.model.DataSetDescPO" >
-    insert into tbdatasetdesc (id, dataset_code, content
+    <insert id="insert" parameterType="com.selfwork.intelligence.model.DataSetDescPO">
+    insert into tbdatasetdesc (
+      id,
+     dataset_code,
+     dataset_name,
+     content
       )
-    values (#{id,jdbcType=INTEGER}, #{datasetCode,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+    values (
+    #{id,jdbcType=INTEGER},
+    #{datasetCode,jdbcType=VARCHAR},
+    #{datasetName,jdbcType=VARCHAR},
+    #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.DataSetDescPO" >
-    insert into tbdatasetdesc
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="datasetCode != null" >
-        dataset_code,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="datasetCode != null" >
-        #{datasetCode,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.DataSetDescPO" >
-    update tbdatasetdesc
-    <set >
-      <if test="datasetCode != null" >
-        dataset_code = #{datasetCode,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.selfwork.intelligence.model.DataSetDescPO" >
+    <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.DataSetDescPO">
+        insert into tbdatasetdesc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="datasetCode != null">
+                dataset_code,
+            </if>
+            <if test="datasetName != null">
+                dataset_name,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="datasetCode != null">
+                #{datasetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.DataSetDescPO">
+        update tbdatasetdesc
+        <set>
+            <if test="datasetCode != null">
+                dataset_code = #{datasetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="datasetName != null">
+                dataset_name = #{datasetName,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.selfwork.intelligence.model.DataSetDescPO">
     update tbdatasetdesc
     set dataset_code = #{datasetCode,jdbcType=VARCHAR},
+    dataset_name=#{datasetName,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.DataSetDescPO" >
+    <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.DataSetDescPO">
     update tbdatasetdesc
-    set dataset_code = #{datasetCode,jdbcType=VARCHAR}
+    set dataset_code = #{datasetCode,jdbcType=VARCHAR},
+     dataset_name=#{datasetName,jdbcType=VARCHAR},
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
