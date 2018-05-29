@@ -44,6 +44,10 @@ public class DataQualityBiz extends BaseBiz {
     @Autowired
     private ResourceEtlLogPOMapper resourceEtlLogPOMapper;
 
+    //数据集说明内容
+    @Autowired
+    private DataSetDescPOMapper dataSetDescPOMapper;
+
     private static List<DataSetContainer> containerList = null;
 
     public DataQualityBiz() {
@@ -250,5 +254,16 @@ public class DataQualityBiz extends BaseBiz {
         container.setQbBizName(qbBizName);
         containerList.add(container);
 
+    }
+
+    //获取游客模式内容
+    public String getTouristContent(String dataSetCode) {
+
+        DataSetDescPO item = dataSetDescPOMapper.selectByDataSetCode(dataSetCode);
+        if (item != null) {
+            return item.getContent();
+        }
+
+        return "";
     }
 }

@@ -65,5 +65,7 @@
         <!--<TABLE TABLENAME="QB_SJ_DPTSSMB" DOMAINOBJECTNAME="QBSJDPTSSMBPO" ENABLECOUNTBYEXAMPLE="FALSE" ENABLEUPDATEBYEXAMPLE="FALSE" ENABLEDELETEBYEXAMPLE="FALSE" ENABLESELECTBYEXAMPLE="FALSE" SELECTBYEXAMPLEQUERYID="FALSE" ></TABLE>-->
         <!--<TABLE TABLENAME="QB_SJ_DPTDZZMB" domainObjectName="QbSjDptdzzmbPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>-->
 
+        <table tableName="tbDataSetDesc" domainObjectName="DataSetDescPO" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+
     </context>
 </generatorConfiguration>

@@ -78,6 +78,23 @@ public class ResourceCatalogController extends BaseController {
         return result;
     }
 
+    //获取游客模式内容
+    @ResponseBody
+    @RequestMapping(value = "/getTouristContent", method = RequestMethod.GET)
+    public Map<String, Object> getTouristContent(@RequestParam String dataSetCode) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("data", "");
+        try {
+            String data = dataQualityBiz.getTouristContent(dataSetCode);
+            result.put("data", data);
+        } catch (Exception e) {
+            logger.error("获取游客模式内容异常：" + e.getMessage(), e);
+        }
+
+        return result;
+    }
+
+
 //    @RequestMapping(value = "/index")
 //    public ModelAndView index() {
 //

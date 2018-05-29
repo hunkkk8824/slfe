@@ -48,6 +48,7 @@
 
     </table>
 
+    <div id="touristContent"></div>
 </div>
 
 
@@ -142,16 +143,26 @@
 
             });
 
-            debugger
 
             var dataSetCode = $("#hd_dataSetCode").val();
             $('li[data-code="' + dataSetCode + '"] a').trigger('click');
         }
 
+        //获取游客模式内容
+        function getTouristContent(dataSetCode) {
+            $.get(baseUrl + '/getTouristContent',{
+                dataSetCode:dataSetCode
+            },function (res) {
+                $("#touristContent").html(res.data);
+            });
+        }
+
         function initData(){
+
+            debugger
             //游客模式
             if (isTourist) {
-
+                getTouristContent($("#hd_dataSetCode").val());
             }
             else {
                 getColumnsByDataSetCode(initTable);
