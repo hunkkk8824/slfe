@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -47,7 +44,7 @@ public class ResourcecatalogDescController extends BaseController {
         result.put("total", 0);
         result.put("rows", new ArrayList());
         try {
-            PageInfo<CatalogDescVo> pageData =  resourcecatalogDescBiz.findPage(queryVo);
+            PageInfo<CatalogDescVo> pageData = resourcecatalogDescBiz.findPage(queryVo);
             if (pageData != null) {
                 result.put("total", pageData.getTotal());
                 result.put("rows", pageData.getList());
@@ -57,4 +54,33 @@ public class ResourcecatalogDescController extends BaseController {
         }
         return result;
     }
+
+    @RequestMapping(value = "/toEdit")
+    public ModelAndView toEdit(@RequestParam Integer id) {
+        ModelAndView mv = new ModelAndView("sub/catalogdesc/edit");
+        CatalogDescVo vo = resourcecatalogDescBiz.selectByPrimaryKey(id);
+        mv.addObject("catalogDescVo", vo);
+        return mv;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public Map<String, Object> edit(@RequestBody CatalogDescVo vo) {
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("total", 0);
+        result.put("rows", new ArrayList());
+        try {
+            resourcecatalogDescBiz.edit(vo);
+            result.put("message", "操作成功");
+            result.put("code", 0);
+        } catch (Exception e) {
+            logger.error("编辑资源目录说明异常 e:{}" + e.getMessage(), e);
+            result.put("message", e.getMessage());
+            result.put("code", 0);
+        }
+
+        return result;
+    }
+
 }

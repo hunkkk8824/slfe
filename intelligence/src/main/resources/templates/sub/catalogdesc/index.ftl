@@ -20,22 +20,22 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="example-wrap">
 
-    <#--<div class="hidden-xs" id="toolbar" role="group">-->
-        <#--&lt;#&ndash;<input style="width:250px;" name="resourceName" id="resourceName" placeholder="资源名称"&ndash;&gt;-->
-               <#--&lt;#&ndash;class="input-sm form-control">&ndash;&gt;-->
+<#--<div class="hidden-xs" id="toolbar" role="group">-->
+<#--&lt;#&ndash;<input style="width:250px;" name="resourceName" id="resourceName" placeholder="资源名称"&ndash;&gt;-->
+<#--&lt;#&ndash;class="input-sm form-control">&ndash;&gt;-->
 
-        <#--&lt;#&ndash;<input style="width:250px;" name="startTime" id="startTime" placeholder="开始时间"&ndash;&gt;-->
-               <#--&lt;#&ndash;class="input-sm form-control">&ndash;&gt;-->
+<#--&lt;#&ndash;<input style="width:250px;" name="startTime" id="startTime" placeholder="开始时间"&ndash;&gt;-->
+<#--&lt;#&ndash;class="input-sm form-control">&ndash;&gt;-->
 
-        <#--&lt;#&ndash;<input style="width:250px;" name="endTime" id="endTime" placeholder="截止时间"&ndash;&gt;-->
-               <#--&lt;#&ndash;class="input-sm form-control">&ndash;&gt;-->
+<#--&lt;#&ndash;<input style="width:250px;" name="endTime" id="endTime" placeholder="截止时间"&ndash;&gt;-->
+<#--&lt;#&ndash;class="input-sm form-control">&ndash;&gt;-->
 
-    <#--&lt;#&ndash;&lt;#&ndash;</select>&ndash;&gt;&ndash;&gt;-->
-        <#--&lt;#&ndash;<button id="query" type="button" class="btn btn-sm btn-primary">&ndash;&gt;-->
-            <#--&lt;#&ndash;搜索&ndash;&gt;-->
-        <#--&lt;#&ndash;</button>&ndash;&gt;-->
+<#--&lt;#&ndash;&lt;#&ndash;</select>&ndash;&gt;&ndash;&gt;-->
+<#--&lt;#&ndash;<button id="query" type="button" class="btn btn-sm btn-primary">&ndash;&gt;-->
+<#--&lt;#&ndash;搜索&ndash;&gt;-->
+<#--&lt;#&ndash;</button>&ndash;&gt;-->
 
-    <#--</div>-->
+<#--</div>-->
     <table id="table" data-height="400" data-mobile-responsive="true">
 
     </table>
@@ -70,6 +70,21 @@
             $('#query').click();
         }
 
+        window.operateEvents = {
+            'click .btn_edit': function (e, value, row, index) {
+
+                var url = base + "/resourcecatalogDesc/toEdit?id=" + row.id;
+
+                layer.open({
+                    type: 2,
+                    title: '编辑',
+                    area: ['740px', '740px'],
+                    skin: 'layui-layer-rim', //加上边框
+                    content: [encodeURI(url)]
+                });
+
+            }
+        };
 
         function initTable() {
             $('#table').bootstrapTable({
@@ -99,10 +114,25 @@
                 columns: [{
                     field: 'datasetName',
                     title: '资源名称'
-                },{
+                }, {
                     field: 'datasetCode',
                     title: '资源编码'
-                },]
+                }, {
+                    field: 'Button',
+                    title: '操作',
+                    formatter: function (value, row, index) {
+
+                        var btns = [
+                            '<button  type="button" class="btn btn-primary btn-sm btn_edit' +
+                            '">编辑</button> ',
+                        ];
+
+
+                        return btns.join('');
+
+                    },
+                    events: operateEvents
+                }]
             });
         }
 

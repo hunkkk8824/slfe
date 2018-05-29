@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,5 +51,29 @@ public class ResourcecatalogDescBiz {
         }
 
         return "";
+    }
+
+    public CatalogDescVo selectByPrimaryKey(Integer id) {
+
+        DataSetDescPO po = dataSetDescPOMapper.selectByPrimaryKey(id);
+
+        if (po == null) {
+            return null;
+        }
+
+        CatalogDescVo vo = new CatalogDescVo();
+        BeanUtils.copy(po, vo);
+        if(StringUtils.isEmpty(vo.getContent())){
+            vo.setContent("");
+        }
+        return vo;
+    }
+
+
+    public int edit(CatalogDescVo vo) {
+
+        DataSetDescPO po = new DataSetDescPO();
+        BeanUtils.copy(vo, po);
+        return dataSetDescPOMapper.updateByPrimaryKeyWithBLOBs(po);
     }
 }

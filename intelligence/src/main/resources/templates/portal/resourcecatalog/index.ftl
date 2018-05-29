@@ -48,7 +48,7 @@
 
     </table>
 
-    <div id="touristContent"></div>
+    <div id="touristContent" style="padding-left: 20px"></div>
 </div>
 
 
