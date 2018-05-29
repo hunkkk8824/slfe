@@ -57,7 +57,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/portal/add", "roles[admin]");
 
         //后台
-        filterChainDefinitionMap.put("/manageindex/**", "roles[admin]");
+        //filterChainDefinitionMap.put("/manageindex/**", "roles[admin]");
 
         //其他
         filterChainDefinitionMap.put("/user/**", "roles[admin]");
