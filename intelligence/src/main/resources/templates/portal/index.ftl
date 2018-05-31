@@ -8,7 +8,25 @@
 <body>
 
 <#include "common/header.ftl"/>
+<script type="text/javascript">
 
+    var islogin=parseInt('${islogin}');
+debugger
+    function touristLogin() {
+
+        if(islogin==1){
+            return false;
+        }
+        $.post("/lo/ajaxLogin", {
+            "username": "tourist",
+            "password": "123456"
+        }, function (result) {
+            layer.msg("当前处于游客模式");
+        });
+    }
+
+    touristLogin();
+</script>
 <div class="layui-container">
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md8">

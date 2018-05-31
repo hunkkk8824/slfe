@@ -17,4 +17,5 @@ public class BaseController {
         return (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
     }
 
+
 }

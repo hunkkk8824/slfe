@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,14 +30,26 @@ public class IndexController extends BaseController {
 
     @Autowired
     UserBiz userBiz;
+
     //跳转到主页
     @RequestMapping(value = "index")
     public ModelAndView index() {
 
-        ModelAndView modelAndView=new ModelAndView("portal/index");
-        UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
-        modelAndView.addObject("userName",user.getRealname());
-        modelAndView.addObject("nickname",user.getNickname());
+        ModelAndView modelAndView = new ModelAndView("portal/index");
+
+        Object userPrincipal = SecurityUtils.getSubject().getPrincipal();
+
+        if (userPrincipal == null) {
+            modelAndView.addObject("islogin", 0);
+            modelAndView.addObject("userName", "游客");
+            modelAndView.addObject("nickname", "游客");
+        } else {
+            UserInfoPO user = (UserInfoPO) userPrincipal;
+            modelAndView.addObject("islogin", 1);
+            modelAndView.addObject("userName", user.getRealname());
+            modelAndView.addObject("nickname", user.getNickname());
+        }
+
         modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         return modelAndView;
     }
@@ -46,10 +59,10 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "manageindex")
     public ModelAndView manageindex() {
 
-        ModelAndView modelAndView=new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("index");
         UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
-        modelAndView.addObject("userName",user.getRealname());
-        modelAndView.addObject("nickname",user.getNickname());
+        modelAndView.addObject("userName", user.getRealname());
+        modelAndView.addObject("nickname", user.getNickname());
 
         // 获取用户权限菜单
         List<TreeMenuVo> menuList = userBiz.findTreeMenuByUserId(getLoginUser().getUserid(), PermissionTypeEnum.MENU_PERMISSION.getValue());
@@ -57,14 +70,16 @@ public class IndexController extends BaseController {
         return modelAndView;
 
     }
+
     /**
      * 退出
      *
      * @return
      */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
-    public ModelAndView logout() {
+    public ModelAndView logout(@RequestParam(required = false) Integer sys) {
         ModelAndView view = new ModelAndView("/login");
+        view.addObject("sys", sys);
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         try {
             //退出
