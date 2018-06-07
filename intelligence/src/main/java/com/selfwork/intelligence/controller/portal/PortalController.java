@@ -65,6 +65,7 @@ public class PortalController extends BaseController {
         UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
         modelAndView.addObject("userName",user.getRealname());
         modelAndView.addObject("nickname",user.getNickname());
+        modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         return modelAndView;
     }
 
