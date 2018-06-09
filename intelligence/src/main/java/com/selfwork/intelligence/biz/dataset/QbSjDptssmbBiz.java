@@ -15,6 +15,7 @@ import com.selfwork.intelligence.model.vo.dateset.QbSjDptssmbVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//情报_数据_多平台水声目标
 @Service
 public class QbSjDptssmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptssmbVO> {
 
