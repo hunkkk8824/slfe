@@ -1,9 +1,11 @@
 package com.selfwork.intelligence.model.vo.dateset;
 
-import java.util.Date;
+/**
+ * Created by zzc on 2018/6/10.
+ */
+public class QueryVo {
 
-public class QbSjMybQueryReq {
-    // ******************* zzc ******************
+    private String tableName;
     /**
      * 传感器编号
      */
@@ -16,8 +18,19 @@ public class QbSjMybQueryReq {
      * 平台类型 （有些表没有此字段）
      */
     private Integer ptlx;
-    // ******************* zzc ******************
 
+    /**
+     * 查询类型 1：经纬度，2：列表，3：echarts图
+     */
+    private Integer queryType;
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
 
     public String getCgqbh() {
         return cgqbh;
@@ -41,5 +54,13 @@ public class QbSjMybQueryReq {
 
     public void setPtlx(Integer ptlx) {
         this.ptlx = ptlx;
+    }
+
+    public Integer getQueryType() {
+        return queryType;
+    }
+
+    public void setQueryType(Integer queryType) {
+        this.queryType = queryType;
     }
 }

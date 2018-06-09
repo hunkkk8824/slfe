@@ -95,6 +95,16 @@
       <if test="sbsjEndTime!= null">
         sbsj >= #{sbsjEndTime,jdbcType=TIMESTAMP}
       </if>
+      <if test="cgqbh!= null">
+        cgqbh = #{cgqbh,jdbcType=VARCHAR}
+      </if>
+      <if test="ptbh!= null">
+        (ptbh = #{ptbh,jdbcType=VARCHAR} or
+        ptmc = #{ptbh,jdbcType=VARCHAR})
+      </if>
+      <if test="ptlx!= null">
+        ptlx = #{ptlx,jdbcType=INTEGER}
+      </if>
     </where>
   </select>
   <select id="getListByBatchNO" resultMap="BaseResultMap" parameterType="java.lang.String" >
