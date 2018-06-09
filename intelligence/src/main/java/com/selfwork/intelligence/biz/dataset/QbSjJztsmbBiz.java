@@ -120,12 +120,12 @@ public class QbSjJztsmbBiz extends BaseBiz implements IBaseQbBiz<QbSjJztsmbVO> {
         list.add(new ColumnsVo("aqxx", "安全信息"));
         list.add(new ColumnsVo("pxfs", "判性方式"));
         list.add(new ColumnsVo("hjgl", "航迹管理"));
-        list.add(new ColumnsVo("ph2", "批号2"));
-        list.add(new ColumnsVo("ptbh2", "平台编号2"));
-        list.add(new ColumnsVo("ptmc2", "平台名称2"));
-        list.add(new ColumnsVo("xylx2", "信源类型2"));
-        list.add(new ColumnsVo("twlb", "可阅台位列表"));
-        list.add(new ColumnsVo("hjzt", "航迹状态"));
+//        list.add(new ColumnsVo("ph2", "批号2"));
+//        list.add(new ColumnsVo("ptbh2", "平台编号2"));
+//        list.add(new ColumnsVo("ptmc2", "平台名称2"));
+//        list.add(new ColumnsVo("xylx2", "信源类型2"));
+//        list.add(new ColumnsVo("twlb", "可阅台位列表"));
+//        list.add(new ColumnsVo("hjzt", "航迹状态"));
         list.add(new ColumnsVo("jssb", "接收上报"));
         list.add(new ColumnsVo("twlbcd", "可阅台位列表长度"));
 

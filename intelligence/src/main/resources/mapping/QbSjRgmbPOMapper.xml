@@ -105,6 +105,18 @@
       <if test="ptlx!= null">
         ptlx = #{ptlx,jdbcType=INTEGER}
       </if>
+      <if test="startLongitude != null">
+        AND JD <![CDATA[ >= ]]> #{startLongitude,jdbcType=DECIMAL}
+      </if>
+      <if test="endLongitude != null">
+        AND JD <![CDATA[ <= ]]> #{endLongitude,jdbcType=DECIMAL}
+      </if>
+      <if test="startLatitude != null">
+        AND WD <![CDATA[ >= ]]> #{startLatitude,jdbcType=DECIMAL}
+      </if>
+      <if test="endLatitude != null">
+        AND WD <![CDATA[ <= ]]> #{endLatitude,jdbcType=DECIMAL}
+      </if>
     </where>
   </select>
   <select id="getListByBatchNO" resultMap="BaseResultMap" parameterType="java.lang.String" >

@@ -36,6 +36,14 @@ public class QbSjDptdzzmbQueryReq {
         this.sbsjStartTime = sbsjStartTime;
     }
 
+    public String getSbsjEndTime() {
+        return sbsjEndTime;
+    }
+
+    public void setSbsjEndTime(String sbsjEndTime) {
+        this.sbsjEndTime = sbsjEndTime;
+    }
+
     public Integer getJmbz() {
         return jmbz;
     }

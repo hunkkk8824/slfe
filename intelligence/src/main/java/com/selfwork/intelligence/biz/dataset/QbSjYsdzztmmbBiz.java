@@ -55,6 +55,7 @@ public class QbSjYsdzztmmbBiz extends BaseBiz implements IBaseQbBiz<QbSjYsdzztmm
         list.add(new ColumnsVo("jd", "经度"));
         list.add(new ColumnsVo("wd", "维度"));
         list.add(new ColumnsVo("gd", "高度"));
+        list.add(new ColumnsVo("jl", "距离"));
         list.add(new ColumnsVo("fw", "方位"));
         list.add(new ColumnsVo("yj", "仰角"));
         list.add(new ColumnsVo("jlwc", "距离误差"));
@@ -65,14 +66,15 @@ public class QbSjYsdzztmmbBiz extends BaseBiz implements IBaseQbBiz<QbSjYsdzztmm
         list.add(new ColumnsVo("zzpl", "终止频率"));
         list.add(new ColumnsVo("zxpl", "中心频率"));
         list.add(new ColumnsVo("xhdk", "信号贷款"));
-        list.add(new ColumnsVo("fwkxd", "方位可信度"));
+//        list.add(new ColumnsVo("fwkxd", "方位可信度"));
         list.add(new ColumnsVo("syfs", "通信频率使用方式"));
         list.add(new ColumnsVo("xhlx", "信号类型"));
         list.add(new ColumnsVo("tpsd", "调频速度"));
         list.add(new ColumnsVo("sl", "数量"));
         list.add(new ColumnsVo("fsysx", "辐射源属性"));
         list.add(new ColumnsVo("bwlx", "link11报文"));
-        list.add(new ColumnsVo("gsfs", "建议干扰方式"));
+        list.add(new ColumnsVo("ms", "IFF模式"));
+        list.add(new ColumnsVo("grfs", "建议干扰方式"));
         list.add(new ColumnsVo("grxhtzfs", "建议干扰信号调制方式"));
         list.add(new ColumnsVo("grxhys", "建议干扰信号样式"));
         list.add(new ColumnsVo("grtxzx", "干扰天线指向"));

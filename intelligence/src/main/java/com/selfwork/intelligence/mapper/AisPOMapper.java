@@ -1,6 +1,9 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.AisPO;
+import com.selfwork.intelligence.model.vo.dateset.AisQueryReq;
+
+import java.util.List;
 
 public interface AisPOMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface AisPOMapper {
     int updateByPrimaryKeySelective(AisPO record);
 
     int updateByPrimaryKey(AisPO record);
+
+    List<AisPO> getAisInfoList(AisQueryReq req);
 }

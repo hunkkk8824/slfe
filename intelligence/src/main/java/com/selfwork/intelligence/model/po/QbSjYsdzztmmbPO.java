@@ -38,6 +38,9 @@ public class QbSjYsdzztmmbPO {
 
     private BigDecimal gd;
 
+    //?距离
+    private BigDecimal jl;
+
     private BigDecimal fw;
 
     private BigDecimal yj;
@@ -58,7 +61,8 @@ public class QbSjYsdzztmmbPO {
 
     private BigDecimal xhdk;
 
-    private Integer fwkxd;
+//    //?
+//    private Integer fwkxd;
 
     private Integer syfs;
 
@@ -72,7 +76,12 @@ public class QbSjYsdzztmmbPO {
 
     private Integer bwlx;
 
-    private Integer gsfs;
+    //?IFF模式
+    private Integer ms;
+
+    //?
+    private Integer grfs;
+    //private Integer gsfs;
 
     private Integer grxhtzfs;
 
@@ -302,13 +311,13 @@ public class QbSjYsdzztmmbPO {
         this.xhdk = xhdk;
     }
 
-    public Integer getFwkxd() {
-        return fwkxd;
-    }
-
-    public void setFwkxd(Integer fwkxd) {
-        this.fwkxd = fwkxd;
-    }
+//    public Integer getFwkxd() {
+//        return fwkxd;
+//    }
+//
+//    public void setFwkxd(Integer fwkxd) {
+//        this.fwkxd = fwkxd;
+//    }
 
     public Integer getSyfs() {
         return syfs;
@@ -358,12 +367,12 @@ public class QbSjYsdzztmmbPO {
         this.bwlx = bwlx;
     }
 
-    public Integer getGsfs() {
-        return gsfs;
+    public BigDecimal getJl() {
+        return jl;
     }
 
-    public void setGsfs(Integer gsfs) {
-        this.gsfs = gsfs;
+    public void setJl(BigDecimal jl) {
+        this.jl = jl;
     }
 
     public Integer getGrxhtzfs() {
