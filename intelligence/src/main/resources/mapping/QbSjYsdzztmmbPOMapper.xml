@@ -19,6 +19,7 @@
     <result column="JD" property="jd" jdbcType="DECIMAL" />
     <result column="WD" property="wd" jdbcType="DECIMAL" />
     <result column="GD" property="gd" jdbcType="DECIMAL" />
+    <result column="JL" property="jl" jdbcType="DECIMAL" />
     <result column="FW" property="fw" jdbcType="DECIMAL" />
     <result column="YJ" property="yj" jdbcType="DECIMAL" />
     <result column="JLWC" property="jlwc" jdbcType="DECIMAL" />
@@ -29,14 +30,14 @@
     <result column="ZZPL" property="zzpl" jdbcType="DECIMAL" />
     <result column="ZXPL" property="zxpl" jdbcType="DECIMAL" />
     <result column="XHDK" property="xhdk" jdbcType="DECIMAL" />
-    <result column="FWKXD" property="fwkxd" jdbcType="INTEGER" />
     <result column="SYFS" property="syfs" jdbcType="INTEGER" />
     <result column="XHLX" property="xhlx" jdbcType="INTEGER" />
     <result column="TPSD" property="tpsd" jdbcType="INTEGER" />
     <result column="SL" property="sl" jdbcType="INTEGER" />
     <result column="FSYSX" property="fsysx" jdbcType="INTEGER" />
     <result column="BWLX" property="bwlx" jdbcType="INTEGER" />
-    <result column="GSFS" property="gsfs" jdbcType="INTEGER" />
+    <result column="MS" property="ms" jdbcType="INTEGER" />
+    <result column="GRFS" property="grfs" jdbcType="INTEGER" />
     <result column="GRXHTZFS" property="grxhtzfs" jdbcType="INTEGER" />
     <result column="GRXHYS" property="grxhys" jdbcType="INTEGER" />
     <result column="GRTXZX" property="grtxzx" jdbcType="DECIMAL" />
@@ -46,8 +47,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     ID, BATCH_NO, PH, PTBH, PTMC, PTLX, CGQBH, XYLX, HJZT, HJZL, JSSJ, SBSJ, SX, GJ, 
-    JD, WD, GD, FW, YJ, JLWC, FWWC, YJWC, TZYS, QSPL, ZZPL, ZXPL, XHDK, FWKXD, SYFS, 
-    XHLX, TPSD, SL, FSYSX, BWLX, GSFS, GRXHTZFS, GRXHYS, GRTXZX, PTXH, JXH, JJM
+    JD, WD, GD,JL, FW, YJ, JLWC, FWWC, YJWC, TZYS, QSPL, ZZPL, ZXPL, XHDK,  SYFS,
+    XHLX, TPSD, SL, FSYSX, BWLX,MS, GRFS, GRXHTZFS, GRXHYS, GRTXZX, PTXH, JXH, JJM
   </sql>
 
 
@@ -96,24 +97,24 @@
       PTBH, PTMC, PTLX, CGQBH, 
       XYLX, HJZT, HJZL, JSSJ, 
       SBSJ, SX, GJ, JD, 
-      WD, GD, FW, YJ, 
+      WD, GD, JL,FW, YJ,
       JLWC, FWWC, YJWC, TZYS, 
       QSPL, ZZPL, ZXPL, XHDK, 
-      FWKXD, SYFS, XHLX, 
-      TPSD, SL, FSYSX, BWLX, 
-      GSFS, GRXHTZFS, GRXHYS, 
+       SYFS, XHLX,
+      TPSD, SL, FSYSX, BWLX, MS,
+      GRFS, GRXHTZFS, GRXHYS,
       GRTXZX, PTXH, JXH, 
       JJM)
     values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{ph,jdbcType=INTEGER}, 
       #{ptbh,jdbcType=INTEGER}, #{ptmc,jdbcType=VARCHAR}, #{ptlx,jdbcType=INTEGER}, #{cgqbh,jdbcType=INTEGER}, 
       #{xylx,jdbcType=INTEGER}, #{hjzt,jdbcType=INTEGER}, #{hjzl,jdbcType=INTEGER}, #{jssj,jdbcType=TIMESTAMP}, 
       #{sbsj,jdbcType=TIMESTAMP}, #{sx,jdbcType=INTEGER}, #{gj,jdbcType=INTEGER}, #{jd,jdbcType=DECIMAL}, 
-      #{wd,jdbcType=DECIMAL}, #{gd,jdbcType=DECIMAL}, #{fw,jdbcType=DECIMAL}, #{yj,jdbcType=DECIMAL}, 
+      #{wd,jdbcType=DECIMAL}, #{gd,jdbcType=DECIMAL},#{jl,jdbcType=DECIMAL}, #{fw,jdbcType=DECIMAL}, #{yj,jdbcType=DECIMAL},
       #{jlwc,jdbcType=DECIMAL}, #{fwwc,jdbcType=DECIMAL}, #{yjwc,jdbcType=DECIMAL}, #{tzys,jdbcType=INTEGER}, 
-      #{qspl,jdbcType=DECIMAL}, #{zzpl,jdbcType=DECIMAL}, #{zxpl,jdbcType=DECIMAL}, #{xhdk,jdbcType=DECIMAL}, 
-      #{fwkxd,jdbcType=INTEGER}, #{syfs,jdbcType=INTEGER}, #{xhlx,jdbcType=INTEGER}, 
-      #{tpsd,jdbcType=INTEGER}, #{sl,jdbcType=INTEGER}, #{fsysx,jdbcType=INTEGER}, #{bwlx,jdbcType=INTEGER}, 
-      #{gsfs,jdbcType=INTEGER}, #{grxhtzfs,jdbcType=INTEGER}, #{grxhys,jdbcType=INTEGER}, 
+      #{qspl,jdbcType=DECIMAL}, #{zzpl,jdbcType=DECIMAL}, #{zxpl,jdbcType=DECIMAL}, #{xhdk,jdbcType=DECIMAL},
+      #{syfs,jdbcType=INTEGER}, #{xhlx,jdbcType=INTEGER},
+      #{tpsd,jdbcType=INTEGER}, #{sl,jdbcType=INTEGER}, #{fsysx,jdbcType=INTEGER}, #{bwlx,jdbcType=INTEGER},  #{ms,jdbcType=INTEGER},
+      #{grfs,jdbcType=INTEGER}, #{grxhtzfs,jdbcType=INTEGER}, #{grxhys,jdbcType=INTEGER},
       #{grtxzx,jdbcType=DECIMAL}, #{ptxh,jdbcType=VARCHAR}, #{jxh,jdbcType=VARCHAR}, 
       #{jjm,jdbcType=VARCHAR})
   </insert>
@@ -171,6 +172,9 @@
       <if test="gd != null" >
         GD,
       </if>
+      <if test="jl != null" >
+        JL,
+      </if>
       <if test="fw != null" >
         FW,
       </if>
@@ -201,9 +205,7 @@
       <if test="xhdk != null" >
         XHDK,
       </if>
-      <if test="fwkxd != null" >
-        FWKXD,
-      </if>
+
       <if test="syfs != null" >
         SYFS,
       </if>
@@ -222,8 +224,11 @@
       <if test="bwlx != null" >
         BWLX,
       </if>
-      <if test="gsfs != null" >
-        GSFS,
+      <if test="ms != null" >
+        ms,
+      </if>
+      <if test="grfs != null" >
+        GRFS,
       </if>
       <if test="grxhtzfs != null" >
         GRXHTZFS,
@@ -296,6 +301,9 @@
       <if test="gd != null" >
         #{gd,jdbcType=DECIMAL},
       </if>
+      <if test="jl != null" >
+        #{jl,jdbcType=DECIMAL},
+      </if>
       <if test="fw != null" >
         #{fw,jdbcType=DECIMAL},
       </if>
@@ -326,9 +334,7 @@
       <if test="xhdk != null" >
         #{xhdk,jdbcType=DECIMAL},
       </if>
-      <if test="fwkxd != null" >
-        #{fwkxd,jdbcType=INTEGER},
-      </if>
+
       <if test="syfs != null" >
         #{syfs,jdbcType=INTEGER},
       </if>
@@ -347,8 +353,11 @@
       <if test="bwlx != null" >
         #{bwlx,jdbcType=INTEGER},
       </if>
-      <if test="gsfs != null" >
-        #{gsfs,jdbcType=INTEGER},
+      <if test="ms != null" >
+        #{ms,jdbcType=INTEGER},
+      </if>
+      <if test="grfs != null" >
+        #{grfs,jdbcType=INTEGER},
       </if>
       <if test="grxhtzfs != null" >
         #{grxhtzfs,jdbcType=INTEGER},
@@ -421,6 +430,9 @@
       <if test="gd != null" >
         GD = #{gd,jdbcType=DECIMAL},
       </if>
+      <if test="jl != null" >
+        JL = #{jl,jdbcType=DECIMAL},
+      </if>
       <if test="fw != null" >
         FW = #{fw,jdbcType=DECIMAL},
       </if>
@@ -451,9 +463,7 @@
       <if test="xhdk != null" >
         XHDK = #{xhdk,jdbcType=DECIMAL},
       </if>
-      <if test="fwkxd != null" >
-        FWKXD = #{fwkxd,jdbcType=INTEGER},
-      </if>
+
       <if test="syfs != null" >
         SYFS = #{syfs,jdbcType=INTEGER},
       </if>
@@ -472,8 +482,11 @@
       <if test="bwlx != null" >
         BWLX = #{bwlx,jdbcType=INTEGER},
       </if>
-      <if test="gsfs != null" >
-        GSFS = #{gsfs,jdbcType=INTEGER},
+      <if test="ms != null" >
+        MS = #{ms,jdbcType=INTEGER},
+      </if>
+      <if test="grfs != null" >
+        GRFS = #{grfs,jdbcType=INTEGER},
       </if>
       <if test="grxhtzfs != null" >
         GRXHTZFS = #{grxhtzfs,jdbcType=INTEGER},
@@ -514,6 +527,7 @@
       JD = #{jd,jdbcType=DECIMAL},
       WD = #{wd,jdbcType=DECIMAL},
       GD = #{gd,jdbcType=DECIMAL},
+      JL = #{jl,jdbcType=DECIMAL},
       FW = #{fw,jdbcType=DECIMAL},
       YJ = #{yj,jdbcType=DECIMAL},
       JLWC = #{jlwc,jdbcType=DECIMAL},
@@ -524,14 +538,14 @@
       ZZPL = #{zzpl,jdbcType=DECIMAL},
       ZXPL = #{zxpl,jdbcType=DECIMAL},
       XHDK = #{xhdk,jdbcType=DECIMAL},
-      FWKXD = #{fwkxd,jdbcType=INTEGER},
       SYFS = #{syfs,jdbcType=INTEGER},
       XHLX = #{xhlx,jdbcType=INTEGER},
       TPSD = #{tpsd,jdbcType=INTEGER},
       SL = #{sl,jdbcType=INTEGER},
       FSYSX = #{fsysx,jdbcType=INTEGER},
       BWLX = #{bwlx,jdbcType=INTEGER},
-      GSFS = #{gsfs,jdbcType=INTEGER},
+      MS = #{ms,jdbcType=INTEGER},
+      GRFS = #{grfs,jdbcType=INTEGER},
       GRXHTZFS = #{grxhtzfs,jdbcType=INTEGER},
       GRXHYS = #{grxhys,jdbcType=INTEGER},
       GRTXZX = #{grtxzx,jdbcType=DECIMAL},
