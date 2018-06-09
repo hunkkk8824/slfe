@@ -7,8 +7,6 @@ public class QbSjRgmbQueryReq {
     //军民标识
     private Integer jmbz;
 
-
-
     //机舰名
     private String jjm;
 
@@ -19,6 +17,11 @@ public class QbSjRgmbQueryReq {
     private String sbsjStartTime;
     private String sbsjEndTime;
 
+    //区域对角线
+    private double startLongitude;
+    private double startLatitude;
+    private double endLongitude;
+    private double endLatitude;
 
     public String getSbsjStartTime() {
         return sbsjStartTime;
@@ -59,5 +62,37 @@ public class QbSjRgmbQueryReq {
 
     public void setJmbz(Integer jmbz) {
         this.jmbz = jmbz;
+    }
+
+    public double getStartLongitude() {
+        return startLongitude;
+    }
+
+    public void setStartLongitude(double startLongitude) {
+        this.startLongitude = startLongitude;
+    }
+
+    public double getStartLatitude() {
+        return startLatitude;
+    }
+
+    public void setStartLatitude(double startLatitude) {
+        this.startLatitude = startLatitude;
+    }
+
+    public double getEndLongitude() {
+        return endLongitude;
+    }
+
+    public void setEndLongitude(double endLongitude) {
+        this.endLongitude = endLongitude;
+    }
+
+    public double getEndLatitude() {
+        return endLatitude;
+    }
+
+    public void setEndLatitude(double endLatitude) {
+        this.endLatitude = endLatitude;
     }
 }
