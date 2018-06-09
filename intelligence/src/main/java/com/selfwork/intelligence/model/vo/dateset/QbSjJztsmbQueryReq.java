@@ -9,23 +9,23 @@ public class QbSjJztsmbQueryReq {
 
 
     //发报时间
-    private Date fbsjStartTime;
-    private Date fbsjEndTime;
+    private String fbsjStartTime;
+    private String fbsjEndTime;
 
 
-    public Date getFbsjStartTime() {
+    public String getFbsjStartTime() {
         return fbsjStartTime;
     }
 
-    public void setFbsjStartTime(Date fbsjStartTime) {
+    public void setFbsjStartTime(String fbsjStartTime) {
         this.fbsjStartTime = fbsjStartTime;
     }
 
-    public Date getFbsjEndTime() {
+    public String getFbsjEndTime() {
         return fbsjEndTime;
     }
 
-    public void setFbsjEndTime(Date fbsjEndTime) {
+    public void setFbsjEndTime(String fbsjEndTime) {
         this.fbsjEndTime = fbsjEndTime;
     }
 
