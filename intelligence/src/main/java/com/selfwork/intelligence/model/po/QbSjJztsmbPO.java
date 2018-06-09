@@ -166,17 +166,17 @@ public class QbSjJztsmbPO {
 
     private Integer hjgl;
 
-    private String ptmc2;
+//    private String ptmc2;
+//
+//    private Integer xylx2;
 
-    private Integer xylx2;
-
-    private Integer hjzt;
+//    private Integer hjzt;
 
     private Integer jssb;
 
     private Integer twlbcd;
 
-    private byte[] twlb;
+//    private byte[] twlb;
 
     public Integer getId() {
         return id;
@@ -826,29 +826,29 @@ public class QbSjJztsmbPO {
         this.hjgl = hjgl;
     }
 
-    public String getPtmc2() {
-        return ptmc2;
-    }
+//    public String getPtmc2() {
+//        return ptmc2;
+//    }
+//
+//    public void setPtmc2(String ptmc2) {
+//        this.ptmc2 = ptmc2 == null ? null : ptmc2.trim();
+//    }
+//
+//    public Integer getXylx2() {
+//        return xylx2;
+//    }
+//
+//    public void setXylx2(Integer xylx2) {
+//        this.xylx2 = xylx2;
+//    }
 
-    public void setPtmc2(String ptmc2) {
-        this.ptmc2 = ptmc2 == null ? null : ptmc2.trim();
-    }
+//    public Integer getHjzt() {
+//        return hjzt;
+//    }
 
-    public Integer getXylx2() {
-        return xylx2;
-    }
-
-    public void setXylx2(Integer xylx2) {
-        this.xylx2 = xylx2;
-    }
-
-    public Integer getHjzt() {
-        return hjzt;
-    }
-
-    public void setHjzt(Integer hjzt) {
-        this.hjzt = hjzt;
-    }
+//    public void setHjzt(Integer hjzt) {
+//        this.hjzt = hjzt;
+//    }
 
     public Integer getJssb() {
         return jssb;
@@ -866,11 +866,11 @@ public class QbSjJztsmbPO {
         this.twlbcd = twlbcd;
     }
 
-    public byte[] getTwlb() {
-        return twlb;
-    }
-
-    public void setTwlb(byte[] twlb) {
-        this.twlb = twlb;
-    }
+//    public byte[] getTwlb() {
+//        return twlb;
+//    }
+//
+//    public void setTwlb(byte[] twlb) {
+//        this.twlb = twlb;
+//    }
 }
