@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.selfwork.intelligence.mapper.AisPOMapper" >
+  <resultMap id="BaseResultMap" type="com.selfwork.intelligence.model.po.AisPO" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="nav_status" property="navStatus" jdbcType="INTEGER" />
+    <result column="rot" property="rot" jdbcType="DECIMAL" />
+    <result column="sog" property="sog" jdbcType="DECIMAL" />
+    <result column="pos_acc" property="posAcc" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="cog" property="cog" jdbcType="INTEGER" />
+    <result column="true_head" property="trueHead" jdbcType="INTEGER" />
+    <result column="eta" property="eta" jdbcType="TIMESTAMP" />
+    <result column="destid" property="destid" jdbcType="VARCHAR" />
+    <result column="srcid" property="srcid" jdbcType="VARCHAR" />
+    <result column="distance" property="distance" jdbcType="DECIMAL" />
+    <result column="speed" property="speed" jdbcType="DECIMAL" />
+    <result column="draught" property="draught" jdbcType="DECIMAL" />
+    <result column="ship_type" property="shipType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, nav_status, rot, sog, pos_acc, longitude, latitude, cog, true_head, eta, destid, 
+    srcid, distance, speed, draught, ship_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_ais
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_ais
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.selfwork.intelligence.model.po.AisPO" >
+    insert into tb_ais (ID, nav_status, rot, 
+      sog, pos_acc, longitude, 
+      latitude, cog, true_head, 
+      eta, destid, srcid, 
+      distance, speed, draught, 
+      ship_type)
+    values (#{id,jdbcType=INTEGER}, #{navStatus,jdbcType=INTEGER}, #{rot,jdbcType=DECIMAL}, 
+      #{sog,jdbcType=DECIMAL}, #{posAcc,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+      #{latitude,jdbcType=DECIMAL}, #{cog,jdbcType=INTEGER}, #{trueHead,jdbcType=INTEGER}, 
+      #{eta,jdbcType=TIMESTAMP}, #{destid,jdbcType=VARCHAR}, #{srcid,jdbcType=VARCHAR}, 
+      #{distance,jdbcType=DECIMAL}, #{speed,jdbcType=DECIMAL}, #{draught,jdbcType=DECIMAL}, 
+      #{shipType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.AisPO" >
+    insert into tb_ais
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="navStatus != null" >
+        nav_status,
+      </if>
+      <if test="rot != null" >
+        rot,
+      </if>
+      <if test="sog != null" >
+        sog,
+      </if>
+      <if test="posAcc != null" >
+        pos_acc,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="cog != null" >
+        cog,
+      </if>
+      <if test="trueHead != null" >
+        true_head,
+      </if>
+      <if test="eta != null" >
+        eta,
+      </if>
+      <if test="destid != null" >
+        destid,
+      </if>
+      <if test="srcid != null" >
+        srcid,
+      </if>
+      <if test="distance != null" >
+        distance,
+      </if>
+      <if test="speed != null" >
+        speed,
+      </if>
+      <if test="draught != null" >
+        draught,
+      </if>
+      <if test="shipType != null" >
+        ship_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="navStatus != null" >
+        #{navStatus,jdbcType=INTEGER},
+      </if>
+      <if test="rot != null" >
+        #{rot,jdbcType=DECIMAL},
+      </if>
+      <if test="sog != null" >
+        #{sog,jdbcType=DECIMAL},
+      </if>
+      <if test="posAcc != null" >
+        #{posAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="cog != null" >
+        #{cog,jdbcType=INTEGER},
+      </if>
+      <if test="trueHead != null" >
+        #{trueHead,jdbcType=INTEGER},
+      </if>
+      <if test="eta != null" >
+        #{eta,jdbcType=TIMESTAMP},
+      </if>
+      <if test="destid != null" >
+        #{destid,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null" >
+        #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null" >
+        #{distance,jdbcType=DECIMAL},
+      </if>
+      <if test="speed != null" >
+        #{speed,jdbcType=DECIMAL},
+      </if>
+      <if test="draught != null" >
+        #{draught,jdbcType=DECIMAL},
+      </if>
+      <if test="shipType != null" >
+        #{shipType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.AisPO" >
+    update tb_ais
+    <set >
+      <if test="navStatus != null" >
+        nav_status = #{navStatus,jdbcType=INTEGER},
+      </if>
+      <if test="rot != null" >
+        rot = #{rot,jdbcType=DECIMAL},
+      </if>
+      <if test="sog != null" >
+        sog = #{sog,jdbcType=DECIMAL},
+      </if>
+      <if test="posAcc != null" >
+        pos_acc = #{posAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="cog != null" >
+        cog = #{cog,jdbcType=INTEGER},
+      </if>
+      <if test="trueHead != null" >
+        true_head = #{trueHead,jdbcType=INTEGER},
+      </if>
+      <if test="eta != null" >
+        eta = #{eta,jdbcType=TIMESTAMP},
+      </if>
+      <if test="destid != null" >
+        destid = #{destid,jdbcType=VARCHAR},
+      </if>
+      <if test="srcid != null" >
+        srcid = #{srcid,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null" >
+        distance = #{distance,jdbcType=DECIMAL},
+      </if>
+      <if test="speed != null" >
+        speed = #{speed,jdbcType=DECIMAL},
+      </if>
+      <if test="draught != null" >
+        draught = #{draught,jdbcType=DECIMAL},
+      </if>
+      <if test="shipType != null" >
+        ship_type = #{shipType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.po.AisPO" >
+    update tb_ais
+    set nav_status = #{navStatus,jdbcType=INTEGER},
+      rot = #{rot,jdbcType=DECIMAL},
+      sog = #{sog,jdbcType=DECIMAL},
+      pos_acc = #{posAcc,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      cog = #{cog,jdbcType=INTEGER},
+      true_head = #{trueHead,jdbcType=INTEGER},
+      eta = #{eta,jdbcType=TIMESTAMP},
+      destid = #{destid,jdbcType=VARCHAR},
+      srcid = #{srcid,jdbcType=VARCHAR},
+      distance = #{distance,jdbcType=DECIMAL},
+      speed = #{speed,jdbcType=DECIMAL},
+      draught = #{draught,jdbcType=DECIMAL},
+      ship_type = #{shipType,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
