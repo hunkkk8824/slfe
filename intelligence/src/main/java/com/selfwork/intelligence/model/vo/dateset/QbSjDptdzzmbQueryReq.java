@@ -52,14 +52,6 @@ public class QbSjDptdzzmbQueryReq {
         this.jmbz = jmbz;
     }
 
-    public String getSbsjEndTime() {
-        return sbsjEndTime;
-    }
-
-    public void setSbsjEndTime(String sbsjEndTime) {
-        this.sbsjEndTime = sbsjEndTime;
-    }
-
     public String getCgqbh() {
         return cgqbh;
     }
