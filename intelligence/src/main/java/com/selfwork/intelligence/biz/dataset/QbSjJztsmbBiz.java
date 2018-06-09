@@ -6,6 +6,7 @@ import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.mapper.QbSjJztsmbPOMapper;
 import com.selfwork.intelligence.model.QbSjJztsmbPO;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
+import com.selfwork.intelligence.model.vo.dateset.QbSjJztsmbQueryReq;
 import com.selfwork.intelligence.model.vo.dateset.QbSjJztsmbVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,4 +131,10 @@ public class QbSjJztsmbBiz extends BaseBiz implements IBaseQbBiz<QbSjJztsmbVO> {
 
         return list;
     }
+
+    public List<QbSjJztsmbVO> getBaseInfoList(QbSjJztsmbQueryReq req) throws IllegalAccessException, InstantiationException {
+        List<QbSjJztsmbPO> pos = qbSjJztsmb.getBaseInfoList(req);
+        return BeanUtils.copyList(pos, QbSjJztsmbVO.class);
+    }
+
 }

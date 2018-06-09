@@ -59,6 +59,23 @@
     PHDZ
   </sql>
 
+
+  <select id="getBaseInfoList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.dateset.QbSjDptssmbQueryReq">
+    select
+    <include refid="Base_Column_List"/>
+    from qb_sj_dptssmb
+    <where>
+      <if test="jmbz!= null">
+        jmbz=#{jmbz,jdbcType=INTEGER}
+      </if>
+      <if test="sbsjStartTime!= null">
+        #{sbsjStartTime,jdbcType=TIMESTAMP} >= sbsj
+      </if>
+      <if test="sbsjEndTime!= null">
+        sbsj >= #{sbsjEndTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
   <select id="getListByBatchNO" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

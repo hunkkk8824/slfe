@@ -2,6 +2,7 @@ package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPO;
 import com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs;
+import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbQueryReq;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface QbSjYsdzzdzzcmbPOMapper {
     int updateByPrimaryKey(QbSjYsdzzdzzcmbPO record);
 
     List<QbSjYsdzzdzzcmbPOWithBLOBs> getListByBatchNO(String batchNO);
+
+    List<QbSjYsdzzdzzcmbPO> getBaseInfoList(QbSjYsdzzdzzcmbQueryReq req);
 }

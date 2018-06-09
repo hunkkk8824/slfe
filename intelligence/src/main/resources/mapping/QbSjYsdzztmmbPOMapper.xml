@@ -49,6 +49,28 @@
     JD, WD, GD, FW, YJ, JLWC, FWWC, YJWC, TZYS, QSPL, ZZPL, ZXPL, XHDK, FWKXD, SYFS, 
     XHLX, TPSD, SL, FSYSX, BWLX, GSFS, GRXHTZFS, GRXHYS, GRTXZX, PTXH, JXH, JJM
   </sql>
+
+
+  <select id="getBaseInfoList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.dateset.QbSjYsdzztmmbQueryReq">
+    select
+    <include refid="Base_Column_List"/>
+    from qb_sj_ysdzztmmb
+    <where>
+
+      <if test="jjm!= null and jjm !=''">
+        jjm=#{jjm,jdbcType=VARCHAR}
+      </if>
+      <if test="jxh!= null and jxh !=''">
+        jxh=#{jxh,jdbcType=VARCHAR}
+      </if>
+      <if test="sbsjStartTime!= null">
+        #{sbsjStartTime,jdbcType=TIMESTAMP} >= sbsj
+      </if>
+      <if test="sbsjEndTime!= null">
+        sbsj >= #{sbsjEndTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
   <select id="getListByBatchNO" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

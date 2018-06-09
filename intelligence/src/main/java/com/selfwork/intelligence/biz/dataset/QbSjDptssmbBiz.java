@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
+import com.selfwork.intelligence.model.vo.dateset.QbSjDptssmbQueryReq;
 import com.selfwork.intelligence.model.vo.dateset.QbSjDptssmbVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +83,10 @@ public class QbSjDptssmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptssmbVO>
         list.add(new ColumnsVo("xpdxzxpl", "线谱等效中心频率"));
         list.add(new ColumnsVo("phdzcd", "批号对照表长度"));
         return list;
+    }
+
+    public List<QbSjDptssmbVO> getBaseInfoList(QbSjDptssmbQueryReq req) throws IllegalAccessException, InstantiationException {
+        List<QbSjDptssmbPO> pos = qbSjDptssmb.getBaseInfoList(req);
+        return BeanUtils.copyList(pos,QbSjDptssmbVO.class);
     }
 }

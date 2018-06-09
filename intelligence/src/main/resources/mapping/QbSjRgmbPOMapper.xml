@@ -74,6 +74,29 @@
     DXX, GLJZ, KYTWCD, DXXCD
   </sql>
 
+
+  <select id="getBaseInfoList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.dateset.QbSjRgmbQueryReq">
+    select
+    <include refid="Base_Column_List"/>
+    from qb_sj_rgmb
+    <where>
+      <if test="jmbz!= null">
+        jmbz=#{jmbz,jdbcType=INTEGER}
+      </if>
+      <if test="jjm!= null and jjm !=''">
+        jjm=#{jjm,jdbcType=VARCHAR}
+      </if>
+      <if test="jxh!= null and jxh !=''">
+        jxh=#{jxh,jdbcType=VARCHAR}
+      </if>
+      <if test="sbsjStartTime!= null">
+        #{sbsjStartTime,jdbcType=TIMESTAMP} >= sbsj
+      </if>
+      <if test="sbsjEndTime!= null">
+        sbsj >= #{sbsjEndTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
   <select id="getListByBatchNO" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

@@ -4,9 +4,13 @@ import com.selfwork.intelligence.biz.BaseBiz;
 import com.selfwork.intelligence.common.BeanUtils;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.mapper.QbSjDptdzzmbPOMapper;
+import com.selfwork.intelligence.model.QbSjDptdzzmbPO;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
 import com.selfwork.intelligence.model.vo.dateset.QbSjDptdzzmbPOWithBLOBsVO;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
+import com.selfwork.intelligence.model.vo.dateset.QbSjDptdzzmbQueryReq;
+import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbQueryReq;
+import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -101,5 +105,10 @@ public class QbSjDptdzzmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptdzzmbP
         list.add(new ColumnsVo("cfplcd", "重复频率长度"));
         list.add(new ColumnsVo("mckdzcd", "脉冲宽度值长度"));
         return list;
+    }
+
+    public List<QbSjYsdzzdzzcmbVO> getBaseInfoList(QbSjDptdzzmbQueryReq req) throws IllegalAccessException, InstantiationException {
+        List<QbSjDptdzzmbPO> pos = qbSjDptdzzmb.getBaseInfoList(req);
+        return BeanUtils.copyList(pos,QbSjYsdzzdzzcmbVO.class);
     }
 }

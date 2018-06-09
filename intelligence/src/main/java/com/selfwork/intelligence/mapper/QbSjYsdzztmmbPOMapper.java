@@ -1,6 +1,7 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.QbSjYsdzztmmbPO;
+import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzztmmbQueryReq;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface QbSjYsdzztmmbPOMapper {
     int updateByPrimaryKey(QbSjYsdzztmmbPO record);
 
     List<QbSjYsdzztmmbPO> getListByBatchNO(String batchNO);
+
+    List<QbSjYsdzztmmbPO> getBaseInfoList(QbSjYsdzztmmbQueryReq req);
 }

@@ -104,6 +104,22 @@
     TWLB
   </sql>
 
+  <select id="getBaseInfoList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.dateset.QbSjJztsmbQueryReq">
+    select
+    <include refid="Base_Column_List"/>
+    from qb_sj_jztsmb
+    <where>
+      <if test="jmbz!= null">
+        jmbz=#{jmbz,jdbcType=INTEGER}
+      </if>
+      <if test="fbsjStartTime!= null">
+        #{fbsjStartTime,jdbcType=TIMESTAMP} >= fbsj
+      </if>
+      <if test="fbsjEndTime!= null">
+        fbsj >= #{fbsjEndTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
   <select id="getListByBatchNO" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
