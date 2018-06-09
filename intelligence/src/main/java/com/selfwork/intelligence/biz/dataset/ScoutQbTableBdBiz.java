@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//scoutQbTableBdBiz
+//动向情报
 @Service
 public class ScoutQbTableBdBiz extends BaseBiz implements IBaseQbBiz<ScoutQbTableBdPO> {
 
