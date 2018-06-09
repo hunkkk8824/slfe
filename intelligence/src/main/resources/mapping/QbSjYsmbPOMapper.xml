@@ -71,7 +71,7 @@
   <select id="getBaseInfoList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.dateset.QbSjYsdzztmmbQueryReq">
     select
     <include refid="Base_Column_List"/>
-    from qb_sj_ysdzztmmb
+    from qb_sj_ysmb
     <where>
 
       <if test="jmbz!= null">
