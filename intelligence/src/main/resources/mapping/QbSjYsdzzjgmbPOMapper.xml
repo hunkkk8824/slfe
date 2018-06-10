@@ -47,6 +47,25 @@
     BMTZ
   </sql>
 
+  <select id="getList" resultMap="ResultMapWithBLOBs" parameterType="com.selfwork.intelligence.model.vo.dateset.QueryVo">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from qb_sj_ysdzzjgmb
+    <where>
+      <if test="cgqbh!= null">
+        and cgqbh = #{cgqbh,jdbcType=VARCHAR}
+      </if>
+      <if test="ptbh!= null">
+        (ptbh = #{ptbh,jdbcType=VARCHAR} or
+        and ptmc = #{ptbh,jdbcType=VARCHAR})
+      </if>
+      <if test="ptlx!= null">
+        and ptlx = #{ptlx,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
 
   <select id="getBaseInfoList" resultMap="BaseResultMap" parameterType="com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzjgmbQueryReq">
     select

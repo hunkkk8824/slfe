@@ -1,9 +1,11 @@
 package com.selfwork.intelligence.model.vo.dateset;
 
+import com.selfwork.intelligence.model.vo.BaseQueryVo;
+
 /**
  * Created by zzc on 2018/6/10.
  */
-public class QueryVo {
+public class QueryVo extends BaseQueryVo{
 
     private String tableName;
     /**
@@ -18,11 +20,6 @@ public class QueryVo {
      * 平台类型 （有些表没有此字段）
      */
     private Integer ptlx;
-
-    /**
-     * 查询类型 1：经纬度，2：列表，3：echarts图
-     */
-    private Integer queryType;
 
     public String getTableName() {
         return tableName;
@@ -54,13 +51,5 @@ public class QueryVo {
 
     public void setPtlx(Integer ptlx) {
         this.ptlx = ptlx;
-    }
-
-    public Integer getQueryType() {
-        return queryType;
-    }
-
-    public void setQueryType(Integer queryType) {
-        this.queryType = queryType;
     }
 }

@@ -6,11 +6,8 @@ import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.mapper.QbSjDptdzzmbPOMapper;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPO;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
-import com.selfwork.intelligence.model.vo.dateset.QbSjDptdzzmbPOWithBLOBsVO;
+import com.selfwork.intelligence.model.vo.dateset.*;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
-import com.selfwork.intelligence.model.vo.dateset.QbSjDptdzzmbQueryReq;
-import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbQueryReq;
-import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +25,19 @@ public class QbSjDptdzzmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptdzzmbP
     @Override
     public List<QbSjDptdzzmbPOWithBLOBsVO> getListByBatchNO(String batchNO) {
         List<QbSjDptdzzmbPOWithBLOBs> pos = qbSjDptdzzmb.getListByBatchNO(batchNO);
+
+        return pos.parallelStream().map(po -> {
+            QbSjDptdzzmbPOWithBLOBsVO item = new QbSjDptdzzmbPOWithBLOBsVO();
+            BeanUtils.copy(po, item);
+            item.setJssjStr(DateUtils.getFormatDateTime(po.getJssj()));
+            item.setSbsjStr(DateUtils.getFormatDateTime(po.getSbsj()));
+            return item;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<QbSjDptdzzmbPOWithBLOBsVO> getList(QueryVo queryVo) {
+        List<QbSjDptdzzmbPOWithBLOBs> pos = qbSjDptdzzmb.getList(queryVo);
 
         return pos.parallelStream().map(po -> {
             QbSjDptdzzmbPOWithBLOBsVO item = new QbSjDptdzzmbPOWithBLOBsVO();
@@ -107,7 +117,7 @@ public class QbSjDptdzzmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptdzzmbP
         return list;
     }
 
-    public List<QbSjYsdzzdzzcmbVO> getBaseInfoList(QbSjDptdzzmbQueryReq req) throws IllegalAccessException, InstantiationException {
+    public List<QbSjYsdzzdzzcmbVO> getBaseInfoList(QbSjDptdzzmbQueryReq req) throws Exception {
         List<QbSjDptdzzmbPO> pos = qbSjDptdzzmb.getBaseInfoList(req);
         return BeanUtils.copyList(pos,QbSjYsdzzdzzcmbVO.class);
     }

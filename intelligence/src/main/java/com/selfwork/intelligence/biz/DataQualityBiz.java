@@ -18,6 +18,7 @@ import com.selfwork.intelligence.model.po.*;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
 import com.selfwork.intelligence.model.vo.dateset.QbSjRhmbVO;
+import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -233,6 +234,23 @@ public class DataQualityBiz extends BaseBiz {
         return map;
     }
 
+    public Map<String,Object> getList(QueryVo queryVo) {
+        Map<String, Object> map = new HashMap<>();
+        String dataSetCode = queryVo.getTableName();
+        DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
+        this.startPage(queryVo);
+        IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
+        PageInfo pageData = new PageInfo<>(qbBiz.getList(queryVo));
+        if(pageData != null){
+            map.put("rows", pageData.getList());
+            map.put("total", pageData.getTotal());
+        }else {
+            map.put("rows", new ArrayList<>());
+            map.put("total", 0);
+        }
+        return map;
+    }
+
 
     public List<ColumnsVo> getColumnsByDataSetCode(String dataSetCode) {
 
@@ -253,5 +271,4 @@ public class DataQualityBiz extends BaseBiz {
         containerList.add(container);
 
     }
-
 }

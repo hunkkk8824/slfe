@@ -2,6 +2,7 @@ package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.QbSjRhmbPO;
 import com.selfwork.intelligence.model.vo.dateset.QbSjRhmbQueryReq;
+import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface QbSjRhmbPOMapper {
     Integer insertList(List<QbSjRhmbPO> list);
 
     List<QbSjRhmbPO> getBaseInfoList(QbSjRhmbQueryReq req);
+
+    List<QbSjRhmbPO> getList(QueryVo queryVo);
 }

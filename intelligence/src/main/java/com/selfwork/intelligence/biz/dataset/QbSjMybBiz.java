@@ -7,6 +7,7 @@ import com.selfwork.intelligence.mapper.QbSjMybPOMapper;
 import com.selfwork.intelligence.model.QbSjMybPO;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
 import com.selfwork.intelligence.model.vo.dateset.QbSjMybVO;
+import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,11 @@ public class QbSjMybBiz extends BaseBiz implements IBaseQbBiz<QbSjMybVO> {
             BeanUtils.copy(po, item);
             return item;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<QbSjMybVO> getList(QueryVo queryVo) {
+        return null;
     }
 
     @Override

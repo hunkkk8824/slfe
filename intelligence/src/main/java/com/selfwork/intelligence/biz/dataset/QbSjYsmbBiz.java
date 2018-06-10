@@ -8,6 +8,7 @@ import com.selfwork.intelligence.model.po.QbSjYsmbPO;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
 import com.selfwork.intelligence.model.vo.dateset.QbSjYsmbQueryReq;
 import com.selfwork.intelligence.model.vo.dateset.QbSjYsmbVO;
+import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,20 @@ public class QbSjYsmbBiz extends BaseBiz implements IBaseQbBiz<QbSjYsmbVO> {
     public List<QbSjYsmbVO> getListByBatchNO(String batchNO) {
 
         List<QbSjYsmbPO> pos =  qbSjYsmb.getListByBatchNO(batchNO);
+
+        return pos.parallelStream().map(po -> {
+            QbSjYsmbVO item = new QbSjYsmbVO();
+            BeanUtils.copy(po, item);
+            item.setJssjStr(DateUtils.getFormatDateTime(po.getJssj()));
+            item.setSbsjStr(DateUtils.getFormatDateTime(po.getSbsj()));
+            return item;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<QbSjYsmbVO> getList(QueryVo queryVo) {
+
+        List<QbSjYsmbPO> pos =  qbSjYsmb.getList(queryVo);
 
         return pos.parallelStream().map(po -> {
             QbSjYsmbVO item = new QbSjYsmbVO();
