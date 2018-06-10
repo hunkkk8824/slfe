@@ -121,22 +121,27 @@
 </body>
 <script type="text/javascript">
 
-    var islogin=parseInt('${islogin}');
+    $(function(){
 
-    function touristLogin() {
+        var islogin=parseInt('${islogin}');
 
-        if(islogin==1){
-            return false;
+        function touristLogin() {
+
+
+            $.post("/lo/ajaxLogin", {
+                "username": "tourist",
+                "password": "123456"
+            }, function (result) {
+                layer.msg("当前处于游客模式");
+            });
         }
-        $.post("/lo/ajaxLogin", {
-            "username": "tourist",
-            "password": "123456"
-        }, function (result) {
-            layer.msg("当前处于游客模式");
-        });
-    }
 
-    touristLogin();
+        if(islogin==0){
+            touristLogin();
+        }
+
+    })
+
 </script>
 </html>
 

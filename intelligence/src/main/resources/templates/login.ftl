@@ -125,12 +125,16 @@
     //     login("tourist", "123456");
     // });
 
-    $("#ajaxLogin").click(function () {
+    $(function(){
+        $("#ajaxLogin").click(function () {
 
-        var username = $("#first-name").val();
-        var password = $("#password").val();
-        login(username, password);
-    });
+            var username = $("#first-name").val();
+            var password = $("#password").val();
+            login(username, password);
+        });
+    })
+
+
 </script>
 </html>
 

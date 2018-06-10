@@ -41,9 +41,10 @@ public class PortalController extends BaseController {
      * 跳转到新增数据转换页面
      * @return
      */
-    @RequestMapping(value = "add")
+    @RequestMapping(value = "/add")
     public ModelAndView add() {
-        ModelAndView modelAndView=new ModelAndView("portal/add");
+        ModelAndView modelAndView=new ModelAndView("system/exchangeData");
+//        ModelAndView modelAndView=new ModelAndView("portal/add");
         UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
         // 获取交换机
         List<ExchangerPO> exchangerPOs = exChangeConfigBiz.findAllEnable();
