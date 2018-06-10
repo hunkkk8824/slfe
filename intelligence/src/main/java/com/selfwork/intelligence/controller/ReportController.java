@@ -1,5 +1,6 @@
 package com.selfwork.intelligence.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.dataset.AisBiz;
 import com.selfwork.intelligence.model.vo.BaseQueryVo;
@@ -72,6 +73,7 @@ public class ReportController extends BaseController{
     public Map<String, Object> getAisList(@RequestBody AisQueryReq request) {
 
         Map<String, Object> result = new HashMap<>();
+        result.put("total", 0);
         result.put("rows", new ArrayList());
 
         if(request == null){
@@ -79,9 +81,10 @@ public class ReportController extends BaseController{
         }
 
         try {
-            List<AisVo> list= aisBiz.getAisInfoList(request);
-            if(!CollectionUtils.isEmpty(list)){
-                result.put("rows",list);
+            PageInfo<AisVo> pageData= aisBiz.getAisInfoList(request);
+            if (pageData != null) {
+                result.put("total", pageData.getTotal());
+                result.put("rows", pageData.getList());
             }
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);
