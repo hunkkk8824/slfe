@@ -47,7 +47,7 @@
                             <div class="select-condition row">
                                 <div class="col-lg-2 wrapper">统计类型</div>
                                 <div class="col-lg-4 wrapper">
-                                    <select name="" id="" class="default-select">
+                                    <select name="" id="searchType" class="default-select">
                                         <option value="cgqbh">传感器编号</option>
                                         <option value="ptbh">平台编号（平台名称）</option>
                                         <option value="ptlx">平台类型</option>
@@ -55,12 +55,12 @@
                                 </div>
                                 <div class="col-lg-2 wrapper">统计值</div>
                                 <div class="col-lg-4 wrapper">
-                                    <input type="text" class="input form-control">
+                                    <input type="text" id="searchValue" class="input form-control">
                                 </div>
                                 <div class="col-lg-2 wrapper">数据源</div>
                                 <div class="col-lg-4 wrapper">
                                     <#--<input type="text" class="input form-control">-->
-                                    <select name="" id="" class="default-select">
+                                    <select name="" id="dataSetCode" class="default-select">
                                         <option value="qb_sj_dptdzzmb">多平台电子战目标</option>
                                         <option value="qb_sj_dptssmb">多平台水声目标</option>
                                         <option value="qb_sj_jztsmb">技侦态势目标</option>
@@ -78,9 +78,9 @@
                                 </div>
                             </div>
                             <div class="chart" id="chart1" style="height: 400px;">chart1</div>
-                            <div class="row" style="height: 300px;">
+                            <div class="row" style="height: 500px;">
                                 <div class="col-lg-12">
-                                    <table class="table table-responsive"  id="table"></table>
+                                    <table class="table table-responsive"  id="table" style="height: 500px;"></table>
                                 </div>
                             </div>
                         </div>

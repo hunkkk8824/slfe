@@ -3,6 +3,7 @@ package com.selfwork.intelligence.mapper;
 import com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPO;
 import com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs;
 import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbQueryReq;
+import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface QbSjYsdzzdzzcmbPOMapper {
     List<QbSjYsdzzdzzcmbPOWithBLOBs> getListByBatchNO(String batchNO);
 
     List<QbSjYsdzzdzzcmbPO> getBaseInfoList(QbSjYsdzzdzzcmbQueryReq req);
+
+    List<QbSjYsdzzdzzcmbPOWithBLOBs> getList(QueryVo queryVo);
 }
