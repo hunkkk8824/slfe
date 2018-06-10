@@ -35,7 +35,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "index")
     public ModelAndView index() {
 
-        ModelAndView modelAndView = new ModelAndView("portal/index");
+        ModelAndView modelAndView = new ModelAndView("system/index");
 
         Object userPrincipal = SecurityUtils.getSubject().getPrincipal();
 

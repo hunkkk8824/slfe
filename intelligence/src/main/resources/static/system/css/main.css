@@ -980,9 +980,10 @@ h1, h2, h3, h4, h5, h6 {
 .genric-btn {
   display: inline-block;
   outline: none;
-  line-height: 40px;
-  padding: 0 30px;
+  padding: 0 15px;
   font-size: .8em;
+  line-height: 30px;
+  border-radius: 6px;
   text-align: center;
   text-decoration: none;
   font-weight: 500;
@@ -1080,6 +1081,9 @@ h1, h2, h3, h4, h5, h6 {
   background: #f8b600;
   border: 1px solid transparent;
 }
+.genric-btn.primary:hover .fa-table{
+  color: #f8b600;
+}
 
 .genric-btn.success {
   color: #fff;
@@ -1103,6 +1107,9 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
   background: #4cd3e3;
   border: 1px solid transparent;
+}
+.genric-btn.success:hover .fa-search{
+  color: #4cd3e3;
 }
 
 .genric-btn.info {
@@ -2117,7 +2124,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header.header-scrolled .header-top {
-  display: none;
+  /*display: none;*/
 }
 
 #header.header-scrolled .main-menu {
@@ -4501,20 +4508,24 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 
-#slide1, #slide2, #slide3{
+#slide1, #slide2, #slide3, #slide4{
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  line-height: 100%;
 }
-#slide1{
+/* #slide1{
   background-image: url('../img/banner.jpg');
 }
 #slide2{
-  background-image: url('../img/banner2.jpg');
+  background-image: url('../img/banner5.jpg');
 }
 #slide3{
-  background-image: url('../img/banner3.jpg');
+  background-image: url('../img/banner6.png');
 }
+#slide4{
+  background-image: url('../img/banner7.png');
+} */
 
 .left-tree{
   width: 100%;
@@ -4589,4 +4600,141 @@ body.mobile-nav-active #mobile-nav-toggle {
 .chart{
   width: 100%;
   height: 500px;
+}
+.content-wrapper{
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 100px;
+}
+.content-wrapper .center{
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+.content-wrapper .center .left{
+  width: 40%;
+  height: 100%;
+  float: left;
+  box-sizing: border-box;
+  padding-top: 17%;
+}
+.content-wrapper .center .left a{
+  display: block;
+  height: 60px;
+  font-size: 40px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  margin-top: 34px;
+  line-height: 60px;
+  font-style: italic;
+}
+
+.content-wrapper .center .right{
+  width: 60%;
+  height: 100%;
+  float: left;
+  position: relative;
+}
+.content-wrapper .center .right a{
+  width: 50%;
+  height: 300px;
+  overflow: hidden;
+  float: left;
+  position: absolute;
+  top: 50%;
+  left: -100px;
+  transform: translateY(-50%);
+  border-radius: 10px;
+}
+.content-wrapper .center .right .right-pic2{
+  left: 50%;
+}
+.content-wrapper .center .right a img{
+  height: 300px;
+}
+
+/* #left-tree{
+  background: #34495e;
+  list-style: none;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+#left-tree>li{
+  color: #fff;
+  background: #34495e;
+  padding: 1em;
+  border-bottom: 0.5em solid #2c3e50;
+  margin-top: 0.25em;
+  border-left: 0.5em groove #e74c3c;
+  cursor: pointer;
+  transition: 0.4s all;
+}
+#left-tree>li.active{
+  border-left: 0.5em groove #1abc9c;
+}
+#left-tree li:hover{
+  background: #2c3e50;
+  border-left: 0.5em groove #3498db;
+} */
+
+#left-tree{
+  box-shadow: 2px 0px 3px #9e9e9e inset;
+  overflow: hidden;
+  border: none;
+}
+#left-tree > li {
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 1px 1px 3px #9e9e9e;
+  text-indent: 8px;
+  font-size: 14px;
+  margin-top: 20px;
+  color: #174867;
+  background-color: #cbcbcb;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  position: relative;
+}
+#left-tree > li:hover{
+  transition: all 0.3s ease-out;
+  color: #fff;
+  transform: translateY(-2px)translateX(2px);
+  box-shadow: 1px 1px 5px #9e9e9e;
+  background-color: #416fb1;
+}
+#left-tree > li.active{
+  background-color: #416fb1;
+  color: #fff;
+}
+#left-tree > li.active .fa-star{
+  display: block;
+}
+#left-tree > li .fa-star{
+  position: absolute;
+  right: 0;
+  display: none;
+  top: 0;
+  transform: rotate(45deg);
+  color: #d88f04;
+}
+
+.animateWhite{
+  animation:Updown 1s infinite alternate;
+  -webkit-animation:Updown 1s alternate infinite;/*infinite无限播放，alternate轮流反向播放*/
+}
+
+@keyframes Updown{
+from{transform:translateY(-2px);}
+to{transform:translateY(-8px);}
+}
+@-webkit-keyframes Updown{
+  from{transform:translateY(-2px);}
+  to{transform:translateY(-8px);}
+}
+.fa-table, .fa-search{
+  margin-right: 5px;
+  font-size: 14px;
+  color: #fff;
 }

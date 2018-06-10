@@ -45,7 +45,7 @@ public class ResourceCatalogController extends BaseController {
     @RequestMapping(value = "/index")
     public ModelAndView index(@RequestParam(required = false) String defaultdataSetCode) {
 
-        ModelAndView view = new ModelAndView("portal/resourcecatalog/index");
+        ModelAndView view = new ModelAndView("sub/resourcecatalog/index");
 
         view.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         view.addObject("defaultdataSetCode", StringUtils.isEmpty(defaultdataSetCode) ? DataSetCodeEnum.QB_SJ_RHMB.getValue() : defaultdataSetCode);

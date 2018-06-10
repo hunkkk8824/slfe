@@ -8,7 +8,7 @@ $(document).ready(function() {
         header_height_static = $(".site-header.static").outerHeight(),
         fitscreen = window_height - header_height;
 
-    $(".fullscreen,.banner-area, .swiper-wrapper").css("height", window_height)
+    $(".fullscreen,.banner-area, .swiper-wrapper, .overlay-bg").css("height", window_height)
     $(".fitscreen").css("height", fitscreen);
 
     var mySwiper = new Swiper ('.swiper-container', {
@@ -27,165 +27,11 @@ $(document).ready(function() {
       
     })       
 
-    var data = {
-      treedata: [{
-        text: "数据集群组",
-        // icon: "iconfont icon-weixuanzhong",
-        state: {
-          checked: true
-        },
-        nodes: [
-          {
-            text: "动向情报",
-            // icon: "iconfont icon-weixuanzhong",
-            nodes: [{
-                text: "动向情报1",
-                // icon: "iconfont icon-weixuanzhong",
-                nodes: [{
-                  text: "情报1",
-                  // icon: "iconfont icon-weixuanzhong",
-                  nodes: [{
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }]
-                }]
-              },
-              {
-                text: " 情报XXX",
-                icon: "iconfont icon-wenjian"
-              }
-            ]
-          },
-          {
-            text: "情报_数据_融合目标",
-            // icon: "iconfont icon-weixuanzhong",
-            nodes: [{
-                text: "融合目标1",
-                // icon: "iconfont icon-weixuanzhong",
-                nodes: [{
-                  text: "融合目标",
-                  // icon: "iconfont icon-weixuanzhong",
-                  nodes: [{
-                    text: "情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: "情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: "情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }]
-                }]
-              },
-              {
-                text: "情报XXX",
-                icon: "iconfont icon-wenjian"
-              }
-            ]
-          },
-          {
-            text: "情报_数据_人工目标",
-            // icon: "iconfont icon-weixuanzhong",
-            nodes: [{
-                text: "人工目标",
-                // icon: "iconfont icon-weixuanzhong",
-                nodes: [{
-                  text: "情报集合",
-                  // icon: "iconfont icon-weixuanzhong",
-                  nodes: [{
-                    text: "情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: "情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: "情报XXX<i class='iconfont icon-tuding'></i>",
-                    icon: "iconfont icon-wenjian",
-                  }]
-                }]
-              },
-              {
-                text: " 情报XXX",
-                icon: "iconfont icon-wenjian"
-              }
-            ]
-          },
-          {
-            text: "情报_数据_多平台电子战目标",
-            // icon: "iconfont icon-weixuanzhong",
-            nodes: [{
-                text: "目标数据",
-                // icon: "iconfont icon-weixuanzhong",
-                nodes: [{
-                  text: "数据集合",
-                  // icon: "iconfont icon-weixuanzhong",
-                  nodes: [{
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: " 情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }, {
-                    text: "情报XXX",
-                    icon: "iconfont icon-wenjian",
-                  }]
-                }]
-              },
-              {
-                text: "情报XXX",
-                icon: "iconfont icon-wenjian"
-              }
-            ]
-          }
-        ]
-      }]
-    }
-  
-    function init() {
-      $('#left-tree').treeview({
-        data: data.treedata,
-        borderColor: '#9e9e9e',
-        selectedBackColor: "#f3f2f2",
-        selectedColor: "#36bfd2",
-        selectable: true,
-        showCheckbox: true,
-        // selectedIcon: 'iconfont icon-fangxingxuanzhong',
-        collapseIcon: 'iconfont icon-wenjiandakai',
-        expandIcon: 'iconfont icon-folder'
-      });
-    }
-  
-    init();
+    $('#left-tree > .tree-menu').on('click', function (e) {
+      console.log(e.currentTarget)
+      $('#left-tree > .tree-menu').removeClass('active')
+      $(e.currentTarget).addClass('active')
+    })
 
     $('.statics-table').bootstrapTable({
       columns: [
@@ -471,16 +317,6 @@ $(document).ready(function() {
 
 
 
-
-    //------- Header Scroll Class  js --------//  
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
-            $('#header').addClass('header-scrolled');
-        } else {
-            $('#header').removeClass('header-scrolled');
-        }
-    });
 
     //------- Google Map  js --------//  
 
