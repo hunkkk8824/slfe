@@ -63,9 +63,7 @@
 
 <!-- jsTree plugin javascript -->
 <script src="${base}/static/js/plugins/jsTree/jstree.min.js"></script>
-<#--<!--离线地图&ndash;&gt;-->
-<#--<script type="text/javascript" src="${base}/static/js/plugins/offlinemap/map_load.js"></script>-->
-<#--<link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/offlinemap/css/map.css"/>-->
+
 
 <script type="text/javascript">
     var base = '${base}';
