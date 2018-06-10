@@ -58,9 +58,9 @@
                     <div class="col-lg-6 col-md-6 banner-left">
                         <h1 class="text-white animateWhite">装备能力分析</h1>
                         <p class="text-white">
-                            Equipment capability analysis
+                            Aanalysis of equipment capability
                         </p>
-                        <a href="#" class="primary-btn text-uppercase">Get Started</a>
+                        <a href="${base}/report/report1" class="primary-btn text-uppercase">Get Started</a>
                     </div>
                     <div class="col-lg-4 col-md-6 banner-right">
                     </div>
@@ -69,11 +69,11 @@
             <div class="swiper-slide" id="slide2">
                 <div style="width: 1000px;margin: 400px auto;">
                     <div class="col-lg-6 col-md-6 banner-left">
-                        <h1 class="text-white animateWhite">知识提取</h1>
+                        <h1 class="text-white animateWhite">航道提取分析</h1>
                         <p class="text-white">
-                            Equipment capability analysis
+                            Analysis of channel extraction
                         </p>
-                        <a href="#" class="primary-btn text-uppercase">Get Started</a>
+                        <a href="${base}/report/aisReport" class="primary-btn text-uppercase">Get Started</a>
                     </div>
                     <div class="col-lg-4 col-md-6 banner-right">
                     </div>

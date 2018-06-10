@@ -2,6 +2,7 @@ package com.selfwork.intelligence.controller;
 
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.dataset.AisBiz;
+import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.BaseQueryVo;
 import com.selfwork.intelligence.model.vo.dateset.AisQueryReq;
 import com.selfwork.intelligence.model.vo.dateset.AisVo;
@@ -36,9 +37,13 @@ public class ReportController extends BaseController{
     @Autowired
     private AisBiz aisBiz;
 
-    @RequestMapping(value = "report1")
+    //装备能力分析
+    @RequestMapping(value = "/report1")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("system/report/report1");
+
+        UserInfoPO user =  this.getLoginUser();
+        modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
     }
 
@@ -61,9 +66,12 @@ public class ReportController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "aisReport")
+    //航道提取分析
+    @RequestMapping(value = "/aisReport")
     public ModelAndView aisReport() {
         ModelAndView modelAndView = new ModelAndView("system/report/aisReport");
+        UserInfoPO user =  this.getLoginUser();
+        modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
     }
 

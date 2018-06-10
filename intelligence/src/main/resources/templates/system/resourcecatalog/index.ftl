@@ -70,7 +70,7 @@
             </div>
             <div class="col-lg-8">
                 <div class="single-price">
-                    <h4>Luxury Packages</h4>
+                    <h4 id="htitle">Luxury Packages</h4>
 
                     <ul class="nav nav-tabs">
                         <li><a href="#tab1" data-toggle="tab" class="active">表结构</a></li>
@@ -218,6 +218,7 @@
 
                 $("#hd_dataSetCode").val($(this).data("code"));
                 initData();
+                $("#htitle").html($(this).data("name"))
             });
 
 
