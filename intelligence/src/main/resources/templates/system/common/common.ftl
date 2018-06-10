@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="${base}/static/system/css/bootstrap-table.css">
 <link rel="stylesheet" href="${base}/static/system/css/owl.carousel.css">
 <link rel="stylesheet" href="${base}/static/system/css/main.css">
+<link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/laydate/theme/default/laydate.css" media="all">
 
 
 <script src="${base}/static/system/js/vendor/jquery-2.2.4.min.js"></script>
@@ -45,6 +46,7 @@
 <script type="text/javascript" src="${base}/static/system/js/china.js"></script>
 <script src="${base}/static/system/js/owl.carousel.min.js"></script>
 <script src="${base}/static/system/js/mail-script.js"></script>
+<script src="${base}/static/js/plugins/laydate/laydate.js"></script>
 
 
 <script type="text/javascript">

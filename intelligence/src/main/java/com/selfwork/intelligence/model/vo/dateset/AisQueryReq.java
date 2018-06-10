@@ -4,23 +4,23 @@ public class AisQueryReq {
     /**
      * 开始经度
      */
-    private double startLongitude;
+    private Double startLongitude;
     /**
      * 开始纬度
      */
-    private double startLatitude;
+    private Double startLatitude;
     /**
      * 结束经度
      */
-    private double endLongitude;
+    private Double endLongitude;
     /**
      * 结束纬度
      */
-    private double endLatitude;
+    private Double endLatitude;
     /**
      * 船舶类型
      */
-    private int shipType;
+    private Integer shipType;
 
     /**
      * 开始时间
@@ -31,43 +31,43 @@ public class AisQueryReq {
      */
     private String endTime;
 
-    public double getStartLongitude() {
+    public Double getStartLongitude() {
         return startLongitude;
     }
 
-    public void setStartLongitude(double startLongitude) {
+    public void setStartLongitude(Double startLongitude) {
         this.startLongitude = startLongitude;
     }
 
-    public double getStartLatitude() {
+    public Double getStartLatitude() {
         return startLatitude;
     }
 
-    public void setStartLatitude(double startLatitude) {
+    public void setStartLatitude(Double startLatitude) {
         this.startLatitude = startLatitude;
     }
 
-    public double getEndLongitude() {
+    public Double getEndLongitude() {
         return endLongitude;
     }
 
-    public void setEndLongitude(double endLongitude) {
+    public void setEndLongitude(Double endLongitude) {
         this.endLongitude = endLongitude;
     }
 
-    public double getEndLatitude() {
+    public Double getEndLatitude() {
         return endLatitude;
     }
 
-    public void setEndLatitude(double endLatitude) {
+    public void setEndLatitude(Double endLatitude) {
         this.endLatitude = endLatitude;
     }
 
-    public int getShipType() {
+    public Integer getShipType() {
         return shipType;
     }
 
-    public void setShipType(int shipType) {
+    public void setShipType(Integer shipType) {
         this.shipType = shipType;
     }
 
