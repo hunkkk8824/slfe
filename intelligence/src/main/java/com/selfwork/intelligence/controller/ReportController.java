@@ -37,7 +37,7 @@ public class ReportController extends BaseController{
     private AisBiz aisBiz;
 
     @RequestMapping(value = "report1")
-    public ModelAndView index() {
+    public ModelAndView report1() {
         ModelAndView modelAndView = new ModelAndView("system/report/report1");
         return modelAndView;
     }
@@ -87,5 +87,11 @@ public class ReportController extends BaseController{
             logger.error("查询失败：" + e.getMessage(), e);
         }
         return result;
+    }
+
+    @RequestMapping(value = "knowledgeReport")
+    public ModelAndView knowledgeReport() {
+        ModelAndView modelAndView = new ModelAndView("system/report/knowledgeReport");
+        return modelAndView;
     }
 }

@@ -14,7 +14,7 @@
     <!-- meta character set -->
     <meta charset="UTF-8">
     <!-- Site Title -->
-    <title>多源情报系统</title>
+    <title>装备能力分析</title>
 
     <#include "../common/common.ftl"/>
 
@@ -25,6 +25,9 @@
         }
         .price-area{
             margin: 0;
+        }
+        .table tr{
+            height:20px;
         }
     </style>
 </head>
@@ -80,7 +83,7 @@
                             <div class="chart" id="chart1" style="height: 400px;">chart1</div>
                             <div class="row" style="height: 500px;">
                                 <div class="col-lg-12">
-                                    <table class="table table-responsive"  id="table" style="height: 500px;"></table>
+                                    <table class="table"  id="table" style="height: 400px;"></table>
                                 </div>
                             </div>
                         </div>
