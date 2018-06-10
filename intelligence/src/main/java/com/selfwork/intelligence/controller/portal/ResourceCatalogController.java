@@ -9,6 +9,7 @@ import com.selfwork.intelligence.common.enums.AuditStatusEnum;
 import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.controller.BaseController;
+import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
 import org.slf4j.Logger;
@@ -45,11 +46,14 @@ public class ResourceCatalogController extends BaseController {
     @RequestMapping(value = "/index")
     public ModelAndView index(@RequestParam(required = false) String defaultdataSetCode) {
 
-        ModelAndView view = new ModelAndView("sub/resourcecatalog/index");
+        ModelAndView view = new ModelAndView("system/resourcecatalog/index");
 
         view.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         view.addObject("defaultdataSetCode", StringUtils.isEmpty(defaultdataSetCode) ? DataSetCodeEnum.QB_SJ_RHMB.getValue() : defaultdataSetCode);
         view.addObject("touristRoleCount", userBiz.touristRolsCount(this.getLoginUser().getUserid()));
+
+        UserInfoPO user =  this.getLoginUser();
+        view.addObject("nickname", user.getNickname());
         return view;
 
     }

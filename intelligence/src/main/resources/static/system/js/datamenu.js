@@ -26,65 +26,65 @@ $(document).ready(function() {
     },
     
   })       
-  $('#left-tree > .tree-menu').on('click', function (e) {
-    console.log(e.currentTarget)
-    $('#left-tree > .tree-menu').removeClass('active')
-    $(e.currentTarget).addClass('active')
-  })
+  // $('#left-tree > .tree-menu').on('click', function (e) {
+  //   console.log(e.currentTarget)
+  //   $('#left-tree > .tree-menu').removeClass('active')
+  //   $(e.currentTarget).addClass('active')
+  // })
 
-  $('.statics-table').bootstrapTable({
-    columns: [
-      {
-        field: 'id1',
-        title: 'column1'
-      },
-      {
-        field: 'id2',
-        title: 'column3'
-      },
-      {
-        field: 'id3',
-        title: 'column3'
-      },
-      {
-        field: 'id4',
-        title: 'column4'
-      },
-    ],
-    data: [
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-      { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
-    ],
-    sidePagination: "client",
-    pageNumber: 1,
-    pageSize: 20,
-    height: 450,
-    pagination: true,
-    align: 'center',
-    onPostBody: function () {
-      $('.deal-icon.view').on('click', function () {
-        layer.open({
-          type: 1,
-          content: $('.common-dialog-watch'),
-          area: ['912px', '642px'],
-          title: '弹框优化',
-          shade: 0
-        });
-      });
-    }
-  });
+  // $('.statics-table').bootstrapTable({
+  //   columns: [
+  //     {
+  //       field: 'id1',
+  //       title: 'column1'
+  //     },
+  //     {
+  //       field: 'id2',
+  //       title: 'column3'
+  //     },
+  //     {
+  //       field: 'id3',
+  //       title: 'column3'
+  //     },
+  //     {
+  //       field: 'id4',
+  //       title: 'column4'
+  //     },
+  //   ],
+  //   data: [
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //     { id1: 'data1',id2: 'data2',id3: 'data3',id4: 'data4'},
+  //   ],
+  //   sidePagination: "client",
+  //   pageNumber: 1,
+  //   pageSize: 20,
+  //   height: 450,
+  //   pagination: true,
+  //   align: 'center',
+  //   onPostBody: function () {
+  //     $('.deal-icon.view').on('click', function () {
+  //       layer.open({
+  //         type: 1,
+  //         content: $('.common-dialog-watch'),
+  //         area: ['912px', '642px'],
+  //         title: '弹框优化',
+  //         shade: 0
+  //       });
+  //     });
+  //   }
+  // });
 
   // ------- Datepicker  js --------//  
 

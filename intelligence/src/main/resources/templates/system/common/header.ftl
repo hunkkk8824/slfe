@@ -24,7 +24,7 @@
             </div>
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li><a href="#">首页</a></li>
+                    <li><a href="${base}/index">首页</a></li>
                     <li><a href="${base}/resourcecatalog/index">资源目录</a></li>
                     <li><a href="${base}/portal/add">数据交换</a></li>
                 <#--${base}/system/add-->
