@@ -1,6 +1,8 @@
 package com.selfwork.intelligence.model.vo.dateset;
 
-public class AisQueryReq {
+import com.selfwork.intelligence.model.vo.BaseQueryVo;
+
+public class AisQueryReq extends BaseQueryVo {
     /**
      * 开始经度
      */

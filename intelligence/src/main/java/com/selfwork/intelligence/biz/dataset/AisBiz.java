@@ -1,5 +1,6 @@
 package com.selfwork.intelligence.biz.dataset;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.BaseBiz;
 import com.selfwork.intelligence.common.BeanUtils;
@@ -32,7 +33,11 @@ public class AisBiz extends BaseBiz {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public List<AisVo> getAisInfoList(AisQueryReq req) throws IllegalAccessException, InstantiationException{
+    public PageInfo<AisVo> getAisInfoList(AisQueryReq req) throws IllegalAccessException, InstantiationException{
+
+        int pageNumber = req.getPageNumber();
+        int pageSize = req.getLimit();
+        PageHelper.startPage(pageNumber, pageSize);
         List<AisPO> pos = aisPOMapper.getAisInfoList(req);
       //  return BeanUtils.copyList(pos,AisVo.class);
 
@@ -52,7 +57,7 @@ public class AisBiz extends BaseBiz {
 
             });
 
-            return res;
+            return new PageInfo<>(res);
         } catch (Exception e) {
             logger.error("数据转换错误", e);
             return null;
