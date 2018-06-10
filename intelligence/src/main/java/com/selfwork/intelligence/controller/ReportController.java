@@ -99,4 +99,10 @@ public class ReportController extends BaseController{
         }
         return result;
     }
+
+    @RequestMapping(value = "knowledgeReport")
+    public ModelAndView knowledgeReport() {
+        ModelAndView modelAndView = new ModelAndView("system/report/knowledgeReport");
+        return modelAndView;
+    }
 }
