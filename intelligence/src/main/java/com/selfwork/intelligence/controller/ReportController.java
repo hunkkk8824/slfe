@@ -37,16 +37,16 @@ public class ReportController extends BaseController{
     @ResponseBody
     @RequestMapping(value = "/getList", method = RequestMethod.POST)
     public Map<String, Object> getList(@RequestBody QueryVo queryVo) {
-
         Map<String, Object> result = new HashMap<>();
-        result.put("list", new ArrayList());
+        result.put("total", 0);
+        result.put("rows", new ArrayList());
 
-        if(queryVo == null || queryVo.getTableName() == null || queryVo.getQueryType() == null){
+        if(queryVo == null || queryVo.getTableName() == null){
             return result;
         }
 
         try {
-
+            return dataQualityBiz.getList(queryVo);
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);
         }

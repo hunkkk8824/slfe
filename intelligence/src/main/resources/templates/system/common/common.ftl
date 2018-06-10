@@ -12,6 +12,7 @@
  <![endif]-->
 
 <link rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" href="${base}/static/portal/res/layui/css/layui.css">
 <link rel="stylesheet" href="${base}/static/system/css/linearicons.css">
 <link rel="stylesheet" href="${base}/static/system/css/font-awesome.min.css">
 <link rel="stylesheet" href="${base}/static/system/css/bootstrap.css">
@@ -45,6 +46,7 @@
 <script type="text/javascript" src="${base}/static/system/js/china.js"></script>
 <script src="${base}/static/system/js/owl.carousel.min.js"></script>
 <script src="${base}/static/system/js/mail-script.js"></script>
+<script src="${base}/static/portal/res/layui/layui.all.js"></script>
 
 
 <script type="text/javascript">
