@@ -34,8 +34,10 @@
 <script src="${base}/static/system/js/hoverIntent.js"></script>
 <script src="${base}/static/system/js/superfish.min.js"></script>
 <script src="${base}/static/system/js/bootstrap-treeview.js"></script>
-<script src="${base}/static/system/js/bootstrap-table-zh-CN.js"></script>
+<#--<script src="${base}/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"-->
+        <#--type="text/javascript"></script>-->
 <script src="${base}/static/system/js/bootstrap-table.js"></script>
+<script src="${base}/static/system/js/bootstrap-table-zh-CN.js"></script>
 <script src="${base}/static/system/js/jquery.ajaxchimp.min.js"></script>
 <script src="${base}/static/system/js/jquery.magnific-popup.min.js"></script>
 <script src="${base}/static/system/js/jquery.nice-select.min.js"></script>
@@ -43,6 +45,7 @@
 <script type="text/javascript" src="${base}/static/system/js/china.js"></script>
 <script src="${base}/static/system/js/owl.carousel.min.js"></script>
 <script src="${base}/static/system/js/mail-script.js"></script>
+
 
 <script type="text/javascript">
     var base = '${base}';
