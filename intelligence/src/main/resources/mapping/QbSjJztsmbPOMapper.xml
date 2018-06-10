@@ -113,10 +113,10 @@
         jmbz=#{jmbz,jdbcType=INTEGER}
       </if>
       <if test="fbsjStartTime!= null">
-        #{fbsjStartTime,jdbcType=TIMESTAMP} >= fbsj
+        fbsj >= #{fbsjStartTime,jdbcType=TIMESTAMP}
       </if>
       <if test="fbsjEndTime!= null">
-        fbsj >= #{fbsjEndTime,jdbcType=TIMESTAMP}
+         #{fbsjEndTime,jdbcType=TIMESTAMP} >= fbsj
       </if>
       <if test="cgqbh!= null">
         cgqbh = #{cgqbh,jdbcType=VARCHAR}

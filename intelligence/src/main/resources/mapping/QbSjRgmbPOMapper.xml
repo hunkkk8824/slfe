@@ -90,10 +90,10 @@
         jxh=#{jxh,jdbcType=VARCHAR}
       </if>
       <if test="sbsjStartTime!= null">
-        #{sbsjStartTime,jdbcType=TIMESTAMP} >= sbsj
+        sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
       </if>
       <if test="sbsjEndTime!= null">
-        sbsj >= #{sbsjEndTime,jdbcType=TIMESTAMP}
+        #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
       </if>
       <if test="cgqbh!= null">
         cgqbh = #{cgqbh,jdbcType=VARCHAR}
