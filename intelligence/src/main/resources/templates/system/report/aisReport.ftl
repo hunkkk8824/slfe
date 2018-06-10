@@ -62,7 +62,7 @@
                                 <div class="col-lg-4 wrapper">
                                     <input id="gpsRange" type="text" class="input form-control" placeholder="经度1,纬度1;经度2,纬度2" >
                                 </div>
-                                <div class="col-lg-2 wrapper">开始时间</div>
+                                <div class="col-lg-2 wrapper">起止时间</div>
                                 <div class="col-lg-4 wrapper">
                                     <input id="startTime" type="text" class="input form-control">
                                 </div>

@@ -106,6 +106,24 @@
             }, {
                 field: 'etaStr',
                 title: '预计到达时间'
+            }, {
+                field: 'destid',
+                title: '目的港ID'
+            }, {
+                field: 'srcid',
+                title: '数据源标识'
+            }, {
+                field: 'distance',
+                title: '到目的港剩余距离'
+            }, {
+                field: 'speed',
+                title: '平均航速'
+            }, {
+                field: 'draught',
+                title: '吃水'
+            }, {
+                field: 'shipTypeStr',
+                title: '船舶类型'
             }]
         });
     }
