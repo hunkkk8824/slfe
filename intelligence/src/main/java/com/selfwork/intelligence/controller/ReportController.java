@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,12 @@ public class ReportController extends BaseController{
 
     @Autowired
     private DataQualityBiz dataQualityBiz;
+
+    @RequestMapping(value = "report1")
+    public ModelAndView index() {
+        ModelAndView modelAndView = new ModelAndView("system/report/report1");
+        return modelAndView;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/getList", method = RequestMethod.POST)

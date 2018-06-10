@@ -1,0 +1,43 @@
+<header id="header" class="header-scrolled">
+    <div class="header-top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-sm-6 col-6 header-top-left">
+                    <ul>
+                        <li><a href="#">Admin</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-sm-6 col-6 header-top-right">
+                    <div class="header-social">
+                        <a href="#"><i class="fa fa-desktop"></i></a>
+                        <a href="#"><i class="fa fa-cog"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container main-menu">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a href="index.html"><img src="${base}/static/system/img/logo.png" alt="" title="" style="height: 35px;"/></a>
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="about.html">资源目录</a></li>
+                    <li><a href="packages.html">数据交换</a></li>
+                    <li class="menu-has-children"><a href="">数据应用</a>
+                        <ul>
+                            <li><a href="blog-home.html">装备能力分析</a></li>
+                            <li><a href="blog-single.html">目标活动规律</a></li>
+                            <li><a href="blog-single.html">航道提取分析</a></li>
+                            <li><a href="blog-single.html">目标融合识别</a></li>
+                            <li><a href="blog-single.html">知识提取</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </div>
+</header><!-- #header -->
