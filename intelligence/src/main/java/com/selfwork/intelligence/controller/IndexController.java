@@ -40,7 +40,7 @@ public class IndexController extends BaseController {
         Object userPrincipal = SecurityUtils.getSubject().getPrincipal();
 
         if (userPrincipal == null) {
-            modelAndView.addObject("islogin", 0);
+            modelAndView.addObject("islogin", -1);
             modelAndView.addObject("userName", "游客");
             modelAndView.addObject("nickname", "游客");
         } else {

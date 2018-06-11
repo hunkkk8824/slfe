@@ -136,7 +136,7 @@
             });
         }
 
-        if(islogin==0){
+        if(islogin==-1){
             touristLogin();
         }
 
