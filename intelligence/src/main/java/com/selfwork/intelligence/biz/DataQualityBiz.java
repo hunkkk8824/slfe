@@ -17,6 +17,7 @@ import com.selfwork.intelligence.model.QbSjRgmbPO;
 import com.selfwork.intelligence.model.po.*;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
+import com.selfwork.intelligence.model.vo.dateset.LocationDto;
 import com.selfwork.intelligence.model.vo.dateset.QbSjRhmbVO;
 import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
@@ -29,6 +30,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -253,7 +255,6 @@ public class DataQualityBiz extends BaseBiz {
 
 
     public List<ColumnsVo> getColumnsByDataSetCode(String dataSetCode) {
-
         DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
         IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
         return qbBiz.getColumns();
@@ -269,6 +270,63 @@ public class DataQualityBiz extends BaseBiz {
         container.setDateSetCode(dateSetCode);
         container.setQbBizName(qbBizName);
         containerList.add(container);
+    }
 
+    /**
+     * 获取记录经纬度坐标
+     * @param queryVo
+     * @return
+     */
+    public List<LocationDto> getLocations(QueryVo queryVo) {
+        String dataSetCode = queryVo.getTableName();
+        DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
+        this.startPage(queryVo);
+        IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
+        List<LocationDto> list =  qbBiz.getLocations(queryVo);
+        if(!CollectionUtils.isEmpty(list) && list.size() > 1 && queryVo.getCgqbh() != null){
+            BigDecimal maxJd = null;
+            BigDecimal maxWd = null;
+            BigDecimal minJd = null;
+            BigDecimal minWd = null;
+
+            for (int i = 0; i < list.size(); i++) {
+                LocationDto dto = list.get(i);
+                dto.setLabel("目标");
+                if(dto.getJd() == null || dto.getWd() == null){
+                    continue;
+                }
+                if(i == 0){
+                    maxJd = dto.getJd();
+                    minJd = dto.getJd();
+                    maxWd = dto.getWd();
+                    minWd = dto.getWd();
+                }else {
+                    if(maxJd.compareTo(dto.getJd()) == -1){
+                        maxJd = dto.getJd();
+                    }
+                    if(minJd.compareTo(dto.getJd()) == 1){
+                        minJd = dto.getJd();
+                    }
+                    if(maxWd.compareTo(dto.getWd()) == -1){
+                        maxWd = dto.getWd();
+                    }
+                    if(minWd.compareTo(dto.getWd()) == 1){
+                        minWd = dto.getWd();
+                    }
+                }
+            }
+            if(maxJd != null && maxWd != null &&  !maxJd.equals(minJd) &&
+                    maxWd != null && minWd != null && !maxWd.equals(minWd)){
+                BigDecimal cgqJd = maxJd.add(minJd).divide(BigDecimal.valueOf(2),6,BigDecimal.ROUND_HALF_UP);
+                BigDecimal cgqWd = maxWd.add(minWd).divide(BigDecimal.valueOf(2),6,BigDecimal.ROUND_HALF_UP);
+                LocationDto cgq = new LocationDto();
+                cgq.setLabel("传感器");
+                cgq.setJd(cgqJd);
+                cgq.setWd(cgqWd);
+                cgq.setCgq(true);
+                list.add(cgq);
+            }
+        }
+        return list;
     }
 }

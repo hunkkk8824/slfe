@@ -49,6 +49,11 @@ public class QbSjDptdzzmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptdzzmbP
     }
 
     @Override
+    public List<LocationDto> getLocations(QueryVo queryVo) {
+        return qbSjDptdzzmb.getLocations(queryVo);
+    }
+
+    @Override
     public List<ColumnsVo> getColumns() {
         List<ColumnsVo> list = new ArrayList<>();
         list.add(new ColumnsVo("ph", "批号"));

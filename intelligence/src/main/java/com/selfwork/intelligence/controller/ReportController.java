@@ -8,6 +8,7 @@ import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.BaseQueryVo;
 import com.selfwork.intelligence.model.vo.dateset.AisQueryReq;
 import com.selfwork.intelligence.model.vo.dateset.AisVo;
+import com.selfwork.intelligence.model.vo.dateset.LocationDto;
 import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,12 @@ public class ReportController extends BaseController{
         UserInfoPO user =  this.getLoginUser();
         modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getLocations", method = RequestMethod.POST)
+    public List<LocationDto> getLocations(@RequestBody QueryVo queryVo) {
+        return dataQualityBiz.getLocations(queryVo);
     }
 
     @ResponseBody

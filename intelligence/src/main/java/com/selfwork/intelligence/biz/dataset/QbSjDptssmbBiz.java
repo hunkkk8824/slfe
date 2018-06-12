@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
+import com.selfwork.intelligence.model.vo.dateset.LocationDto;
 import com.selfwork.intelligence.model.vo.dateset.QbSjDptssmbQueryReq;
 import com.selfwork.intelligence.model.vo.dateset.QbSjDptssmbVO;
 import com.selfwork.intelligence.model.vo.dateset.QueryVo;
@@ -49,6 +50,11 @@ public class QbSjDptssmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptssmbVO>
             item.setSbsjStr(DateUtils.getFormatDateTime(po.getSbsj()));
             return item;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LocationDto> getLocations(QueryVo queryVo) {
+        return qbSjDptssmb.getLocations(queryVo);
     }
 
     @Override
