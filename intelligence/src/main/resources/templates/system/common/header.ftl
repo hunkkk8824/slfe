@@ -8,12 +8,11 @@
                         <li><a href="${base}/logout">登出</a></li>
                     </ul>
                 </div>
-                <#--<div class="col-lg-6 col-sm-6 col-6 header-top-right">-->
-                    <#--<div class="header-social">-->
-                        <#--<a href="#"><i class="fa fa-desktop"></i></a>-->
-                        <#--<a href="#"><i class="fa fa-cog"></i></a>-->
-                    <#--</div>-->
-                <#--</div>-->
+                <div class="col-lg-6 col-sm-6 col-6 header-top-right">
+                    <div class="header-social">
+                        <a href="${base}/manageindex">后台管理</i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -32,10 +31,10 @@
                     <li class="menu-has-children"><a href="">数据应用</a>
                         <ul>
                             <li><a href="${base}/report/report1">装备能力分析</a></li>
-                            <li><a href="${base}/report/targetActivityRule">目标活动规律</a></li>
+                            <li><a href="${base}/report/toTargetActivityRule">目标活动规律</a></li>
                             <li><a href="${base}/report/aisReport">航道提取分析</a></li>
                             <li><a href="blog-single.html">目标融合识别</a></li>
-                            <li><a href="blog-single.html">知识提取</a></li>
+                            <li><a href="${base}/report/knowledgeReport">知识提取</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -33,10 +33,14 @@
     <link rel="stylesheet" href="${base}/static/system/css/bootstrap-table.css">
     <link rel="stylesheet" href="${base}/static/system/css/owl.carousel.css">
     <link rel="stylesheet" href="${base}/static/system/css/main.css">
+
 </head>
 <style>
     .price-area {
         margin: 0;
+    }
+    #left-tree > li {
+        width: 230px;
     }
 </style>
 <body>
@@ -89,9 +93,9 @@
                         </div>
                         <div class="tab-pane fade" id="tab2">
 
-                            <#if touristRoleCount == 0>
-                                <table id="table" class="table table-hover statics-table"></table>
-                            </#if>
+                        <#if touristRoleCount == 0>
+                            <table id="table" class="table table-hover statics-table"></table>
+                        </#if>
 
 
                         </div>

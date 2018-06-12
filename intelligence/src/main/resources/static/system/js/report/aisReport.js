@@ -1,15 +1,63 @@
-(function(_path) {
+(function (_path) {
     /** 通用变量 */
-    var publicCache= {};
-
+    var publicCache = {};
+    var map = new BMap.Map("gpsMap");
 
     //初始化数据
-    var initData = function(){
+    var initData = function () {
         publicCache.path = _path;
+        //地图初始化
+        map.centerAndZoom(new BMap.Point(121.55, 24.94), 7);  // 初
+        // map.setCurrentCity("台北");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+        //map.addControl(new BMap.NavigationControl());   //缩放按钮
+        map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
+
+        //监听地图缩放
+        map.addEventListener("zoomend", function () {
+            hideLog();
+            if (this.getZoom() > 12) {
+                layer.msg("默认只有12级地图, 超过无法显示");
+            }
+        });
+
+        //地图加载完成
+        map.addEventListener("tilesloaded", function () {
+            hideLog();
+        });
+
+        //初始化地图点数据
+        // var point = new BMap.Point(122.2998046875,26.3918696718);
+        // addMarker(point);
+        // var bounds = map.getBounds();
+        // var sw = bounds.getSouthWest();
+        // var ne = bounds.getNorthEast();
+        // var lngSpan = Math.abs(sw.lng - ne.lng);
+        // var latSpan = Math.abs(ne.lat - sw.lat);
+        // for (var i = 0; i < 25; i++) {
+        //     var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
+        //     addMarker(point);
+        // }
+
+
     };
 
+    //添加地图数据
+    var addMarker = function (point) {
+        var marker = new BMap.Marker(point);
+        var label = new BMap.Label("目标", {offset: new BMap.Size(20, -10)});
+        marker.setLabel(label);
+        map.addOverlay(marker);
+    }
+
+    //隐藏log
+    var hideLog = function (point) {
+        $('a[title="到百度地图查看此区域"]').hide();
+        $('span[_cid="1"]').hide();
+    }
+
     //初始化事件
-    var initEvent = function(){
+    var initEvent = function () {
         laydate.render({
             elem: '#startTime',
             type: 'datetime',
@@ -43,11 +91,11 @@
 
         //计算地理范围坐标
         var gpsRange = $("#gpsRange").val();
-        if(gpsRange!=null){
+        if (gpsRange != null) {
             var gpsPair = gpsRange.split(';');
-            if(gpsPair.length>1){
+            if (gpsPair.length > 1) {
                 //开始和结束的经纬度同时存在才有意义
-                if(gpsPair[0].split(',').length>0 && gpsPair[1].split(',').length>0){
+                if (gpsPair[0].split(',').length > 0 && gpsPair[1].split(',').length > 0) {
                     temp.startLongitude = Number(gpsPair[0].split(',')[0]);
                     temp.startLatitude = Number(gpsPair[0].split(',')[1]);
                     temp.endLongitude = Number(gpsPair[1].split(',')[0]);
@@ -77,7 +125,7 @@
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 25,                       //每页的记录行数（*）
-            pageList: [ 25, 50, 100],          //可供选择的每页的行数（*）
+            pageList: [25, 50, 100],          //可供选择的每页的行数（*）
             strictSearch: true,
             clickToSelect: true,                //是否启用点击选中行
             height: 580,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
@@ -124,7 +172,16 @@
             }, {
                 field: 'shipTypeStr',
                 title: '船舶类型'
-            }]
+            }],
+            onLoadSuccess: function (data) {
+                if (data != null && data.rows != null && data.rows.length > 0) {
+                    map.clearOverlays();
+                    for (var i = 0; i < data.rows.length; i++) {
+                        var point = new BMap.Point(data.rows[i].longitude, data.rows[i].latitude);
+                        addMarker(point);
+                    }
+                }
+            }
         });
     }
 

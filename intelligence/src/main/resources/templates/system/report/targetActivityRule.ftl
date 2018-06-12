@@ -1,3 +1,4 @@
+<#assign base= request.contextPath />
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
@@ -13,11 +14,10 @@
     <meta name="keywords" content="">
     <!-- meta character set -->
     <meta charset="UTF-8">
-    <!--离线地图-->
     <!-- Site Title -->
-    <title>多源情报系统</title>
+    <title>目标活动规律</title>
 
-    <#include "../common/common.ftl"/>
+<#include "../common/common.ftl"/>
 
     <style>
         .tab-content {
@@ -27,10 +27,10 @@
         .price-area{
             margin: 0;
         }
+        .table tr{
+            height:20px;
+        }
     </style>
-    <!--离线地图-->
-    <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/map_load.js"></script>
-    <link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/offlinemap/css/map.css"/>
 </head>
 <body>
 <#include "../common/header.ftl"/>
@@ -45,44 +45,52 @@
 
             <div class="col-lg-12">
                 <div class="single-price">
-                    <h4>航道提取分析</h4>
+                    <h4>装备能力分析</h4>
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="tab1">
                             <div class="select-condition row">
-                                <div class="col-lg-2 wrapper">目标类型</div>
+
+                                <div class="col-lg-2 wrapper">数据源</div>
                                 <div class="col-lg-4 wrapper">
-                                    <select name="" id="shipType" class="default-select">
-                                        <option value="3">作业船</option>
-                                        <option value="4">高速轮</option>
-                                        <option value="5">拖船</option>
-                                        <option value="6">客轮</option>
-                                        <option value="7">货轮</option>
-                                        <option value="8">油轮</option>
-                                        <option value="">其他</option>
+
+                                    <select name="" id="dataSetCode" class="default-select">
+                                    <#list dataSetCodeEnums as item>
+
+                                      <option value="${item.getValue()}">${item.getDisplayName()}</option>
+
+                                    </#list>
 
                                     </select>
                                 </div>
-                                <div class="col-lg-2 wrapper">地理范围选择</div>
+                                <div class="col-lg-2 wrapper">统计类型</div>
                                 <div class="col-lg-4 wrapper">
-                                    <input id="gpsRange" type="text" class="input form-control" placeholder="经度1,纬度1;经度2,纬度2" >
+                                    <select name="" id="searchType" class="default-select">
+                                        <option value="jjm">机舰名</option>
+                                        <option value="jxm">机弦号</option>
+                                        <option value="jmbs">军民标识</option>
+                                    </select>
                                 </div>
+
                                 <div class="col-lg-2 wrapper">起止时间</div>
                                 <div class="col-lg-4 wrapper">
-                                    <input id="startTime" type="text" class="input form-control">
+                                    <input id="startTime" type="text" class="input form-control" placeholder="开始时间">
                                 </div>
                                 <div class="col-lg-4 wrapper">
-                                    <input id="endTime" type="text" class="input form-control">
+                                    <input id="endTime" type="text" class="input form-control" placeholder="结束时间">
                                 </div>
-                                <div class="col-lg-24 wrapper">
+
+
+
+                                <div class="col-lg-6 wrapper">
                                     <button id="query" type="button" class="btn btn-sm btn-primary">
                                         搜索
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="gpsMap" style="height: 400px;"></div>
-                            <div class="row" style="height: 300px;">
+                            <div class="chart" id="map" style="height: 400px;">map</div>
+                            <div class="row" style="height: 500px;">
                                 <div class="col-lg-12">
-                                    <table class="table table-responsive"  id="table"></table>
+                                    <table class="table"  id="table" style="height: 400px;"></table>
                                 </div>
                             </div>
                         </div>
@@ -93,6 +101,7 @@
     </div>
 </section>
 <!-- End price Area -->
-<script src="${base}/static/system/js/report/aisReport.js"></script>
+
+<script src="${base}/static/system/js/report/targetActivityRule.js"></script>
 </body>
 </html>

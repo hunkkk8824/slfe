@@ -52,7 +52,6 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/user/**", "anon");
         filterChainDefinitionMap.put("/dataQuality/getColumnsByDataSetCode", "anon");
 
-
         // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/lo/logout", "logout");
 
@@ -62,7 +61,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/portal/add", "roles[admin]");
 
         //后台
-        //filterChainDefinitionMap.put("/manageindex/**", "roles[admin]");
+        filterChainDefinitionMap.put("/manageindex/**", "roles[admin]");
 
         //其他
         filterChainDefinitionMap.put("/user/**", "roles[admin]");

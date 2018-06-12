@@ -3,6 +3,7 @@ package com.selfwork.intelligence.controller;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.dataset.AisBiz;
+import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.BaseQueryVo;
 import com.selfwork.intelligence.model.vo.dateset.AisQueryReq;
@@ -107,18 +108,22 @@ public class ReportController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "knowledgeReport")
+    @RequestMapping(value = "/knowledgeReport")
     public ModelAndView knowledgeReport() {
+
         ModelAndView modelAndView = new ModelAndView("system/report/knowledgeReport");
+        UserInfoPO user =  this.getLoginUser();
+        modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
     }
 
 
     //----------------------------------目标活动规律
-    @RequestMapping(value = "/toTtargetActivityRule")
+    @RequestMapping(value = "/toTargetActivityRule")
     public ModelAndView toTtargetActivityRule() {
         ModelAndView modelAndView = new ModelAndView("system/report/targetActivityRule");
         UserInfoPO user =  this.getLoginUser();
+        modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
     }
