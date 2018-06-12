@@ -76,6 +76,15 @@
       <if test="ptlx!= null">
         and ptlx = #{ptlx,jdbcType=INTEGER}
       </if>
+      <if test="jmbz!= null">
+        jmbz=#{jmbz,jdbcType=INTEGER}
+      </if>
+      <if test="sbsjStartTime!= null">
+        sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="sbsjEndTime!= null">
+        #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
+      </if>
     </where>
   </select>
 
