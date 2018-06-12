@@ -105,4 +105,15 @@ public class ReportController extends BaseController{
         ModelAndView modelAndView = new ModelAndView("system/report/knowledgeReport");
         return modelAndView;
     }
+
+
+    //----------------------------------目标活动规律
+    @RequestMapping(value = "/toTtargetActivityRule")
+    public ModelAndView toTtargetActivityRule() {
+        ModelAndView modelAndView = new ModelAndView("system/report/targetActivityRule");
+        UserInfoPO user =  this.getLoginUser();
+        modelAndView.addObject("nickname", user.getNickname());
+        return modelAndView;
+    }
+
 }
