@@ -115,20 +115,20 @@
         and cgqbh = #{cgqbh,jdbcType=VARCHAR}
       </if>
       <if test="ptbh!= null">
-        (ptbh = #{ptbh,jdbcType=VARCHAR} or
-        and ptmc = #{ptbh,jdbcType=VARCHAR})
+        and (ptbh = #{ptbh,jdbcType=VARCHAR} or
+         ptmc = #{ptbh,jdbcType=VARCHAR})
       </if>
       <if test="ptlx!= null">
         and ptlx = #{ptlx,jdbcType=INTEGER}
       </if>
       <if test="jmbz!= null">
-        jmbz=#{jmbz,jdbcType=INTEGER}
+        and  jmbz=#{jmbz,jdbcType=INTEGER}
       </if>
       <if test="fbsjStartTime!= null and fbsjStartTime!=''">
-        fbsj >= #{fbsjStartTime,jdbcType=TIMESTAMP}
+        and fbsj >= #{fbsjStartTime,jdbcType=TIMESTAMP}
       </if>
       <if test="fbsjEndTime!= null and fbsjEndTime!=null">
-        #{fbsjEndTime,jdbcType=TIMESTAMP} >= fbsj
+        and #{fbsjEndTime,jdbcType=TIMESTAMP} >= fbsj
       </if>
     </where>
   </select>
@@ -141,20 +141,20 @@
         and cgqbh = #{cgqbh,jdbcType=VARCHAR}
       </if>
       <if test="ptbh!= null">
-        (ptbh = #{ptbh,jdbcType=VARCHAR} or
-        and ptmc = #{ptbh,jdbcType=VARCHAR})
+        and (ptbh = #{ptbh,jdbcType=VARCHAR} or
+         ptmc = #{ptbh,jdbcType=VARCHAR})
       </if>
       <if test="ptlx!= null">
         and ptlx = #{ptlx,jdbcType=INTEGER}
       </if>
       <if test="jmbz!= null">
-        jmbz=#{jmbz,jdbcType=INTEGER}
+        and jmbz=#{jmbz,jdbcType=INTEGER}
       </if>
       <if test="fbsjStartTime!= null and fbsjStartTime!=''">
-        fbsj >= #{fbsjStartTime,jdbcType=TIMESTAMP}
+        and  fbsj >= #{fbsjStartTime,jdbcType=TIMESTAMP}
       </if>
       <if test="fbsjEndTime!= null and fbsjEndTime!=null">
-        #{fbsjEndTime,jdbcType=TIMESTAMP} >= fbsj
+        and #{fbsjEndTime,jdbcType=TIMESTAMP} >= fbsj
       </if>
     </where>
   </select>
@@ -165,23 +165,23 @@
     from qb_sj_jztsmb
     <where>
       <if test="jmbz!= null">
-        jmbz=#{jmbz,jdbcType=INTEGER}
+        and jmbz=#{jmbz,jdbcType=INTEGER}
       </if>
       <if test="fbsjStartTime!= null and fbsjStartTime!=''">
-        fbsj >= #{fbsjStartTime,jdbcType=TIMESTAMP}
+        and fbsj >= #{fbsjStartTime,jdbcType=TIMESTAMP}
       </if>
       <if test="fbsjEndTime!= null and fbsjEndTime!=null">
-         #{fbsjEndTime,jdbcType=TIMESTAMP} >= fbsj
+        and  #{fbsjEndTime,jdbcType=TIMESTAMP} >= fbsj
       </if>
       <if test="cgqbh!= null">
-        cgqbh = #{cgqbh,jdbcType=VARCHAR}
+        and cgqbh = #{cgqbh,jdbcType=VARCHAR}
       </if>
       <if test="ptbh!= null">
-        (ptbh = #{ptbh,jdbcType=VARCHAR} or
+        and (ptbh = #{ptbh,jdbcType=VARCHAR} or
         ptmc = #{ptbh,jdbcType=VARCHAR})
       </if>
       <if test="ptlx!= null">
-        ptlx = #{ptlx,jdbcType=INTEGER}
+        and  ptlx = #{ptlx,jdbcType=INTEGER}
       </if>
     </where>
   </select>
