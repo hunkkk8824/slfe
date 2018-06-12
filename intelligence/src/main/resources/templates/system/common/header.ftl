@@ -8,12 +8,11 @@
                         <li><a href="${base}/logout">登出</a></li>
                     </ul>
                 </div>
-                <#--<div class="col-lg-6 col-sm-6 col-6 header-top-right">-->
-                    <#--<div class="header-social">-->
-                        <#--<a href="#"><i class="fa fa-desktop"></i></a>-->
-                        <#--<a href="#"><i class="fa fa-cog"></i></a>-->
-                    <#--</div>-->
-                <#--</div>-->
+                <div class="col-lg-6 col-sm-6 col-6 header-top-right">
+                    <div class="header-social">
+                        <a href="${base}/manageindex">后台管理</i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

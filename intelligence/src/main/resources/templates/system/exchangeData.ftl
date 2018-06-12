@@ -87,12 +87,6 @@
 
         <div class="row">
             <div class="col-lg-12">
-
-                <button type="button" class="genric-btn success"><a href="#"><i class="fa fa-search"></i></a>查询</button>
-                <button type="button" class="genric-btn success"><a href="#"><i class="fa fa-cloud-upload"></i></a>发布数据交换
-                </button>
-            </div>
-            <div class="col-lg-12">
                 <div class="single-price">
                     <h4 style="text-align: left;text-indent: 20px;">数据导入</h4>
                     <div class="tab-content">
