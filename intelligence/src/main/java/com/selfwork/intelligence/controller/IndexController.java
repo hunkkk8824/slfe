@@ -6,6 +6,8 @@ import com.selfwork.intelligence.common.enums.PermissionTypeEnum;
 import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.user.TreeMenuVo;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,18 +39,16 @@ public class IndexController extends BaseController {
 
         ModelAndView modelAndView = new ModelAndView("system/index");
 
-        Object userPrincipal = SecurityUtils.getSubject().getPrincipal();
-
-        if (userPrincipal == null) {
-            modelAndView.addObject("islogin", -1);
-            modelAndView.addObject("userName", "游客");
-            modelAndView.addObject("nickname", "游客");
-        } else {
-            UserInfoPO user = (UserInfoPO) userPrincipal;
-            modelAndView.addObject("islogin", 1);
-            modelAndView.addObject("userName", user.getRealname());
-            modelAndView.addObject("nickname", user.getNickname());
+        boolean isAuthenticated = SecurityUtils.getSubject().isAuthenticated();
+        if (!isAuthenticated) {
+            UsernamePasswordToken token = new UsernamePasswordToken("tourist", "123456");
+            SecurityUtils.getSubject().login(token);
         }
+
+        UserInfoPO user = this.getLoginUser();
+        modelAndView.addObject("userName", user.getRealname());
+        modelAndView.addObject("nickname", user.getNickname());
+        
 
         modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         return modelAndView;

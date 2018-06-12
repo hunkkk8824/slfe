@@ -119,30 +119,7 @@
 <script src="${base}/static/system/js/main.js"></script>
 <script src="${base}/static/js/plugins/layer/layer.min.js"></script>
 </body>
-<script type="text/javascript">
 
-    $(function(){
-
-        var islogin=parseInt('${islogin}');
-
-        function touristLogin() {
-
-
-            $.post("/lo/ajaxLogin", {
-                "username": "tourist",
-                "password": "123456"
-            }, function (result) {
-                layer.msg("当前处于游客模式");
-            });
-        }
-
-        if(islogin==-1){
-            touristLogin();
-        }
-
-    })
-
-</script>
 </html>
 
 
