@@ -31,6 +31,46 @@ public class QueryVo extends BaseQueryVo {
     //JMBS（军民标识）
     private String jmbs;
 
+    //上报收时间
+    private String sbsjStartTime;
+    private String sbsjEndTime;
+
+    //发报时间
+    private String fbsjStartTime;
+    private String fbsjEndTime;
+
+    public String getFbsjStartTime() {
+        return fbsjStartTime;
+    }
+
+    public void setFbsjStartTime(String fbsjStartTime) {
+        this.fbsjStartTime = fbsjStartTime;
+    }
+
+    public String getFbsjEndTime() {
+        return fbsjEndTime;
+    }
+
+    public void setFbsjEndTime(String fbsjEndTime) {
+        this.fbsjEndTime = fbsjEndTime;
+    }
+
+    public String getSbsjStartTime() {
+        return sbsjStartTime;
+    }
+
+    public void setSbsjStartTime(String sbsjStartTime) {
+        this.sbsjStartTime = sbsjStartTime;
+    }
+
+    public String getSbsjEndTime() {
+        return sbsjEndTime;
+    }
+
+    public void setSbsjEndTime(String sbsjEndTime) {
+        this.sbsjEndTime = sbsjEndTime;
+    }
+
     public String getJjm() {
         return jjm;
     }
