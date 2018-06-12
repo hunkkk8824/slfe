@@ -35,7 +35,7 @@
                             <li><a href="${base}/report/targetActivityRule">目标活动规律</a></li>
                             <li><a href="${base}/report/aisReport">航道提取分析</a></li>
                             <li><a href="blog-single.html">目标融合识别</a></li>
-                            <li><a href="blog-single.html">知识提取</a></li>
+                            <li><a href="${base}/report/knowledgeReport">知识提取</a></li>
                         </ul>
                     </li>
                 </ul>

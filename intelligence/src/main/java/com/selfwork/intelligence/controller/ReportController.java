@@ -100,9 +100,12 @@ public class ReportController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "knowledgeReport")
+    @RequestMapping(value = "/knowledgeReport")
     public ModelAndView knowledgeReport() {
+
         ModelAndView modelAndView = new ModelAndView("system/report/knowledgeReport");
+        UserInfoPO user =  this.getLoginUser();
+        modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
     }
 
