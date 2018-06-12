@@ -95,6 +95,18 @@
       <if test="ptlx!= null">
         and ptlx = #{ptlx,jdbcType=INTEGER}
       </if>
+      <if test="jjm!= null and jjm !=''">
+        jjm=#{jjm,jdbcType=VARCHAR}
+      </if>
+      <if test="jxh!= null and jxh !=''">
+        jxh=#{jxh,jdbcType=VARCHAR}
+      </if>
+      <if test="sbsjStartTime!= null and sbsjStartTime!=''">
+        sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="sbsjEndTime!= null and sbsjEndTime!=''">
+        #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
+      </if>
     </where>
   </select>
 

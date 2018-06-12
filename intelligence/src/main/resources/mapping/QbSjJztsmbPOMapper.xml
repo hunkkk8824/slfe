@@ -147,6 +147,15 @@
       <if test="ptlx!= null">
         and ptlx = #{ptlx,jdbcType=INTEGER}
       </if>
+      <if test="jmbz!= null">
+        jmbz=#{jmbz,jdbcType=INTEGER}
+      </if>
+      <if test="fbsjStartTime!= null and fbsjStartTime!=''">
+        fbsj >= #{fbsjStartTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="fbsjEndTime!= null and fbsjEndTime!=null">
+        #{fbsjEndTime,jdbcType=TIMESTAMP} >= fbsj
+      </if>
     </where>
   </select>
 

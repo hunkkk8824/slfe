@@ -101,6 +101,7 @@
 <script src="${base}/static/system/login/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 <script src="${base}/static/system/login/js/main.js"></script>
+<script src="${base}/static/js/plugins/layer/layer.min.js"></script>
 
 </body>
 
@@ -113,6 +114,7 @@
             "username": username,
             "password": password
         }, function (result) {
+
             if (result.status == 200) {
                 location.href = "/index";
             } else {

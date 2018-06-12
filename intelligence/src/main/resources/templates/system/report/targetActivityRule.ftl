@@ -18,7 +18,9 @@
     <title>目标活动规律</title>
 
 <#include "../common/common.ftl"/>
-
+    <!--离线地图-->
+    <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/map_load.js"></script>
+    <link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/offlinemap/css/map.css"/>
     <style>
         .tab-content {
             width: 100%;
@@ -93,7 +95,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="map" style="height:400px;">map</div>
+                            <div class="chart" id="map" style="height: 300px;margin-top: 10px;"></div>
                             <div class="row" style="height: 500px;">
                                 <div class="col-lg-12">
                                     <table class="table"  id="table" style="height: 300px;"></table>
