@@ -5,7 +5,7 @@ import com.selfwork.intelligence.model.vo.BaseQueryVo;
 /**
  * Created by zzc on 2018/6/10.
  */
-public class QueryVo extends BaseQueryVo{
+public class QueryVo extends BaseQueryVo {
 
     private String tableName;
     /**
@@ -20,6 +20,40 @@ public class QueryVo extends BaseQueryVo{
      * 平台类型 （有些表没有此字段）
      */
     private Integer ptlx;
+
+
+    //（机舰名）
+    private String jjm;
+
+    //JXH（机弦号）
+    private String jxh;
+
+    //JMBS（军民标识）
+    private String jmbs;
+
+    public String getJjm() {
+        return jjm;
+    }
+
+    public void setJjm(String jjm) {
+        this.jjm = jjm;
+    }
+
+    public String getJxh() {
+        return jxh;
+    }
+
+    public void setJxh(String jxh) {
+        this.jxh = jxh;
+    }
+
+    public String getJmbs() {
+        return jmbs;
+    }
+
+    public void setJmbs(String jmbs) {
+        this.jmbs = jmbs;
+    }
 
     public String getTableName() {
         return tableName;
