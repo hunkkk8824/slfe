@@ -62,21 +62,27 @@
 
                                     </select>
                                 </div>
-                                <div class="col-lg-2 wrapper">统计类型</div>
+                                <div class="col-lg-2 wrapper">机舰名</div>
                                 <div class="col-lg-4 wrapper">
-                                    <select name="" id="searchType" class="default-select">
-                                        <option value="jjm">机舰名</option>
-                                        <option value="jxm">机弦号</option>
-                                        <option value="jmbs">军民标识</option>
-                                    </select>
+                                    <input type="text" placeholder="机舰名" id="jjm" class="input form-control">
                                 </div>
+                                <div class="col-lg-2 wrapper">机弦号</div>
+                                <div class="col-lg-4 wrapper">
+                                    <input type="text" placeholder="机弦号" id="jxh" class="input form-control">
+                                </div>
+                                <div class="col-lg-2 wrapper">军民标识</div>
+                                <div class="col-lg-4 wrapper">
+                                    <input type="text" placeholder="军民标识" id="jmbz" class="input form-control">
+                                </div>
+
+
 
                                 <div class="col-lg-2 wrapper">起止时间</div>
                                 <div class="col-lg-4 wrapper">
-                                    <input id="startTime" type="text" class="input form-control" placeholder="开始时间">
+                                    <input id="sbsjStartTime" type="text" class="input form-control" placeholder="上报开始时间">
                                 </div>
                                 <div class="col-lg-4 wrapper">
-                                    <input id="endTime" type="text" class="input form-control" placeholder="结束时间">
+                                    <input id="sbsjEndTime" type="text" class="input form-control" placeholder="上报结束时间">
                                 </div>
 
 
@@ -87,10 +93,10 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="map" style="height: 400px;">map</div>
+                            <div class="chart" id="map" style="height:400px;">map</div>
                             <div class="row" style="height: 500px;">
                                 <div class="col-lg-12">
-                                    <table class="table"  id="table" style="height: 400px;"></table>
+                                    <table class="table"  id="table" style="height: 300px;"></table>
                                 </div>
                             </div>
                         </div>

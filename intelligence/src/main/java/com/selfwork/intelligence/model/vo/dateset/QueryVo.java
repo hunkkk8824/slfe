@@ -28,8 +28,8 @@ public class QueryVo extends BaseQueryVo {
     //JXH（机弦号）
     private String jxh;
 
-    //JMBS（军民标识）
-    private String jmbs;
+    //JMBZ（军民标识）
+    private Integer jmbz;
 
     //上报收时间
     private String sbsjStartTime;
@@ -53,6 +53,14 @@ public class QueryVo extends BaseQueryVo {
 
     public void setFbsjEndTime(String fbsjEndTime) {
         this.fbsjEndTime = fbsjEndTime;
+    }
+
+    public Integer getJmbz() {
+        return jmbz;
+    }
+
+    public void setJmbz(Integer jmbz) {
+        this.jmbz = jmbz;
     }
 
     public String getSbsjStartTime() {
@@ -87,13 +95,7 @@ public class QueryVo extends BaseQueryVo {
         this.jxh = jxh;
     }
 
-    public String getJmbs() {
-        return jmbs;
-    }
 
-    public void setJmbs(String jmbs) {
-        this.jmbs = jmbs;
-    }
 
     public String getTableName() {
         return tableName;

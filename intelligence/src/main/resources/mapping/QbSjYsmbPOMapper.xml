@@ -93,10 +93,10 @@
       <if test="jxh!= null and jxh !=''">
         jxh=#{jxh,jdbcType=VARCHAR}
       </if>
-      <if test="sbsjStartTime!= null">
+      <if test="sbsjStartTime!= null and sbsjStartTime!=''">
         sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
       </if>
-      <if test="sbsjEndTime!= null">
+      <if test="sbsjEndTime!= null and sbsjEndTime!=''">
         #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
       </if>
     </where>
@@ -118,10 +118,10 @@
       <if test="jxh!= null and jxh !=''">
         jxh=#{jxh,jdbcType=VARCHAR}
       </if>
-      <if test="sbsjStartTime!= null">
+      <if test="sbsjStartTime!= null and sbsjStartTime!=''">
         sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
       </if>
-      <if test="sbsjEndTime!= null">
+      <if test="sbsjEndTime!= null and sbsjEndTime!=''">
         #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
       </if>
       <if test="cgqbh!= null">

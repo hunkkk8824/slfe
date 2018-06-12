@@ -8,6 +8,7 @@ import com.selfwork.intelligence.model.vo.user.TreeMenuVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class IndexController extends BaseController {
         UserInfoPO user = this.getLoginUser();
         modelAndView.addObject("userName", user.getRealname());
         modelAndView.addObject("nickname", user.getNickname());
-        
+
 
         modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         return modelAndView;

@@ -6,6 +6,7 @@ import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,28 +28,28 @@ public class LoginController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     //跳转到登录表单页面
-    @RequestMapping(value="/login")
+    @RequestMapping(value = "/login")
     public String login(HttpServletRequest req, Model model) {
 
         Subject subject = SecurityUtils.getSubject();
-        if(subject != null && subject.isAuthenticated()) {
+        if (subject != null && subject.isAuthenticated()) {
             return "redirect:/";
         }
 
-        String exceptionClassName = (String)req.getAttribute("shiroLoginFailure");
+        String exceptionClassName = (String) req.getAttribute("shiroLoginFailure");
         String error = null;
-        if(UnknownAccountException.class.getName().equals(exceptionClassName)) {
+        if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
             error = "用户名/密码错误";
             logger.error(error);
-        } else if(IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
+        } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
             error = "用户名/密码错误";
             logger.error(error);
-        } else if(AccountException.class.getName().equals(exceptionClassName)){
+        } else if (AccountException.class.getName().equals(exceptionClassName)) {
             error = "账户已被禁用";
             logger.error(error);
-        }else if(exceptionClassName != null) {
+        } else if (exceptionClassName != null) {
             error = "登录异常";
-            logger.error(error+":"+exceptionClassName);
+            logger.error(error + ":" + exceptionClassName);
         }
         model.addAttribute("error", error);
         return "login";
@@ -56,13 +57,14 @@ public class LoginController extends BaseController {
 
     /**
      * ajax登录请求
+     *
      * @param username
      * @param password
      * @return
      */
-    @RequestMapping(value="/ajaxLogin",method= RequestMethod.POST)
+    @RequestMapping(value = "/ajaxLogin", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> submitLogin(String username, String password, Model model) {
+    public Map<String, Object> submitLogin(String username, String password, Model model) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         try {
 

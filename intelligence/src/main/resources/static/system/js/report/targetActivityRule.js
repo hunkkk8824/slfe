@@ -12,13 +12,13 @@
     var initEvent = function(){
 
         laydate.render({
-            elem: '#startTime',
+            elem: '#sbsjStartTime',
             type: 'datetime',
             format: 'yyyy-MM-dd HH:mm:ss',
         });
 
         laydate.render({
-            elem: '#endTime',
+            elem: '#sbsjEndTime',
             type: 'datetime',
             format: 'yyyy-MM-dd HH:mm:ss',
         });
@@ -31,13 +31,9 @@
     };
 
     function doSearch(){
-        var searchType = $('#searchType').val();
-        var searchValue = $('#searchValue').val();
+
         var dataSetCode = $('#dataSetCode').val();
-        if(!searchType){
-            layer.msg("请选择统计类型",{icon:0});
-            return false;
-        }
+
 
         if(!dataSetCode){
             layer.msg("请选择数据集",{icon:0});
@@ -63,20 +59,29 @@
 
     //得到查询的参数
     function queryParams(params) {
-        var searchType = $('#searchType').val();
-        var dataSetCode = $('#dataSetCode').val();
+        var dataSetCode = $('#dataSetCode').val(),
+            jjm=$("#jjm").val(),
+            jxh=$("#jxh").val(),
+            jmbz=$("#jmbz").val();
 
         var temp = {
             limit: params.limit,    //页面大小
             offset: params.offset,   //页码
             tableName : dataSetCode,
+            jjm:jjm,//机舰名
+            jxh:jxh,//机弦号
+            jmbz:jmbz,//军民标识,
+            sbsjStartTime:$("#sbsjStartTime").val(),
+            sbsjEndTime:$("#sbsjEndTime").val()
         };
-        temp[searchType]=searchType;
+
+        debugger
         return temp;
     };
 
 
     function initTable(tableColumns) {
+        $('#table').bootstrapTable("destroy");
         $('#table').bootstrapTable({
             url: publicCache.path + "/report/getList?v=" + new Date(),    //请求后台的URL（*）
             method: 'post',                         //请求方式（*）

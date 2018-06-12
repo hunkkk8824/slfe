@@ -102,11 +102,11 @@
             <if test="jmbz!= null">
                 jmbz=#{jmbz,jdbcType=INTEGER}
             </if>
-            <if test="sbsjStartTime!= null">
-                sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
+            <if test="sbsjStartTime!= null and sbsjStartTime!=''">
+                sbsj <![CDATA[ >= ]]>  #{sbsjStartTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="sbsjEndTime!= null">
-                #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
+            <if test="sbsjEndTime!= null and sbsjEndTime!=''">
+                sbsj <![CDATA[ <= ]]>   #{sbsjEndTime,jdbcType=TIMESTAMP}
             </if>
         </where>
     </select>
@@ -117,13 +117,13 @@
         <include refid="Base_Column_List"/>
         from qb_sj_dptdzzmb
         <where>
-            <if test="jmbz!= null">
+            <if test="jmbz!= null ">
                 jmbz=#{jmbz,jdbcType=INTEGER}
             </if>
-            <if test="sbsjStartTime!= null">
+            <if test="sbsjStartTime!= null and sbsjStartTime!=''">
                 sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="sbsjEndTime!= null">
+            <if test="sbsjEndTime!= null and sbsjEndTime!=''">
                 #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
             </if>
             <if test="cgqbh!= null">
