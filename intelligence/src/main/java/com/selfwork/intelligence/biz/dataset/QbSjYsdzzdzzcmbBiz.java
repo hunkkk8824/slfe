@@ -7,10 +7,7 @@ import com.selfwork.intelligence.mapper.QbSjYsdzzdzzcmbPOMapper;
 import com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPO;
 import com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
-import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbPOWithBLOBsVO;
-import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbQueryReq;
-import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbVO;
-import com.selfwork.intelligence.model.vo.dateset.QueryVo;
+import com.selfwork.intelligence.model.vo.dateset.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +49,11 @@ public class QbSjYsdzzdzzcmbBiz extends BaseBiz implements IBaseQbBiz<QbSjYsdzzd
             item.setSbsjStr(DateUtils.getFormatDateTime(po.getSbsj()));
             return item;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LocationDto> getLocations(QueryVo queryVo) {
+        return qbSjYsdzzdzzcmb.getLocations(queryVo);
     }
 
     @Override

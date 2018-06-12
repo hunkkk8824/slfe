@@ -19,6 +19,91 @@
 
     };
 
+
+    //1.百度地图API功能
+    var map = new BMap.Map("map");    // 创建Map实例
+
+    //隐藏百度地图商标
+    function hideLog() {
+
+        $('a[title="到百度地图查看此区域"]').hide();
+        $('span[_cid="1"]').hide();
+
+    }
+
+    //添加标注
+    function addMarker(point,isCgq,labelName) {
+        var marker;
+        if(isCgq){
+            //var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png",
+            //    new BMap.Size(23, 25), {
+            //        offset: new BMap.Size(10, 25),
+            //        imageOffset: new BMap.Size(0, 0 -  index * 25)
+            //
+            //    });
+            //var marker = new BMap.Marker(point, { icon: myIcon });
+            marker = new BMap.Marker(point);
+        }else{
+            marker = new BMap.Marker(point);
+        }
+        var label = new BMap.Label(labelName, {offset: new BMap.Size(20, -10)});
+        marker.setLabel(label);
+        map.addOverlay(marker);
+    }
+
+    function initMarker(data){
+        $.each(data,function(i,obj){
+            var point = new BMap.Point(obj.jd,obj.wd);
+            addMarker(point,obj.isCgq,obj.label);
+        });
+    }
+
+    // 初始化地图
+    var initMap = function(){
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初
+        map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+        //map.addControl(new BMap.NavigationControl());   //缩放按钮
+        map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
+
+        //监听地图缩放
+        map.addEventListener("zoomend", function () {
+            hideLog();
+            if (this.getZoom() > 12) {
+                layer.msg("默认只有12级地图, 超过无法显示");
+            }
+        });
+
+        //地图加载完成
+        map.addEventListener("tilesloaded", function () {
+            hideLog()
+        });
+
+    };
+
+    function initChartMap(params){
+        // 获取坐标
+        var url = publicCache.path + "/report/getLocations?v=" + new Date();
+        layer.load(3);
+        $.ajax({
+            type: 'post',
+            url: url,
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(params),
+            success: function (res) {
+                layer.closeAll('loading');
+                if(res){
+                    initMarker(res);
+                }
+            }, error: function (xhr, status) {
+                layer.closeAll('loading');
+                //提示层
+                layer.msg("系统出现异常！", {icon: 0});
+            }
+        });
+    }
+
     function doSearch(){
         var searchType = $('#searchType').val();
         var searchValue = $('#searchValue').val();
@@ -35,7 +120,21 @@
             layer.msg("请选择数据集",{icon:0});
             return false;
         }
+
+        // 查询表数据
         getColumnsByDataSetCode(dataSetCode,initTable);
+        // 查询地图数据
+        var params = {
+            tableName : dataSetCode
+        };
+        if("cgqbh" == searchType){
+            params.cgqbh = searchValue;
+        }else if("ptbh" == searchType){
+            params.ptbh = searchValue;
+        }else {
+            params.ptlx = searchValue;
+        }
+        initChartMap(params);
     }
 
     //根据表名称或列设置
@@ -109,5 +208,6 @@
     $(function () {
         initData();
         initEvent();
+        initMap();
     });
 })(_path);

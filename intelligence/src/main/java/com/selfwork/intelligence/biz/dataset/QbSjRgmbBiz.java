@@ -6,6 +6,7 @@ import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.mapper.QbSjRgmbPOMapper;
 import com.selfwork.intelligence.model.QbSjRgmbPO;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
+import com.selfwork.intelligence.model.vo.dateset.LocationDto;
 import com.selfwork.intelligence.model.vo.dateset.QbSjRgmbQueryReq;
 import com.selfwork.intelligence.model.vo.dateset.QbSjRgmbVO;
 import com.selfwork.intelligence.model.vo.dateset.QueryVo;
@@ -46,6 +47,11 @@ public class QbSjRgmbBiz extends BaseBiz implements IBaseQbBiz<QbSjRgmbVO> {
             item.setSbsjStr(DateUtils.getFormatDateTime(po.getSbsj()));
             return item;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LocationDto> getLocations(QueryVo queryVo) {
+        return qbSjRgmb.getLocations(queryVo);
     }
 
     @Override

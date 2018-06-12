@@ -1,6 +1,7 @@
 package com.selfwork.intelligence.mapper;
 
 import com.selfwork.intelligence.model.po.QbSjYsmbPO;
+import com.selfwork.intelligence.model.vo.dateset.LocationDto;
 import com.selfwork.intelligence.model.vo.dateset.QbSjYsmbQueryReq;
 import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 
@@ -24,4 +25,6 @@ public interface QbSjYsmbPOMapper {
     List<QbSjYsmbPO> getBaseInfoList(QbSjYsmbQueryReq req);
 
     List<QbSjYsmbPO> getList(QueryVo queryVo);
+
+    List<LocationDto> getLocations(QueryVo queryVo);
 }

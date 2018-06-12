@@ -17,6 +17,9 @@
     <title>装备能力分析</title>
 
     <#include "../common/common.ftl"/>
+    <!--离线地图-->
+    <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/map_load.js"></script>
+    <link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/offlinemap/css/map.css"/>
 
     <style>
         .tab-content {
@@ -26,8 +29,26 @@
         .price-area{
             margin: 0;
         }
-        .table tr{
-            height:20px;
+
+        #map, #tab, #mapfrm {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #menu {
+            height: 100%;
+            overflow-y: auto
+        }
+
+        td {
+            font-size: 14px
+        }
+
+        h4 {
+            margin: 0;
         }
     </style>
 </head>
@@ -80,10 +101,10 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="chart1" style="height: 400px;">chart1</div>
-                            <div class="row" style="height: 500px;">
+                            <div class="chart" id="map" style="height: 400px;margin-top: 10px;"></div>
+                            <div class="row" style="margin-top: 10px;">
                                 <div class="col-lg-12">
-                                    <table class="table"  id="table" style="height: 400px;"></table>
+                                    <table data-mobile-responsive="true"  id="table" style="height: 400px;"></table>
                                 </div>
                             </div>
                         </div>
