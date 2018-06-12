@@ -13,6 +13,7 @@
     <meta name="keywords" content="">
     <!-- meta character set -->
     <meta charset="UTF-8">
+    <!--离线地图-->
     <!-- Site Title -->
     <title>多源情报系统</title>
 
@@ -27,6 +28,9 @@
             margin: 0;
         }
     </style>
+    <!--离线地图-->
+    <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/map_load.js"></script>
+    <link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/offlinemap/css/map.css"/>
 </head>
 <body>
 <#include "../common/header.ftl"/>
@@ -75,7 +79,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="chart1" style="height: 400px;">chart1</div>
+                            <div class="chart" id="gpsMap" style="height: 400px;"></div>
                             <div class="row" style="height: 300px;">
                                 <div class="col-lg-12">
                                     <table class="table table-responsive"  id="table"></table>
@@ -89,7 +93,6 @@
     </div>
 </section>
 <!-- End price Area -->
-
 <script src="${base}/static/system/js/report/aisReport.js"></script>
 </body>
 </html>
