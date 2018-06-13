@@ -10,6 +10,11 @@
 
     //初始化事件
     var initEvent = function(){
+
+        $(window).resize(function () {
+            $('#table').bootstrapTable('resetView');
+        });
+
         $('#query').click(function () {
             //$('#table').bootstrapTable('refresh', {
             //    pageNumber: 1
@@ -72,7 +77,7 @@
         //监听地图缩放
         map.addEventListener("zoomend", function () {
             hideLog();
-            if (this.getZoom() > 12) {
+            if (this.getZoom() > 7) {
                 layer.msg("默认只有12级地图, 超过无法显示");
             }
         });
