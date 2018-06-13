@@ -49,6 +49,7 @@
 <script src="${base}/static/system/js/mail-script.js"></script>
 <script src="${base}/static/js/plugins/laydate/laydate.js"></script>
 <script src="${base}/static/portal/res/layui/layui.all.js"></script>
+<script src="${base}/static/system/js/main.js"></script>
 
 
 <script type="text/javascript">

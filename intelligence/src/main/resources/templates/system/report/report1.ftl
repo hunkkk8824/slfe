@@ -102,9 +102,9 @@
                                 </div>
                             </div>
                             <div class="chart" id="map" style="height: 400px;margin-top: 10px;"></div>
-                            <div class="row" style="margin-top: 10px;">
+                            <div class="row" style="margin-top: 10px;height: 500px;">
                                 <div class="col-lg-12">
-                                    <table data-mobile-responsive="true"  id="table" style="height: 400px;"></table>
+                                    <table class="table"  id="table" style="height: 300px;"></table>
                                 </div>
                             </div>
                         </div>

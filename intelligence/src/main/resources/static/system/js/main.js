@@ -13,7 +13,9 @@ $(document).ready(function() {
 
     var mySwiper = new Swiper ('.swiper-container', {
       loop: true,
-      
+      autoplay: {
+          delay: 5000
+      },
       // 如果需要分页器
       pagination: {
         el: '.swiper-pagination',

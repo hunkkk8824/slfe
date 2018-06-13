@@ -10,6 +10,11 @@
 
     //初始化事件
     var initEvent = function(){
+
+        $(window).resize(function () {
+            $('#table').bootstrapTable('resetView');
+        });
+
         $('#query').click(function () {
             //$('#table').bootstrapTable('refresh', {
             //    pageNumber: 1
@@ -34,6 +39,7 @@
     //添加标注
     function addMarker(point,isCgq,labelName) {
         var marker;
+        debugger
         if(isCgq){
             //var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png",
             //    new BMap.Size(23, 25), {
@@ -44,6 +50,7 @@
             //var marker = new BMap.Marker(point, { icon: myIcon });
             marker = new BMap.Marker(point);
         }else{
+            labelName = '目标';
             marker = new BMap.Marker(point);
         }
         var label = new BMap.Label(labelName, {offset: new BMap.Size(20, -10)});
@@ -55,7 +62,7 @@
         map.clearOverlays();
         $.each(data,function(i,obj){
             var point = new BMap.Point(obj.jd,obj.wd);
-            addMarker(point,obj.isCgq,obj.label);
+            addMarker(point,obj.cgq,obj.label);
         });
     }
 
@@ -70,7 +77,7 @@
         //监听地图缩放
         map.addEventListener("zoomend", function () {
             hideLog();
-            if (this.getZoom() > 12) {
+            if (this.getZoom() > 7) {
                 layer.msg("默认只有12级地图, 超过无法显示");
             }
         });
@@ -176,6 +183,7 @@
 
 
     function initTable(tableColumns) {
+        $('#table').bootstrapTable("destroy");
         $('#table').bootstrapTable({
             url: publicCache.path + "/report/getList?v=" + new Date(),    //请求后台的URL（*）
             method: 'post',                         //请求方式（*）

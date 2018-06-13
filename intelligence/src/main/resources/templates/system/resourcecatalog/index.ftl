@@ -75,7 +75,7 @@
             <div class="col-lg-8">
                 <div class="single-price">
                     <h4 id="htitle">Luxury Packages</h4>
-
+                    <h6 id="htitle2" style="margin-top: 15px;color: #495057;font-weight: 200;">这里是一个副标题或备注</h6>
                     <ul class="nav nav-tabs">
                         <li><a href="#tab1" data-toggle="tab" class="active">表结构</a></li>
 
