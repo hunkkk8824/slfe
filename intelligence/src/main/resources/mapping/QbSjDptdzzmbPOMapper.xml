@@ -93,8 +93,8 @@
                 and cgqbh = #{cgqbh,jdbcType=VARCHAR}
             </if>
             <if test="ptbh!= null">
-                (ptbh = #{ptbh,jdbcType=VARCHAR} or
-                and ptmc = #{ptbh,jdbcType=VARCHAR})
+                and (ptbh = #{ptbh,jdbcType=VARCHAR} or
+                 ptmc = #{ptbh,jdbcType=VARCHAR})
             </if>
             <if test="ptlx!= null">
                 and ptlx = #{ptlx,jdbcType=INTEGER}
