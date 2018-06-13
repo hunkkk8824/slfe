@@ -2063,6 +2063,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header-top a {
   color: #fff;
+  font-size: 14px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -2195,8 +2196,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sf-arrows .sf-with-ul:after {
-  content: "\f107";
+  content: "";
   position: absolute;
+  width: 12px;
+  height: 12px;
+  background-image: url(../img/arrow.png);
+  background-size: cover;
+  margin-top: 6px;
   right: 15px;
   font-family: FontAwesome;
   font-style: normal;
@@ -2221,7 +2227,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   color: #fff;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   outline: none;
 }
@@ -4701,7 +4707,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   border: none;
 }
 #left-tree > li {
-  width: 220px;
+  width: 200px;
   height: 40px;
   line-height: 40px;
   border-radius: 0 10px 10px 0;
@@ -4760,4 +4766,82 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+}
+.fixed-header{
+  width: 100px;
+  height: 22px;
+  line-height: 22px;
+  position: fixed;
+  right: 10px;
+  top: 28px;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+
+}
+.fixed-header li{
+  flex: 1;
+  line-height: 22px;
+  cursor: pointer;
+  text-align: center;
+}
+.icon-logout{
+  width: 12px;
+  margin-top: 4px;
+  height: 12px;
+  display: inline-block;
+  background-size: cover;
+  background-image: url(../img/logout.png);
+}
+.icon-setting{
+  width: 12px;
+  margin-top: 4px;
+  height: 12px;
+  display: block;
+  background-size: cover;
+  background-image: url(../img/setting.png);
+}
+
+.swiper-button-prev, .swiper-container-rtl .swiper-button-next{
+  background-image: url(../img/larrow.png);
+}
+
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev{
+  background-image: url(../img/rarrow.png);
+
+.swiper-pagination-bullet{
+  opacity: 1;
+  background-color: #fff;
+}
+}
+.swiper-pagination-bullet-active{
+  background: #ffa74a;
+}
+
+
+@media (max-width: 1300px) {
+  .fixed-header {
+    width: 50px;
+    flex-wrap: wrap;
+    height: 100px;
+    right: 0px;
+    top: 100px;
+    background-color: #1250a9;
+    border-radius: 6px;
+  }
+  .fixed-header li{
+    flex: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  .icon-setting{
+    display: inline-block;
+  }
+  .icon-logout{
+    height: 12px!important;
+  }
+
+
 }

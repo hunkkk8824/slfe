@@ -1,21 +1,47 @@
 <header id="header" class="header-scrolled">
-    <div class="header-top">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-sm-6 col-6 header-top-left">
-                    <ul>
-                        <li><a href="#">${nickname}</a></li>
-                        <li><a href="${base}/logout">登出</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-6 col-sm-6 col-6 header-top-right">
-                    <div class="header-social">
-                        <a href="${base}/manageindex">后台管理</i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <#--<div class="header-top">-->
+        <#--<div class="container">-->
+            <#--<div class="row align-items-center">-->
+                <#--<div class="col-lg-6 col-sm-6 col-6 header-top-left">-->
+                    <#--<ul>-->
+                        <#--<li><a href="#">${nickname}</a></li>-->
+                        <#--<li><a href="${base}/logout">登出</a></li>-->
+                    <#--</ul>-->
+                <#--</div>-->
+                <#--<div class="col-lg-6 col-sm-6 col-6 header-top-right">-->
+                    <#--<div class="header-social">-->
+                        <#--<a href="${base}/manageindex">后台管理</i></a>-->
+                    <#--</div>-->
+                <#--</div>-->
+            <#--</div>-->
+        <#--</div>-->
+    <#--</div>-->
+
+    <ul class="fixed-header">
+        <li><a href="#" style="color:white">${nickname}</a></li>
+        <a href="${base}/logout"><li class="icon-logout"></li></a>
+        <li>
+            <a href="${base}/manageindex"> <i class="icon-setting"></i></a>
+        </li>
+    </ul>
+
+    <#--<div class="header-top">-->
+        <#--<div class="container">-->
+            <#--<div class="row align-items-center">-->
+                <#--<div class="col-lg-6 col-sm-6 col-6 header-top-left">-->
+                    <#--<ul>-->
+                        <#--<li><a href="#">${nickname}</a></li>-->
+                        <#--<li><a href="${base}/logout">登出</a></li>-->
+                    <#--</ul>-->
+                <#--</div>-->
+                <#--<div class="col-lg-6 col-sm-6 col-6 header-top-right">-->
+                    <#--<div class="header-social">-->
+                        <#--<a href="${base}/manageindex"><i class="fa fa-cog"></i></a>-->
+                    <#--</div>-->
+                <#--</div>-->
+            <#--</div>-->
+        <#--</div>-->
+    <#--</div>-->
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">

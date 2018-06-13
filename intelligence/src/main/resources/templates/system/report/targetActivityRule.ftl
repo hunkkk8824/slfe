@@ -47,7 +47,7 @@
 
             <div class="col-lg-12">
                 <div class="single-price">
-                    <h4>装备能力分析</h4>
+                    <h4>目标活动规律</h4>
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="tab1">
                             <div class="select-condition row">
