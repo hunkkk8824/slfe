@@ -58,6 +58,39 @@
         return temp;
     };
 
+    //1.百度地图API功能
+    var map = new BMap.Map("map");    // 创建Map实例
+
+    //隐藏百度地图商标
+    function hideLog() {
+
+        $('a[title="到百度地图查看此区域"]').hide();
+        $('span[_cid="1"]').hide();
+
+    }
+
+    // 初始化地图
+    var initMap = function(){
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初
+        map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
+        map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+        //map.addControl(new BMap.NavigationControl());   //缩放按钮
+        map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
+
+        //监听地图缩放
+        map.addEventListener("zoomend", function () {
+            hideLog();
+            if (this.getZoom() > 7) {
+                layer.msg("默认只有12级地图, 超过无法显示");
+            }
+        });
+
+        //地图加载完成
+        map.addEventListener("tilesloaded", function () {
+            hideLog()
+        });
+
+    };
 
     function initTable() {
         $('#table').bootstrapTable({
@@ -114,6 +147,6 @@
     $(function () {
         initData();
         initEvent();
-        initTable();
+        initMap();
     });
 })(_path);

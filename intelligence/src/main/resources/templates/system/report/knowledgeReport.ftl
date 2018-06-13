@@ -18,6 +18,10 @@
 
     <#include "../common/common.ftl"/>
 
+    <!--离线地图-->
+    <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/map_load.js"></script>
+    <link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/offlinemap/css/map.css"/>
+
     <style>
         .tab-content {
             width: 100%;
@@ -71,7 +75,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="map">map</div>
+                            <div class="chart" id="map" style="margin-top:30px;"></div>
                         </div>
                         <div class="tab-pane fade" id="tab2">
                             <div class="select-condition row">
