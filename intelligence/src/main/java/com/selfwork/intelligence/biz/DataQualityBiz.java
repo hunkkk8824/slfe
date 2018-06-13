@@ -1,5 +1,6 @@
 package com.selfwork.intelligence.biz;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.dataset.*;
@@ -46,7 +47,6 @@ public class DataQualityBiz extends BaseBiz {
 
     @Autowired
     private ResourceEtlLogPOMapper resourceEtlLogPOMapper;
-
 
 
     private static List<DataSetContainer> containerList = null;
@@ -228,25 +228,25 @@ public class DataQualityBiz extends BaseBiz {
 
         DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
 
-        this.startPage(queryVo);
+        Page page = this.startPage(queryVo);
         IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
         PageInfo pageData = new PageInfo<>(qbBiz.getListByBatchNO(resourceCode));
         map.put("rows", pageData.getList());
-        map.put("total", pageData.getTotal());
+        map.put("total", page.getTotal());
         return map;
     }
 
-    public Map<String,Object> getList(QueryVo queryVo) {
+    public Map<String, Object> getList(QueryVo queryVo) {
         Map<String, Object> map = new HashMap<>();
         String dataSetCode = queryVo.getTableName();
         DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
-        this.startPage(queryVo);
+        Page page = this.startPage(queryVo);
         IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
         PageInfo pageData = new PageInfo<>(qbBiz.getList(queryVo));
-        if(pageData != null){
+        if (pageData != null) {
             map.put("rows", pageData.getList());
-            map.put("total", pageData.getTotal());
-        }else {
+            map.put("total", page.getTotal());
+        } else {
             map.put("rows", new ArrayList<>());
             map.put("total", 0);
         }
@@ -274,6 +274,7 @@ public class DataQualityBiz extends BaseBiz {
 
     /**
      * 获取记录经纬度坐标
+     *
      * @param queryVo
      * @return
      */
@@ -282,8 +283,8 @@ public class DataQualityBiz extends BaseBiz {
         DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
         this.startPage(queryVo);
         IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
-        List<LocationDto> list =  qbBiz.getLocations(queryVo);
-        if(!CollectionUtils.isEmpty(list) && list.size() > 1 && queryVo.getCgqbh() != null){
+        List<LocationDto> list = qbBiz.getLocations(queryVo);
+        if (!CollectionUtils.isEmpty(list) && list.size() > 1 && queryVo.getCgqbh() != null) {
             BigDecimal maxJd = null;
             BigDecimal maxWd = null;
             BigDecimal minJd = null;
@@ -292,33 +293,33 @@ public class DataQualityBiz extends BaseBiz {
             for (int i = 0; i < list.size(); i++) {
                 LocationDto dto = list.get(i);
                 dto.setLabel("目标");
-                if(dto.getJd() == null || dto.getWd() == null){
+                if (dto.getJd() == null || dto.getWd() == null) {
                     continue;
                 }
-                if(i == 0){
+                if (i == 0) {
                     maxJd = dto.getJd();
                     minJd = dto.getJd();
                     maxWd = dto.getWd();
                     minWd = dto.getWd();
-                }else {
-                    if(maxJd.compareTo(dto.getJd()) == -1){
+                } else {
+                    if (maxJd.compareTo(dto.getJd()) == -1) {
                         maxJd = dto.getJd();
                     }
-                    if(minJd.compareTo(dto.getJd()) == 1){
+                    if (minJd.compareTo(dto.getJd()) == 1) {
                         minJd = dto.getJd();
                     }
-                    if(maxWd.compareTo(dto.getWd()) == -1){
+                    if (maxWd.compareTo(dto.getWd()) == -1) {
                         maxWd = dto.getWd();
                     }
-                    if(minWd.compareTo(dto.getWd()) == 1){
+                    if (minWd.compareTo(dto.getWd()) == 1) {
                         minWd = dto.getWd();
                     }
                 }
             }
-            if(maxJd != null && maxWd != null &&  !maxJd.equals(minJd) &&
-                    maxWd != null && minWd != null && !maxWd.equals(minWd)){
-                BigDecimal cgqJd = maxJd.add(minJd).divide(BigDecimal.valueOf(2),6,BigDecimal.ROUND_HALF_UP);
-                BigDecimal cgqWd = maxWd.add(minWd).divide(BigDecimal.valueOf(2),6,BigDecimal.ROUND_HALF_UP);
+            if (maxJd != null && maxWd != null && !maxJd.equals(minJd) &&
+                    maxWd != null && minWd != null && !maxWd.equals(minWd)) {
+                BigDecimal cgqJd = maxJd.add(minJd).divide(BigDecimal.valueOf(2), 6, BigDecimal.ROUND_HALF_UP);
+                BigDecimal cgqWd = maxWd.add(minWd).divide(BigDecimal.valueOf(2), 6, BigDecimal.ROUND_HALF_UP);
                 LocationDto cgq = new LocationDto();
                 cgq.setLabel("传感器");
                 cgq.setJd(cgqJd);
