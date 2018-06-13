@@ -52,6 +52,7 @@
     }
 
     function initMarker(data){
+        map.clearOverlays();
         $.each(data,function(i,obj){
             var point = new BMap.Point(obj.jd,obj.wd);
             addMarker(point,obj.isCgq,obj.label);

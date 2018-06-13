@@ -87,7 +87,7 @@
 
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade active show touristContent" id="tab1">
+                        <div class="tab-pane fade active show touristContent" id="tab1" style="height: 650px;overflow-y: auto">
 
 
                         </div>
