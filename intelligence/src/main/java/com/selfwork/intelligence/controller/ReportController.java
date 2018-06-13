@@ -31,7 +31,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/report")
-public class ReportController extends BaseController{
+public class ReportController extends BaseController {
     public final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -45,7 +45,7 @@ public class ReportController extends BaseController{
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("system/report/report1");
 
-        UserInfoPO user =  this.getLoginUser();
+        UserInfoPO user = this.getLoginUser();
         modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
     }
@@ -53,7 +53,13 @@ public class ReportController extends BaseController{
     @ResponseBody
     @RequestMapping(value = "/getLocations", method = RequestMethod.POST)
     public List<LocationDto> getLocations(@RequestBody QueryVo queryVo) {
-        return dataQualityBiz.getLocations(queryVo);
+        List<LocationDto> dtos = null;
+        try {
+            dtos = dataQualityBiz.getLocations(queryVo);
+        } catch (Exception e) {
+            logger.error("查询失败：" + e.getMessage(), e);
+        }
+        return dtos;
     }
 
     @ResponseBody
@@ -63,7 +69,7 @@ public class ReportController extends BaseController{
         result.put("total", 0);
         result.put("rows", new ArrayList());
 
-        if(queryVo == null || queryVo.getTableName() == null){
+        if (queryVo == null || queryVo.getTableName() == null) {
             return result;
         }
 
@@ -79,7 +85,7 @@ public class ReportController extends BaseController{
     @RequestMapping(value = "/aisReport")
     public ModelAndView aisReport() {
         ModelAndView modelAndView = new ModelAndView("system/report/aisReport");
-        UserInfoPO user =  this.getLoginUser();
+        UserInfoPO user = this.getLoginUser();
         modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
     }
@@ -92,12 +98,12 @@ public class ReportController extends BaseController{
         result.put("total", 0);
         result.put("rows", new ArrayList());
 
-        if(request == null){
+        if (request == null) {
             return result;
         }
 
         try {
-            PageInfo<AisVo> pageData= aisBiz.getAisInfoList(request);
+            PageInfo<AisVo> pageData = aisBiz.getAisInfoList(request);
             if (pageData != null) {
                 result.put("total", pageData.getTotal());
                 result.put("rows", pageData.getList());
@@ -112,7 +118,7 @@ public class ReportController extends BaseController{
     public ModelAndView knowledgeReport() {
 
         ModelAndView modelAndView = new ModelAndView("system/report/knowledgeReport");
-        UserInfoPO user =  this.getLoginUser();
+        UserInfoPO user = this.getLoginUser();
         modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
     }
@@ -122,7 +128,7 @@ public class ReportController extends BaseController{
     @RequestMapping(value = "/toTargetActivityRule")
     public ModelAndView toTtargetActivityRule() {
         ModelAndView modelAndView = new ModelAndView("system/report/targetActivityRule");
-        UserInfoPO user =  this.getLoginUser();
+        UserInfoPO user = this.getLoginUser();
         modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
