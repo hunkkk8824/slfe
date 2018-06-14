@@ -1,7 +1,11 @@
 (function (_path) {
     /** 通用变量 */
     var publicCache = {};
-    var map = new BMap.Map("gpsMap");
+    var map = new BMap.Map("gpsMap",{
+        minZoom : 1,
+        maxZoom : 7
+    });
+
 
     //初始化数据
     var initData = function () {

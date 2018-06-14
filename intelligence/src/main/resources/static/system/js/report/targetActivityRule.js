@@ -31,7 +31,10 @@
     };
 
     //1.百度地图API功能
-    var map = new BMap.Map("map");    // 创建Map实例
+    var map = new BMap.Map("map",{
+        minZoom : 1,
+        maxZoom : 7
+    });    // 创建Map实例
 
     //隐藏百度地图商标
     function hideLog() {
