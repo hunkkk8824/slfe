@@ -137,8 +137,8 @@
 
     // 初始化地图
     var initMap = function () {
-        map.centerAndZoom(new BMap.Point(121.55, 24.94), 7);  // 初
-        map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初
+        // map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
         //map.addControl(new BMap.NavigationControl());   //缩放按钮
         map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
@@ -159,8 +159,8 @@
     };
 
     var initAisMap = function () {
-        map.centerAndZoom(new BMap.Point(121.55, 24.94), 7);  // 初
-        map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
+        aisMap.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初
+        // map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
         aisMap.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
         //map.addControl(new BMap.NavigationControl());   //缩放按钮
         aisMap.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
