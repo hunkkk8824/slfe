@@ -75,7 +75,7 @@
             <div class="col-lg-8">
                 <div class="single-price">
                     <h4 id="htitle">Luxury Packages</h4>
-                    <h6 id="htitle2" style="margin-top: 15px;color: #495057;font-weight: 200;">这里是一个副标题或备注</h6>
+                    <#--<h6 id="htitle2" style="margin-top: 15px;color: #495057;font-weight: 200;">这里是一个副标题或备注</h6>-->
                     <ul class="nav nav-tabs">
                         <li><a href="#tab1" data-toggle="tab" class="active">表结构</a></li>
 
@@ -164,7 +164,7 @@
                 return false;
             }
 
-            layer.load();
+
             $.get(baseUrl + "/getColumnsByDataSetCode", {
                 dataSetCode: $("#hd_dataSetCode").val(),//表名称
             }, function (data) {
@@ -179,7 +179,6 @@
 
         function initTable(columns) {
 
-            $('#table').bootstrapTable("destroy");
             $('#table').bootstrapTable({
                 //classes: 'table table-responsive',
                 url: baseUrl + '/getDetail',    //请求后台的URL（*）
@@ -207,7 +206,7 @@
                 showRefresh: false,                   //刷新按钮
                 columns: columns,
                 onLoadSuccess: function (data) {
-                    layer.closeAll();
+
                 }
             });
 
@@ -221,7 +220,11 @@
                 $(this).addClass('active');
 
                 $("#hd_dataSetCode").val($(this).data("code"));
-                initData();
+
+                getData(function () {
+                    $('#table').bootstrapTable("refresh",{pageNumber:1});
+                });
+
                 $("#htitle").html($(this).data("name"))
             });
 
@@ -239,16 +242,14 @@
             });
         }
 
-        function initData() {
-
+        function getData(callback){
             getTouristContent($("#hd_dataSetCode").val());
-            getColumnsByDataSetCode(initTable);
-
+            getColumnsByDataSetCode(callback);
         }
 
         $(function () {
-
-            initData();
+            
+            getData(initTable);
             treeInit();
 
 
