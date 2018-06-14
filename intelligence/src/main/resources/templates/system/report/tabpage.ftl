@@ -155,6 +155,10 @@
                 <a href="#">
                   <i class="fa fa-play"></i>
                 </a>融合识别</button>
+                <button type="button" style="margin-left: 20px;" class="genric-btn info">
+                    <a href="#">
+                        <i class="fa fa-play"></i>
+                    </a>上传图片</button>
             </div>
           </div>
           <ul class="nav nav-tabs">
