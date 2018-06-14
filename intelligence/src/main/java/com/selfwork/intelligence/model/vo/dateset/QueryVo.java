@@ -43,6 +43,43 @@ public class QueryVo extends BaseQueryVo {
     private String fbsjStartTime;
     private String fbsjEndTime;
 
+    // 目标活动规律
+    private Double startLongitude;
+    private Double startLatitude;
+    private Double endLongitude;
+    private Double endLatitude;
+
+    public Double getStartLongitude() {
+        return startLongitude;
+    }
+
+    public void setStartLongitude(Double startLongitude) {
+        this.startLongitude = startLongitude;
+    }
+
+    public Double getStartLatitude() {
+        return startLatitude;
+    }
+
+    public void setStartLatitude(Double startLatitude) {
+        this.startLatitude = startLatitude;
+    }
+
+    public Double getEndLongitude() {
+        return endLongitude;
+    }
+
+    public void setEndLongitude(Double endLongitude) {
+        this.endLongitude = endLongitude;
+    }
+
+    public Double getEndLatitude() {
+        return endLatitude;
+    }
+
+    public void setEndLatitude(Double endLatitude) {
+        this.endLatitude = endLatitude;
+    }
 
     public Integer getPtmc() {
         return ptmc;

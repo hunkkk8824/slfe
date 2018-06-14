@@ -9,11 +9,34 @@
     };
 
     //添加地图数据
-    var addMarker = function (point) {
-        var marker = new BMap.Marker(point);
-        var label = new BMap.Label("目标", {offset: new BMap.Size(20, -10)});
+    //添加标注
+    function addMarker(point,isCgq,labelName) {
+        var marker;
+        debugger
+        if(isCgq){
+            //var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png",
+            //    new BMap.Size(23, 25), {
+            //        offset: new BMap.Size(10, 25),
+            //        imageOffset: new BMap.Size(0, 0 -  index * 25)
+            //
+            //    });
+            //var marker = new BMap.Marker(point, { icon: myIcon });
+            marker = new BMap.Marker(point);
+        }else{
+            labelName = '目标';
+            marker = new BMap.Marker(point);
+        }
+        var label = new BMap.Label(labelName, {offset: new BMap.Size(20, -10)});
         marker.setLabel(label);
         map.addOverlay(marker);
+    }
+
+    function initMarker(data){
+        map.clearOverlays();
+        $.each(data,function(i,obj){
+            var point = new BMap.Point(obj.jd,obj.wd);
+            addMarker(point,obj.cgq,obj.label);
+        });
     }
 
     //添加地图数据
@@ -39,9 +62,44 @@
         });
 
         $('#query').click(function () {
+            var temp = {};
+            temp.jjm = $('#jjm').val();
+            temp.fbsjStartTime = $('#startTime').val();
+            temp.fbsjEndTime = $('#endTime').val();
+            temp.tableName = 'qb_sj_rhmb';
+            //计算地理范围坐标
+            var gpsRange = $("#gpsRange").val();
+            if (gpsRange != null) {
+                var gpsPair = gpsRange.split(';');
+                if (gpsPair.length > 1) {
+                    //开始和结束的经纬度同时存在才有意义
+                    if (gpsPair[0].split(',').length > 0 && gpsPair[1].split(',').length > 0) {
+                        temp.startLongitude = Number(gpsPair[0].split(',')[0]);
+                        temp.startLatitude = Number(gpsPair[0].split(',')[1]);
+                        temp.endLongitude = Number(gpsPair[1].split(',')[0]);
+                        temp.endLatitude = Number(gpsPair[1].split(',')[1]);
+                    }
+                }
+            }
 
-            $('#table').bootstrapTable('refresh', {
-                pageNumber: 1
+            layer.load(3);
+            $.ajax({
+                type: 'post',
+                url:publicCache.path + "/report/getLocations?v=" + new Date(),
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(temp),
+                success: function (res) {
+                    layer.closeAll('loading');
+                    map.clearOverlays();
+                    if(res){
+                        initMarker(res);
+                    }
+                }, error: function (xhr, status) {
+                    layer.closeAll('loading');
+                    //提示层
+                    layer.msg("系统出现异常！", {icon: 0});
+                }
             });
         })
 
