@@ -116,6 +116,26 @@ public class ReportController extends BaseController {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/getSingleAisList", method = RequestMethod.POST)
+    public List<AisVo> getSingleAisList(@RequestBody AisQueryReq request) {
+
+        List<AisVo> result = new ArrayList<AisVo>();
+        if (request == null) {
+            return result;
+        }
+
+        try {
+            PageInfo<AisVo> pageData = aisBiz.getAisInfoList(request);
+            if (pageData != null) {
+               result = pageData.getList();
+            }
+        } catch (Exception e) {
+            logger.error("查询失败：" + e.getMessage(), e);
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/knowledgeReport")
     public ModelAndView knowledgeReport() {
 

@@ -60,7 +60,7 @@
                         <p class="text-white">
                             Aanalysis of equipment capability
                         </p>
-                        <a href="${base}/report/report1" class="primary-btn text-uppercase">Get Started</a>
+                        <a href="${base}/report/report1" class="primary-btn text-uppercase">查看</a>
                     </div>
                     <div class="col-lg-4 col-md-6 banner-right">
                     </div>
@@ -69,18 +69,55 @@
             <div class="swiper-slide" id="slide2">
                 <div style="width: 1000px;margin: 400px auto;">
                     <div class="col-lg-6 col-md-6 banner-left">
-                        <h1 class="text-white animateWhite">航道提取分析</h1>
+                        <h1 class="text-white animateWhite">目标活动规律</h1>
                         <p class="text-white">
-                            Analysis of channel extraction
+                            Law of target activity
                         </p>
-                        <a href="${base}/report/aisReport" class="primary-btn text-uppercase">Get Started</a>
+                        <a href="${base}/report/toTargetActivityRule" class="primary-btn text-uppercase">查看</a>
                     </div>
                     <div class="col-lg-4 col-md-6 banner-right">
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide" id="slide3"></div>
-            <div class="swiper-slide" id="slide4"></div>
+            <div class="swiper-slide" id="slide3">
+                <div style="width: 1000px;margin: 400px auto;">
+                    <div class="col-lg-6 col-md-6 banner-left">
+                        <h1 class="text-white animateWhite">航道提取分析</h1>
+                        <p class="text-white">
+                            Analysis of channel extraction
+                        </p>
+                        <a href="${base}/report/aisReport" class="primary-btn text-uppercase">查看</a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 banner-right">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="slide4">
+                <div style="width: 1000px;margin: 400px auto;">
+                    <div class="col-lg-6 col-md-6 banner-left">
+                        <h1 class="text-white animateWhite">目标融合识别</h1>
+                        <p class="text-white">
+                            Target fusion identification
+                        </p>
+                        <a href="${base}/report/aisReport" class="primary-btn text-uppercase">查看</a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 banner-right">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide" id="slide5">
+                <div style="width: 1000px;margin: 400px auto;">
+                    <div class="col-lg-6 col-md-6 banner-left">
+                        <h1 class="text-white animateWhite">知识提取</h1>
+                        <p class="text-white">
+                            Knowledge extraction
+                        </p>
+                        <a href="${base}/report/knowledgeReport" class="primary-btn text-uppercase">查看</a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 banner-right">
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
