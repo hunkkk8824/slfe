@@ -92,47 +92,17 @@
                         </div>
                         <div class="tab-pane fade" id="tab3">
                             <div class="select-condition row">
-                                <div class="col-lg-2 wrapper">条件1</div>
+                                <div class="col-lg-2 wrapper">区域选择</div>
                                 <div class="col-lg-4 wrapper">
-                                    <input type="text" class="input form-control">
+                                    <input id="gpsRange" type="text" class="input form-control" placeholder="经度1,纬度1;经度2,纬度2" >
                                 </div>
-                                <div class="col-lg-2 wrapper">条件2</div>
-                                <div class="col-lg-4 wrapper">
-                                    <div class="confirm-switch">
-                                        <input type="checkbox" id="confirm-switch" checked>
-                                        <label for="confirm-switch"></label>
-                                    </div>
-                                    <span>是否打开</span>
-                                </div>
-                                <div class="col-lg-2 wrapper">条件3</div>
-                                <div class="col-lg-4 wrapper">
-                                    <select name="" id="" class="default-select">
-                                        <option value="">选择1</option>
-                                        <option value="">选择2</option>
-                                        <option value="">选择3</option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-2 wrapper">条件4</div>
-                                <div class="col-lg-4 wrapper">
-
-                                    <div class="confirm-checkbox">
-                                        <input type="checkbox" id="confirm-checkbox">
-                                        <label for="confirm-checkbox"></label>
-                                    </div>
-                                    <span>选项1</span>
-                                    <div class="confirm-checkbox">
-                                        <input type="checkbox" id="confirm-checkbox2">
-                                        <label for="confirm-checkbox2"></label>
-                                    </div>
-                                    <span>选项2</span>
-                                    <div class="confirm-checkbox">
-                                        <input type="checkbox" id="confirm-checkbox3">
-                                        <label for="confirm-checkbox3"></label>
-                                    </div>
-                                    <span>选项3</span>
+                                <div class="col-lg-2 wrapper">
+                                    <button id="aisQuery" type="button" class="btn btn-sm btn-primary">
+                                        搜索
+                                    </button>
                                 </div>
                             </div>
-
+                            <div class="chart" id="aisMap" style="margin-top:30px;"></div>
                         </div>
                     </div>
                 </div>

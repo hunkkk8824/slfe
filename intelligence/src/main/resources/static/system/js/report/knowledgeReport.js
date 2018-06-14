@@ -1,15 +1,31 @@
-(function(_path) {
+(function (_path) {
     /** 通用变量 */
-    var publicCache= {};
+    var publicCache = {};
 
 
     //初始化数据
-    var initData = function(){
+    var initData = function () {
         publicCache.path = _path;
     };
 
+    //添加地图数据
+    var addMarker = function (point) {
+        var marker = new BMap.Marker(point);
+        var label = new BMap.Label("目标", {offset: new BMap.Size(20, -10)});
+        marker.setLabel(label);
+        map.addOverlay(marker);
+    }
+
+    //添加地图数据
+    var addAisMarker = function (point) {
+        var marker = new BMap.Marker(point);
+        var label = new BMap.Label("目标", {offset: new BMap.Size(20, -10)});
+        marker.setLabel(label);
+        aisMap.addOverlay(marker);
+    }
+
     //初始化事件
-    var initEvent = function(){
+    var initEvent = function () {
         laydate.render({
             elem: '#startTime',
             type: 'datetime',
@@ -23,8 +39,50 @@
         });
 
         $('#query').click(function () {
+
             $('#table').bootstrapTable('refresh', {
                 pageNumber: 1
+            });
+        })
+
+        $('#aisQuery').click(function () {
+            //设置参数
+            var temp = {};
+
+            //计算地理范围坐标
+            var gpsRange = $("#gpsRange").val();
+            if (gpsRange != null) {
+                var gpsPair = gpsRange.split(';');
+                if (gpsPair.length > 1) {
+                    //开始和结束的经纬度同时存在才有意义
+                    if (gpsPair[0].split(',').length > 0 && gpsPair[1].split(',').length > 0) {
+                        temp.startLongitude = Number(gpsPair[0].split(',')[0]);
+                        temp.startLatitude = Number(gpsPair[0].split(',')[1]);
+                        temp.endLongitude = Number(gpsPair[1].split(',')[0]);
+                        temp.endLatitude = Number(gpsPair[1].split(',')[1]);
+                    }
+                }
+            }
+
+            layer.load(3);
+            $.ajax({
+                type: 'post',
+                url: _path + '/report/getSingleAisList',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(temp),
+                success: function (res) {
+                    layer.closeAll('loading');
+                    map.clearOverlays();
+                    for (var i = 0; i < res.length; i++) {
+                        var point = new BMap.Point(res[i].longitude, res[i].latitude);
+                        addAisMarker(point);
+                    }
+                }, error: function (xhr, status) {
+                    layer.closeAll('loading');
+                    //提示层
+                    layer.msg("系统出现异常！", {icon: 0});
+                }
             });
         })
     };
@@ -42,11 +100,11 @@
 
         //计算地理范围坐标
         var gpsRange = $("#gpsRange").val();
-        if(gpsRange!=null){
+        if (gpsRange != null) {
             var gpsPair = gpsRange.split(';');
-            if(gpsPair.length>1){
+            if (gpsPair.length > 1) {
                 //开始和结束的经纬度同时存在才有意义
-                if(gpsPair[0].split(',').length>0 && gpsPair[1].split(',').length>0){
+                if (gpsPair[0].split(',').length > 0 && gpsPair[1].split(',').length > 0) {
                     temp.startLongitude = Number(gpsPair[0].split(',')[0]);
                     temp.startLatitude = Number(gpsPair[0].split(',')[1]);
                     temp.endLongitude = Number(gpsPair[1].split(',')[0]);
@@ -59,10 +117,15 @@
     };
 
     //1.百度地图API功能
-    var map = new BMap.Map("map",{
-        minZoom : 1,
-        maxZoom : 7
+    var map = new BMap.Map("map", {
+        minZoom: 1,
+        maxZoom: 7
     });    // 创建Map实例
+
+    var aisMap = new BMap.Map("aisMap", {
+        minZoom: 1,
+        maxZoom: 7
+    });
 
     //隐藏百度地图商标
     function hideLog() {
@@ -73,8 +136,8 @@
     }
 
     // 初始化地图
-    var initMap = function(){
-        map.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初
+    var initMap = function () {
+        map.centerAndZoom(new BMap.Point(121.55, 24.94), 7);  // 初
         map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
         //map.addControl(new BMap.NavigationControl());   //缩放按钮
@@ -90,6 +153,28 @@
 
         //地图加载完成
         map.addEventListener("tilesloaded", function () {
+            hideLog()
+        });
+
+    };
+
+    var initAisMap = function () {
+        map.centerAndZoom(new BMap.Point(121.55, 24.94), 7);  // 初
+        map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
+        aisMap.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+        //map.addControl(new BMap.NavigationControl());   //缩放按钮
+        aisMap.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
+
+        //监听地图缩放
+        aisMap.addEventListener("zoomend", function () {
+            hideLog();
+            if (this.getZoom() > 7) {
+                layer.msg("默认只有7级地图, 超过无法显示");
+            }
+        });
+
+        //地图加载完成
+        aisMap.addEventListener("tilesloaded", function () {
             hideLog()
         });
 
@@ -112,7 +197,7 @@
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 25,                       //每页的记录行数（*）
-            pageList: [ 25, 50, 100],          //可供选择的每页的行数（*）
+            pageList: [25, 50, 100],          //可供选择的每页的行数（*）
             strictSearch: true,
             clickToSelect: true,                //是否启用点击选中行
             height: 580,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
@@ -151,5 +236,6 @@
         initData();
         initEvent();
         initMap();
+        initAisMap();
     });
 })(_path);
