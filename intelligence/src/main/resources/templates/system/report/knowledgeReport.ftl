@@ -94,7 +94,7 @@
                             <div class="select-condition row">
                                 <div class="col-lg-2 wrapper">区域选择</div>
                                 <div class="col-lg-4 wrapper">
-                                    <input id="gpsRange" type="text" class="input form-control" placeholder="经度1,纬度1;经度2,纬度2" >
+                                    <input id="aisGpsRange" type="text" class="input form-control" placeholder="经度1,纬度1;经度2,纬度2" >
                                 </div>
                                 <div class="col-lg-2 wrapper">
                                     <button id="aisQuery" type="button" class="btn btn-sm btn-primary">

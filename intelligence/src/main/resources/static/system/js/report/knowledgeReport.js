@@ -50,7 +50,7 @@
             var temp = {};
 
             //计算地理范围坐标
-            var gpsRange = $("#gpsRange").val();
+            var gpsRange = $("#aisGpsRange").val();
             if (gpsRange != null) {
                 var gpsPair = gpsRange.split(';');
                 if (gpsPair.length > 1) {
@@ -73,7 +73,7 @@
                 data: JSON.stringify(temp),
                 success: function (res) {
                     layer.closeAll('loading');
-                    map.clearOverlays();
+                    aisMap.clearOverlays();
                     for (var i = 0; i < res.length; i++) {
                         var point = new BMap.Point(res[i].longitude, res[i].latitude);
                         addAisMarker(point);
