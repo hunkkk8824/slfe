@@ -281,7 +281,7 @@ public class DataQualityBiz extends BaseBiz {
     public List<LocationDto> getLocations(QueryVo queryVo) {
         String dataSetCode = queryVo.getTableName();
         DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
-        this.startPage(queryVo);
+        //this.startPage(queryVo);
         IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
         List<LocationDto> list = qbBiz.getLocations(queryVo);
         if (!CollectionUtils.isEmpty(list) && list.size() > 1 && queryVo.getCgqbh() != null) {

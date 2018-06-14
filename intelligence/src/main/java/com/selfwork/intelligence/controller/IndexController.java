@@ -79,7 +79,7 @@ public class IndexController extends BaseController {
      */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public ModelAndView logout(@RequestParam(required = false) Integer sys) {
-        ModelAndView view = new ModelAndView("/login");
+        ModelAndView view = new ModelAndView("/logout");
         view.addObject("sys", sys);
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         try {
