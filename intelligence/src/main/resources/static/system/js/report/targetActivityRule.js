@@ -173,8 +173,8 @@
             columns: tableColumns,
             onLoadSuccess:function (res) {
 
-                var allTableData = $('#table').bootstrapTable('getData');//获取表格的所有内容行
-                initMarker(allTableData);
+                // var allTableData = $('#table').bootstrapTable('getData');//获取表格的所有内容行
+                // initMarker(allTableData);
             }
         });
     }

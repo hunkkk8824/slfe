@@ -81,7 +81,7 @@
         map.addEventListener("zoomend", function () {
             hideLog();
             if (this.getZoom() > 7) {
-                layer.msg("默认只有12级地图, 超过无法显示");
+                layer.msg("默认只有7级地图, 超过无法显示");
             }
         });
 
