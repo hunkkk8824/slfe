@@ -82,7 +82,28 @@
     PHDZ, SPZ, CFPL, MCKDZ
   </sql>
 
-    <select id="getList" resultMap="ResultMapWithBLOBs" parameterType="com.selfwork.intelligence.model.vo.dateset.QueryVo">
+    <select id="getStatisicInfoList" resultType="com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbStatiscVo"
+            parameterType="com.selfwork.intelligence.model.vo.dateset.QbSjDptdzzmbQueryReq">
+        select
+        jl,
+        count(*) count
+        from qb_sj_dptdzzmb
+        <where>
+
+            <if test="cgqbh!= null and  cgqbh!=''">
+                and cgqbh = #{cgqbh,jdbcType=VARCHAR}
+            </if>
+            <if test="ptbh!= null and  ptbh!=''">
+                and ptbh = #{ptmc,jdbcType=VARCHAR}
+            </if>
+            <if test="ptmc!= null and ptmc!=''">
+                and ptmc = #{ptmc,jdbcType=VARCHAR}
+            </if>
+        </where>
+        GROUP BY jl
+    </select>
+    <select id="getList" resultMap="ResultMapWithBLOBs"
+            parameterType="com.selfwork.intelligence.model.vo.dateset.QueryVo">
         select
         <include refid="Base_Column_List"/>
         ,
@@ -94,7 +115,7 @@
             </if>
             <if test="ptbh!= null">
                 and (ptbh = #{ptbh,jdbcType=VARCHAR} or
-                 ptmc = #{ptbh,jdbcType=VARCHAR})
+                ptmc = #{ptbh,jdbcType=VARCHAR})
             </if>
             <if test="ptlx!= null">
                 and ptlx = #{ptlx,jdbcType=INTEGER}
@@ -103,7 +124,7 @@
                 and jmbz=#{jmbz,jdbcType=INTEGER}
             </if>
             <if test="sbsjStartTime!= null and sbsjStartTime!=''">
-                and  sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
+                and sbsj >= #{sbsjStartTime,jdbcType=TIMESTAMP}
             </if>
             <if test="sbsjEndTime!= null and sbsjEndTime!=''">
                 and #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
@@ -111,7 +132,8 @@
         </where>
     </select>
 
-    <select id="getLocations" resultType="com.selfwork.intelligence.model.vo.dateset.LocationDto" parameterType="com.selfwork.intelligence.model.vo.dateset.QueryVo">
+    <select id="getLocations" resultType="com.selfwork.intelligence.model.vo.dateset.LocationDto"
+            parameterType="com.selfwork.intelligence.model.vo.dateset.QueryVo">
         select jd,wd
         from qb_sj_dptdzzmb
         <where>
@@ -119,17 +141,17 @@
                 and cgqbh = #{cgqbh,jdbcType=VARCHAR}
             </if>
             <if test="ptbh!= null">
-                and   (ptbh = #{ptbh,jdbcType=VARCHAR} or
-                 ptmc = #{ptbh,jdbcType=VARCHAR})
+                and (ptbh = #{ptbh,jdbcType=VARCHAR} or
+                ptmc = #{ptbh,jdbcType=VARCHAR})
             </if>
             <if test="ptlx!= null">
                 and ptlx = #{ptlx,jdbcType=INTEGER}
             </if>
             <if test="jmbz!= null">
-                and  jmbz=#{jmbz,jdbcType=INTEGER}
+                and jmbz=#{jmbz,jdbcType=INTEGER}
             </if>
             <if test="sbsjStartTime!= null and sbsjStartTime!=''">
-                and sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
+                and sbsj >= #{sbsjStartTime,jdbcType=TIMESTAMP}
             </if>
             <if test="sbsjEndTime!= null and sbsjEndTime!=''">
                 and #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
@@ -144,23 +166,23 @@
         from qb_sj_dptdzzmb
         <where>
             <if test="jmbz!= null ">
-                and  jmbz=#{jmbz,jdbcType=INTEGER}
+                and jmbz=#{jmbz,jdbcType=INTEGER}
             </if>
             <if test="sbsjStartTime!= null and sbsjStartTime!=''">
-                and  sbsj >=  #{sbsjStartTime,jdbcType=TIMESTAMP}
+                and sbsj >= #{sbsjStartTime,jdbcType=TIMESTAMP}
             </if>
             <if test="sbsjEndTime!= null and sbsjEndTime!=''">
-                and  #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
+                and #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
             </if>
             <if test="cgqbh!= null">
                 and cgqbh = #{cgqbh,jdbcType=VARCHAR}
             </if>
             <if test="ptbh!= null">
                 and (ptbh = #{ptbh,jdbcType=VARCHAR} or
-                 ptmc = #{ptbh,jdbcType=VARCHAR})
+                ptmc = #{ptbh,jdbcType=VARCHAR})
             </if>
             <if test="ptlx!= null">
-                and  ptlx = #{ptlx,jdbcType=INTEGER}
+                and ptlx = #{ptlx,jdbcType=INTEGER}
             </if>
         </where>
     </select>

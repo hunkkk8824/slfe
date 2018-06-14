@@ -81,14 +81,24 @@
                             <div class="select-condition row">
                                 <div class="col-lg-2 wrapper">平台编号</div>
                                 <div class="col-lg-4 wrapper">
-                                    <input type="text" class="input form-control" id="ptbh" placeholder="平台编号">
+                                    <input type="text" class="input form-control" id="powerlaw_ptbh" placeholder="平台编号">
+                                </div>
+                                <div class="col-lg-2 wrapper">平台名称</div>
+                                <div class="col-lg-4 wrapper">
+                                    <input type="text" class="input form-control" id="powerlaw_ptmc" placeholder="平台名称">
                                 </div>
                                 <div class="col-lg-2 wrapper">传感器编号</div>
                                 <div class="col-lg-4 wrapper">
-                                    <input type="text" class="input form-control" id="cgqbh" placeholder="传感器编号">
+                                    <input type="text" class="input form-control" id="powerlaw_cgqbh" placeholder="传感器编号">
+                                </div>
+
+                                <div class="col-lg-24 wrapper">
+                                    <button id="powerlaw_query" type="button" class="btn btn-sm btn-primary">
+                                        搜索
+                                    </button>
                                 </div>
                             </div>
-                            <div class="chart" id="chart2"></div>
+                            <div class="chart" id="powerlaw_chart" style="width:980px;height:600px"></div>
                         </div>
                         <div class="tab-pane fade" id="tab3">
                             <div class="select-condition row">

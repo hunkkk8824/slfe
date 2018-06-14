@@ -4,6 +4,7 @@ import com.selfwork.intelligence.model.QbSjDptdzzmbPO;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
 import com.selfwork.intelligence.model.vo.dateset.LocationDto;
 import com.selfwork.intelligence.model.vo.dateset.QbSjDptdzzmbQueryReq;
+import com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbStatiscVo;
 import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 
 import java.util.*;
@@ -30,4 +31,6 @@ public interface QbSjDptdzzmbPOMapper {
     List<QbSjDptdzzmbPOWithBLOBs> getList(QueryVo queryVo);
 
     List<LocationDto> getLocations(QueryVo queryVo);
+
+    List<QbSjYsdzzdzzcmbStatiscVo> getStatisicInfoList(QbSjDptdzzmbQueryReq req);
 }

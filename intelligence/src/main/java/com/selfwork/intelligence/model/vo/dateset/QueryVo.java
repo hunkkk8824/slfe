@@ -21,6 +21,10 @@ public class QueryVo extends BaseQueryVo {
      */
     private Integer ptlx;
 
+    /**
+     * 平台名称
+     */
+    private Integer ptmc;
 
     //（机舰名）
     private String jjm;
@@ -38,6 +42,15 @@ public class QueryVo extends BaseQueryVo {
     //发报时间
     private String fbsjStartTime;
     private String fbsjEndTime;
+
+
+    public Integer getPtmc() {
+        return ptmc;
+    }
+
+    public void setPtmc(Integer ptmc) {
+        this.ptmc = ptmc;
+    }
 
     public String getFbsjStartTime() {
         return fbsjStartTime;

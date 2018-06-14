@@ -19,14 +19,28 @@ public class QbSjDptdzzmbQueryReq {
      */
     private String cgqbh;
     /**
-     * 平台编号、平台名称
+     * 平台编号
      */
     private String ptbh;
+
+    /**
+     * 平台名称
+     */
+    private String ptmc;
     /**
      * 平台类型 （有些表没有此字段）
      */
     private Integer ptlx;
     // ******************* zzc ******************
+
+
+    public String getPtmc() {
+        return ptmc;
+    }
+
+    public void setPtmc(String ptmc) {
+        this.ptmc = ptmc;
+    }
 
     public String getSbsjStartTime() {
         return sbsjStartTime;

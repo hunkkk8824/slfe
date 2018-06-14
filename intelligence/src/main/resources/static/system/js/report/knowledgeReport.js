@@ -1,15 +1,15 @@
-(function(_path) {
+(function (_path) {
     /** 通用变量 */
-    var publicCache= {};
+    var publicCache = {};
 
 
     //初始化数据
-    var initData = function(){
+    var initData = function () {
         publicCache.path = _path;
     };
 
     //初始化事件
-    var initEvent = function(){
+    var initEvent = function () {
         laydate.render({
             elem: '#startTime',
             type: 'datetime',
@@ -42,11 +42,11 @@
 
         //计算地理范围坐标
         var gpsRange = $("#gpsRange").val();
-        if(gpsRange!=null){
+        if (gpsRange != null) {
             var gpsPair = gpsRange.split(';');
-            if(gpsPair.length>1){
+            if (gpsPair.length > 1) {
                 //开始和结束的经纬度同时存在才有意义
-                if(gpsPair[0].split(',').length>0 && gpsPair[1].split(',').length>0){
+                if (gpsPair[0].split(',').length > 0 && gpsPair[1].split(',').length > 0) {
                     temp.startLongitude = Number(gpsPair[0].split(',')[0]);
                     temp.startLatitude = Number(gpsPair[0].split(',')[1]);
                     temp.endLongitude = Number(gpsPair[1].split(',')[0]);
@@ -59,9 +59,9 @@
     };
 
     //1.百度地图API功能
-    var map = new BMap.Map("map",{
-        minZoom : 1,
-        maxZoom : 7
+    var map = new BMap.Map("map", {
+        minZoom: 1,
+        maxZoom: 7
     });    // 创建Map实例
 
     //隐藏百度地图商标
@@ -73,7 +73,7 @@
     }
 
     // 初始化地图
-    var initMap = function(){
+    var initMap = function () {
         map.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初
         map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
@@ -112,7 +112,7 @@
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 25,                       //每页的记录行数（*）
-            pageList: [ 25, 50, 100],          //可供选择的每页的行数（*）
+            pageList: [25, 50, 100],          //可供选择的每页的行数（*）
             strictSearch: true,
             clickToSelect: true,                //是否启用点击选中行
             height: 580,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
@@ -145,11 +145,96 @@
         });
     }
 
+    //装备威力规律
+    var powerlawIns = new function () {
+
+        var self = this;
+
+        function initChart(data) {
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('powerlaw_chart'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                color: ['#3398DB'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: data.x,
+                        axisTick: {
+                            alignWithLabel: true
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        name: '装备威力',
+                        type: 'bar',
+                        barWidth: '60%',
+                        data: data.y
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        }
+
+        function initSearch() {
+            $("#powerlaw_query").click(function () {
+                $.ajax({
+                    type: 'post',
+                    url: publicCache.path + "/report/powerlaw",
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        ptbh: $.trim($("#powerlaw_ptbh").val()),
+                        ptmc: $.trim($("#powerlaw_ptmc").val()),
+                        cgqbh: $.trim($("#powerlaw_cgqbh").val()),
+                    }),
+                    success: function (res) {
+                        layer.closeAll('loading');
+                        if (res) {
+                            debugger
+                            initChart(res)
+                        }
+                    }, error: function (xhr, status) {
+                        layer.closeAll('loading');
+                        //提示层
+                        layer.msg("系统出现异常！", {icon: 0});
+                    }
+                });
+            });
+        };
+
+        self.fo = {
+            initSearch: initSearch
+        }
+    }
+
 
     // 页面初始化
     $(function () {
         initData();
         initEvent();
         initMap();
+        powerlawIns.fo.initSearch();
     });
 })(_path);

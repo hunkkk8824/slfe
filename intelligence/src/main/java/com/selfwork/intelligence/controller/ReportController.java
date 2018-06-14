@@ -3,13 +3,11 @@ package com.selfwork.intelligence.controller;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.dataset.AisBiz;
+import com.selfwork.intelligence.biz.dataset.QbSjDptdzzmbBiz;
 import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.BaseQueryVo;
-import com.selfwork.intelligence.model.vo.dateset.AisQueryReq;
-import com.selfwork.intelligence.model.vo.dateset.AisVo;
-import com.selfwork.intelligence.model.vo.dateset.LocationDto;
-import com.selfwork.intelligence.model.vo.dateset.QueryVo;
+import com.selfwork.intelligence.model.vo.dateset.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,10 @@ public class ReportController extends BaseController {
 
     @Autowired
     private AisBiz aisBiz;
+
+    @Autowired
+    private QbSjDptdzzmbBiz qbSjDptdzzmbBiz;
+
 
     //装备能力分析
     @RequestMapping(value = "/report1")
@@ -132,6 +134,38 @@ public class ReportController extends BaseController {
         modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
         modelAndView.addObject("nickname", user.getNickname());
         return modelAndView;
+    }
+
+    //装备威力规律
+    @ResponseBody
+    @RequestMapping(value = "/powerlaw", method = RequestMethod.POST)
+    public Map<String, Object> powerlaw(@RequestBody QbSjDptdzzmbQueryReq request) {
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("x", new ArrayList());
+        result.put("y", new ArrayList());
+
+        if (request == null) {
+            return result;
+        }
+
+        try {
+            List<QbSjYsdzzdzzcmbStatiscVo> res = qbSjDptdzzmbBiz.getStatisicInfoList(request);
+
+            List<String> jlList = new ArrayList();//jl 距离
+            List<Integer> valList = new ArrayList();//count 统计数目
+            res.stream().forEach(m -> {
+                jlList.add(String.format("%.2f", m.getJl())+"km");
+                valList.add(m.getCount());
+            });
+            result.put("x", jlList);
+            result.put("y", valList);
+
+        } catch (Exception e) {
+            logger.error("查询失败：" + e.getMessage(), e);
+        }
+
+        return result;
     }
 
 }

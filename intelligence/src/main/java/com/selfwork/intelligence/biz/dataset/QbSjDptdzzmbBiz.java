@@ -124,6 +124,11 @@ public class QbSjDptdzzmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptdzzmbP
 
     public List<QbSjYsdzzdzzcmbVO> getBaseInfoList(QbSjDptdzzmbQueryReq req) throws Exception {
         List<QbSjDptdzzmbPO> pos = qbSjDptdzzmb.getBaseInfoList(req);
-        return BeanUtils.copyList(pos,QbSjYsdzzdzzcmbVO.class);
+        return BeanUtils.copyList(pos, QbSjYsdzzdzzcmbVO.class);
+    }
+
+    public List<QbSjYsdzzdzzcmbStatiscVo> getStatisicInfoList(QbSjDptdzzmbQueryReq req)  {
+        return qbSjDptdzzmb.getStatisicInfoList(req);
+
     }
 }
