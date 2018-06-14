@@ -156,7 +156,7 @@ public class ReportController extends BaseController {
         return modelAndView;
     }
 
-    //装备威力规律
+    //----------------------------------装备威力规律
     @ResponseBody
     @RequestMapping(value = "/powerlaw", method = RequestMethod.POST)
     public Map<String, Object> powerlaw(@RequestBody QbSjDptdzzmbQueryReq request) {
@@ -186,6 +186,15 @@ public class ReportController extends BaseController {
         }
 
         return result;
+    }
+
+    //----------------------------------目标融合识别
+    @RequestMapping(value = "/toTargetFusionRecognition")
+    public ModelAndView toTargetFusionRecognition() {
+        ModelAndView modelAndView = new ModelAndView("system/report/tabpage");
+        UserInfoPO user = this.getLoginUser();
+        modelAndView.addObject("nickname", user.getNickname());
+        return modelAndView;
     }
 
 }
