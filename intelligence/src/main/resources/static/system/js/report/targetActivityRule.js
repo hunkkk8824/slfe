@@ -31,9 +31,9 @@
     };
 
     //1.百度地图API功能
-    var map = new BMap.Map("map",{
-        minZoom : 1,
-        maxZoom : 7
+    var map = new BMap.Map("map", {
+        minZoom: 1,
+        maxZoom: 7
     });    // 创建Map实例
 
     //隐藏百度地图商标
@@ -42,6 +42,29 @@
         $('a[title="到百度地图查看此区域"]').hide();
         $('span[_cid="1"]').hide();
 
+    }
+
+    function initChartMap(params) {
+        // 获取坐标
+        var url = publicCache.path + "/report/getLocations?v=" + new Date();
+        layer.load(3);
+        $.ajax({
+            type: 'post',
+            url: url,
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(params),
+            success: function (res) {
+                layer.closeAll('loading');
+                if (res) {
+                    initMarker(res);
+                }
+            }, error: function (xhr, status) {
+                layer.closeAll('loading');
+                //提示层
+                layer.msg("系统出现异常！", {icon: 0});
+            }
+        });
     }
 
     //添加标注
@@ -69,7 +92,7 @@
         $.each(data, function (i, obj) {
             debugger
             var point = new BMap.Point(obj.jd, obj.wd);
-            addMarker(point, obj.isCgq, obj.bz);
+            addMarker(point, obj.isCgq, "");
         });
     }
 
@@ -96,17 +119,28 @@
 
     };
 
+    function getBaseParam() {
+
+        return {
+            tableName: $.trim($('#dataSetCode').val()),
+            jjm: $.trim($("#jjm").val()),//机舰名
+            jxh: $.trim($("#jxh").val()),//机弦号
+            jmbz: $.trim($("#jmbz").val()),//军民标识,
+            sbsjStartTime: $.trim($("#sbsjStartTime").val()),
+            sbsjEndTime: $.trim($("#sbsjEndTime").val())
+        }
+    }
+
     function doSearch() {
 
-        var dataSetCode = $('#dataSetCode').val();
+        var param = getBaseParam();
 
-
-        if (!dataSetCode) {
+        if (!param.tableName) {
             layer.msg("请选择数据集", {icon: 0});
             return false;
         }
-        getColumnsByDataSetCode(dataSetCode, initTable);
-
+        getColumnsByDataSetCode(param.tableName, initTable);
+        initChartMap(param);
     }
 
     //根据表名称或列设置
@@ -124,23 +158,10 @@
 
     //得到查询的参数
     function queryParams(params) {
-        var dataSetCode = $('#dataSetCode').val(),
-            jjm = $("#jjm").val(),
-            jxh = $("#jxh").val(),
-            jmbz = $("#jmbz").val();
-
-        var temp = {
-            limit: params.limit,    //页面大小
-            offset: params.offset ,   //页码
-            tableName: dataSetCode,
-            jjm: jjm,//机舰名
-            jxh: jxh,//机弦号
-            jmbz: jmbz,//军民标识,
-            sbsjStartTime: $("#sbsjStartTime").val(),
-            sbsjEndTime: $("#sbsjEndTime").val()
-        };
-
-        return temp;
+        var param = getBaseParam();
+        param.limit = params.limit;//页面大小
+        param.offset = params.offset;   //页码
+        return param;
     };
 
 
@@ -171,7 +192,7 @@
             detailView: false,                  //是否显示父子表
             showRefresh: false,                   //刷新按钮
             columns: tableColumns,
-            onLoadSuccess:function (res) {
+            onLoadSuccess: function (res) {
 
                 // var allTableData = $('#table').bootstrapTable('getData');//获取表格的所有内容行
                 // initMarker(allTableData);

@@ -59,7 +59,7 @@ public class ReportController extends BaseController {
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);
         }
-        return dtos;
+        return dtos != null ? dtos : new ArrayList<>();
     }
 
     @ResponseBody
