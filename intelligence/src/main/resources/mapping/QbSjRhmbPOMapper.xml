@@ -141,6 +141,19 @@
       <if test="sbsjEndTime!= null and sbsjEndTime!=''">
         and #{sbsjEndTime,jdbcType=TIMESTAMP} >= sbsj
       </if>
+
+      <if test="startLongitude!= null">
+        and jd >= #{startLongitude,jdbcType=DECIMAL}
+      </if>
+      <if test="endLongitude!= null">
+        and #{endLongitude,jdbcType=DECIMAL} >= jd
+      </if>
+      <if test="startLatitude!= null">
+        and wd >= #{startLatitude,jdbcType=DECIMAL}
+      </if>
+      <if test="endLatitude!= null and endLatitude!=''">
+        and #{endLatitude,jdbcType=DECIMAL} >= wd
+      </if>
     </where>
   </select>
 
