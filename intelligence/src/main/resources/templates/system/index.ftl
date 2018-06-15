@@ -99,7 +99,7 @@
                         <p class="text-white">
                             Target fusion identification
                         </p>
-                        <a href="${base}/report/aisReport" class="primary-btn text-uppercase">查看</a>
+                        <a href="${base}/report/toTargetFusionRecognition" class="primary-btn text-uppercase">查看</a>
                     </div>
                     <div class="col-lg-4 col-md-6 banner-right">
                     </div>
