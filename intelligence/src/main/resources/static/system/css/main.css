@@ -4768,7 +4768,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   cursor: pointer;
 }
 .fixed-header{
-  width: 100px;
+  width: 130px;
   height: 22px;
   line-height: 22px;
   position: fixed;
