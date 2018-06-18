@@ -160,7 +160,7 @@
                 <div class="right-content">
                     <div class="col-lg-12" style="margin-top: 20px;">
                         <select name="type" id="type" class="default-select key-input">
-                            <#--<option value="">选择传感器信息</option>-->
+                        <#--<option value="">选择传感器信息</option>-->
                             <option value="1">电子侦察</option>
                             <option value="2">激光</option>
                             <option value="3">通讯</option>
@@ -205,13 +205,16 @@
                     </div>
                     <div class="tab-pane fade" id="tab2">
                         <div class="select-condition row">
-                            <button type="button" id="btn_videoExport" style="float: right;margin-top: 10px;" class="genric-btn primary">
+                            <button type="button" id="btn_videoExport" style="float: right;margin-top: 10px;"
+                                    class="genric-btn primary">
                                 <a href="#">
                                     <i class="fa fa-table"></i>
                                 </a>视频载入
                             </button>
                             <div class="col-lg-12 wrapper">
                                 <div class="video-wrapper">
+                                    <input type="file" id="videoFileUpload" style="display:none;">
+                                    <video id="video" controls="controls" autoplay height="100%" width="100%">您的浏览器不支持。</video>
                                 </div>
                             </div>
                         </div>
@@ -257,49 +260,50 @@
 
 <script type="application/javascript">
 
-    $(function(){
+    $(function () {
 
         $('.nav a').eq(2).tab('show');
+        $('.nav a').eq(0).hide();
+        $('.nav a').eq(1).hide();
+        $('.nav a').eq(2).show();
 
-        $('#type').change(function(){
+        $('#type').change(function () {
             var type = $('#type').val();
-            if(type == 4){
+            if (type == 4) {
                 $('.nav a').eq(0).tab('show');
-            }else{
+                $('.nav a').eq(0).show();
+                $('.nav a').eq(1).show();
+                $('.nav a').eq(2).hide();
+            } else {
                 $('.nav a').eq(2).tab('show');
+                $('.nav a').eq(0).hide();
+                $('.nav a').eq(1).hide();
+                $('.nav a').eq(2).show();
             }
         });
 
-        getColumnsByDataSetCode(getDataSetCodeByType($('#type').val()),initTable);
+        getColumnsByDataSetCode(getDataSetCodeByType($('#type').val()), initTable);
     });
 
     $("#btnRongHe").click(function () {
-       var type = $('#type').val();
-       if(type == 4){
-           var keyword=  $("#txtkeyword").val();
-           if(keyword==null || keyword==''){
-               alert("关键字不允许为空");
-           }else if(keyword == '斯坦尼斯'){
-               $("#img1").attr("src","/static/system/img/stns_new.png");
-           }else{
-               alert("该关键字无法识别");
-           }
-       }else {
-           doSearchTable(type);
-       var keyword=  $("#txtkeyword").val();
-       if(keyword==null || keyword==''){
-           alert("关键字不允许为空");
-       }else if(keyword == '斯坦尼斯'){
-           if($("#img1").attr("flag")!="empty"){
-               $("#img1").attr("src","/static/system/img/stns_new.png");
-           }
-           if($("#video").attr("src")!=undefined){
-               $("#video").attr("src","/static/system/video/stns_new.mp4");
-           }
-       }else{
-           alert("该关键字无法识别");
-       }
-    });
+        var type = $('#type').val();
+        if (type == 4) {
+            var keyword = $("#txtkeyword").val();
+            if (keyword == null || keyword == '') {
+                alert("关键字不允许为空");
+            } else if (keyword == '斯坦尼斯') {
+                if ($("#img1").attr("flag") != "empty") {
+                    $("#img1").attr("src", "/static/system/img/stns_new.png");
+                }
+                if ($("#video").attr("src") != undefined) {
+                    $("#video").attr("src", "/static/system/video/stns_new.mp4");
+                }
+            } else {
+                alert("该关键字无法识别");
+            }
+        } else {
+            doSearchTable(type);
+        }
     });
 
     //得到查询的参数
@@ -309,7 +313,7 @@
         var temp = {
             limit: params.limit,    //页面大小
             offset: params.offset,   //页码
-            tableName : getDataSetCodeByType(type)
+            tableName: getDataSetCodeByType(type)
         };
         return temp;
     };
@@ -332,7 +336,7 @@
             sidePagination: "server",            //分页方式：client客户端分页，server服务端分页（*）
             pageNumber: 1,                         //初始化加载第一页，默认第一页
             pageSize: 25,                          //每页的记录行数（*）
-            pageList: [ 25, 50, 100],              //可供选择的每页的行数（*）
+            pageList: [25, 50, 100],              //可供选择的每页的行数（*）
             strictSearch: true,
             clickToSelect: true,                //是否启用点击选中行
             height: 450,                          //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
@@ -345,37 +349,37 @@
     }
 
     //根据表名称或列设置
-    function getColumnsByDataSetCode(code,callBack) {
+    function getColumnsByDataSetCode(code, callBack) {
         var url = "${base}/dataQuality/getColumnsByDataSetCode?v=" + new Date();
         $.get(url, {
-            dataSetCode:code,//表名称
+            dataSetCode: code,//表名称
         }, function (data) {
 
             debugger
-            if(callBack){
+            if (callBack) {
                 callBack(data);
             }
 
         });
     }
 
-    function getDataSetCodeByType(type){
+    function getDataSetCodeByType(type) {
         var dataSetCode = "";
-        if(type == 1){
+        if (type == 1) {
             dataSetCode = 'qb_sj_ysdzzdzzcmb';
-        }else if(type == 2){
+        } else if (type == 2) {
             dataSetCode = 'qb_sj_ysdzzjgmb';
-        }else if(type == 3){
+        } else if (type == 3) {
             dataSetCode == 'qb_sj_ysdzztmmb';
         }
         return dataSetCode;
     }
 
-    function doSearchTable(type){
+    function doSearchTable(type) {
         var dataSetCode = getDataSetCodeByType(type);
         // 查询表数据
-        getColumnsByDataSetCode(dataSetCode,function (columns) {
-            $('#table').bootstrapTable("refresh", {pageNumber: 1,columns:columns});
+        getColumnsByDataSetCode(dataSetCode, function (columns) {
+            $('#table').bootstrapTable("refresh", {pageNumber: 1, columns: columns});
         });
 
     }
@@ -387,9 +391,7 @@
     });
 
     $("#btn_videoExport").click(function () {
-
         $("#videoFileUpload").click();
-
     });
 
     $("#img1").click(function () {
