@@ -391,6 +391,10 @@
         $("#fileUpload").click();
     });
 
+    $("#btn_videoExport").click(function () {
+        $("#videoFileUpload").click();
+    });
+
     $("#img1").click(function () {
         $("#imgFileUpload1").click();
     });
