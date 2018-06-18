@@ -178,7 +178,7 @@
 
 
         function initTable(columns) {
-
+            $('#table').bootstrapTable("destroy");
             $('#table').bootstrapTable({
                 //classes: 'table table-responsive',
                 url: baseUrl + '/getDetail',    //请求后台的URL（*）
@@ -221,9 +221,7 @@
 
                 $("#hd_dataSetCode").val($(this).data("code"));
 
-                getData(function () {
-                    $('#table').bootstrapTable("refresh",{pageNumber:1});
-                });
+                getData(initTable);
 
                 $("#htitle").html($(this).data("name"))
             });
