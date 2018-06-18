@@ -183,9 +183,9 @@
                     <li>
                         <a href="#tab1" data-toggle="tab" class="active">图片</a>
                     </li>
-                <#--<li>-->
-                <#--<a href="#tab2" data-toggle="tab">视频</a>-->
-                <#--</li>-->
+                <li>
+                     <a href="#tab2" data-toggle="tab">视频</a>
+                </li>
                 <#--<li>-->
                 <#--<a href="#tab3" data-toggle="tab">表格</a>-->
                 <#--</li>-->
@@ -194,20 +194,26 @@
                     <div class="tab-pane fade active show" id="tab1">
                         <div class="col-lg-12 img-wrapper">
                             <input type="file" id="imgFileUpload1" style="display:none;">
-                            <img id="img1" src="${base}/static/system/img/empty.png" alt="">
+                            <img id="img1" src="${base}/static/system/img/empty.png" flag="empty" alt="">
 
                             <input type="file" id="imgFileUpload2" style="display:none;">
-                            <img id="img2" src="${base}/static/system/img/empty.png" alt="">
+                            <img id="img2" src="${base}/static/system/img/empty.png" flag="empty" alt="">
 
                             <input type="file" id="imgFileUpload3" style="display:none;">
-                            <img id="img3" src="${base}/static/system/img/empty.png" alt="">
+                            <img id="img3" src="${base}/static/system/img/empty.png" flag="empty" alt="">
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tab2">
                         <div class="select-condition row">
-
+                            <button type="button" id="btn_videoExport" style="float: right;margin-top: 10px;" class="genric-btn primary">
+                                <a href="#">
+                                    <i class="fa fa-table"></i>
+                                </a>视频载入
+                            </button>
                             <div class="col-lg-12 wrapper">
+                                <input type="file" id="videoFileUpload" style="display:none;">
                                 <div class="video-wrapper">
+                                    <video id="video" controls="controls" autoplay height="100%" width="100%">您的浏览器不支持。</video>
                                 </div>
                             </div>
                         </div>
@@ -258,16 +264,26 @@
        if(keyword==null || keyword==''){
            alert("关键字不允许为空");
        }else if(keyword == '斯坦尼斯'){
-           $("#img1").attr("src","/static/system/img/stns_new.png");
+           if($("#img1").attr("flag")!="empty"){
+               $("#img1").attr("src","/static/system/img/stns_new.png");
+           }
+           if($("#video").attr("src")!=undefined){
+               $("#video").attr("src","/static/system/video/stns_new.mp4");
+           }
        }else{
            alert("该关键字无法识别");
        }
-
     });
 
     $("#btn_txtExport").click(function () {
 
         $("#fileUpload").click();
+
+    });
+
+    $("#btn_videoExport").click(function () {
+
+        $("#videoFileUpload").click();
 
     });
 
@@ -324,6 +340,7 @@
             //监听文件读取结束后事件
             reader.onloadend = function (e) {
                 $("#img1").attr("src", e.target.result);    //e.target.result就是最后的路径地址
+                $("#img1").attr("flag", "full");
             };
         }
     });
@@ -336,6 +353,7 @@
             //监听文件读取结束后事件
             reader.onloadend = function (e) {
                 $("#img2").attr("src", e.target.result);    //e.target.result就是最后的路径地址
+                $("#img2").attr("flag", "full");
             };
         }
     });
@@ -348,8 +366,15 @@
             //监听文件读取结束后事件
             reader.onloadend = function (e) {
                 $("#img3").attr("src", e.target.result);    //e.target.result就是最后的路径地址
+                $("#img3").attr("flag", "full");
             };
         }
+    });
+
+    $("#videoFileUpload").change(function () {
+        var file = this.files[0];
+        var url = URL.createObjectURL(file);
+        $("#video").attr("src", url);
     });
 
 </script>
