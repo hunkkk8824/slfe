@@ -299,6 +299,7 @@
 
 
     function initTable(tableColumns) {
+        $('#table').bootstrapTable("destroy");
         $('#table').bootstrapTable({
             url: "${base}/report/getList?v=" + new Date(),    //请求后台的URL（*）
             method: 'post',                         //请求方式（*）
@@ -349,7 +350,7 @@
         }else if(type == 2){
             dataSetCode = 'qb_sj_ysdzzjgmb';
         }else if(type == 3){
-            dataSetCode == 'qb_sj_ysdzztmmb';
+            dataSetCode = 'qb_sj_ysdzztmmb';
         }
         return dataSetCode;
     }
@@ -357,9 +358,11 @@
     function doSearchTable(type){
         var dataSetCode = getDataSetCodeByType(type);
         // 查询表数据
-        getColumnsByDataSetCode(dataSetCode,function (columns) {
-            $('#table').bootstrapTable("refresh", {pageNumber: 1,columns:columns});
-        });
+//        getColumnsByDataSetCode(dataSetCode,function () {
+//            $('#table').bootstrapTable("refresh", {pageNumber: 1,columns:columns});
+////            $('#table').bootstrapTable("refresh", {pageNumber: 1});
+//        });
+        getColumnsByDataSetCode(dataSetCode,initTable);
 
     }
 
