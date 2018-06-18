@@ -16,23 +16,7 @@
     <meta charset="UTF-8">
     <!-- Site Title -->
     <title>多源情报系统-数据交换</title>
-
-    <#--<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">-->
-    <!--
-    CSS
-    ============================================= -->
-    <link rel="stylesheet" href="${base}/static/system/css/linearicons.css">
-    <link rel="stylesheet" href="${base}/static/system/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${base}/static/system/css/bootstrap.css">
-    <link rel="stylesheet" href="${base}/static/system/css/magnific-popup.css">
-    <link rel="stylesheet" href="${base}/static/system/css/jquery-ui.css">
-    <link rel="stylesheet" href="${base}/static/system/css/nice-select.css">
-    <link rel="stylesheet" href="${base}/static/system/css/animate.min.css">
-<#--<link rel="stylesheet" href="http://at.alicdn.com/t/font_205919_gs446lbdhoyr2j4i.css">-->
-    <link rel="stylesheet" href="${base}/static/system/css/swiper.min.css">
-    <link rel="stylesheet" href="${base}/static/system/css/bootstrap-table.css">
-    <link rel="stylesheet" href="${base}/static/system/css/owl.carousel.css">
-    <link rel="stylesheet" href="${base}/static/system/css/main.css">
+<#include "common/common.ftl"/>
 </head>
 <style>
     .price-area {
@@ -125,7 +109,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <table class="table table-hover statics-table"></table>
                         </div>
                     </div>
                 </div>
@@ -140,23 +123,6 @@
 <#include "./common/footer.ftl"/>
 <!-- End footer Area -->
 
-<script src="${base}/static/system/js/vendor/jquery-2.2.4.min.js"></script>
-<script src="${base}/static/system/js/popper.min.js"></script>
-<script src="${base}/static/system/js/vendor/bootstrap.min.js"></script>
-<script src="${base}/static/system/js/jquery-ui.js"></script>
-<script src="${base}/static/system/js/easing.min.js"></script>
-<script src="${base}/static/system/js/swiper.min.js"></script>
-<script src="${base}/static/system/js/hoverIntent.js"></script>
-<script src="${base}/static/system/js/superfish.min.js"></script>
-<script src="${base}/static/system/js/bootstrap-treeview.js"></script>
-<script src="${base}/static/system/js/bootstrap-table-zh-CN.js"></script>
-<script src="${base}/static/system/js/bootstrap-table.js"></script>
-<script src="${base}/static/system/js/jquery.ajaxchimp.min.js"></script>
-<script src="${base}/static/system/js/jquery.magnific-popup.min.js"></script>
-<script src="${base}/static/system/js/jquery.nice-select.min.js"></script>
-<script src="${base}/static/system/js/owl.carousel.min.js"></script>
-<script src="${base}/static/system/js/mail-script.js"></script>
-<script src="${base}/static/js/plugins/layer/layer.min.js"></script>
 <script type="text/javascript">
     $(function(){
 

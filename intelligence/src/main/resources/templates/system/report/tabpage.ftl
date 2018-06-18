@@ -106,6 +106,9 @@
             box-shadow: none;
         }
     </style>
+    <script>
+
+    </script>
 </head>
 
 <body>
@@ -136,11 +139,11 @@
                         </button>
                     </div>
                     <div class="col-lg-12">
-                        <div  class="readTextarea" id="txtResult" style=" text-align: left;
+                        <div class="readTextarea" id="txtResult" style=" text-align: left;
     padding: 5px; height: 500px; border: 1px solid #d4bc15;margin-top: 10px;"></div>
-              <#--<textarea class="readTextarea" name="" id="txtResult" cols="30" rows="20" readonly="true">-->
-                <#--这是一段只读的文本框-->
-              <#--</textarea>-->
+                    <#--<textarea class="readTextarea" name="" id="txtResult" cols="30" rows="20" readonly="true">-->
+                    <#--这是一段只读的文本框-->
+                    <#--</textarea>-->
                     </div>
                     <div class="col-lg-12" style="margin-top: 20px;">
                         <span class="keyword ">关键词</span>
@@ -157,21 +160,22 @@
                 <div class="right-content">
                     <div class="col-lg-12" style="margin-top: 20px;">
                         <select name="" id="" class="default-select key-input">
-                        <#--<option value="">选择传感器信息</option>-->
-                        <#--<option value="1">激光</option>-->
-                        <#--<option value="2">通讯</option>-->
-                            <option value="3">光电</option>
-
+                            <option value="">选择传感器信息</option>
+                            <option value="1">电子侦察</option>
+                            <option value="2">激光</option>
+                            <option value="3">通讯</option>
+                            <option value="4">光电</option>
                         </select>
-                        <button type="button" style="margin-left: 20px;" class="genric-btn info">
+                    <#--<input type="file" id="imgFileUpload" style="display:none;">-->
+                    <#--<button id = "btn_otherExport" type="button" style="margin-left: 20px;" class="genric-btn info">-->
+                    <#--<a href="#">-->
+                    <#--<i class="fa fa-play"></i>-->
+                    <#--</a>上传图片-->
+                    <#--</button>-->
+                        <button id="btnRongHe" type="button" style="margin-left: 20px;" class="genric-btn info">
                             <a href="#">
                                 <i class="fa fa-play"></i>
                             </a>融合识别
-                        </button>
-                        <button type="button" style="margin-left: 20px;" class="genric-btn info">
-                            <a href="#">
-                                <i class="fa fa-play"></i>
-                            </a>上传图片
                         </button>
                     </div>
                 </div>
@@ -189,9 +193,14 @@
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="tab1">
                         <div class="col-lg-12 img-wrapper">
-                            <img src="${base}/static/system/img/b2.jpg" alt="">
-                            <img src="${base}/static/system/img/b1.jpg" alt="">
-                            <img src="${base}/static/system/img/b3.jpg" alt="">
+                            <input type="file" id="imgFileUpload1" style="display:none;">
+                            <img id="img1" src="${base}/static/system/img/empty.png" alt="">
+
+                            <input type="file" id="imgFileUpload2" style="display:none;">
+                            <img id="img2" src="${base}/static/system/img/empty.png" alt="">
+
+                            <input type="file" id="imgFileUpload3" style="display:none;">
+                            <img id="img3" src="${base}/static/system/img/empty.png" alt="">
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tab2">
@@ -243,10 +252,34 @@
 <script src="${base}/static/system/js/report/tabpage.js"></script>
 
 <script type="application/javascript">
+
+    $("#btnRongHe").click(function () {
+       var keyword=  $("#txtkeyword").val();
+       if(keyword==null || keyword==''){
+           alert("关键字不允许为空");
+       }else if(keyword == '斯坦尼斯'){
+           $("#img1").attr("src","/static/system/img/stns_new.png");
+       }else{
+           alert("该关键字无法识别");
+       }
+
+    });
+
     $("#btn_txtExport").click(function () {
 
         $("#fileUpload").click();
 
+    });
+
+    $("#img1").click(function () {
+        $("#imgFileUpload1").click();
+    });
+
+    $("#img2").click(function () {
+        $("#imgFileUpload2").click();
+    });
+    $("#img3").click(function () {
+        $("#imgFileUpload3").click();
     });
 
     function readAsText() {
@@ -254,7 +287,7 @@
         var file = document.getElementById("fileUpload").files[0];
         var reader = new FileReader();
         //将文件以文本形式读入页面
-        reader.readAsText(file,'gb2312');
+        reader.readAsText(file, 'gb2312');
         reader.onload = function (f) {
 
             $("#txtResult").html(this.result);
@@ -263,24 +296,61 @@
 
 
     $("#btn_txtShiBie").click(function () {
-        var txtkeyword=$.trim($("#txtkeyword").val());
-        if(txtkeyword==''){
+        var txtkeyword = $.trim($("#txtkeyword").val());
+        if (txtkeyword == '') {
             layer.msg('请输入关键字');
             return false;
         }
 
-        var content=$("#txtResult").html();
+        var content = $("#txtResult").html();
         var values = content.split(txtkeyword);
         $("#txtResult").html(values.join('<span style="background:red;color: white">' + txtkeyword + '</span>'));
     });
 
-    $("input[type=file]").click(function (e) {
+    $("#fileUpload").click(function (e) {
         $("#fileUpload").val('');
     });
 
-    $("input[type=file]").change(function (e) {
+    $("#fileUpload").change(function (e) {
         readAsText();
     })
+
+
+    $("#imgFileUpload1").change(function () {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function (e) {
+                $("#img1").attr("src", e.target.result);    //e.target.result就是最后的路径地址
+            };
+        }
+    });
+
+    $("#imgFileUpload2").change(function () {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function (e) {
+                $("#img2").attr("src", e.target.result);    //e.target.result就是最后的路径地址
+            };
+        }
+    });
+
+    $("#imgFileUpload3").change(function () {
+        var file = this.files[0];
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function (e) {
+                $("#img3").attr("src", e.target.result);    //e.target.result就是最后的路径地址
+            };
+        }
+    });
 
 </script>
 </body>

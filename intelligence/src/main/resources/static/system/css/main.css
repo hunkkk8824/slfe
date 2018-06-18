@@ -4768,7 +4768,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   cursor: pointer;
 }
 .fixed-header{
-  width: 100px;
+  width: 130px;
   height: 22px;
   line-height: 22px;
   position: fixed;
@@ -4779,7 +4779,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   justify-content: space-around;
 
 }
-.fixed-header li{
+.fixed-header > *{
   flex: 1;
   line-height: 22px;
   cursor: pointer;
