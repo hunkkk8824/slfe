@@ -148,7 +148,7 @@ public class ResourceBiz extends BaseBiz {
     public void sycnResource(ResourcePO resource) {
         logger.info("开始同步资源,resourceId：" + resource.getId());
         StringBuilder log = new StringBuilder();
-        log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 开始同步资源").append("/r/n");
+        log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 开始同步资源").append("<br/>");
         try {
             // 修改resource状态为执行中
             resource.setImportStatus(ImportStatusEnum.IMPORTING.getValue().shortValue());
@@ -158,7 +158,7 @@ public class ResourceBiz extends BaseBiz {
 
             if (exchangePo == null) {
                 logger.error("resource 配置交换机信息未找到");
-                log.append(DateUtils.getCurrTimeStr()).append(" 配置交换机信息未找到").append("/r/n");
+                log.append(DateUtils.getCurrTimeStr()).append(" 配置交换机信息未找到").append("<br/>");
                 resourceEtlLogBiz.asynSave(resource.getId(), log.toString());
                 return;
             }
@@ -174,7 +174,7 @@ public class ResourceBiz extends BaseBiz {
             // 无同步数据，resource 状态刷为同步成功，预导入总数：0 成功总数：0
             if (CollectionUtils.isEmpty(list)) {
                 logger.info("暂无同步数据", resource);
-                log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 暂无同步数据").append("/r/n");
+                log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 暂无同步数据").append("<br/>");
                 this.updateResourceSuccess(resource, datasetCode, batchNo, total, log);
                 resourceEtlLogBiz.asynSave(resource.getId(), log.toString());
                 return;
@@ -196,7 +196,7 @@ public class ResourceBiz extends BaseBiz {
             }
         } catch (Exception e) {
             logger.error("数据同步失败", e);
-            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 数据同步失败").append("/r/n");
+            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 数据同步失败").append("<br/>");
             resource.setImportStatus(ImportStatusEnum.Excellent.getValue().shortValue());
             resourcePOMapper.updateByPrimaryKey(resource);
         }
@@ -213,7 +213,7 @@ public class ResourceBiz extends BaseBiz {
      * @return
      */
     private List<Object> validateList(String datasetCode, List<Object> list, StringBuilder log) {
-        log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 数据验证开始").append("/r/n");
+        log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 数据验证开始").append("<br/>");
         List<Object> result = new ArrayList<>();
         for (Object obj : list) {
             JSONObject jsonObject = JSONObject.parseObject(JSON.toJSONString(obj));
@@ -222,10 +222,10 @@ public class ResourceBiz extends BaseBiz {
                 result.add(obj);
             } else {
                 String id = jsonObject.getString("id");
-                log.append(DateUtils.getCurrTimeStrWithSSS()).append(" ID[" + id + "],").append(validateResult.getMessage()).append("/r/n");
+                log.append(DateUtils.getCurrTimeStrWithSSS()).append(" ID[" + id + "],").append(validateResult.getMessage()).append("<br/>");
             }
         }
-        log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 数据验证完成").append("/r/n");
+        log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 数据验证完成").append("<br/>");
         return result;
     }
 
@@ -246,7 +246,7 @@ public class ResourceBiz extends BaseBiz {
         resourcePOMapper.updateByPrimaryKey(resource);
 
         String result = " 预导入数据" + total + "条,导入成功" + count + "条！";
-        log.append(DateUtils.getCurrTimeStr()).append(result).append("/r/n");
+        log.append(DateUtils.getCurrTimeStr()).append(result).append("<br/>");
     }
 
     /**
@@ -282,7 +282,7 @@ public class ResourceBiz extends BaseBiz {
     private boolean insertData(String datasetCode, List<Object> list, String batchNo, StringBuilder log) {
         boolean result = false;
         try {
-            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 开始写入数据").append("/r/n");
+            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 开始写入数据").append("<br/>");
             if (DataSetCodeEnum.QB_SJ_RHMB.getValue().equals(datasetCode)) {
                 List<QbSjRhmbPO> myList = list.stream().parallel().map(obj -> {
                     QbSjRhmbPO o = (QbSjRhmbPO) obj;
@@ -295,13 +295,13 @@ public class ResourceBiz extends BaseBiz {
             }
         } catch (Exception e) {
             logger.error("写入数据失败", e);
-            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 写入数据失败").append("/r/n");
+            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 写入数据失败").append("<br/>");
             result = false;
         }
         if (result) {
-            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 写入数据成功").append("/r/n");
+            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 写入数据成功").append("<br/>");
         } else {
-            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 写入数据失败").append("/r/n");
+            log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 写入数据失败").append("<br/>");
         }
         return result;
     }

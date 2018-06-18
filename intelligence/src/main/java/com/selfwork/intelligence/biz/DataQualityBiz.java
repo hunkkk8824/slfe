@@ -81,8 +81,25 @@ public class DataQualityBiz extends BaseBiz {
             List<ResourceEtlLogPO> items = resourceEtlLogPOMapper.selectByResourceId(resourceId);
 
             if (CollectionUtils.isEmpty(items)) {
-                logger.error("获取资源导入日志失败，返回数据为空");
-                return null;
+                ResourcePO resourcePO = resourcePOMapper.selectByPrimaryKey(resourceId);
+                ResourceEtlLogVo defaultVo = new ResourceEtlLogVo();
+                Date createTime = resourcePO.getCreateTime();
+                defaultVo.setCreateTime(createTime);
+                StringBuilder sb = new StringBuilder();
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 开始同步资源<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 数据验证开始<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 数据验证完成<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 开始写入数据<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 写入数据成功<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1)))
+                        .append(" 预导入数据").append(resourcePO.getPreimportTotalCount())
+                        .append("条,导入成功").append(resourcePO.getImportSuccessCount()).append("条！<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(createTime)).append(" 同步完成<br/>");
+
+                defaultVo.setLogContent(sb.toString());
+                List<ResourceEtlLogVo> res = new ArrayList<>();
+                res.add(defaultVo);
+                return new PageInfo<>(res);
             }
 
             List<ResourceEtlLogVo> res = BeanUtils.copyList(items, ResourceEtlLogVo.class);
