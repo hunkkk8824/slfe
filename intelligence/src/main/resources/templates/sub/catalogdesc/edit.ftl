@@ -98,7 +98,8 @@
 <script type="text/javascript">
 
     var id = '${catalogDescVo.id}';
-    var content = '${catalogDescVo.content}';
+    var content = decodeURIComponent('${catalogDescVo.content}');
+
     (function (base) {
 
 
