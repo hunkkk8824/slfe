@@ -159,8 +159,8 @@
             <div class="col-lg-8">
                 <div class="right-content">
                     <div class="col-lg-12" style="margin-top: 20px;">
-                        <select name="" id="" class="default-select key-input">
-                            <option value="">选择传感器信息</option>
+                        <select name="type" id="type" class="default-select key-input">
+                            <#--<option value="">选择传感器信息</option>-->
                             <option value="1">电子侦察</option>
                             <option value="2">激光</option>
                             <option value="3">通讯</option>
@@ -181,14 +181,14 @@
                 </div>
                 <ul class="nav nav-tabs">
                     <li>
-                        <a href="#tab1" data-toggle="tab" class="active">图片</a>
+                        <a href="#tab1" id="tab1_a" data-toggle="tab" class="active ">图片</a>
                     </li>
-                <#--<li>-->
-                <#--<a href="#tab2" data-toggle="tab">视频</a>-->
-                <#--</li>-->
-                <#--<li>-->
-                <#--<a href="#tab3" data-toggle="tab">表格</a>-->
-                <#--</li>-->
+                    <li>
+                        <a href="#tab2" id="tab2_a" data-toggle="tab">视频</a>
+                    </li>
+                    <li>
+                        <a href="#tab3" id="tab3_a" data-toggle="tab">表格</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="tab1">
@@ -214,7 +214,7 @@
 
                     </div>
                     <div class="tab-pane fade" id="tab3">
-                        <table class="table table-hover statics-table"></table>
+                        <table class="table table-hover statics-table" id="table"></table>
                     </div>
                 </div>
             </div>
@@ -237,8 +237,8 @@
 <script src="${base}/static/system/js/hoverIntent.js"></script>
 <script src="${base}/static/system/js/superfish.min.js"></script>
 <script src="${base}/static/system/js/bootstrap-treeview.js"></script>
-<script src="${base}/static/system/js/bootstrap-table-zh-CN.js"></script>
 <script src="${base}/static/system/js/bootstrap-table.js"></script>
+<script src="${base}/static/system/js/bootstrap-table-zh-CN.js"></script>
 <script src="${base}/static/system/js/jquery.ajaxchimp.min.js"></script>
 <script src="${base}/static/system/js/jquery.magnific-popup.min.js"></script>
 <script src="${base}/static/system/js/jquery.nice-select.min.js"></script>
@@ -249,26 +249,122 @@
 
 <script src="${base}/static/system/js/owl.carousel.min.js"></script>
 <script src="${base}/static/system/js/mail-script.js"></script>
-<script src="${base}/static/system/js/report/tabpage.js"></script>
+<#--<script src="${base}/static/system/js/report/tabpage.js"></script>-->
 
 <script type="application/javascript">
 
-    $("#btnRongHe").click(function () {
-       var keyword=  $("#txtkeyword").val();
-       if(keyword==null || keyword==''){
-           alert("关键字不允许为空");
-       }else if(keyword == '斯坦尼斯'){
-           $("#img1").attr("src","/static/system/img/stns_new.png");
-       }else{
-           alert("该关键字无法识别");
-       }
+    $(function(){
 
+        $('.nav a').eq(2).tab('show');
+
+        $('#type').change(function(){
+            var type = $('#type').val();
+            if(type == 4){
+                $('.nav a').eq(0).tab('show');
+            }else{
+                $('.nav a').eq(2).tab('show');
+            }
+        });
+
+        getColumnsByDataSetCode(getDataSetCodeByType($('#type').val()),initTable);
     });
 
+    $("#btnRongHe").click(function () {
+       var type = $('#type').val();
+       if(type == 4){
+           var keyword=  $("#txtkeyword").val();
+           if(keyword==null || keyword==''){
+               alert("关键字不允许为空");
+           }else if(keyword == '斯坦尼斯'){
+               $("#img1").attr("src","/static/system/img/stns_new.png");
+           }else{
+               alert("该关键字无法识别");
+           }
+       }else {
+           doSearchTable(type);
+       }
+    });
+
+    //得到查询的参数
+    function queryParams(params) {
+        var type = $('#type').val();
+
+        var temp = {
+            limit: params.limit,    //页面大小
+            offset: params.offset,   //页码
+            tableName : getDataSetCodeByType(type)
+        };
+        return temp;
+    };
+
+
+    function initTable(tableColumns) {
+        $('#table').bootstrapTable({
+            url: "${base}/report/getList?v=" + new Date(),    //请求后台的URL（*）
+            method: 'post',                         //请求方式（*）
+            contentType: "application/json",
+            toolbarAlign: 'right',                 //工具栏对齐方式
+            buttonsAlign: 'right',                 //按钮对齐方式
+            striped: false,                         //是否显示行间隔色
+            cache: false,                           //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                      //是否显示分页（*）
+            sortable: false,                       //是否启用排序
+            sortOrder: "asc",                      //排序方式
+            sortName: "id",                        // 排序字段
+            queryParams: queryParams,                //传递参数（*）
+            sidePagination: "server",            //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                         //初始化加载第一页，默认第一页
+            pageSize: 25,                          //每页的记录行数（*）
+            pageList: [ 25, 50, 100],              //可供选择的每页的行数（*）
+            strictSearch: true,
+            clickToSelect: true,                //是否启用点击选中行
+            height: 450,                          //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                  //是否显示父子表
+            showRefresh: false,                   //刷新按钮
+            columns: tableColumns
+        });
+    }
+
+    //根据表名称或列设置
+    function getColumnsByDataSetCode(code,callBack) {
+        var url = "${base}/dataQuality/getColumnsByDataSetCode?v=" + new Date();
+        $.get(url, {
+            dataSetCode:code,//表名称
+        }, function (data) {
+
+            debugger
+            if(callBack){
+                callBack(data);
+            }
+
+        });
+    }
+
+    function getDataSetCodeByType(type){
+        var dataSetCode = "";
+        if(type == 1){
+            dataSetCode = 'qb_sj_ysdzzdzzcmb';
+        }else if(type == 2){
+            dataSetCode = 'qb_sj_ysdzzjgmb';
+        }else if(type == 3){
+            dataSetCode == 'qb_sj_ysdzztmmb';
+        }
+        return dataSetCode;
+    }
+
+    function doSearchTable(type){
+        var dataSetCode = getDataSetCodeByType(type);
+        // 查询表数据
+        getColumnsByDataSetCode(dataSetCode,function (columns) {
+            $('#table').bootstrapTable("refresh", {pageNumber: 1,columns:columns});
+        });
+
+    }
+
     $("#btn_txtExport").click(function () {
-
         $("#fileUpload").click();
-
     });
 
     $("#img1").click(function () {
