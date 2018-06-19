@@ -128,7 +128,7 @@ public class ReportController extends BaseController {
         try {
             PageInfo<AisVo> pageData = aisBiz.getAisInfoList(request);
             if (pageData != null) {
-               result = pageData.getList();
+                result = pageData.getList();
             }
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);
@@ -170,16 +170,20 @@ public class ReportController extends BaseController {
         }
 
         try {
-            List<QbSjYsdzzdzzcmbStatiscVo> res = qbSjDptdzzmbBiz.getStatisicInfoList(request);
+            Map<String, Long> res = qbSjDptdzzmbBiz.getStatisicInfoList(request);
 
-            List<String> jlList = new ArrayList();//jl 距离
-            List<Integer> valList = new ArrayList();//count 统计数目
-            res.stream().forEach(m -> {
-                jlList.add(String.format("%.2f", m.getJl())+"km");
-                valList.add(m.getCount());
-            });
-            result.put("x", jlList);
-            result.put("y", valList);
+            List<String> titleList = new ArrayList();//jl 距离区间
+            List<Map<String, String>> dataList = new ArrayList();
+            for (Map.Entry<String, Long> entry : res.entrySet()) {
+                titleList.add(entry.getKey());
+
+                Map<String, String> mapitem=new HashMap<>();
+                mapitem.put("name",entry.getKey());
+                mapitem.put("value",String.valueOf(entry.getValue()));
+                dataList.add(mapitem);
+            }
+            result.put("titleList", titleList);
+            result.put("dataList", dataList);
 
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);

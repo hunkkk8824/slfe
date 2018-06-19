@@ -85,8 +85,7 @@
     <select id="getStatisicInfoList" resultType="com.selfwork.intelligence.model.vo.dateset.QbSjYsdzzdzzcmbStatiscVo"
             parameterType="com.selfwork.intelligence.model.vo.dateset.QbSjDptdzzmbQueryReq">
         select
-        jl,
-        count(*) count
+        jl
         from qb_sj_dptdzzmb
         <where>
 
@@ -100,7 +99,7 @@
                 and ptmc = #{ptmc,jdbcType=VARCHAR}
             </if>
         </where>
-        GROUP BY jl
+
     </select>
     <select id="getList" resultMap="ResultMapWithBLOBs"
             parameterType="com.selfwork.intelligence.model.vo.dateset.QueryVo">
