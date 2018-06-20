@@ -77,6 +77,39 @@
     delete from scout_qb_table_bd
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into scout_qb_table_bd (BATCH_NO, NCAT,
+    INFO_SOURCE, SEND_UNIT, RECV_UNIT,
+    SEND_TIME, STREAM_NO, GRAM_TYPE,
+    SECRET_GRADE, WRITE_TIME, SEND_GRAM_TIME,
+    SEND_GRAM_SERIAL, AUTHOR, SIGNATORY,
+    CAPTION, CONTENT_LEN, CONTENT,
+    SUBJECT, EIGENVALUE, FJ_DEPICT,
+    FJ_TYPE, FJ_NAME, FJ_LEN,
+    GRAM_STREAM, RECEIPT_PERSON, RECEIPT_STATUS,
+    ERROR_CAUSE, FRIORITY, TIME_ZONE_VALUE,
+    READ_FLAG, REPLAY_FLAG, WD_ID,
+    SEND_UUNIT_ID, EDIT_CONTENT, FJ_CONTENT)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.batchNo,jdbcType=VARCHAR}, #{item.ncat,jdbcType=INTEGER},
+      #{item.infoSource,jdbcType=VARCHAR}, #{item.sendUnit,jdbcType=VARCHAR}, #{item.recvUnit,jdbcType=VARCHAR},
+      #{item.sendTime,jdbcType=VARCHAR}, #{item.streamNo,jdbcType=INTEGER}, #{item.gramType,jdbcType=INTEGER},
+      #{item.secretGrade,jdbcType=SMALLINT}, #{item.writeTime,jdbcType=VARCHAR}, #{item.sendGramTime,jdbcType=VARCHAR},
+      #{item.sendGramSerial,jdbcType=VARCHAR}, #{item.author,jdbcType=VARCHAR}, #{item.signatory,jdbcType=VARCHAR},
+      #{item.caption,jdbcType=VARCHAR}, #{item.contentLen,jdbcType=INTEGER}, #{item.content,jdbcType=VARCHAR},
+      #{item.subject,jdbcType=VARCHAR}, #{item.eigenvalue,jdbcType=VARCHAR}, #{item.fjDepict,jdbcType=VARCHAR},
+      #{item.fjType,jdbcType=INTEGER}, #{item.fjName,jdbcType=VARCHAR}, #{item.fjLen,jdbcType=INTEGER},
+      #{item.gramStream,jdbcType=INTEGER}, #{item.receiptPerson,jdbcType=VARCHAR}, #{item.receiptStatus,jdbcType=SMALLINT},
+      #{item.errorCause,jdbcType=VARCHAR}, #{item.friority,jdbcType=SMALLINT}, #{item.timeZoneValue,jdbcType=DECIMAL},
+      #{item.readFlag,jdbcType=SMALLINT}, #{item.replayFlag,jdbcType=SMALLINT}, #{item.wdId,jdbcType=DECIMAL},
+      #{item.sendUunitId,jdbcType=INTEGER}, #{item.editContent,jdbcType=VARCHAR}, #{item.fjContent,jdbcType=LONGVARBINARY}
+      )
+    </foreach>
+  </insert>
+
   <insert id="insert" parameterType="com.selfwork.intelligence.model.po.ScoutQbTableBdPO" >
     insert into scout_qb_table_bd (ID, BATCH_NO, NCAT, 
       INFO_SOURCE, SEND_UNIT, RECV_UNIT, 

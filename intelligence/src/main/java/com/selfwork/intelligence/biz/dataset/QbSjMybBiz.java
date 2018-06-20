@@ -1,6 +1,8 @@
 package com.selfwork.intelligence.biz.dataset;
 
 import com.selfwork.intelligence.biz.BaseBiz;
+import com.selfwork.intelligence.biz.IBatchInsertCallBack;
+import com.selfwork.intelligence.biz.IBatchService;
 import com.selfwork.intelligence.common.BeanUtils;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.mapper.QbSjMybPOMapper;
@@ -22,6 +24,22 @@ public class QbSjMybBiz extends BaseBiz implements IBaseQbBiz<QbSjMybVO> {
 
     @Autowired
     private QbSjMybPOMapper qbSjMyb;
+
+    @Autowired
+    private IBatchService batchService;
+
+    public boolean batchInsert(List<QbSjMybPO> list) {
+        return batchService.insertObjectByBatch(list, 500, new IBatchInsertCallBack<QbSjMybPO>() {
+            @Override
+            public Integer doBatch(List<QbSjMybPO> list, Insert insert) {
+                return insertList(list);
+            }
+        });
+    }
+
+    private Integer insertList(List<QbSjMybPO> list) {
+        return qbSjMyb.insertList(list);
+    }
 
     @Override
     public List<QbSjMybVO> getListByBatchNO(String batchNO) {

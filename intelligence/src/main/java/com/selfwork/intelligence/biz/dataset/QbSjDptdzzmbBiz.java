@@ -1,11 +1,14 @@
 package com.selfwork.intelligence.biz.dataset;
 
 import com.selfwork.intelligence.biz.BaseBiz;
+import com.selfwork.intelligence.biz.IBatchInsertCallBack;
+import com.selfwork.intelligence.biz.IBatchService;
 import com.selfwork.intelligence.common.BeanUtils;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.mapper.QbSjDptdzzmbPOMapper;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPO;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
+import com.selfwork.intelligence.model.po.ScoutQbTableBdPO;
 import com.selfwork.intelligence.model.vo.dateset.*;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,22 @@ public class QbSjDptdzzmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptdzzmbP
 
     @Autowired
     private QbSjDptdzzmbPOMapper qbSjDptdzzmb;
+
+    @Autowired
+    private IBatchService batchService;
+
+    public boolean batchInsert(List<QbSjDptdzzmbPOWithBLOBs> list) {
+        return batchService.insertObjectByBatch(list, 500, new IBatchInsertCallBack<QbSjDptdzzmbPOWithBLOBs>() {
+            @Override
+            public Integer doBatch(List<QbSjDptdzzmbPOWithBLOBs> list, Insert insert) {
+                return insertList(list);
+            }
+        });
+    }
+
+    private Integer insertList(List<QbSjDptdzzmbPOWithBLOBs> list) {
+        return qbSjDptdzzmb.insertList(list);
+    }
 
     @Override
     public List<QbSjDptdzzmbPOWithBLOBsVO> getListByBatchNO(String batchNO) {

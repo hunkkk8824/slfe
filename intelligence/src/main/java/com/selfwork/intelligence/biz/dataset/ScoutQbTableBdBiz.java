@@ -1,7 +1,10 @@
 package com.selfwork.intelligence.biz.dataset;
 
 import com.selfwork.intelligence.biz.BaseBiz;
+import com.selfwork.intelligence.biz.IBatchInsertCallBack;
+import com.selfwork.intelligence.biz.IBatchService;
 import com.selfwork.intelligence.mapper.ScoutQbTableBdPOMapper;
+import com.selfwork.intelligence.model.po.QbSjRhmbPO;
 import com.selfwork.intelligence.model.po.ScoutQbTableBdPO;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
 import com.selfwork.intelligence.model.vo.dateset.LocationDto;
@@ -19,6 +22,22 @@ public class ScoutQbTableBdBiz extends BaseBiz implements IBaseQbBiz<ScoutQbTabl
 
     @Autowired
     private ScoutQbTableBdPOMapper scoutQbTableBd;
+
+    @Autowired
+    private IBatchService batchService;
+
+    public boolean batchInsert(List<ScoutQbTableBdPO> list) {
+        return batchService.insertObjectByBatch(list, 500, new IBatchInsertCallBack<ScoutQbTableBdPO>() {
+            @Override
+            public Integer doBatch(List<ScoutQbTableBdPO> list, Insert insert) {
+                return insertList(list);
+            }
+        });
+    }
+
+    private Integer insertList(List<ScoutQbTableBdPO> list) {
+        return scoutQbTableBd.insertList(list);
+    }
 
     @Override
     public List<ScoutQbTableBdPO> getListByBatchNO(String batchNO) {

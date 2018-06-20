@@ -210,6 +210,63 @@
     delete from qb_sj_ysdzzdzzcmb
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into qb_sj_ysdzzdzzcmb (BATCH_NO, PH,
+    PTBH, PTMC, PTLX, CGQBH,
+    XYLX, HJZT, HJZL, JSSJ,
+    SBSJ, ZCXXLY, SX,
+    GJ, JD, WD, GD,
+    JL, FW, YJ, JLWC,
+    FWWC, YJWC, CPCCS,
+    CPDDL, CPHDL, CPLX,
+    LDXH, LDYT, TXSMZQ,
+    TXSMFS, JHFS, PLFW,
+    WXDJ, KXD, DGNGRMS,
+    DGNGRYS, HMBGRMS, HMBGRYS,
+    XBDGRYS, WYGDGRYS, GRDK,
+    DGNFPZT, HMBFPZT, XSBFPZT,
+    SPLX, MBZP, ZPJBL,
+    MCKDLX, MCFD, MNLX,
+    ZMCGS, ZMCKD, QSPL,
+    ZZPL, ZDPP, QSXW, SMZQ,
+    ZBKDSJ, ZBDPWZSJ, ZFBDPC,
+    YFWFZSJ, SPJCZ, SPJCJFC,
+    MCJCZ, MCJCJFC, JCMCS,
+    PTXH, JXH, JJM, CFPLCD,
+    SPZCD, MCKDZCD, CFPL,
+    SPZ, MCKDZ)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.batchNo,jdbcType=VARCHAR}, #{item.ph,jdbcType=INTEGER},
+      #{item.ptbh,jdbcType=INTEGER}, #{item.ptmc,jdbcType=VARCHAR}, #{item.ptlx,jdbcType=INTEGER}, #{item.cgqbh,jdbcType=INTEGER},
+      #{item.xylx,jdbcType=INTEGER}, #{item.hjzt,jdbcType=INTEGER}, #{item.hjzl,jdbcType=INTEGER}, #{item.jssj,jdbcType=TIMESTAMP},
+      #{item.sbsj,jdbcType=TIMESTAMP}, #{item.zcxxly,jdbcType=INTEGER}, #{item.sx,jdbcType=INTEGER},
+      #{item.gj,jdbcType=INTEGER}, #{item.jd,jdbcType=DECIMAL}, #{item.wd,jdbcType=DECIMAL}, #{item.gd,jdbcType=DECIMAL},
+      #{item.jl,jdbcType=DECIMAL}, #{item.fw,jdbcType=DECIMAL}, #{item.yj,jdbcType=DECIMAL}, #{item.jlwc,jdbcType=DECIMAL},
+      #{item.fwwc,jdbcType=DECIMAL}, #{item.yjwc,jdbcType=DECIMAL}, #{item.cpccs,jdbcType=INTEGER},
+      #{item.cpddl,jdbcType=INTEGER}, #{item.cphdl,jdbcType=INTEGER}, #{item.cplx,jdbcType=INTEGER},
+      #{item.ldxh,jdbcType=VARCHAR}, #{item.ldyt,jdbcType=INTEGER}, #{item.txsmzq,jdbcType=INTEGER},
+      #{item.txsmfs,jdbcType=INTEGER}, #{item.jhfs,jdbcType=INTEGER}, #{item.plfw,jdbcType=INTEGER},
+      #{item.wxdj,jdbcType=INTEGER}, #{item.kxd,jdbcType=INTEGER}, #{item.dgngrms,jdbcType=INTEGER},
+      #{item.dgngrys,jdbcType=INTEGER}, #{item.hmbgrms,jdbcType=INTEGER}, #{item.hmbgrys,jdbcType=INTEGER},
+      #{item.xbdgrys,jdbcType=INTEGER}, #{item.wygdgrys,jdbcType=INTEGER}, #{item.grdk,jdbcType=INTEGER},
+      #{item.dgnfpzt,jdbcType=INTEGER}, #{item.hmbfpzt,jdbcType=INTEGER}, #{item.xsbfpzt,jdbcType=INTEGER},
+      #{item.splx,jdbcType=INTEGER}, #{item.mbzp,jdbcType=INTEGER}, #{item.zpjbl,jdbcType=INTEGER},
+      #{item.mckdlx,jdbcType=INTEGER}, #{item.mcfd,jdbcType=DECIMAL}, #{item.mnlx,jdbcType=INTEGER},
+      #{item.zmcgs,jdbcType=INTEGER}, #{item.zmckd,jdbcType=DECIMAL}, #{item.qspl,jdbcType=DECIMAL},
+      #{item.zzpl,jdbcType=DECIMAL}, #{item.zdpp,jdbcType=DECIMAL}, #{item.qsxw,jdbcType=DECIMAL}, #{item.smzq,jdbcType=DECIMAL},
+      #{item.zbkdsj,jdbcType=INTEGER}, #{item.zbdpwzsj,jdbcType=INTEGER}, #{item.zfbdpc,jdbcType=INTEGER},
+      #{item.yfwfzsj,jdbcType=INTEGER}, #{item.spjcz,jdbcType=DECIMAL}, #{item.spjcjfc,jdbcType=DECIMAL},
+      #{item.mcjcz,jdbcType=DECIMAL}, #{item.mcjcjfc,jdbcType=DECIMAL}, #{item.jcmcs,jdbcType=INTEGER},
+      #{item.ptxh,jdbcType=VARCHAR}, #{item.jxh,jdbcType=VARCHAR}, #{item.jjm,jdbcType=VARCHAR}, #{item.cfplcd,jdbcType=INTEGER},
+      #{item.spzcd,jdbcType=INTEGER}, #{item.mckdzcd,jdbcType=INTEGER}, #{item.cfpl,jdbcType=VARBINARY},
+      #{item.spz,jdbcType=VARBINARY}, #{item.mckdz,jdbcType=VARBINARY}
+      )
+    </foreach>
+  </insert>
+
   <insert id="insert" parameterType="com.selfwork.intelligence.model.po.QbSjYsdzzdzzcmbPOWithBLOBs" >
     insert into qb_sj_ysdzzdzzcmb (ID, BATCH_NO, PH, 
       PTBH, PTMC, PTLX, CGQBH, 

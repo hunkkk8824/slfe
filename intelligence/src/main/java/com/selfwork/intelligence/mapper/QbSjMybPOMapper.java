@@ -19,4 +19,5 @@ public interface QbSjMybPOMapper {
     int updateByPrimaryKey(QbSjMybPO record);
     List<QbSjMybPO> getListByBatchNO(String batchNO);
 
+    Integer insertList(List<QbSjMybPO> list);
 }

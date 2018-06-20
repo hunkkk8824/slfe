@@ -20,4 +20,6 @@ public interface ScoutQbTableBdPOMapper {
     int updateByPrimaryKey(ScoutQbTableBdPO record);
 
     List<ScoutQbTableBdPO> getListByBatchNO(String batchNO);
+
+    Integer insertList(List<ScoutQbTableBdPO> list);
 }

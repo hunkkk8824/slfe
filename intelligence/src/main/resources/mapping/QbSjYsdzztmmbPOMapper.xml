@@ -158,6 +158,39 @@
     delete from qb_sj_ysdzztmmb
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into qb_sj_ysdzztmmb (BATCH_NO, PH,
+    PTBH, PTMC, PTLX, CGQBH,
+    XYLX, HJZT, HJZL, JSSJ,
+    SBSJ, SX, GJ, JD,
+    WD, GD, JL,FW, YJ,
+    JLWC, FWWC, YJWC, TZYS,
+    QSPL, ZZPL, ZXPL, XHDK,
+    SYFS, XHLX,
+    TPSD, SL, FSYSX, BWLX, MS,
+    GRFS, GRXHTZFS, GRXHYS,
+    GRTXZX, PTXH, JXH,
+    JJM)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.batchNo,jdbcType=VARCHAR}, #{item.ph,jdbcType=INTEGER},
+      #{item.ptbh,jdbcType=INTEGER}, #{item.ptmc,jdbcType=VARCHAR}, #{item.ptlx,jdbcType=INTEGER}, #{item.cgqbh,jdbcType=INTEGER},
+      #{item.xylx,jdbcType=INTEGER}, #{item.hjzt,jdbcType=INTEGER}, #{item.hjzl,jdbcType=INTEGER}, #{item.jssj,jdbcType=TIMESTAMP},
+      #{item.sbsj,jdbcType=TIMESTAMP}, #{item.sx,jdbcType=INTEGER}, #{item.gj,jdbcType=INTEGER}, #{item.jd,jdbcType=DECIMAL},
+      #{item.wd,jdbcType=DECIMAL}, #{item.gd,jdbcType=DECIMAL},#{item.jl,jdbcType=DECIMAL}, #{item.fw,jdbcType=DECIMAL}, #{item.yj,jdbcType=DECIMAL},
+      #{item.jlwc,jdbcType=DECIMAL}, #{item.fwwc,jdbcType=DECIMAL}, #{item.yjwc,jdbcType=DECIMAL}, #{item.tzys,jdbcType=INTEGER},
+      #{item.qspl,jdbcType=DECIMAL}, #{item.zzpl,jdbcType=DECIMAL}, #{item.zxpl,jdbcType=DECIMAL}, #{item.xhdk,jdbcType=DECIMAL},
+      #{item.syfs,jdbcType=INTEGER}, #{item.xhlx,jdbcType=INTEGER},
+      #{item.tpsd,jdbcType=INTEGER}, #{item.sl,jdbcType=INTEGER}, #{item.fsysx,jdbcType=INTEGER}, #{item.bwlx,jdbcType=INTEGER},  #{item.ms,jdbcType=INTEGER},
+      #{item.grfs,jdbcType=INTEGER}, #{item.grxhtzfs,jdbcType=INTEGER}, #{item.grxhys,jdbcType=INTEGER},
+      #{item.grtxzx,jdbcType=DECIMAL}, #{item.ptxh,jdbcType=VARCHAR}, #{item.jxh,jdbcType=VARCHAR},
+      #{item.jjm,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
   <insert id="insert" parameterType="com.selfwork.intelligence.model.po.QbSjYsdzztmmbPO" >
     insert into qb_sj_ysdzztmmb (ID, BATCH_NO, PH, 
       PTBH, PTMC, PTLX, CGQBH, 

@@ -2,7 +2,7 @@ package com.selfwork.intelligence.biz;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.selfwork.intelligence.biz.dataset.QbSjRhmbBiz;
+import com.selfwork.intelligence.biz.dataset.*;
 import com.selfwork.intelligence.common.Constant;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.common.enums.AuditStatusEnum;
@@ -11,10 +11,14 @@ import com.selfwork.intelligence.common.enums.ImportStatusEnum;
 import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.config.ValidateHandler;
 import com.selfwork.intelligence.mapper.ResourcePOMapper;
+import com.selfwork.intelligence.model.*;
+import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
+import com.selfwork.intelligence.model.QbSjDptssmbPO;
+import com.selfwork.intelligence.model.QbSjJztsmbPO;
+import com.selfwork.intelligence.model.QbSjMybPO;
+import com.selfwork.intelligence.model.QbSjRgmbPO;
 import com.selfwork.intelligence.model.bo.ValidateResult;
-import com.selfwork.intelligence.model.po.ExchangerPO;
-import com.selfwork.intelligence.model.po.QbSjRhmbPO;
-import com.selfwork.intelligence.model.po.ResourcePO;
+import com.selfwork.intelligence.model.po.*;
 import com.selfwork.intelligence.model.vo.BaseResultVo;
 import com.selfwork.intelligence.model.vo.dataquality.QuantityQueryVo;
 import org.slf4j.Logger;
@@ -51,6 +55,36 @@ public class ResourceBiz extends BaseBiz {
 
     @Autowired
     private QbSjRhmbBiz qbSjRhmbBiz;
+
+    @Autowired
+    private ScoutQbTableBdBiz scoutQbTableBdBiz;
+
+    @Autowired
+    private QbSjYsmbBiz qbSjYsmbBiz;
+
+    @Autowired
+    private QbSjYsdzztmmbBiz qbSjYsdzztmmbBiz;
+
+    @Autowired
+    private QbSjYsdzzjgmbBiz qbSjYsdzzjgmbBiz;
+
+    @Autowired
+    private QbSjYsdzzdzzcmbBiz qbSjYsdzzdzzcmbBiz;
+
+    @Autowired
+    private QbSjRgmbBiz qbSjRgmbBiz;
+
+    @Autowired
+    private QbSjMybBiz qbSjMybBiz;
+
+    @Autowired
+    private QbSjJztsmbBiz qbSjJztsmbBiz;
+
+    @Autowired
+    private QbSjDptssmbBiz qbSjDptssmbBiz;
+
+    @Autowired
+    private QbSjDptdzzmbBiz qbSjDptdzzmbBiz;
 
     @Autowired
     private ValidateHandler validateHandler;
@@ -290,7 +324,77 @@ public class ResourceBiz extends BaseBiz {
                     return o;
                 }).collect(Collectors.toList());
                 result = qbSjRhmbBiz.batchInsert(myList);
-            } else {
+            }else if (DataSetCodeEnum.SCOUT_QB_TABLE_BD.getValue().equals(datasetCode)) {
+                List<ScoutQbTableBdPO> myList = list.stream().parallel().map(obj -> {
+                    ScoutQbTableBdPO o = (ScoutQbTableBdPO) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = scoutQbTableBdBiz.batchInsert(myList);
+            }else if (DataSetCodeEnum.QB_SJ_YSMB.getValue().equals(datasetCode)) {
+                List<QbSjYsmbPO> myList = list.stream().parallel().map(obj -> {
+                    QbSjYsmbPO o = (QbSjYsmbPO) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjYsmbBiz.batchInsert(myList);
+            }else if (DataSetCodeEnum.QB_SJ_YSDZZTMMB.getValue().equals(datasetCode)) {
+                List<QbSjYsdzztmmbPO> myList = list.stream().parallel().map(obj -> {
+                    QbSjYsdzztmmbPO o = (QbSjYsdzztmmbPO) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjYsdzztmmbBiz.batchInsert(myList);
+            } else if (DataSetCodeEnum.QB_SJ_YSDZZJGMB.getValue().equals(datasetCode)) {
+                List<QbSjYsdzzjgmbPO> myList = list.stream().parallel().map(obj -> {
+                    QbSjYsdzzjgmbPO o = (QbSjYsdzzjgmbPO) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjYsdzzjgmbBiz.batchInsert(myList);
+            } else if (DataSetCodeEnum.QB_SJ_YSDZZDZZCMB.getValue().equals(datasetCode)) {
+                List<QbSjYsdzzdzzcmbPOWithBLOBs> myList = list.stream().parallel().map(obj -> {
+                    QbSjYsdzzdzzcmbPOWithBLOBs o = (QbSjYsdzzdzzcmbPOWithBLOBs) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjYsdzzdzzcmbBiz.batchInsert(myList);
+            } else if (DataSetCodeEnum.QB_SJ_RGMB.getValue().equals(datasetCode)) {
+                List<QbSjRgmbPO> myList = list.stream().parallel().map(obj -> {
+                    QbSjRgmbPO o = (QbSjRgmbPO) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjRgmbBiz.batchInsert(myList);
+            } else if (DataSetCodeEnum.QB_SJ_MYB.getValue().equals(datasetCode)) {
+                List<QbSjMybPO> myList = list.stream().parallel().map(obj -> {
+                    QbSjMybPO o = (QbSjMybPO) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjMybBiz.batchInsert(myList);
+            }else if (DataSetCodeEnum.QB_SJ_JZTSMB.getValue().equals(datasetCode)) {
+                List<QbSjJztsmbPO> myList = list.stream().parallel().map(obj -> {
+                    QbSjJztsmbPO o = (QbSjJztsmbPO) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjJztsmbBiz.batchInsert(myList);
+            }else if (DataSetCodeEnum.QB_SJ_DPTSSMB.getValue().equals(datasetCode)) {
+                List<QbSjDptssmbPO> myList = list.stream().parallel().map(obj -> {
+                    QbSjDptssmbPO o = (QbSjDptssmbPO) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjDptssmbBiz.batchInsert(myList);
+            } else if (DataSetCodeEnum.QB_SJ_DPTDZZMB.getValue().equals(datasetCode)) {
+                List<QbSjDptdzzmbPOWithBLOBs> myList = list.stream().parallel().map(obj -> {
+                    QbSjDptdzzmbPOWithBLOBs o = (QbSjDptdzzmbPOWithBLOBs) obj;
+                    o.setBatchNo(batchNo);
+                    return o;
+                }).collect(Collectors.toList());
+                result = qbSjDptdzzmbBiz.batchInsert(myList);
+            }  else {
                 result = false;
             }
         } catch (Exception e) {

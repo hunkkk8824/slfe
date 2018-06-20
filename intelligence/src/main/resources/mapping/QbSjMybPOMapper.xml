@@ -37,6 +37,21 @@
     delete from qb_sj_myb
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+
+  <insert id="insertList" parameterType="java.util.List">
+    insert into qb_sj_myb (BATCH_NO, MYLX,
+    XXGSLX, XXLX, MYBH,
+    MYMC, NBBH, BBH)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.batchNo,jdbcType=VARCHAR}, #{item.mylx,jdbcType=DECIMAL},
+      #{item.xxgslx,jdbcType=DECIMAL}, #{item.xxlx,jdbcType=DECIMAL}, #{item.mybh,jdbcType=DECIMAL},
+      #{item.mymc,jdbcType=VARCHAR}, #{item.nbbh,jdbcType=DECIMAL}, #{item.bbh,jdbcType=DECIMAL}
+      )
+    </foreach>
+  </insert>
+
   <insert id="insert" parameterType="com.selfwork.intelligence.model.QbSjMybPO" >
     insert into qb_sj_myb (ID, BATCH_NO, MYLX, 
       XXGSLX, XXLX, MYBH, 

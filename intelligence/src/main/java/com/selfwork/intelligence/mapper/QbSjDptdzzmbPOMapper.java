@@ -33,4 +33,6 @@ public interface QbSjDptdzzmbPOMapper {
     List<LocationDto> getLocations(QueryVo queryVo);
 
     List<QbSjYsdzzdzzcmbStatiscVo> getStatisicInfoList(QbSjDptdzzmbQueryReq req);
+
+    Integer insertList(List<QbSjDptdzzmbPOWithBLOBs> list);
 }
