@@ -1,9 +1,9 @@
 (function (_path) {
     /** 通用变量 */
     var publicCache = {};
-    var map = new BMap.Map("gpsMap",{
-        minZoom : 1,
-        maxZoom : 7
+    var map = new BMap.Map("gpsMap", {
+        minZoom: 1,
+        maxZoom: 7
     });
 
 
@@ -64,18 +64,6 @@
         } else {
             layer.msg('请在chrome、safari、IE8+以上浏览器查看本示例');
         }
-    }
-
-    function initMarker(data) {
-
-        map.clearOverlays();
-
-        var points = [];  // 添加海量点数据
-        for (var i = 0; i < data.length; i++) {
-            points.push(new BMap.Point(data[i].jd, data[i].wd));
-        }
-
-        addMarker(points);
     }
 
     //隐藏log
@@ -204,12 +192,13 @@
             onLoadSuccess: function (data) {
                 if (data != null && data.rows != null && data.rows.length > 0) {
                     map.clearOverlays();
-                    // for (var i = 0; i < data.rows.length; i++) {
-                    //     var point = new BMap.Point(data.rows[i].longitude, data.rows[i].latitude);
-                    //     addMarker(point);
-                    // }
+                    var points = [];  // 添加海量点数据
+                    for (var i = 0; i < data.rows.length; i++) {
+                        points.push(new BMap.Point(data.rows[i].longitude, data.rows[i].latitude));
+                    }
 
-                    initMarker(data.rows);
+                    addMarker(points);
+
                 }
             }
         });
