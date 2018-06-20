@@ -68,32 +68,35 @@
     }
 
     //添加标注
-    function addMarker(point, isCgq, labelName) {
-        var marker;
-        if (isCgq) {
-            //var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png",
-            //    new BMap.Size(23, 25), {
-            //        offset: new BMap.Size(10, 25),
-            //        imageOffset: new BMap.Size(0, 0 -  index * 25)
-            //
-            //    });
-            //var marker = new BMap.Marker(point, { icon: myIcon });
-            marker = new BMap.Marker(point);
+    function addMarker(points) {
+
+        if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
+
+            var options = {
+                size: BMAP_POINT_SIZE_SMALL,
+                shape: BMAP_POINT_SHAPE_STAR,
+                color: '#d340c3'
+            }
+            var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
+            pointCollection.addEventListener('click', function (e) {
+                layer.msg('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+            });
+            map.addOverlay(pointCollection);  // 添加Overlay
         } else {
-            marker = new BMap.Marker(point);
+            layer.msg('请在chrome、safari、IE8+以上浏览器查看本示例');
         }
-        var label = new BMap.Label(labelName, {offset: new BMap.Size(20, -10)});
-        marker.setLabel(label);
-        map.addOverlay(marker);
     }
 
     function initMarker(data) {
+
         map.clearOverlays();
-        $.each(data, function (i, obj) {
-            debugger
-            var point = new BMap.Point(obj.jd, obj.wd);
-            addMarker(point, obj.isCgq, "");
-        });
+
+        var points = [];  // 添加海量点数据
+        for (var i = 0; i < data.length; i++) {
+            points.push(new BMap.Point(data[i].jd, data[i].wd));
+        }
+
+        addMarker(points);
     }
 
     // 初始化地图
