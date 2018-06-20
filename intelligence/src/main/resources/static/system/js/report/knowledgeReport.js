@@ -8,35 +8,36 @@
         publicCache.path = _path;
     };
 
-    //添加地图数据
     //添加标注
-    function addMarker(point,isCgq,labelName) {
-        var marker;
-        debugger
-        if(isCgq){
-            //var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png",
-            //    new BMap.Size(23, 25), {
-            //        offset: new BMap.Size(10, 25),
-            //        imageOffset: new BMap.Size(0, 0 -  index * 25)
-            //
-            //    });
-            //var marker = new BMap.Marker(point, { icon: myIcon });
-            marker = new BMap.Marker(point);
-        }else{
-            labelName = '目标';
-            marker = new BMap.Marker(point);
+    function addMarker(points) {
+
+        if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
+
+            var options = {
+                size: BMAP_POINT_SIZE_SMALL,
+                shape: BMAP_POINT_SHAPE_STAR,
+                color: '#d340c3'
+            }
+            var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
+            pointCollection.addEventListener('click', function (e) {
+                layer.msg('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+            });
+            map.addOverlay(pointCollection);  // 添加Overlay
+        } else {
+            layer.msg('请在chrome、safari、IE8+以上浏览器查看本示例');
         }
-        var label = new BMap.Label(labelName, {offset: new BMap.Size(20, -10)});
-        marker.setLabel(label);
-        map.addOverlay(marker);
     }
 
-    function initMarker(data){
+    function initMarker(data) {
+
         map.clearOverlays();
-        $.each(data,function(i,obj){
-            var point = new BMap.Point(obj.jd,obj.wd);
-            addMarker(point,obj.cgq,obj.label);
-        });
+
+        var points = [];  // 添加海量点数据
+        for (var i = 0; i < data.length; i++) {
+            points.push(new BMap.Point(data[i].jd, data[i].wd));
+        }
+
+        addMarker(points);
     }
 
     //添加地图数据
@@ -297,44 +298,77 @@
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('powerlaw_chart'));
 
-            // 指定图表的配置项和数据
+            debugger
             var option = {
-                color: ['#3398DB'],
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    }
+                title : {
+                    text: '装备威力规律',
+                    subtext: 'JL(距离)数目统计',
+                    x:'center'
                 },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
-                xAxis: [
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: data.titleList
+                },
+                series : [
                     {
-                        type: 'category',
-                        data: data.x,
-                        axisTick: {
-                            alignWithLabel: true
+                        name: '装备威力规律',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:data.dataList,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
                         }
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                series: [
-                    {
-                        name: '装备威力',
-                        type: 'bar',
-                        barWidth: '60%',
-                        data: data.y
                     }
                 ]
             };
+            // // 指定图表的配置项和数据
+            // var option = {
+            //     color: ['#3398DB'],
+            //     tooltip: {
+            //         trigger: 'axis',
+            //         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            //             type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            //         }
+            //     },
+            //     grid: {
+            //         left: '3%',
+            //         right: '4%',
+            //         bottom: '3%',
+            //         containLabel: true
+            //     },
+            //     xAxis: [
+            //         {
+            //             type: 'category',
+            //             data: data.x,
+            //             axisTick: {
+            //                 alignWithLabel: true
+            //             }
+            //         }
+            //     ],
+            //     yAxis: [
+            //         {
+            //             type: 'value'
+            //         }
+            //     ],
+            //     series: [
+            //         {
+            //             name: '装备威力',
+            //             type: 'bar',
+            //             barWidth: '60%',
+            //             data: data.y
+            //         }
+            //     ]
+            // };
 
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);

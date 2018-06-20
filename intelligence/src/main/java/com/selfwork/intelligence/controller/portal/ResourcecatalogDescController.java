@@ -59,6 +59,13 @@ public class ResourcecatalogDescController extends BaseController {
     public ModelAndView toEdit(@RequestParam Integer id) {
         ModelAndView mv = new ModelAndView("sub/catalogdesc/edit");
         CatalogDescVo vo = resourcecatalogDescBiz.selectByPrimaryKey(id);
+        try{
+            String str = java.net.URLEncoder.encode(vo.getContent(),"UTF-8");
+            vo.setContent(str.replace("+","%20"));
+
+        }catch (Exception ex){
+            logger.error("URLEncoder encode失败",ex);
+        }
         mv.addObject("catalogDescVo", vo);
         return mv;
     }

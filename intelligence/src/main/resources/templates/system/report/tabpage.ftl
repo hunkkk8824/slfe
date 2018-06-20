@@ -18,22 +18,7 @@
     <!-- Site Title -->
     <title>Travel</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-    <!--
-      CSS
-      ============================================= -->
-    <link rel="stylesheet" href="${base}/static/system/css/linearicons.css">
-    <link rel="stylesheet" href="${base}/static/system/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${base}/static/system/css/bootstrap.css">
-    <link rel="stylesheet" href="${base}/static/system/css/magnific-popup.css">
-    <link rel="stylesheet" href="${base}/static/system/css/jquery-ui.css">
-    <link rel="stylesheet" href="${base}/static/system/css/nice-select.css">
-    <link rel="stylesheet" href="${base}/static/system/css/animate.min.css">
-<#--<link rel="stylesheet" href="http://at.alicdn.com/t/font_205919_gs446lbdhoyr2j4i.css">-->
-    <link rel="stylesheet" href="${base}/static/system/css/swiper.min.css">
-    <link rel="stylesheet" href="${base}/static/system/css/bootstrap-table.css">
-    <link rel="stylesheet" href="${base}/static/system/css/owl.carousel.css">
-    <link rel="stylesheet" href="${base}/static/system/css/main.css">
+   <#include "../common/common.ftl"/>
 
     <style>
         .tab-content {
@@ -389,6 +374,10 @@
 
     $("#btn_txtExport").click(function () {
         $("#fileUpload").click();
+    });
+
+    $("#btn_videoExport").click(function () {
+        $("#videoFileUpload").click();
     });
 
     $("#img1").click(function () {

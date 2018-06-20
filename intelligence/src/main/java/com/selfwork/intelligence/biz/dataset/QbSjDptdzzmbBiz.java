@@ -11,12 +11,16 @@ import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
 import com.selfwork.intelligence.model.po.ScoutQbTableBdPO;
 import com.selfwork.intelligence.model.vo.dateset.*;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 //情报_数据_多平台电子战目标
 @Service
@@ -146,8 +150,33 @@ public class QbSjDptdzzmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptdzzmbP
         return BeanUtils.copyList(pos, QbSjYsdzzdzzcmbVO.class);
     }
 
-    public List<QbSjYsdzzdzzcmbStatiscVo> getStatisicInfoList(QbSjDptdzzmbQueryReq req)  {
-        return qbSjDptdzzmb.getStatisicInfoList(req);
+    public Map<String, Long> getStatisicInfoList(QbSjDptdzzmbQueryReq req) {
+        List<QbSjYsdzzdzzcmbStatiscVo> list = qbSjDptdzzmb.getStatisicInfoList(req);
 
+        Map<String, Long> map = new HashMap<>();
+
+        if (list != null && !list.isEmpty()) {
+
+            //80km-90km区间
+            long count8090 = list.stream().filter(n ->
+                    n != null && n.getJl().intValue() >= 80 && n.getJl().intValue() <= 90
+            ).count();
+            map.put("80km-90km区间", count8090);
+
+            //90km-100km区间
+            long count90100 = list.stream().filter(n ->
+                    n != null && n.getJl().intValue() > 90 && n.getJl().intValue() <= 100
+            ).count();
+            map.put("90km-100km区间", count90100);
+
+            //100km以上区间
+            long countGt100 = list.stream().filter(n ->
+                    n != null && n.getJl().intValue() > 100
+            ).count();
+            map.put("100km以上区间", countGt100);
+        }
+
+
+        return map;
     }
 }

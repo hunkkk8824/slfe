@@ -83,14 +83,11 @@
     <result column="AQXX" property="aqxx" jdbcType="VARCHAR" />
     <result column="PXFS" property="pxfs" jdbcType="INTEGER" />
     <result column="HJGL" property="hjgl" jdbcType="INTEGER" />
-    <result column="PTMC2" property="ptmc2" jdbcType="VARCHAR" />
-    <result column="XYLX2" property="xylx2" jdbcType="INTEGER" />
-    <result column="HJZT" property="hjzt" jdbcType="INTEGER" />
     <result column="JSSB" property="jssb" jdbcType="INTEGER" />
     <result column="TWLBCD" property="twlbcd" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.selfwork.intelligence.model.QbSjJztsmbPO" extends="BaseResultMap" >
-    <result column="TWLB" property="twlb" jdbcType="VARBINARY" />
+    <result column="TWLBCD" property="twlbcd" jdbcType="VARBINARY" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, BATCH_NO, PH, PTBH, PTMC, CGQBH, XYLX, ZBL, FBDWBH, FBDWMC, FBSJ, HQSJ, BWLSH, 
@@ -98,10 +95,10 @@
     GJZXD, MBSJ, SJSD, DT, HX, HS, ZSD, FWJSD, GDJSD, SPJSD, JSDFX, CZJSD, JD, WD, GD, 
     JL, FW, YJ, JLWC, FWWC, YJWC, SJPC, WXDJ, ZYCD, HDSJ, HDQY, RW, ZY, KXD, KKX, QRXX, 
     QDJD, ZDJD, MBJZ, LSDW, FH, WZSM, DDSJ, HWLX, CC, CK, CSSD, IMO, ZXL, JSX, HH, DWZBLX, 
-    SKBZ, DHTLX, DHBZ, SBW, AQXX, PXFS, HJGL, PTMC2, XYLX2, HJZT, JSSB, TWLBCD
+    SKBZ, DHTLX, DHBZ, SBW, AQXX, PXFS, HJGL,JSSB, TWLBCD
   </sql>
   <sql id="Blob_Column_List" >
-    TWLB
+    TWLBCD
   </sql>
 
   <select id="getList" resultMap="ResultMapWithBLOBs" parameterType="com.selfwork.intelligence.model.vo.dateset.QueryVo">
@@ -291,9 +288,8 @@
       CC, CK, CSSD, IMO, 
       ZXL, JSX, HH, DWZBLX, 
       SKBZ, DHTLX, DHBZ, 
-      SBW, AQXX, PXFS, HJGL, 
-      PTMC2, XYLX2, HJZT, 
-      JSSB, TWLBCD, TWLB
+      SBW, AQXX, PXFS, HJGL,
+      JSSB, TWLBCD
       )
     values (#{id,jdbcType=INTEGER}, #{batchNo,jdbcType=VARCHAR}, #{ph,jdbcType=INTEGER}, 
       #{ptbh,jdbcType=INTEGER}, #{ptmc,jdbcType=VARCHAR}, #{cgqbh,jdbcType=INTEGER}, 
@@ -317,9 +313,8 @@
       #{cc,jdbcType=INTEGER}, #{ck,jdbcType=INTEGER}, #{cssd,jdbcType=INTEGER}, #{imo,jdbcType=INTEGER}, 
       #{zxl,jdbcType=INTEGER}, #{jsx,jdbcType=DECIMAL}, #{hh,jdbcType=VARCHAR}, #{dwzblx,jdbcType=INTEGER}, 
       #{skbz,jdbcType=INTEGER}, #{dhtlx,jdbcType=VARCHAR}, #{dhbz,jdbcType=INTEGER}, 
-      #{sbw,jdbcType=VARCHAR}, #{aqxx,jdbcType=VARCHAR}, #{pxfs,jdbcType=INTEGER}, #{hjgl,jdbcType=INTEGER}, 
-      #{ptmc2,jdbcType=VARCHAR}, #{xylx2,jdbcType=INTEGER}, #{hjzt,jdbcType=INTEGER}, 
-      #{jssb,jdbcType=INTEGER}, #{twlbcd,jdbcType=INTEGER}, #{twlb,jdbcType=VARBINARY}
+      #{sbw,jdbcType=VARCHAR}, #{aqxx,jdbcType=VARCHAR}, #{pxfs,jdbcType=INTEGER}, #{hjgl,jdbcType=INTEGER},
+      #{jssb,jdbcType=INTEGER}, #{twlbcd,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.QbSjJztsmbPO" >
@@ -568,23 +563,11 @@
       <if test="hjgl != null" >
         HJGL,
       </if>
-      <if test="ptmc2 != null" >
-        PTMC2,
-      </if>
-      <if test="xylx2 != null" >
-        XYLX2,
-      </if>
-      <if test="hjzt != null" >
-        HJZT,
-      </if>
       <if test="jssb != null" >
         JSSB,
       </if>
       <if test="twlbcd != null" >
         TWLBCD,
-      </if>
-      <if test="twlb != null" >
-        TWLB,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -831,23 +814,11 @@
       <if test="hjgl != null" >
         #{hjgl,jdbcType=INTEGER},
       </if>
-      <if test="ptmc2 != null" >
-        #{ptmc2,jdbcType=VARCHAR},
-      </if>
-      <if test="xylx2 != null" >
-        #{xylx2,jdbcType=INTEGER},
-      </if>
-      <if test="hjzt != null" >
-        #{hjzt,jdbcType=INTEGER},
-      </if>
       <if test="jssb != null" >
         #{jssb,jdbcType=INTEGER},
       </if>
       <if test="twlbcd != null" >
         #{twlbcd,jdbcType=INTEGER},
-      </if>
-      <if test="twlb != null" >
-        #{twlb,jdbcType=VARBINARY},
       </if>
     </trim>
   </insert>
@@ -1094,23 +1065,11 @@
       <if test="hjgl != null" >
         HJGL = #{hjgl,jdbcType=INTEGER},
       </if>
-      <if test="ptmc2 != null" >
-        PTMC2 = #{ptmc2,jdbcType=VARCHAR},
-      </if>
-      <if test="xylx2 != null" >
-        XYLX2 = #{xylx2,jdbcType=INTEGER},
-      </if>
-      <if test="hjzt != null" >
-        HJZT = #{hjzt,jdbcType=INTEGER},
-      </if>
       <if test="jssb != null" >
         JSSB = #{jssb,jdbcType=INTEGER},
       </if>
       <if test="twlbcd != null" >
         TWLBCD = #{twlbcd,jdbcType=INTEGER},
-      </if>
-      <if test="twlb != null" >
-        TWLB = #{twlb,jdbcType=VARBINARY},
       </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
@@ -1197,12 +1156,8 @@
       AQXX = #{aqxx,jdbcType=VARCHAR},
       PXFS = #{pxfs,jdbcType=INTEGER},
       HJGL = #{hjgl,jdbcType=INTEGER},
-      PTMC2 = #{ptmc2,jdbcType=VARCHAR},
-      XYLX2 = #{xylx2,jdbcType=INTEGER},
-      HJZT = #{hjzt,jdbcType=INTEGER},
       JSSB = #{jssb,jdbcType=INTEGER},
       TWLBCD = #{twlbcd,jdbcType=INTEGER},
-      TWLB = #{twlb,jdbcType=VARBINARY}
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.selfwork.intelligence.model.QbSjJztsmbPO" >
@@ -1287,11 +1242,7 @@
       AQXX = #{aqxx,jdbcType=VARCHAR},
       PXFS = #{pxfs,jdbcType=INTEGER},
       HJGL = #{hjgl,jdbcType=INTEGER},
-      PTMC2 = #{ptmc2,jdbcType=VARCHAR},
-      XYLX2 = #{xylx2,jdbcType=INTEGER},
-      HJZT = #{hjzt,jdbcType=INTEGER},
-      JSSB = #{jssb,jdbcType=INTEGER},
-      TWLBCD = #{twlbcd,jdbcType=INTEGER}
+      JSSB = #{jssb,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
