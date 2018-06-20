@@ -297,44 +297,77 @@
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.getElementById('powerlaw_chart'));
 
-            // 指定图表的配置项和数据
+            debugger
             var option = {
-                color: ['#3398DB'],
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    }
+                title : {
+                    text: '装备威力规律',
+                    subtext: 'JL(距离)数目统计',
+                    x:'center'
                 },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
-                xAxis: [
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: data.titleList
+                },
+                series : [
                     {
-                        type: 'category',
-                        data: data.x,
-                        axisTick: {
-                            alignWithLabel: true
+                        name: '装备威力规律',
+                        type: 'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:data.dataList,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
                         }
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                series: [
-                    {
-                        name: '装备威力',
-                        type: 'bar',
-                        barWidth: '60%',
-                        data: data.y
                     }
                 ]
             };
+            // // 指定图表的配置项和数据
+            // var option = {
+            //     color: ['#3398DB'],
+            //     tooltip: {
+            //         trigger: 'axis',
+            //         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            //             type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            //         }
+            //     },
+            //     grid: {
+            //         left: '3%',
+            //         right: '4%',
+            //         bottom: '3%',
+            //         containLabel: true
+            //     },
+            //     xAxis: [
+            //         {
+            //             type: 'category',
+            //             data: data.x,
+            //             axisTick: {
+            //                 alignWithLabel: true
+            //             }
+            //         }
+            //     ],
+            //     yAxis: [
+            //         {
+            //             type: 'value'
+            //         }
+            //     ],
+            //     series: [
+            //         {
+            //             name: '装备威力',
+            //             type: 'bar',
+            //             barWidth: '60%',
+            //             data: data.y
+            //         }
+            //     ]
+            // };
 
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
