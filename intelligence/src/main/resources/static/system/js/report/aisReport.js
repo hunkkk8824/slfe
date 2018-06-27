@@ -199,11 +199,29 @@
 
                     addMarker(points);
 
+                    //航线地图显示
+                    showAirwayData();
                 }
             }
         });
     }
 
+    //航线地图显示
+    function showAirwayData(){
+
+        $.post(_path + '/report/getAirwayData',function (data) {
+
+            debugger
+            var points = [];
+            $.each(data,function (i,n) {
+                points.push(new BMap.Point(n.longitude,n.latitude));
+            });
+
+            var curve = new BMapLib.CurveLine(points, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+            map.addOverlay(curve); //添加到地图中
+        });
+
+    }
 
     // 页面初始化
     $(function () {

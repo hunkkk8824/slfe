@@ -30,6 +30,8 @@
     </style>
     <!--离线地图-->
     <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/map_load.js"></script>
+    <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/tools/CurveLine.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/offlinemap/css/map.css"/>
 </head>
 <body>

@@ -21,7 +21,7 @@
     <!--离线地图-->
     <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/map_load.js"></script>
     <link rel="stylesheet" type="text/css" href="${base}/static/js/plugins/offlinemap/css/map.css"/>
-
+    <script type="text/javascript" src="${base}/static/js/plugins/offlinemap/tools/CurveLine.min.js"></script>
     <style>
         .tab-content {
             width: 100%;

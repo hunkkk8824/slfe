@@ -137,6 +137,9 @@
                         var point = new BMap.Point(res[i].longitude, res[i].latitude);
                         addAisMarker(point);
                     }
+
+                    //航线地图显示
+                    showAirwayData();
                 }, error: function (xhr, status) {
                     layer.closeAll('loading');
                     //提示层
@@ -146,6 +149,22 @@
         })
     };
 
+    //航线地图显示
+    function showAirwayData(){
+
+        $.post(_path + '/report/getAirwayData',function (data) {
+
+            debugger
+            var points = [];
+            $.each(data,function (i,n) {
+                points.push(new BMap.Point(n.longitude,n.latitude));
+            });
+
+            var curve = new BMapLib.CurveLine(points, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+            aisMap.addOverlay(curve); //添加到地图中
+        });
+
+    }
     //得到查询的参数
     function queryParams(params) {
 

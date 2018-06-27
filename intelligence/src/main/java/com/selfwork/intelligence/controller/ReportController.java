@@ -2,9 +2,11 @@ package com.selfwork.intelligence.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.DataQualityBiz;
+import com.selfwork.intelligence.biz.dataset.AirwayDataBiz;
 import com.selfwork.intelligence.biz.dataset.AisBiz;
 import com.selfwork.intelligence.biz.dataset.QbSjDptdzzmbBiz;
 import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
+import com.selfwork.intelligence.model.po.AirwayDataPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.BaseQueryVo;
 import com.selfwork.intelligence.model.vo.dateset.*;
@@ -40,6 +42,9 @@ public class ReportController extends BaseController {
 
     @Autowired
     private QbSjDptdzzmbBiz qbSjDptdzzmbBiz;
+
+    @Autowired
+    AirwayDataBiz airwayDataBiz;
 
 
     //装备能力分析
@@ -116,6 +121,23 @@ public class ReportController extends BaseController {
         return result;
     }
 
+
+    //航线数据
+    @ResponseBody
+    @RequestMapping(value = "/getAirwayData", method = RequestMethod.POST)
+    public List<AirwayDataPO> getAirwayData() {
+
+        List<AirwayDataPO> result = new ArrayList<>();
+
+        try {
+            List<AirwayDataPO> list = airwayDataBiz.getList();
+            result = list;
+        } catch (Exception e) {
+            logger.error("查询失败：" + e.getMessage(), e);
+        }
+        return result;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/getSingleAisList", method = RequestMethod.POST)
     public List<AisVo> getSingleAisList(@RequestBody AisQueryReq request) {
@@ -177,9 +199,9 @@ public class ReportController extends BaseController {
             for (Map.Entry<String, Long> entry : res.entrySet()) {
                 titleList.add(entry.getKey());
 
-                Map<String, String> mapitem=new HashMap<>();
-                mapitem.put("name",entry.getKey());
-                mapitem.put("value",String.valueOf(entry.getValue()));
+                Map<String, String> mapitem = new HashMap<>();
+                mapitem.put("name", entry.getKey());
+                mapitem.put("value", String.valueOf(entry.getValue()));
                 dataList.add(mapitem);
             }
             result.put("titleList", titleList);
