@@ -217,7 +217,7 @@
                 points.push(new BMap.Point(n.longitude,n.latitude));
             });
 
-            var curve = new BMapLib.CurveLine(points, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+            var curve = new BMapLib.CurveLine(points, {strokeColor:"green", strokeWeight:1, strokeOpacity:0.3}); //创建弧线对象
             map.addOverlay(curve); //添加到地图中
         });
 

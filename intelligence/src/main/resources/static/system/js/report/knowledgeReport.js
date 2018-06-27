@@ -41,11 +41,27 @@
     }
 
     //添加地图数据
-    var addAisMarker = function (point) {
-        var marker = new BMap.Marker(point);
-        var label = new BMap.Label("目标", {offset: new BMap.Size(20, -10)});
-        marker.setLabel(label);
-        aisMap.addOverlay(marker);
+    var addAisMarker = function (points) {
+
+        if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
+
+            var options = {
+                size: BMAP_POINT_SIZE_SMALL,
+                shape: BMAP_POINT_SHAPE_STAR,
+                color: '#d340c3'
+            }
+            var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
+            pointCollection.addEventListener('click', function (e) {
+                layer.msg('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+            });
+            aisMap.addOverlay(pointCollection);  // 添加Overlay
+        } else {
+            layer.msg('请在chrome、safari、IE8+以上浏览器查看本示例');
+        }
+        // var marker = new BMap.Marker(point);
+        // var label = new BMap.Label("目标", {offset: new BMap.Size(20, -10)});
+        // marker.setLabel(label);
+        // aisMap.addOverlay(marker);
     }
 
     //初始化事件
@@ -133,10 +149,17 @@
                 success: function (res) {
                     layer.closeAll('loading');
                     aisMap.clearOverlays();
+                    // for (var i = 0; i < res.length; i++) {
+                    //     var point = new BMap.Point(res[i].longitude, res[i].latitude);
+                    //     addAisMarker(point);
+                    // }
+
+                    debugger
+                    var points = [];  // 添加海量点数据
                     for (var i = 0; i < res.length; i++) {
-                        var point = new BMap.Point(res[i].longitude, res[i].latitude);
-                        addAisMarker(point);
+                        points.push(new BMap.Point(res[i].longitude, res[i].latitude));
                     }
+                    addAisMarker(points);
 
                     //航线地图显示
                     showAirwayData();
@@ -160,7 +183,7 @@
                 points.push(new BMap.Point(n.longitude,n.latitude));
             });
 
-            var curve = new BMapLib.CurveLine(points, {strokeColor:"blue", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+            var curve = new BMapLib.CurveLine(points, {strokeColor:"green", strokeWeight:1, strokeOpacity:0.3}); //创建弧线对象
             aisMap.addOverlay(curve); //添加到地图中
         });
 
