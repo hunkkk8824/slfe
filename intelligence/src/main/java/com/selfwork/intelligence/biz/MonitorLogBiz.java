@@ -1,5 +1,6 @@
 package com.selfwork.intelligence.biz;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.common.BeanUtils;
@@ -16,7 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MonitorLogBiz extends BaseBiz {
@@ -26,15 +30,18 @@ public class MonitorLogBiz extends BaseBiz {
     @Autowired
     private ResourceMonitorLogPOMapper resourceMonitorLogPOMapper;
 
-    public PageInfo<MonitorLogVo> findPage(MonitorLogQueryVo queryVo) {
+    public Map<String, Object> findPage(MonitorLogQueryVo queryVo) {
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("total", 0);
+        result.put("rows", new ArrayList());
+
         // 查询
-        int pageNumber = queryVo.getPageNumber();
-        int pageSize = queryVo.getLimit();
-        PageHelper.startPage(pageNumber, pageSize);
+        Page page = this.startPage(queryVo);
         List<ResourceMonitorLogPO> list = resourceMonitorLogPOMapper.findList(queryVo);
         if (null == list || list.size() == 0) {
             logger.error("获取监控日志分页信息失败");
-            return null;
+            return result;
         }
 
         try {
@@ -43,7 +50,7 @@ public class MonitorLogBiz extends BaseBiz {
 
             if (CollectionUtils.isEmpty(res)) {
                 logger.error("BeanUtils.copyList 返回为空");
-                return null;
+                return result;
             }
 
             res.forEach(m -> {
@@ -51,12 +58,13 @@ public class MonitorLogBiz extends BaseBiz {
                 m.setOperatorTypeStr(m.getOperatorType() == null ? "" : OperatorTypeEnum.getEnum(m.getOperatorType().intValue()).getDisplayName());
             });
 
-            return new PageInfo<>(res);
+            result.put("rows", res);
+            result.put("total", page.getTotal());
         } catch (Exception e) {
             logger.error("数据转换错误", e);
-            return null;
         }
 
+        return result;
     }
 
     /**

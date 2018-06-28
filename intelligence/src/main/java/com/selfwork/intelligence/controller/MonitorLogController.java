@@ -48,11 +48,7 @@ public class MonitorLogController extends BaseController {
         result.put("total", 0);
         result.put("rows", new ArrayList());
         try {
-            PageInfo<MonitorLogVo> pageData =  monitorLogBiz.findPage(queryVo);
-            if (pageData != null) {
-                result.put("total", pageData.getTotal());
-                result.put("rows", pageData.getList());
-            }
+            result =  monitorLogBiz.findPage(queryVo);
         } catch (Exception e) {
             logger.error("获取监控日志信息异常 e:{}" + e.getMessage(), e);
         }

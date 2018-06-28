@@ -22,7 +22,7 @@ import java.util.List;
  * Created by zzc on 2018/4/25.
  */
 @Service
-public class ExchangeEtlBiz {
+public class ExchangeEtlBiz extends BaseBiz {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -49,9 +49,8 @@ public class ExchangeEtlBiz {
     }
 
     public PageInfo<ExchangerEtlPO> findPage(ExchangeEtlQueryVo queryVo) {
-        int pageNumber = queryVo.getPageNumber();
-        int pageSize = queryVo.getLimit();
-        PageHelper.startPage(pageNumber, pageSize);
+
+        this.startPage(queryVo);
         List<ExchangerEtlPO> list = exchangerEtlPOmapper.findList(queryVo);
         if (null == list || list.size() == 0) {
             logger.error("获取交换配置分页信息失败");

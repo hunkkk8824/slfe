@@ -71,12 +71,17 @@ public class DataQualityBiz extends BaseBiz {
     }
 
 
-    public PageInfo<ResourceEtlLogVo> selectByResourceId(ResourceEtlLogQueryVo vo) {
+    public Map<String, Object> selectByResourceId(ResourceEtlLogQueryVo vo) {
+
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("total", 0);
+        result.put("rows", new ArrayList());
 
         try {
 
 
-            this.startPage(vo);
+            Page page = this.startPage(vo);
             Integer resourceId = vo.getResourceId();
             List<ResourceEtlLogPO> items = resourceEtlLogPOMapper.selectByResourceId(resourceId);
 
@@ -99,25 +104,34 @@ public class DataQualityBiz extends BaseBiz {
                 defaultVo.setLogContent(sb.toString());
                 List<ResourceEtlLogVo> res = new ArrayList<>();
                 res.add(defaultVo);
-                return new PageInfo<>(res);
+
+                result.put("rows", res);
+                result.put("total", 1);
+            } else {
+                List<ResourceEtlLogVo> res = BeanUtils.copyList(items, ResourceEtlLogVo.class);
+
+                res.stream().forEach(m -> {
+                    m.setCreateTimeStr(DateUtils.getFormatDateTime(m.getCreateTime()));
+                });
+
+                result.put("rows", res);
+                result.put("total", page.getTotal());
+
             }
 
-            List<ResourceEtlLogVo> res = BeanUtils.copyList(items, ResourceEtlLogVo.class);
-
-            res.stream().forEach(m -> {
-                m.setCreateTimeStr(DateUtils.getFormatDateTime(m.getCreateTime()));
-            });
-
-            return new PageInfo<>(res);
         } catch (Exception e) {
             logger.error("获取资源导入日志失败：" + e.getMessage(), e);
         }
 
-        return null;
-
+        return result;
     }
 
-    public PageInfo<DataQualitVo> findPage(DataQualityQueryVo queryVo) {
+    public  Map<String, Object> findPage(DataQualityQueryVo queryVo) {
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("total", 0);
+        result.put("rows", new ArrayList());
+
         try {
 
 //            if(StringUtils.isEmpty(queryVo.getSourceExchangerCode()))
@@ -127,11 +141,11 @@ public class DataQualityBiz extends BaseBiz {
 //            }
 
             // 查询
-            this.startPage(queryVo);
+            Page page = this.startPage(queryVo);
             List<ResourcePO> list = resourcePOMapper.findList(queryVo);
             if (CollectionUtils.isEmpty(list)) {
                 logger.error("获取资源分页信息失败");
-                return null;
+                return result;
             }
 
 
@@ -139,7 +153,7 @@ public class DataQualityBiz extends BaseBiz {
 
             if (CollectionUtils.isEmpty(res)) {
                 logger.error("BeanUtils.copyList 返回为空");
-                return null;
+                return result;
             }
 
             res.forEach(m -> {
@@ -151,10 +165,12 @@ public class DataQualityBiz extends BaseBiz {
                 m.setQualityStr(m.getQuality() == null ? "" : QualityEvaluateEnum.getEnum(m.getQuality().intValue()).getDisplayName());
             });
 
-            return new PageInfo<>(res);
+            result.put("total", page.getTotal());
+            result.put("rows", res);
+            return result;
         } catch (Exception e) {
             logger.error("数据转换错误", e);
-            return null;
+            return result;
         }
 
 
