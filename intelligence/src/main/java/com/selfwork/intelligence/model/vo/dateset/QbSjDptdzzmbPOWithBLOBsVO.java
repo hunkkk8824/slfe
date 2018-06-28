@@ -1,6 +1,6 @@
 package com.selfwork.intelligence.model.vo.dateset;
 
-import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
+import com.selfwork.intelligence.model.po.QbSjDptdzzmbPOWithBLOBs;
 
 public class QbSjDptdzzmbPOWithBLOBsVO extends QbSjDptdzzmbPOWithBLOBs {
 
