@@ -10,9 +10,11 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${base}/static/system/login/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${base}/static/system/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${base}/static/system/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${base}/static/system/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="${base}/static/system/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${base}/static/system/login/vendor/animate/animate.css">
     <!--===============================================================================================-->
@@ -22,7 +24,8 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${base}/static/system/login/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="${base}/static/system/login/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css"
+          href="${base}/static/system/login/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="${base}/static/system/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="${base}/static/system/login/css/main.css">
@@ -49,7 +52,7 @@
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button id="ajaxLogin" class="login100-form-btn" style="font-size: 16px;">
+                    <button type="button" id="ajaxLogin" onclick="mLogin()" class="login100-form-btn" style="font-size: 16px;">
                         登录
                     </button>
                 </div>
@@ -71,7 +74,8 @@
                 </div>
             </form>
 
-            <div class="login100-more" style="background-image: url('${base}/static/system/login/images/land-bg.jpg');"></div>
+            <div class="login100-more"
+                 style="background-image: url('${base}/static/system/login/images/land-bg.jpg');"></div>
         </div>
     </div>
 </div>
@@ -108,34 +112,73 @@
 <script type="text/javascript">
 
 
-    function login(username, password) {
-
-        $.post("/lo/ajaxLogin", {
-            "username": username,
-            "password": password
-        }, function (result) {
-
-            if (result.status == 200) {
-                location.href = "/index";
-            } else {
-                layer.msg(result.message);
-            }
-        });
-    }
+    // function login(username, password) {
+    //
+    //     $.post("/lo/ajaxLogin", {
+    //         "username": username,
+    //         "password": password
+    //     }, function (result) {
+    //
+    //         if (result.status == 200) {
+    //             location.href = "/index";
+    //         } else {
+    //             layer.msg(result.message);
+    //         }
+    //     });
+    // }
 
     // $("#a_tourist").click(function () {
     //
     //     login("tourist", "123456");
     // });
 
-    $(function(){
-        $("#ajaxLogin").click(function () {
+    function mLogin() {
 
-            var username = $("#first-name").val();
-            var password = $("#password").val();
-            login(username, password);
+        layer.load(3);
+        $.ajax({
+            type: 'post',
+            url: "${base}/lo/ajaxLogin",
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                username: $.trim($("#first-name").val()),
+                password: $.trim($("#password").val())
+            }),
+            success: function (result) {
+                layer.closeAll('loading');
+                if (result.status == 200) {
+                    location.href = "/index";
+                } else {
+                    layer.msg(result.message);
+                }
+            }, error: function (xhr, status) {
+                layer.closeAll('loading');
+                layer.msg("系统出现异常！", {icon: 0});//提示层
+            }
         });
-    })
+
+    };
+
+    <#--$.post("${base}/lo/ajaxLogin", {-->
+        <#--"username": $.trim($("#first-name").val()),-->
+        <#--"password": $.trim($("#password").val())-->
+    <#--}, function (result) {-->
+
+        <#--if (result.status == 200) {-->
+            <#--location.href = "/index";-->
+        <#--} else {-->
+            <#--layer.msg(result.message);-->
+        <#--}-->
+    <#--});-->
+
+    // $(function(){
+    //     $("#ajaxLogin").click(function () {
+    //
+    //         var username = $("#first-name").val();
+    //         var password = $("#password").val();
+    //         login(username, password);
+    //     });
+    // })
 
 
 </script>
