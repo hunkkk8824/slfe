@@ -25,9 +25,8 @@ public class ExChangeConfigBiz extends BaseBiz {
     private ExchangerPOMapper exchangerPOMapper;
 
     public PageInfo<ExchangerPO> findPage(ExchangeConfigQueryVo queryVo) {
-        int pageNumber = queryVo.getPageNumber();
-        int pageSize = queryVo.getLimit();
-        PageHelper.startPage(pageNumber, pageSize);
+
+        this.startPage(queryVo);
         List<ExchangerPO> list = exchangerPOMapper.findList(queryVo);
         if (null == list || list.size() == 0) {
             logger.error("获取交换配置分页信息失败");

@@ -1,5 +1,6 @@
 package com.selfwork.intelligence.biz;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.common.BeanUtils;
@@ -15,29 +16,35 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
-public class ResourcecatalogDescBiz {
+public class ResourcecatalogDescBiz extends BaseBiz {
 
     public final Logger logger = LoggerFactory.getLogger(getClass());
     //数据集说明内容
     @Autowired
     private DataSetDescPOMapper dataSetDescPOMapper;
 
-    public PageInfo<CatalogDescVo> findPage(CatalogDescQueryVo queryVo) {
+    public Map<String, Object> findPage(CatalogDescQueryVo queryVo) {
 
+        Map<String, Object> result = new HashMap<>();
+        result.put("total", 0);
+        result.put("rows", new ArrayList());
         try {
-            int pageNumber = queryVo.getPageNumber();
-            int pageSize = queryVo.getLimit();
-            PageHelper.startPage(pageNumber, pageSize);
+
+            Page page = this.startPage(queryVo);
             List<DataSetDescPO> res = dataSetDescPOMapper.findList(queryVo);
 
             List<CatalogDescVo> list = BeanUtils.copyList(res, CatalogDescVo.class);
-            return new PageInfo<>(list);
+            result.put("total", page.getTotal());
+            result.put("rows", list);
+            return result;
         } catch (Exception e) {
             logger.error("获取数据集说明内容错误", e);
-            return null;
+            return result;
         }
 
     }
@@ -63,7 +70,7 @@ public class ResourcecatalogDescBiz {
 
         CatalogDescVo vo = new CatalogDescVo();
         BeanUtils.copy(po, vo);
-        if(StringUtils.isEmpty(vo.getContent())){
+        if (StringUtils.isEmpty(vo.getContent())) {
             vo.setContent("");
         }
         return vo;

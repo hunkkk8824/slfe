@@ -110,11 +110,7 @@ public class ReportController extends BaseController {
         }
 
         try {
-            PageInfo<AisVo> pageData = aisBiz.getAisInfoList(request);
-            if (pageData != null) {
-                result.put("total", pageData.getTotal());
-                result.put("rows", pageData.getList());
-            }
+           return aisBiz.getAisInfoList(request);
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);
         }
@@ -148,9 +144,9 @@ public class ReportController extends BaseController {
         }
 
         try {
-            PageInfo<AisVo> pageData = aisBiz.getAisInfoList(request);
+            Map<String,Object> pageData = aisBiz.getAisInfoList(request);
             if (pageData != null) {
-                result = pageData.getList();
+                result = (List<AisVo>)pageData.get("rows");
             }
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);

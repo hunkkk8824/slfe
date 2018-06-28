@@ -44,11 +44,8 @@ public class ResourcecatalogDescController extends BaseController {
         result.put("total", 0);
         result.put("rows", new ArrayList());
         try {
-            PageInfo<CatalogDescVo> pageData = resourcecatalogDescBiz.findPage(queryVo);
-            if (pageData != null) {
-                result.put("total", pageData.getTotal());
-                result.put("rows", pageData.getList());
-            }
+            result = resourcecatalogDescBiz.findPage(queryVo);
+
         } catch (Exception e) {
             logger.error("获取资源目录说明异常 e:{}" + e.getMessage(), e);
         }

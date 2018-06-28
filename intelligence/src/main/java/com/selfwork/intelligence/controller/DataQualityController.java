@@ -61,11 +61,8 @@ public class DataQualityController extends BaseController {
         result.put("rows", new ArrayList());
 
         try {
-            PageInfo<DataQualitVo> pageData = dataQualityBiz.findPage(queryVo);
-            if (pageData != null) {
-                result.put("total", pageData.getTotal());
-                result.put("rows", pageData.getList());
-            }
+            result = dataQualityBiz.findPage(queryVo);
+
         } catch (Exception e) {
             logger.error("获取资源信息异常：" + e.getMessage(), e);
         }
@@ -145,11 +142,8 @@ public class DataQualityController extends BaseController {
         result.put("rows", new ArrayList());
 
         try {
-            PageInfo<ResourceEtlLogVo> pageData = dataQualityBiz.selectByResourceId(vo);
-            if (pageData != null) {
-                result.put("total", pageData.getTotal());
-                result.put("rows", pageData.getList());
-            }
+            result = dataQualityBiz.selectByResourceId(vo);
+
         } catch (Exception e) {
             logger.error("获取导入日志异常：" + e.getMessage(), e);
         }

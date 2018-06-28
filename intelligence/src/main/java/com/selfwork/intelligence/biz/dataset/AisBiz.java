@@ -1,5 +1,6 @@
 package com.selfwork.intelligence.biz.dataset;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.selfwork.intelligence.biz.BaseBiz;
@@ -17,7 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AisBiz extends BaseBiz {
@@ -28,26 +33,27 @@ public class AisBiz extends BaseBiz {
 
     /**
      * 查询AIS信息列表
+     *
      * @param req
      * @return
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public PageInfo<AisVo> getAisInfoList(AisQueryReq req) throws IllegalAccessException, InstantiationException{
+    public Map<String, Object> getAisInfoList(AisQueryReq req)  {
 
-        int pageNumber = req.getPageNumber();
-        int pageSize = req.getLimit();
-        PageHelper.startPage(pageNumber, pageSize);
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", 0);
+        map.put("rows", new ArrayList());
+        Page page = this.startPage(req);
         List<AisPO> pos = aisPOMapper.getAisInfoList(req);
-      //  return BeanUtils.copyList(pos,AisVo.class);
-
         try {
 
-            List<AisVo> res = BeanUtils.copyList(pos,AisVo.class);
+            List<AisVo> res = BeanUtils.copyList(pos, AisVo.class);
 
             if (CollectionUtils.isEmpty(res)) {
                 logger.error("BeanUtils.copyList 返回为空");
-                return null;
+                map.put("rows", new ArrayList());
+                map.put("total", 0);
             }
 
             res.forEach(m -> {
@@ -56,11 +62,12 @@ public class AisBiz extends BaseBiz {
                 m.setShipTypeStr(m.getShipType() == null ? "" : ShipTypeEnum.getEnum(m.getShipType().intValue()).getDisplayName());
 
             });
-
-            return new PageInfo<>(res);
+            map.put("rows", res);
+            map.put("total", page.getTotal());
+            return map;
         } catch (Exception e) {
             logger.error("数据转换错误", e);
-            return null;
+            return map;
         }
     }
 }
