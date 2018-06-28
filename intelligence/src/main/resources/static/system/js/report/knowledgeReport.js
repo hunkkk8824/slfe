@@ -12,7 +12,7 @@
     function addMarker(points) {
 
         if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
-            aisMap.centerAndZoom(points[0], 5);
+            map.centerAndZoom(points[0], 5);
             var options = {
                 size: BMAP_POINT_SIZE_SMALL,
                 shape: BMAP_POINT_SHAPE_STAR,
