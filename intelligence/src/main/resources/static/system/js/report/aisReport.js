@@ -50,7 +50,7 @@
     function addMarker(points) {
 
         if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
-
+            map.centerAndZoom(points[0], 5);
             var options = {
                 size: BMAP_POINT_SIZE_SMALL,
                 shape: BMAP_POINT_SHAPE_STAR,
@@ -191,9 +191,11 @@
             }],
             onLoadSuccess: function (data) {
 
+
                 map.clearOverlays();
                 showAirwayData(); //航线地图显示
                 if (data != null && data.rows != null && data.rows.length > 0) {
+
                     var points = [];  // 添加海量点数据
                     for (var i = 0; i < data.rows.length; i++) {
                         points.push(new BMap.Point(data.rows[i].longitude, data.rows[i].latitude));
