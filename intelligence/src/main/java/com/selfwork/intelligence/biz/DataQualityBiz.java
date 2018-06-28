@@ -86,12 +86,12 @@ public class DataQualityBiz extends BaseBiz {
                 Date createTime = resourcePO.getCreateTime();
                 defaultVo.setCreateTime(createTime);
                 StringBuilder sb = new StringBuilder();
-                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 开始同步资源<br/>");
-                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 数据验证开始<br/>");
-                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 数据验证完成<br/>");
-                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 开始写入数据<br/>");
-                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1))).append(" 写入数据成功<br/>");
-                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime,1)))
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime, 1))).append(" 开始同步资源<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime, 1))).append(" 数据验证开始<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime, 1))).append(" 数据验证完成<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime, 1))).append(" 开始写入数据<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime, 1))).append(" 写入数据成功<br/>");
+                sb.append(DateUtils.getFormatTimeWithSSS(DateUtils.addSeconds(createTime, 1)))
                         .append(" 预导入数据").append(resourcePO.getPreimportTotalCount())
                         .append("条,导入成功").append(resourcePO.getImportSuccessCount()).append("条！<br/>");
                 sb.append(DateUtils.getFormatTimeWithSSS(createTime)).append(" 同步完成<br/>");
@@ -244,12 +244,16 @@ public class DataQualityBiz extends BaseBiz {
         Map<String, Object> map = new HashMap<>();
 
         DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
-
         Page page = this.startPage(queryVo);
         IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
-        PageInfo pageData = new PageInfo<>(qbBiz.getListByBatchNO(resourceCode));
-        map.put("rows", pageData.getList());
-        map.put("total", page.getTotal());
+        List rows = qbBiz.getListByBatchNO(resourceCode);
+        if (!CollectionUtils.isEmpty(rows)) {
+            map.put("rows", rows);
+            map.put("total", page.getTotal());
+        } else {
+            map.put("rows", new ArrayList<>());
+            map.put("total", 0);
+        }
         return map;
     }
 
@@ -259,9 +263,9 @@ public class DataQualityBiz extends BaseBiz {
         DataSetContainer container = this.getDataSetContainerByCode(dataSetCode);
         Page page = this.startPage(queryVo);
         IBaseQbBiz qbBiz = (IBaseQbBiz) context.getBean(container.getQbBizName());
-        PageInfo pageData = new PageInfo<>(qbBiz.getList(queryVo));
-        if (pageData != null) {
-            map.put("rows", pageData.getList());
+        List rows = qbBiz.getList(queryVo);
+        if (!CollectionUtils.isEmpty(rows)) {
+            map.put("rows", rows);
             map.put("total", page.getTotal());
         } else {
             map.put("rows", new ArrayList<>());

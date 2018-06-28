@@ -144,7 +144,7 @@
             pageList: [25, 50, 100],          //可供选择的每页的行数（*）
             strictSearch: true,
             clickToSelect: true,                //是否启用点击选中行
-            height: 580,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            height: 480,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
             uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
             cardView: false,                    //是否显示详细视图
             detailView: false,                  //是否显示父子表
@@ -190,17 +190,15 @@
                 title: '船舶类型'
             }],
             onLoadSuccess: function (data) {
+
+                map.clearOverlays();
+                showAirwayData(); //航线地图显示
                 if (data != null && data.rows != null && data.rows.length > 0) {
-                    map.clearOverlays();
                     var points = [];  // 添加海量点数据
                     for (var i = 0; i < data.rows.length; i++) {
                         points.push(new BMap.Point(data.rows[i].longitude, data.rows[i].latitude));
                     }
-
                     addMarker(points);
-
-                    //航线地图显示
-                    showAirwayData();
                 }
             }
         });
