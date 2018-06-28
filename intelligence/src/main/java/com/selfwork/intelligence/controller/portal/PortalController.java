@@ -5,6 +5,7 @@ import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.controller.BaseController;
 import com.selfwork.intelligence.model.po.ExchangerPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
+import com.selfwork.intelligence.utils.LicenseValidator;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,11 @@ public class PortalController extends BaseController {
      */
     @RequestMapping(value = "index")
     public ModelAndView index() {
+        boolean hasLicense = LicenseValidator.validate();
+        if(!hasLicense){
+            ModelAndView modelAndView=new ModelAndView("portal");
+            return modelAndView;
+        }
         ModelAndView modelAndView=new ModelAndView("portal/index");
         UserInfoPO user = (UserInfoPO) SecurityUtils.getSubject().getPrincipal();
         modelAndView.addObject("userName",user.getRealname());
