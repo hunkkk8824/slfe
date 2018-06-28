@@ -5,6 +5,7 @@ import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.PermissionTypeEnum;
 import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.user.TreeMenuVo;
+import com.selfwork.intelligence.utils.LicenseValidator;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -37,7 +38,11 @@ public class IndexController extends BaseController {
     //跳转到主页
     @RequestMapping(value = "index")
     public ModelAndView index() {
-
+        boolean hasLicense = LicenseValidator.validate();
+        if(!hasLicense){
+            ModelAndView modelAndView=new ModelAndView("portal");
+            return modelAndView;
+        }
         ModelAndView modelAndView = new ModelAndView("system/index");
 
         boolean isAuthenticated = SecurityUtils.getSubject().isAuthenticated();

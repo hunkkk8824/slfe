@@ -1,6 +1,7 @@
 package com.selfwork.intelligence.interceptor;
 
 
+import com.selfwork.intelligence.utils.LicenseValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -18,8 +19,13 @@ public class ErrorPageInterceptor implements HandlerInterceptor {
             throws Exception {
 //        System.out.println(">>>MyInterceptor1>>>>>>>在请求处理之前进行调用（Controller方法调用之前）");
         logger.info(">>>MyInterceptor1>>>>>>>在请求处理之前进行调用（Controller方法调用之前）");
+        boolean hasLicense = LicenseValidator.validate();
+        if(hasLicense){
+            return true;
+        }else {
+            return false;// 只有返回true才会继续向下执行，返回false取消当前请求
+        }
 
-        return true;// 只有返回true才会继续向下执行，返回false取消当前请求
     }
 
     @Override

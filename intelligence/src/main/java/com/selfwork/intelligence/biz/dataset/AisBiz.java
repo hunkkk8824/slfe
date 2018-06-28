@@ -42,6 +42,8 @@ public class AisBiz extends BaseBiz {
     public Map<String, Object> getAisInfoList(AisQueryReq req)  {
 
         Map<String, Object> map = new HashMap<>();
+        map.put("total", 0);
+        map.put("rows", new ArrayList());
         Page page = this.startPage(req);
         List<AisPO> pos = aisPOMapper.getAisInfoList(req);
         try {
@@ -65,7 +67,7 @@ public class AisBiz extends BaseBiz {
             return map;
         } catch (Exception e) {
             logger.error("数据转换错误", e);
-            return null;
+            return map;
         }
     }
 }
