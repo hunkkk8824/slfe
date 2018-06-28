@@ -20,9 +20,8 @@ public class LicenseValidator {
 
     public static boolean validate() {
         try {
-            String path = ClassLoader.getSystemResource("").getPath();
-            String fileName = path + "license.dat";
-            byte[] encodedData = FileReaderUtil.getByteArr("D:\\project\\myproject\\rsa\\out\\production\\rsa\\license.dat");
+            String fileName = ClassLoader.getSystemResource("license.dat").getPath();
+            byte[] encodedData = FileReaderUtil.getByteArr(fileName);
             byte[] decodedData = RSAUtils.decryptByPublicKey(encodedData, publicKey);
             String target = new String(decodedData);
             System.out.println("有效时间: \r\n" + target);

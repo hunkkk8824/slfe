@@ -19,9 +19,9 @@ public class IntelligenceApplication {
     public static void main(String[] args) {
         boolean hasLicense = LicenseValidator.validate();
         if(hasLicense){
-
+            SpringApplication.run(IntelligenceApplication.class, args);
         }
-        SpringApplication.run(IntelligenceApplication.class, args);
+
     }
 
     @Bean
