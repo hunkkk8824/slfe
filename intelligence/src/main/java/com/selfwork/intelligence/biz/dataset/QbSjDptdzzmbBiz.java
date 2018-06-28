@@ -7,7 +7,7 @@ import com.selfwork.intelligence.common.BeanUtils;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.mapper.QbSjDptdzzmbPOMapper;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPO;
-import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
+import com.selfwork.intelligence.model.po.QbSjDptdzzmbPOWithBLOBs;
 import com.selfwork.intelligence.model.po.ScoutQbTableBdPO;
 import com.selfwork.intelligence.model.vo.dateset.*;
 import com.selfwork.intelligence.model.vo.dataquality.ColumnsVo;

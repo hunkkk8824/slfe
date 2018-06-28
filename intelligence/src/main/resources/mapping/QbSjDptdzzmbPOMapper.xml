@@ -64,7 +64,7 @@
         <result column="CFPLCD" property="cfplcd" jdbcType="INTEGER"/>
         <result column="MCKDZCD" property="mckdzcd" jdbcType="INTEGER"/>
     </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs"
+    <resultMap id="ResultMapWithBLOBs" type="com.selfwork.intelligence.model.po.QbSjDptdzzmbPOWithBLOBs"
                extends="BaseResultMap">
         <result column="PHDZ" property="phdz" jdbcType="VARBINARY"/>
         <result column="SPZ" property="spz" jdbcType="VARBINARY"/>
@@ -261,7 +261,7 @@
         </foreach>
     </insert>
 
-    <insert id="insert" parameterType="com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs">
+    <insert id="insert" parameterType="com.selfwork.intelligence.model.po.QbSjDptdzzmbPOWithBLOBs">
     insert into qb_sj_dptdzzmb (ID, BATCH_NO, PH, 
       PTBH, PTMC, CGQBH, 
       XYLX, JSSJ, SBSJ, 
@@ -303,7 +303,7 @@
       #{phdz,jdbcType=VARBINARY}, #{spz,jdbcType=VARBINARY}, #{cfpl,jdbcType=VARBINARY}, 
       #{mckdz,jdbcType=VARBINARY})
   </insert>
-    <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs">
+    <insert id="insertSelective" parameterType="com.selfwork.intelligence.model.po.QbSjDptdzzmbPOWithBLOBs">
         insert into qb_sj_dptdzzmb
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -700,7 +700,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs">
+    <update id="updateByPrimaryKeySelective" parameterType="com.selfwork.intelligence.model.po.QbSjDptdzzmbPOWithBLOBs">
         update qb_sj_dptdzzmb
         <set>
             <if test="batchNo != null">
@@ -898,7 +898,7 @@
         </set>
         where ID = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.selfwork.intelligence.model.po.QbSjDptdzzmbPOWithBLOBs">
     update qb_sj_dptdzzmb
     set BATCH_NO = #{batchNo,jdbcType=VARCHAR},
       PH = #{ph,jdbcType=INTEGER},

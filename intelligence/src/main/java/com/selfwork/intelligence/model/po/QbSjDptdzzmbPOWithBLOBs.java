@@ -1,4 +1,4 @@
-package com.selfwork.intelligence.model;
+package com.selfwork.intelligence.model.po;
 
 public class QbSjDptdzzmbPOWithBLOBs extends com.selfwork.intelligence.model.QbSjDptdzzmbPO {
     private byte[] phdz;

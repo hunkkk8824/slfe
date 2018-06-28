@@ -6,10 +6,14 @@ import com.selfwork.intelligence.common.Constant;
 import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
 import com.selfwork.intelligence.common.enums.ResponseCodeTypeEnum;
 import com.selfwork.intelligence.data.MysqlJdbcTemplateFactory;
+import com.selfwork.intelligence.model.*;
 import com.selfwork.intelligence.model.QbSjDptdzzmbPO;
+import com.selfwork.intelligence.model.QbSjDptssmbPO;
+import com.selfwork.intelligence.model.QbSjJztsmbPO;
+import com.selfwork.intelligence.model.QbSjMybPO;
+import com.selfwork.intelligence.model.QbSjRgmbPO;
 import com.selfwork.intelligence.model.bo.DateSourceConfig;
-import com.selfwork.intelligence.model.po.ExchangerPO;
-import com.selfwork.intelligence.model.po.QbSjRhmbPO;
+import com.selfwork.intelligence.model.po.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,10 +73,30 @@ public class DataBiz {
     }
 
     private BeanPropertyRowMapper getRowMapper(String datasetCode) {
-        if(DataSetCodeEnum.QB_SJ_RHMB.getValue().equals(datasetCode)){
+        if (DataSetCodeEnum.QB_SJ_RHMB.getValue().equals(datasetCode)) {
             return new BeanPropertyRowMapper<QbSjRhmbPO>(QbSjRhmbPO.class);
+        }else if (DataSetCodeEnum.SCOUT_QB_TABLE_BD.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<ScoutQbTableBdPO>(ScoutQbTableBdPO.class);
+        }else if (DataSetCodeEnum.QB_SJ_YSMB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjYsmbPO>(QbSjYsmbPO.class);
+        }else if (DataSetCodeEnum.QB_SJ_YSDZZTMMB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjYsdzztmmbPO>(QbSjYsdzztmmbPO.class);
+        } else if (DataSetCodeEnum.QB_SJ_YSDZZJGMB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjYsdzzjgmbPO>(QbSjYsdzzjgmbPO.class);
+        } else if (DataSetCodeEnum.QB_SJ_YSDZZDZZCMB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjYsdzzdzzcmbPOWithBLOBs>(QbSjYsdzzdzzcmbPOWithBLOBs.class);
+        } else if (DataSetCodeEnum.QB_SJ_RGMB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjRgmbPO>(QbSjRgmbPO.class);
+        } else if (DataSetCodeEnum.QB_SJ_MYB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjMybPO>(QbSjMybPO.class);
+        }else if (DataSetCodeEnum.QB_SJ_JZTSMB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjJztsmbPO>(QbSjJztsmbPO.class);
+        }else if (DataSetCodeEnum.QB_SJ_DPTSSMB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjDptssmbPO>(QbSjDptssmbPO.class);
+        } else if (DataSetCodeEnum.QB_SJ_DPTDZZMB.getValue().equals(datasetCode)) {
+            return new BeanPropertyRowMapper<QbSjDptdzzmbPOWithBLOBs>(QbSjDptdzzmbPOWithBLOBs.class);
         }else {
-            return new BeanPropertyRowMapper<QbSjDptdzzmbPO>(QbSjDptdzzmbPO.class);
+            return null;
         }
     }
 

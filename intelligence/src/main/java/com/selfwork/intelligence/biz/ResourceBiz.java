@@ -12,7 +12,6 @@ import com.selfwork.intelligence.common.enums.QualityEvaluateEnum;
 import com.selfwork.intelligence.config.ValidateHandler;
 import com.selfwork.intelligence.mapper.ResourcePOMapper;
 import com.selfwork.intelligence.model.*;
-import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
 import com.selfwork.intelligence.model.QbSjDptssmbPO;
 import com.selfwork.intelligence.model.QbSjJztsmbPO;
 import com.selfwork.intelligence.model.QbSjMybPO;
@@ -232,7 +231,7 @@ public class ResourceBiz extends BaseBiz {
             logger.error("数据同步失败", e);
             log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 数据同步失败").append("<br/>");
             resource.setImportStatus(ImportStatusEnum.Excellent.getValue().shortValue());
-            resourcePOMapper.updateByPrimaryKey(resource);
+            resourcePOMapper.updateByPrimaryKeySelective(resource);
         }
         log.append(DateUtils.getCurrTimeStrWithSSS()).append(" 同步完成");
         logger.info(log.toString());
@@ -277,7 +276,7 @@ public class ResourceBiz extends BaseBiz {
         resource.setImportSuccessCount(count);
         resource.setImportStatus(ImportStatusEnum.Good.getValue().shortValue());
         resource.setQuality(qualityLevel.shortValue());
-        resourcePOMapper.updateByPrimaryKey(resource);
+        resourcePOMapper.updateByPrimaryKeySelective(resource);
 
         String result = " 预导入数据" + total + "条,导入成功" + count + "条！";
         log.append(DateUtils.getCurrTimeStr()).append(result).append("<br/>");
