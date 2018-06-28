@@ -1,5 +1,6 @@
 package com.selfwork.intelligence;
 
+import com.selfwork.intelligence.utils.LicenseValidator;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +17,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 public class IntelligenceApplication {
 
     public static void main(String[] args) {
+        boolean hasLicense = LicenseValidator.validate();
+        if(hasLicense){
 
+        }
         SpringApplication.run(IntelligenceApplication.class, args);
     }
 
