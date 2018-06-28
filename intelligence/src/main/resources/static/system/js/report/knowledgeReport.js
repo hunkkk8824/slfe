@@ -102,14 +102,14 @@
             layer.load(3);
             $.ajax({
                 type: 'post',
-                url:publicCache.path + "/report/getLocations?v=" + new Date(),
+                url: publicCache.path + "/report/getLocations?v=" + new Date(),
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify(temp),
                 success: function (res) {
                     layer.closeAll('loading');
                     map.clearOverlays();
-                    if(res){
+                    if (res) {
                         initMarker(res);
                     }
                 }, error: function (xhr, status) {
@@ -149,20 +149,17 @@
                 success: function (res) {
                     layer.closeAll('loading');
                     aisMap.clearOverlays();
-                    // for (var i = 0; i < res.length; i++) {
-                    //     var point = new BMap.Point(res[i].longitude, res[i].latitude);
-                    //     addAisMarker(point);
-                    // }
-
-                    debugger
-                    var points = [];  // 添加海量点数据
-                    for (var i = 0; i < res.length; i++) {
-                        points.push(new BMap.Point(res[i].longitude, res[i].latitude));
-                    }
-                    addAisMarker(points);
-
                     //航线地图显示
                     showAirwayData();
+
+                    if (res && data.rows && data.rows.length > 0) {
+                        var points = [];  // 添加海量点数据
+                        for (var i = 0; i < res.length; i++) {
+                            points.push(new BMap.Point(res[i].longitude, res[i].latitude));
+                        }
+                        addAisMarker(points);
+                    }
+
                 }, error: function (xhr, status) {
                     layer.closeAll('loading');
                     //提示层
@@ -173,21 +170,22 @@
     };
 
     //航线地图显示
-    function showAirwayData(){
+    function showAirwayData() {
 
-        $.post(_path + '/report/getAirwayData',function (data) {
+        $.post(_path + '/report/getAirwayData', function (data) {
 
             debugger
             var points = [];
-            $.each(data,function (i,n) {
-                points.push(new BMap.Point(n.longitude,n.latitude));
+            $.each(data, function (i, n) {
+                points.push(new BMap.Point(n.longitude, n.latitude));
             });
 
-            var curve = new BMapLib.CurveLine(points, {strokeColor:"green", strokeWeight:1, strokeOpacity:0.3}); //创建弧线对象
+            var curve = new BMapLib.CurveLine(points, {strokeColor: "green", strokeWeight: 1, strokeOpacity: 0.3}); //创建弧线对象
             aisMap.addOverlay(curve); //添加到地图中
         });
 
     }
+
     //得到查询的参数
     function queryParams(params) {
 
@@ -259,6 +257,7 @@
 
     };
 
+    //航行规律
     var initAisMap = function () {
         aisMap.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初
         // map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
@@ -342,12 +341,12 @@
 
             debugger
             var option = {
-                title : {
+                title: {
                     text: '装备威力规律',
                     subtext: 'JL(距离)数目统计',
-                    x:'center'
+                    x: 'center'
                 },
-                tooltip : {
+                tooltip: {
                     trigger: 'item',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
@@ -356,13 +355,13 @@
                     left: 'left',
                     data: data.titleList
                 },
-                series : [
+                series: [
                     {
                         name: '装备威力规律',
                         type: 'pie',
-                        radius : '55%',
+                        radius: '55%',
                         center: ['50%', '60%'],
-                        data:data.dataList,
+                        data: data.dataList,
                         itemStyle: {
                             emphasis: {
                                 shadowBlur: 10,
