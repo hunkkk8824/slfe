@@ -6,7 +6,7 @@
 	<groupId>com.selfwork</groupId>
 	<artifactId>intelligence</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>intelligence</name>
 	<description>intelligence project for Spring Boot</description>

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,18 +58,15 @@ public class LoginController extends BaseController {
 
     /**
      * ajax登录请求
-     *
-     * @param username
-     * @param password
      * @return
      */
     @RequestMapping(value = "/ajaxLogin", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> submitLogin(String username, String password, Model model) {
+    public Map<String, Object> submitLogin(@RequestBody  UsernamePasswordToken token) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         try {
 
-            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+//            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             SecurityUtils.getSubject().login(token);
             resultMap.put("status", 200);
             resultMap.put("message", "登录成功");

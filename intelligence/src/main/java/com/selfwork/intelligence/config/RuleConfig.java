@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,24 +24,27 @@ import java.util.Map;
 @Component
 public class RuleConfig {
 
-    private final  Logger logger = LoggerFactory.getLogger(RuleConfig.class);
+    private final Logger logger = LoggerFactory.getLogger(RuleConfig.class);
 
-    private  ArrayList<File> fileList = new ArrayList<>();
+    private ArrayList<File> fileList = new ArrayList<>();
 
-    private  Map<String,TableRules> tableRulesMap = new HashMap<>();
+    private Map<String, TableRules> tableRulesMap = new HashMap<>();
 
 
-    public RuleConfig(){
-        // 加载文件
-        String path = ClassLoader.getSystemResource("rule").getPath();
-        loadFile(path);
-        // 解析规则
-        parseFile(fileList);
+    public RuleConfig() {
+        URL resource = ClassLoader.getSystemResource("rule");
+        if (resource != null) {
+            // 加载文件
+            String path = resource.getPath();
+            loadFile(path);
+            // 解析规则
+            parseFile(fileList);
+        }
     }
 
 
-    private  void parseFile(ArrayList<File> fileList) {
-        if(CollectionUtils.isEmpty(fileList)){
+    private void parseFile(ArrayList<File> fileList) {
+        if (CollectionUtils.isEmpty(fileList)) {
             return;
         }
 
@@ -49,33 +53,31 @@ public class RuleConfig {
             String tableName = file.getName().split("\\.")[0];
             TableRules tableRules = new TableRules();
             tableRules.setName(tableName);
-            Map<String,ColumnRules> columnRulesMap = new HashMap<>();
+            Map<String, ColumnRules> columnRulesMap = new HashMap<>();
             tableRules.setColumnRulesMap(columnRulesMap);
-            tableRulesMap.put(tableName,tableRules);
+            tableRulesMap.put(tableName, tableRules);
             try {
                 JSONReader reader = new JSONReader(new FileReader(file));
                 reader.startObject();
-                while (reader.hasNext()){
+                while (reader.hasNext()) {
                     String column = reader.readString();
                     ColumnRules colunmRules = new ColumnRules();
                     colunmRules.setName(column);
                     List<Rule> ruleList = new ArrayList<>();
                     colunmRules.setRuleList(ruleList);
-                    columnRulesMap.put(column,colunmRules);
+                    columnRulesMap.put(column, colunmRules);
                     reader.startArray();
-                    while (reader.hasNext())
-                    {
+                    while (reader.hasNext()) {
                         Rule rule = new Rule();
                         reader.startObject();
-                        while (reader.hasNext())
-                        {
+                        while (reader.hasNext()) {
                             String key = reader.readString();
                             String value = reader.readObject().toString();
-                            if("rule".equals(key)){
+                            if ("rule".equals(key)) {
                                 rule.setRule(value);
-                            }else if("value".equals(key)){
+                            } else if ("value".equals(key)) {
                                 rule.setValue(value);
-                            }else if("message".equals(key)){
+                            } else if ("message".equals(key)) {
                                 rule.setMessage(value);
                             }
                         }
@@ -86,23 +88,23 @@ public class RuleConfig {
                 }
                 reader.endObject();
             } catch (FileNotFoundException e) {
-                logger.error("规则文件读取异常，file:" + file.getName(),e);
+                logger.error("规则文件读取异常，file:" + file.getName(), e);
             }
         }
     }
 
 
     public void loadFile(String filepath) {
-        File file= new File(filepath);
-        if(!file.isDirectory()){
+        File file = new File(filepath);
+        if (!file.isDirectory()) {
             fileList.add(file);
-        }else if(file.isDirectory()){
-            File[] files =file.listFiles();
-            for(File fileIndex:files){
+        } else if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File fileIndex : files) {
                 //如果这个文件是目录，则进行递归搜索
-                if(fileIndex.isDirectory()){
+                if (fileIndex.isDirectory()) {
                     loadFile(fileIndex.getPath());
-                }else {
+                } else {
                     //如果文件是普通文件，则将文件句柄放入集合
                     fileList.add(fileIndex);
                 }
