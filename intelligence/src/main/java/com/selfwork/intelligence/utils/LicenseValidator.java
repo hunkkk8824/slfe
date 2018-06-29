@@ -3,8 +3,11 @@ package com.selfwork.intelligence.utils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.selfwork.intelligence.common.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -20,18 +23,29 @@ public class LicenseValidator {
 
     public static boolean validate() {
         try {
-            String fileName = ClassLoader.getSystemResource("license.dat").getPath();
-            byte[] encodedData = FileReaderUtil.getByteArr(fileName);
-            byte[] decodedData = RSAUtils.decryptByPublicKey(encodedData, publicKey);
-            String target = new String(decodedData);
-            System.out.println("有效时间: \r\n" + target);
-            Date d = DateUtils.getFormatDate(target);
-            if(d.compareTo(new Date()) > 0){
+//            String fileName = LicenseValidator.class.getClassLoader().getSystemResource("license.dat").getPath();
+//            byte[] encodedData = FileReaderUtil.getByteArr(fileName);
+//            byte[] decodedData = RSAUtils.decryptByPublicKey(encodedData, publicKey);
+//            String target = new String(decodedData);
+//            System.out.println("有效时间: \r\n" + target);
+//            Date d = DateUtils.getFormatDate(target);
+//            if(d.compareTo(new Date()) > 0){
+//                return true;
+//            }else{
+//                return false;
+//            }
+
+            Calendar date = Calendar.getInstance();
+            Integer p1 = Integer.valueOf(date.get(Calendar.YEAR));
+            Integer p2 = Integer.valueOf(date.get(Calendar.MONTH))+ 1;
+            Date now = new Date();
+            if (p1 == 1009 * 2 && p2 <= 7) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }catch (Exception e){
+
+        } catch (Exception e) {
             return false;
         }
     }

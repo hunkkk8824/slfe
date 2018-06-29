@@ -23,7 +23,6 @@ public class IntelligenceApplication extends SpringBootServletInitializer {
         if(hasLicense){
             SpringApplication.run(IntelligenceApplication.class, args);
         }
-
     }
 
     @Bean

@@ -1,25 +1,18 @@
 package com.selfwork.intelligence.biz;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.selfwork.intelligence.biz.dataset.*;
+import com.selfwork.intelligence.biz.dataset.IBaseQbBiz;
 import com.selfwork.intelligence.common.BeanUtils;
-import com.selfwork.intelligence.common.Constant;
 import com.selfwork.intelligence.common.DateUtils;
 import com.selfwork.intelligence.common.enums.*;
-import com.selfwork.intelligence.mapper.*;
-import com.selfwork.intelligence.model.*;
-import com.selfwork.intelligence.model.QbSjDptdzzmbPOWithBLOBs;
-import com.selfwork.intelligence.model.QbSjDptssmbPO;
-import com.selfwork.intelligence.model.QbSjJztsmbPO;
-import com.selfwork.intelligence.model.QbSjMybPO;
-import com.selfwork.intelligence.model.QbSjRgmbPO;
-import com.selfwork.intelligence.model.po.*;
+import com.selfwork.intelligence.mapper.ResourceEtlLogPOMapper;
+import com.selfwork.intelligence.mapper.ResourcePOMapper;
+import com.selfwork.intelligence.model.po.ResourceEtlLogPO;
+import com.selfwork.intelligence.model.po.ResourcePO;
+import com.selfwork.intelligence.model.po.UserInfoPO;
 import com.selfwork.intelligence.model.vo.ResourceEtlLogVo;
 import com.selfwork.intelligence.model.vo.dataquality.*;
 import com.selfwork.intelligence.model.vo.dateset.LocationDto;
-import com.selfwork.intelligence.model.vo.dateset.QbSjRhmbVO;
 import com.selfwork.intelligence.model.vo.dateset.QueryVo;
 import com.selfwork.intelligence.model.vo.monitorlog.AppendMonitorLogVo;
 import org.slf4j.Logger;
@@ -28,8 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
-
 
 import java.math.BigDecimal;
 import java.util.*;
