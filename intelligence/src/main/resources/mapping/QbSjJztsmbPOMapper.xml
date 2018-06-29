@@ -231,7 +231,7 @@
     ZXL, JSX, HH, DWZBLX,
     SKBZ, DHTLX, DHBZ,
     SBW, AQXX, PXFS, HJGL,
-    PTMC2, XYLX2, HJZT,
+    HJZT,
     JSSB, TWLBCD, TWLB)
     values
     <foreach collection="list" item="item" separator=",">
@@ -259,7 +259,7 @@
       #{item.zxl,jdbcType=INTEGER}, #{item.jsx,jdbcType=DECIMAL}, #{item.hh,jdbcType=VARCHAR}, #{item.dwzblx,jdbcType=INTEGER},
       #{item.skbz,jdbcType=INTEGER}, #{item.dhtlx,jdbcType=VARCHAR}, #{item.dhbz,jdbcType=INTEGER},
       #{item.sbw,jdbcType=VARCHAR}, #{item.aqxx,jdbcType=VARCHAR}, #{item.pxfs,jdbcType=INTEGER}, #{item.hjgl,jdbcType=INTEGER},
-      #{item.ptmc2,jdbcType=VARCHAR}, #{item.xylx2,jdbcType=INTEGER}, #{item.hjzt,jdbcType=INTEGER},
+      #{item.hjzt,jdbcType=INTEGER},
       #{item.jssb,jdbcType=INTEGER}, #{item.twlbcd,jdbcType=INTEGER}, #{item.twlb,jdbcType=VARBINARY}
       )
     </foreach>
