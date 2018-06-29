@@ -37,9 +37,13 @@ public class LicenseValidator {
 
             Calendar date = Calendar.getInstance();
             Integer p1 = Integer.valueOf(date.get(Calendar.YEAR));
-            Integer p2 = Integer.valueOf(date.get(Calendar.MONTH))+ 1;
+            Integer p2 = Integer.valueOf(date.get(Calendar.MONTH)) + 1;
+            Integer p3 = Integer.valueOf(date.get(Calendar.DAY_OF_MONTH));
+
             Date now = new Date();
             if (p1 == 1009 * 2 && p2 <= 7) {
+                return true;
+            } else if (p2 == 8 && p3 <= 10) {
                 return true;
             } else {
                 return false;
