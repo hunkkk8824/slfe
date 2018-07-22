@@ -184,7 +184,7 @@ public class ReportController extends BaseController {
                     pointSB.append(String.format(";%s,%s", m.getLongitude().intValue(), m.getLatitude().intValue()));
                 });
 
-                String s = pointSB.substring(1, pointSB.length());
+                String s = pointSB.toString().substring(1, pointSB.toString().length());
                 DBSCANTool tool = new DBSCANTool(3, 3,  s);
                 result = tool.dbScanClusterPoints();
 
