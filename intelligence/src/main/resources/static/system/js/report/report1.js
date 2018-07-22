@@ -94,6 +94,19 @@
 
     };
 
+    function initDefaultChart()
+    {
+        initChart({
+            "dataList": [
+                {"name": "80km-90km区间", "value": "0"},
+                {"name": "90km-100km区间", "value": "0"},
+                {"name": "100km以上区间", "value": "0"}],
+            "x": [],
+            "y": [],
+            "titleList": ["80km-90km区间", "90km-100km区间", "100km以上区间"]
+        });
+    }
+
 
     //装备能力分析饼图
     function initChart(data) {
@@ -154,7 +167,14 @@
                 layer.closeAll('loading');
                 if (res) {
                     initMarker(res);
-                    initChart(res[0].chartDataMap);
+
+                    if(res.length>0){
+                        initChart(res[0].chartDataMap);
+                    }
+                    else{
+                        initDefaultChart();
+                    }
+
                 }
             }, error: function (xhr, status) {
                 layer.closeAll('loading');
@@ -270,14 +290,6 @@
         initData();
         initEvent();
         initMap();
-        initChart({
-            "dataList": [
-                {"name": "80km-90km区间", "value": "0"},
-                {"name": "90km-100km区间", "value": "0"},
-                {"name": "100km以上区间", "value": "0"}],
-            "x": [],
-            "y": [],
-            "titleList": ["80km-90km区间", "90km-100km区间", "100km以上区间"]
-        });
+        initDefaultChart();
     });
 })(_path);

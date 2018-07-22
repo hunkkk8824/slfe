@@ -7,6 +7,31 @@ package com.selfwork.intelligence.datamining.DBSCAN;
  *
  */
 public class Point {
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public boolean isVisited() {
+		return isVisited;
+	}
+
+	public void setVisited(boolean visited) {
+		isVisited = visited;
+	}
+
 	// 坐标点横坐标
 	int x;
 	// 坐标点纵坐标
