@@ -118,6 +118,19 @@
                     </div>
                 </div>
             </div>
+            <div class="swiper-slide" id="slide6">
+                <div style="width: 1000px;margin: 400px auto;">
+                    <div class="col-lg-6 col-md-6 banner-left">
+                        <h1 class="text-white animateWhite">算法</h1>
+                        <p class="text-white">
+                            arithmetic
+                        </p>
+                        <a href="${base}/report/arithmetic" class="primary-btn text-uppercase">查看</a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 banner-right">
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>

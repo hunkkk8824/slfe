@@ -61,6 +61,7 @@
                             <li><a href="${base}/report/aisReport">航道提取分析</a></li>
                             <li><a href="${base}/report/toTargetFusionRecognition">目标融合识别</a></li>
                             <li><a href="${base}/report/knowledgeReport">知识提取</a></li>
+                            <li><a href="${base}/report/arithmetic">数据挖掘</a></li>
                         </ul>
                     </li>
                 </ul>
