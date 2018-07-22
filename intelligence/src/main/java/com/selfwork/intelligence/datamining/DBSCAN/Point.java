@@ -8,7 +8,7 @@ package com.selfwork.intelligence.datamining.DBSCAN;
  */
 public class Point {
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
@@ -16,7 +16,7 @@ public class Point {
 		this.x = x;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 
@@ -33,15 +33,15 @@ public class Point {
 	}
 
 	// 坐标点横坐标
-	int x;
+	double x;
 	// 坐标点纵坐标
-	int y;
+	double y;
 	// 此节点是否已经被访问过
 	boolean isVisited;
 
 	public Point(String x, String y) {
-		this.x = (Integer.parseInt(x));
-		this.y = (Integer.parseInt(y));
+		this.x = (Double.parseDouble(x));
+		this.y = (Double.parseDouble(y));
 		this.isVisited = false;
 	}
 
