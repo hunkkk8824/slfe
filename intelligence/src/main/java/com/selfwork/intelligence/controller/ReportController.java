@@ -6,8 +6,12 @@ import com.selfwork.intelligence.biz.dataset.AirwayDataBiz;
 import com.selfwork.intelligence.biz.dataset.AisBiz;
 import com.selfwork.intelligence.biz.dataset.QbSjDptdzzmbBiz;
 import com.selfwork.intelligence.common.enums.DataSetCodeEnum;
+import com.selfwork.intelligence.datamining.DBSCAN.DBSCANTool;
+import com.selfwork.intelligence.datamining.DBSCAN.Point;
 import com.selfwork.intelligence.model.po.AirwayDataPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
+import com.selfwork.intelligence.model.vo.AirwayDataReq;
+import com.selfwork.intelligence.model.vo.AirwayLocationData;
 import com.selfwork.intelligence.model.vo.BaseQueryVo;
 import com.selfwork.intelligence.model.vo.dateset.*;
 import org.slf4j.Logger;
@@ -104,7 +108,7 @@ public class ReportController extends BaseController {
             result.put("titleList", titleList);
             result.put("dataList", dataList);
 
-            if(!CollectionUtils.isEmpty(list)){
+            if (!CollectionUtils.isEmpty(list)) {
                 list.get(0).setChartDataMap(result);
             }
 
@@ -155,7 +159,7 @@ public class ReportController extends BaseController {
         }
 
         try {
-           return aisBiz.getAisInfoList(request);
+            return aisBiz.getAisInfoList(request);
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);
         }
@@ -166,17 +170,46 @@ public class ReportController extends BaseController {
     //航线数据
     @ResponseBody
     @RequestMapping(value = "/getAirwayData", method = RequestMethod.POST)
-    public List<AirwayDataPO> getAirwayData() {
+    public ArrayList<ArrayList<Point>> getAirwayData(@RequestBody AirwayDataReq req) {
 
-        List<AirwayDataPO> result = new ArrayList<>();
+
+        ArrayList<ArrayList<Point>> result = new ArrayList<>();
 
         try {
-            List<AirwayDataPO> list = airwayDataBiz.getList();
-            result = list;
+
+            if (req != null && req.getPoints() != null) {
+
+                StringBuilder pointSB = new StringBuilder();
+                req.getPoints().forEach(m -> {
+                    pointSB.append(String.format(";%s,%s", m.getLongitude().intValue(), m.getLatitude().intValue()));
+                });
+
+                String s = pointSB.substring(1, pointSB.length());
+                DBSCANTool tool = new DBSCANTool(3, 3,  s);
+                result = tool.dbScanClusterPoints();
+
+                if (CollectionUtils.isEmpty(result)) {
+                    logger.info("dbScanClusterPoints 返回为空");
+                }
+
+            } else {
+                logger.info("查询参数为空");
+            }
+
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);
         }
         return result;
+
+//        List<AirwayDataPO> result = new ArrayList<>();
+//
+//        try {
+//            List<AirwayDataPO> list = airwayDataBiz.getList();
+//            result = list;
+//        } catch (Exception e) {
+//            logger.error("查询失败：" + e.getMessage(), e);
+//        }
+//        return result;
     }
 
     @ResponseBody
@@ -189,9 +222,9 @@ public class ReportController extends BaseController {
         }
 
         try {
-            Map<String,Object> pageData = aisBiz.getAisInfoList(request);
+            Map<String, Object> pageData = aisBiz.getAisInfoList(request);
             if (pageData != null) {
-                result = (List<AisVo>)pageData.get("rows");
+                result = (List<AisVo>) pageData.get("rows");
             }
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);

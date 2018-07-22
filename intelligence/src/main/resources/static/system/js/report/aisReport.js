@@ -90,7 +90,55 @@
             $('#table').bootstrapTable('refresh', {
                 pageNumber: 1
             });
-        })
+        });
+
+        $("#fenxi").click(function () {
+
+            var strokeColor=['','green','red','yellow'];
+            var rows = $('#table').bootstrapTable('getData');
+            var reqPoints = [];
+            $.each(rows, function (i, n) {
+                reqPoints.push({longitude: n.longitude, latitude: n.latitude});
+            });
+
+            $.ajax({
+                type: "POST",
+                url: _path + '/report/getAirwayData',
+                data: JSON.stringify({
+                    points: reqPoints
+                }),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (data) {
+
+                    if (!data) {
+                        return;
+                    }
+
+                    map.centerAndZoom(new BMap.Point(data[0][0].y, data[0][0].x), 5);  // 初
+                    $.each(data, function (i, p) {
+
+                        var points = [];
+                        $.each(p, function (i, n) {
+                            points.push(new BMap.Point(n.y, n.x));
+                        });
+
+                        var curve = new BMapLib.CurveLine(points, {
+                            strokeColor: strokeColor[parseInt(3*Math.random())+1],
+                            strokeWeight: 3,
+                            strokeOpacity: 0.5
+                        }); //创建弧线对象
+                        map.addOverlay(curve); //添加到地图中
+                    });
+
+
+
+                }
+            });
+
+
+
+        });
     };
 
     //得到查询的参数
@@ -193,7 +241,7 @@
 
 
                 map.clearOverlays();
-                showAirwayData(); //航线地图显示
+                // showAirwayData(); //航线地图显示
                 if (data != null && data.rows != null && data.rows.length > 0) {
 
                     var points = [];  // 添加海量点数据
@@ -207,17 +255,17 @@
     }
 
     //航线地图显示
-    function showAirwayData(){
+    function showAirwayData() {
 
-        $.post(_path + '/report/getAirwayData',function (data) {
+        $.post(_path + '/report/getAirwayData', function (data) {
 
             debugger
             var points = [];
-            $.each(data,function (i,n) {
-                points.push(new BMap.Point(n.longitude,n.latitude));
+            $.each(data, function (i, n) {
+                points.push(new BMap.Point(n.longitude, n.latitude));
             });
 
-            var curve = new BMapLib.CurveLine(points, {strokeColor:"green", strokeWeight:1, strokeOpacity:0.3}); //创建弧线对象
+            var curve = new BMapLib.CurveLine(points, {strokeColor: "green", strokeWeight: 1, strokeOpacity: 0.3}); //创建弧线对象
             map.addOverlay(curve); //添加到地图中
         });
 

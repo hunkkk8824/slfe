@@ -79,6 +79,9 @@
                                     <button id="query" type="button" class="btn btn-sm btn-primary">
                                         搜索
                                     </button>
+                                    <button id="fenxi" type="button" class="btn btn-sm btn-primary">
+                                        分析
+                                    </button>
                                 </div>
                             </div>
                             <div class="chart" id="gpsMap" style="height: 400px;"></div>
