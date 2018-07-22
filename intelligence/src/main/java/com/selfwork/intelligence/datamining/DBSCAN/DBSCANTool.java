@@ -44,8 +44,9 @@ public class DBSCANTool {
         this.pointStr = pointStr;
         this.eps = eps;
         this.minPts = minPts;
-        readDataFile();
+        readData();
     }
+
 
     /**
      * 从文件中读取数据
@@ -174,7 +175,7 @@ public class DBSCANTool {
     /**
      * dbScan算法基于密度的聚类
      */
-    public ArrayList<ArrayList<Point>> dbScanCluster() {
+    public String dbScanCluster() {
         ArrayList<Point> cluster = null;
         resultClusters = new ArrayList<>();
         noisePoint = new ArrayList<>();
@@ -195,7 +196,32 @@ public class DBSCANTool {
         }
         removeFalseNoise();
 
-        printClusters();
+        return printClusters();
+    }
+
+    /**
+     * dbScan算法基于密度的聚类（返回点集合)
+     */
+    public ArrayList<ArrayList<Point>> dbScanClusterPoints() {
+        ArrayList<Point> cluster = null;
+        resultClusters = new ArrayList<>();
+        noisePoint = new ArrayList<>();
+
+        for (Point p : totalPoints) {
+            if (p.isVisited) {
+                continue;
+            }
+
+            cluster = new ArrayList<>();
+            recursiveCluster(p, cluster);
+
+            if (cluster.size() > 0) {
+                resultClusters.add(cluster);
+            } else {
+                noisePoint.add(p);
+            }
+        }
+        removeFalseNoise();
 
         return resultClusters;
     }
@@ -226,22 +252,34 @@ public class DBSCANTool {
     /**
      * 输出聚类结果
      */
-    private void printClusters() {
+    private String printClusters() {
         int i = 1;
+        StringBuilder builder = new StringBuilder();
         for (ArrayList<Point> pList : resultClusters) {
             System.out.print("聚簇" + (i++) + ":");
+            builder.append("聚簇" + i + ":");
             for (Point p : pList) {
                 System.out.print(MessageFormat.format("({0},{1}) ", p.x, p.y));
+                builder.append(MessageFormat.format("({0},{1}) ", p.x, p.y));
             }
             System.out.println();
+            builder.append("\r\n");
         }
 
         System.out.println();
+        builder.append("\r\n");
+
         System.out.print("噪声数据:");
+        builder.append("噪声数据:");
+
         for (Point p : noisePoint) {
             System.out.print(MessageFormat.format("({0},{1}) ", p.x, p.y));
+            builder.append(MessageFormat.format("({0},{1}) ", p.x, p.y));
         }
         System.out.println();
+        builder.append("\r\n");
+
+        return  builder.toString();
     }
 
     /**
