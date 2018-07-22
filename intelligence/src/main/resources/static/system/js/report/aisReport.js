@@ -115,14 +115,15 @@
                         return;
                     }
 
-                    map.centerAndZoom(new BMap.Point(data[0][0].y, data[0][0].x), 5);  // 初
+                    map.centerAndZoom(new BMap.Point(data[0][0].x, data[0][0].y), 5);  // 初
                     $.each(data, function (i, p) {
 
                         var points = [];
                         $.each(p, function (i, n) {
-                            points.push(new BMap.Point(n.y, n.x));
+                            points.push(new BMap.Point(n.x, n.y));
                         });
 
+                        debugger
                         var curve = new BMapLib.CurveLine(points, {
                             strokeColor: strokeColor[parseInt(3*Math.random())+1],
                             strokeWeight: 3,
