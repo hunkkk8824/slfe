@@ -79,19 +79,19 @@ public class ReportController extends BaseController {
 
                 //80km-90km区间
                 long count8090 = list.stream().filter(n ->
-                        n != null && n.getJl().intValue() >= 80 && n.getJl().intValue() <= 90
+                        n != null && n.getJl()!=null && n.getJl().intValue() >= 80 && n.getJl().intValue() <= 90
                 ).count();
                 map.put("80km-90km区间", count8090);
 
                 //90km-100km区间
                 long count90100 = list.stream().filter(n ->
-                        n != null && n.getJl().intValue() > 90 && n.getJl().intValue() <= 100
+                        n != null && n.getJl()!=null && n.getJl().intValue() > 90 && n.getJl().intValue() <= 100
                 ).count();
                 map.put("90km-100km区间", count90100);
 
                 //100km以上区间
                 long countGt100 = list.stream().filter(n ->
-                        n != null && n.getJl().intValue() > 100
+                        n != null && n.getJl()!=null && n.getJl().intValue() > 100
                 ).count();
                 map.put("100km以上区间", countGt100);
             }
@@ -186,7 +186,7 @@ public class ReportController extends BaseController {
 
                 StringBuilder pointSB = new StringBuilder();
                 req.getPoints().forEach(m -> {
-                    pointSB.append(String.format(";%s,%s", m.getLongitude().intValue(), m.getLatitude().intValue()));
+                    pointSB.append(String.format(";%s,%s", m.getLongitude().doubleValue(), m.getLatitude().doubleValue()));
                 });
 
                 String s = pointSB.toString().substring(1, pointSB.toString().length());
