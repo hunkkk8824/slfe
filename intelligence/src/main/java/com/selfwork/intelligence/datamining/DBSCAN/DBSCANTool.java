@@ -77,7 +77,7 @@ public class DBSCANTool {
     }
 
     /**
-     * 从文本中读取数据
+     * 从字符串中读取数据
      */
     public void readData() {
         ArrayList<String[]> dataArray = new ArrayList<String[]>();
