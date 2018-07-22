@@ -150,6 +150,7 @@ public class QbSjDptdzzmbBiz extends BaseBiz implements IBaseQbBiz<QbSjDptdzzmbP
         return BeanUtils.copyList(pos, QbSjYsdzzdzzcmbVO.class);
     }
 
+
     public Map<String, Long> getStatisicInfoList(QbSjDptdzzmbQueryReq req) {
         List<QbSjYsdzzdzzcmbStatiscVo> list = qbSjDptdzzmb.getStatisicInfoList(req);
 

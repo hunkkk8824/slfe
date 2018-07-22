@@ -116,7 +116,7 @@
   </select>
 
   <select id="getLocations" resultType="com.selfwork.intelligence.model.vo.dateset.LocationDto" parameterType="com.selfwork.intelligence.model.vo.dateset.QueryVo">
-    select jd,wd
+    select jd,wd,gd,jl
     from qb_sj_ysdzzdzzcmb
     <where>
       <if test="cgqbh!= null">

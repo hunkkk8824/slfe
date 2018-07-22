@@ -1,6 +1,7 @@
 package com.selfwork.intelligence.model.vo.dateset;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * Created by zzc on 2018/6/13.
@@ -25,6 +26,37 @@ public class LocationDto {
      * 是否是传感器
      */
     private boolean isCgq = false ;
+
+    private Map<String, Object> chartDataMap;
+    //高度
+    private BigDecimal gd;
+
+    //距离
+    private BigDecimal jl;
+
+    public Map<String, Object> getChartDataMap() {
+        return chartDataMap;
+    }
+
+    public void setChartDataMap(Map<String, Object> chartDataMap) {
+        this.chartDataMap = chartDataMap;
+    }
+
+    public BigDecimal getGd() {
+        return gd;
+    }
+
+    public void setGd(BigDecimal gd) {
+        this.gd = gd;
+    }
+
+    public BigDecimal getJl() {
+        return jl;
+    }
+
+    public void setJl(BigDecimal jl) {
+        this.jl = jl;
+    }
 
     public BigDecimal getJd() {
         return jd;

@@ -60,13 +60,58 @@ public class ReportController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/getLocations", method = RequestMethod.POST)
     public List<LocationDto> getLocations(@RequestBody QueryVo queryVo) {
-        List<LocationDto> dtos = null;
+        List<LocationDto> list = null;
         try {
-            dtos = dataQualityBiz.getLocations(queryVo);
+            list = dataQualityBiz.getLocations(queryVo);
+
+            //距离分布饼图数据
+            Map<String, Long> map = new HashMap<>();
+            if (list != null && !list.isEmpty()) {
+
+                //80km-90km区间
+                long count8090 = list.stream().filter(n ->
+                        n != null && n.getJl().intValue() >= 80 && n.getJl().intValue() <= 90
+                ).count();
+                map.put("80km-90km区间", count8090);
+
+                //90km-100km区间
+                long count90100 = list.stream().filter(n ->
+                        n != null && n.getJl().intValue() > 90 && n.getJl().intValue() <= 100
+                ).count();
+                map.put("90km-100km区间", count90100);
+
+                //100km以上区间
+                long countGt100 = list.stream().filter(n ->
+                        n != null && n.getJl().intValue() > 100
+                ).count();
+                map.put("100km以上区间", countGt100);
+            }
+
+            List<String> titleList = new ArrayList();//jl 距离区间
+            List<Map<String, String>> dataList = new ArrayList();
+            for (Map.Entry<String, Long> entry : map.entrySet()) {
+                titleList.add(entry.getKey());
+
+                Map<String, String> mapitem = new HashMap<>();
+                mapitem.put("name", entry.getKey());
+                mapitem.put("value", String.valueOf(entry.getValue()));
+                dataList.add(mapitem);
+            }
+
+            Map<String, Object> result = new HashMap<>();
+            result.put("x", new ArrayList());
+            result.put("y", new ArrayList());
+            result.put("titleList", titleList);
+            result.put("dataList", dataList);
+
+            if(CollectionUtils.isEmpty(list)){
+                list.get(0).setChartDataMap(result);
+            }
+
         } catch (Exception e) {
             logger.error("查询失败：" + e.getMessage(), e);
         }
-        return dtos != null ? dtos : new ArrayList<>();
+        return list != null ? list : new ArrayList<>();
     }
 
     @ResponseBody

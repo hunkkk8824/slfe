@@ -101,6 +101,7 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="chart" id="powerlaw_chart" style="width:400px;height:600px"></div>
                             <div class="chart" id="map" style="height: 400px;margin-top: 10px;"></div>
                             <div class="row" style="margin-top: 10px;height: 500px;">
                                 <div class="col-lg-12">
