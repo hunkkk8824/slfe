@@ -104,7 +104,7 @@ public class ReportController extends BaseController {
             result.put("titleList", titleList);
             result.put("dataList", dataList);
 
-            if(CollectionUtils.isEmpty(list)){
+            if(!CollectionUtils.isEmpty(list)){
                 list.get(0).setChartDataMap(result);
             }
 
