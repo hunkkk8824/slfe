@@ -11,21 +11,28 @@
     //添加标注
     function addMarker(points) {
 
-        if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
-            map.centerAndZoom(points[0], 5);
-            var options = {
-                size: BMAP_POINT_SIZE_SMALL,
-                shape: BMAP_POINT_SHAPE_STAR,
-                color: '#d340c3'
-            }
-            var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
-            pointCollection.addEventListener('click', function (e) {
-                layer.msg('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
-            });
-            map.addOverlay(pointCollection);  // 添加Overlay
-        } else {
-            layer.msg('请在chrome、safari、IE8+以上浏览器查看本示例');
+        map.centerAndZoom(points[0], 5);
+        var options = {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_STAR,
+            color: '#d340c3'
         }
+        var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
+        pointCollection.addEventListener('click', function (e) {
+            layer.msg('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+        });
+        map.addOverlay(pointCollection);  // 添加Overlay
+
+    }
+
+    //热力图
+    function addHeatmap(points) {
+
+        map.centerAndZoom(points[0], 5);
+        var heatmapOverlay = new BMapLib.HeatmapOverlay({"radius": 100, "visible": true});
+        map.addOverlay(heatmapOverlay);
+        heatmapOverlay.setDataSet({data: points, max: 100});
+
     }
 
     function initMarker(data) {
@@ -37,7 +44,17 @@
             points.push(new BMap.Point(data[i].jd, data[i].wd));
         }
 
-        addMarker(points);
+        if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制热力图
+
+            if (points.length > 100) {
+                addHeatmap(points);//热力图
+            }
+            else {
+                addMarker(points);
+            }
+        } else {
+            layer.msg('请在chrome、safari、IE8+以上浏览器查看本示例');
+        }
     }
 
     //添加地图数据
