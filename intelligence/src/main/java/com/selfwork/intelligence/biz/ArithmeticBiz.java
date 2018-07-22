@@ -3,11 +3,15 @@ package com.selfwork.intelligence.biz;
 import com.selfwork.intelligence.datamining.DBSCAN.DBSCANTool;
 import com.selfwork.intelligence.datamining.DBSCAN.Point;
 import com.selfwork.intelligence.datamining.DataMining_ACO.ACOTool;
+import com.selfwork.intelligence.datamining.DataMining_CABDDCC.CABDDCCTool;
+import com.selfwork.intelligence.datamining.DataMining_Chameleon.ChameleonTool;
+import com.selfwork.intelligence.datamining.DataMining_RandomForest.RandomForestTool;
 import com.selfwork.intelligence.datamining.GA.GATool;
 import com.selfwork.intelligence.datamining.KDTree.KDTreeTool;
 import com.selfwork.intelligence.model.vo.ArithmeticVo;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,13 @@ public class ArithmeticBiz {
                 result = DataMining_ACO(vo.getArr());
                 break;
             case 2:
-                //...;
+                result = DataMining_RandomForest(vo.getArr());
+                break;
+            case 3:
+                result = DataMining_CABDDCC(vo.getArr());
+                break;
+            case 4:
+                result = DataMining_Chameleon(vo.getArr());
                 break;
             case 5:
                 result = DBSCAN(vo.getArr().get(0));
@@ -44,6 +54,62 @@ public class ArithmeticBiz {
                 break;
         }
         return result;
+    }
+
+    /**
+     * DataMining_RandomForest
+     * @param arr
+     * @return
+     */
+    private String DataMining_RandomForest(List<String> arr) {
+        String queryStr = "Age=Youth,Income=Low,Student=No,CreditRating=Fair";
+
+        // 决策树的样本占总数的占比率
+        double sampleNumRatio = 0.4;
+        // 样本数据的采集特征数量占总特征的比例
+        double featureNumRatio = 0.5;
+
+        StringBuilder sb = new StringBuilder();
+
+        RandomForestTool tool = new RandomForestTool(arr, sampleNumRatio,
+                featureNumRatio);
+        String str1 = tool.constructRandomTree();
+
+        String resultClassType = tool.judgeClassType(queryStr);
+
+        sb.append(str1);
+        sb.append("\n");
+        sb.append(MessageFormat.format(
+                        "查询属性描述{0},预测的分类结果为BuysCompute:{1}", queryStr,
+                        resultClassType));
+        return sb.toString();
+    }
+
+    /**
+     * DataMining_Chameleon
+     * @param arr
+     * @return
+     */
+    private String DataMining_Chameleon(List<String> arr) {
+        //k-近邻的k设置
+        int k = 1;
+        //度量函数阈值
+        double minMetric = 0.1;
+        ChameleonTool tool = new ChameleonTool(arr, k, minMetric);
+        return tool.buildCluster();
+    }
+
+    /**
+     * DataMining_CABDDCC
+     * @param arr
+     * @return
+     */
+    private String DataMining_CABDDCC(List<String> arr) {
+        //连通距离阈值
+        int length = 3;
+
+        CABDDCCTool tool = new CABDDCCTool(arr, length);
+        return tool.splitCluster();
     }
 
     /**

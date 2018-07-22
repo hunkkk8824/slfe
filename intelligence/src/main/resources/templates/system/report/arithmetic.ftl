@@ -119,7 +119,7 @@
                         <form class="form-inline">
                             <select name="type" id="type" class="default-select key-input">
                                 <option value="1">ACO-蚁群算法</option>
-                                <option value="2">BayesNetWork-贝叶斯网络算法</option>
+                                <option value="2">RandomForest-随机森林算法</option>
                                 <option value="3">CABDDCC-基于连通图的分裂聚类算法</option>
                                 <option value="4">Chameleon-两阶段合并聚类算法</option>
                                 <option value="5">DBSCAN-基于密度的聚类算法</option>
