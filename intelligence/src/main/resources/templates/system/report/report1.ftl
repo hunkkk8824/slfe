@@ -66,7 +66,7 @@
             <div class="col-lg-12">
                 <div class="single-price">
                     <h4>装备能力分析</h4>
-                    <div class="tab-content">
+                    <div class="tab-content" style="height: 1100px">
                         <div class="tab-pane fade active show" id="tab1">
                             <div class="select-condition row">
                                 <div class="col-lg-2 wrapper">统计类型</div>
@@ -101,13 +101,19 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="powerlaw_chart" style="width:400px;height:600px"></div>
-                            <div class="chart" id="map" style="height: 400px;margin-top: 10px;"></div>
-                            <div class="row" style="margin-top: 10px;height: 500px;">
+
+                            <div>
+                                <div class="chart" id="powerlaw_chart" style="float: left;width: 520px;height:400px"></div>
+                                <div class="chart" id="map" style="float: left;width: 525px;height: 400px;margin-top: 10px;"></div>
+
+                            </div>
+
+                            <div class="row" style="margin-top: 10px;height: 500px;;clear: both">
                                 <div class="col-lg-12">
                                     <table class="table"  id="table" style="height: 300px;"></table>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

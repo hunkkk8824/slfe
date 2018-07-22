@@ -270,5 +270,14 @@
         initData();
         initEvent();
         initMap();
+        initChart({
+            "dataList": [
+                {"name": "80km-90km区间", "value": "0"},
+                {"name": "90km-100km区间", "value": "0"},
+                {"name": "100km以上区间", "value": "0"}],
+            "x": [],
+            "y": [],
+            "titleList": ["80km-90km区间", "90km-100km区间", "100km以上区间"]
+        });
     });
 })(_path);
