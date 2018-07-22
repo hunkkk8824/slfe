@@ -1,6 +1,7 @@
 package com.selfwork.intelligence.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.selfwork.intelligence.biz.ArithmeticBiz;
 import com.selfwork.intelligence.biz.DataQualityBiz;
 import com.selfwork.intelligence.biz.dataset.AirwayDataBiz;
 import com.selfwork.intelligence.biz.dataset.AisBiz;
@@ -10,6 +11,7 @@ import com.selfwork.intelligence.datamining.DBSCAN.DBSCANTool;
 import com.selfwork.intelligence.datamining.DBSCAN.Point;
 import com.selfwork.intelligence.model.po.AirwayDataPO;
 import com.selfwork.intelligence.model.po.UserInfoPO;
+import com.selfwork.intelligence.model.vo.ArithmeticVo;
 import com.selfwork.intelligence.model.vo.AirwayDataReq;
 import com.selfwork.intelligence.model.vo.AirwayLocationData;
 import com.selfwork.intelligence.model.vo.BaseQueryVo;
@@ -49,6 +51,9 @@ public class ReportController extends BaseController {
 
     @Autowired
     AirwayDataBiz airwayDataBiz;
+
+    @Autowired
+    ArithmeticBiz arithmeticBiz;
 
 
     //装备能力分析
@@ -286,6 +291,31 @@ public class ReportController extends BaseController {
         }
 
         return result;
+    }
+
+    /**
+     * 算法
+     * @return
+     */
+    @RequestMapping(value = "/arithmetic")
+    public ModelAndView arithmetic() {
+        ModelAndView modelAndView = new ModelAndView("system/report/arithmetic");
+        UserInfoPO user = this.getLoginUser();
+        modelAndView.addObject("nickname", user.getNickname());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/getArithmeticResult")
+    @ResponseBody
+    public Map<String,Object> getArithmeticResult(@RequestBody ArithmeticVo vo) {
+        Map<String,Object> map = new HashMap<>();
+        try {
+            String result = arithmeticBiz.arithmetic(vo);
+            map.put("data",result);
+        }catch (Exception e){
+            logger.error("计算异常",e);
+        }
+        return map;
     }
 
     //----------------------------------目标融合识别
