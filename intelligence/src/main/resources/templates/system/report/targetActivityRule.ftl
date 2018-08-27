@@ -81,22 +81,28 @@
 
 
                                 <div class="col-lg-2 wrapper">起止时间</div>
-                                <div class="col-lg-4 wrapper">
+                                <div class="col-lg-3 wrapper">
                                     <input id="sbsjStartTime" type="text" class="input form-control" placeholder="上报开始时间">
                                 </div>
-                                <div class="col-lg-4 wrapper">
+                                <div class="col-lg-3 wrapper">
                                     <input id="sbsjEndTime" type="text" class="input form-control" placeholder="上报结束时间">
                                 </div>
 
 
 
-                                <div class="col-lg-6 wrapper">
+                                <div class="col-lg-3 wrapper">
                                     <button id="query" type="button" class="btn btn-sm btn-primary">
                                         搜索
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="map" style="height: 300px;margin-top: 10px;"></div>
+                            <div class="row" style="height: 420px;">
+                                <div class="col-lg-12">
+                                    <div class="chart" id="chart" style="float: left;width: 520px;height:400px"></div>
+                                    <div class="chart" id="map" style="float: left;width: 525px;height: 400px;margin-top: 10px;"></div>
+                                </div>
+                            </div>
+
                             <div class="row" style="height: 500px;">
                                 <div class="col-lg-12">
                                     <table class="table"  id="table" style="height: 300px;"></table>

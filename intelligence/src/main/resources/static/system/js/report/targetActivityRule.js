@@ -221,9 +221,91 @@
         });
     }
 
+    function initChart(){
+
+        var option = {
+            title: {
+                text: '目标活动规律',
+                subtext: '活动规律同比',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            legend: {
+                top:50,
+                data:['去年','今年','同比增长率']
+            },
+            grid:{
+                left:30,
+                right:45,
+                top:80,
+                bottom:20,
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['1月','2月','3月','4月','5月','6月','7月','8月'],
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '数量',
+                    min: 0,
+                    max: 50,
+                    interval: 10,
+                    axisLabel: {
+                        formatter: '{value} '
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '同比增长率',
+                    min: 0,
+                    max: 100,
+                    interval: 20,
+                    axisLabel: {
+                        formatter: '{value} %'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name:'去年',
+                    type:'bar',
+                    data:[20, 10, 15, 30, 25, 12, 30, 21]
+                },
+                {
+                    name:'今年',
+                    type:'bar',
+                    data:[22, 13, 23, 35, 31, 20, 31, 25]
+                },
+                {
+                    name:'同比增长率',
+                    type:'line',
+                    yAxisIndex: 1,
+                    data:[10,30, 53.33,16.67, 24,66.67, 3.33, 19.05]
+                }
+            ]
+        };
+
+        var myChart = echarts.init(document.getElementById('chart'));
+        myChart.setOption(option);
+    }
 
     // 页面初始化
     $(function () {
+        initChart();
         initData();
         initEvent();
         initMap();
