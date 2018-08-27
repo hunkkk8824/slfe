@@ -84,7 +84,15 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="chart" id="gpsMap" style="height: 400px;"></div>
+
+
+                            <div class="row" style="height: 420px;">
+                                <div class="col-lg-12">
+                                    <div class="chart" id="chart" style="float: left;width: 520px;height:400px"></div>
+                                    <div class="chart" id="gpsMap" style="float: left;width: 525px;height: 400px;margin-top: 10px;"></div>
+                                </div>
+                            </div>
+
                             <div class="row" style="height: 300px;">
                                 <div class="col-lg-12">
                                     <table class="table table-responsive"  id="table"></table>

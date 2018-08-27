@@ -272,10 +272,123 @@
 
     }
 
+    function initChart(){
+
+        var option = {
+            title: {
+                text: '航道提取分析',
+                subtext: '航道提取分析环比',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            legend: {
+                top:50,
+                data:['环比增长率']
+            },
+            grid:{
+                left:30,
+                right:45,
+                top:80,
+                bottom:20,
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['1月','2月','3月','4月','5月','6月','7月','8月'],
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '数量',
+                    min: 0,
+                    max: 50,
+                    interval: 10,
+                    axisLabel: {
+                        formatter: '{value} '
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '环比增长率',
+                    min: 0,
+                    max: 100,
+                    interval: 20,
+                    axisLabel: {
+                        formatter: '{value} %'
+                    }
+                }
+            ],
+            series: [
+
+                {
+                    name:'环比增长率',
+                    type:'line',
+                    yAxisIndex: 1,
+                    data:[10,30, 53.33,16.67, 24,66.67, 3.33, 19.05]
+                }
+            ]
+        };
+        //
+        // var option = {
+        //         color: ['#3398DB'],
+        //         tooltip : {
+        //             trigger: 'axis',
+        //             axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+        //                 type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        //             }
+        //         },
+        //         grid: {
+        //             left: '3%',
+        //             right: '4%',
+        //             bottom: '3%',
+        //             containLabel: true
+        //         },
+        //         xAxis : [
+        //             {
+        //                 type : 'category',
+        //                 data :['1月','2月','3月','4月','5月','6月','7月','8月'],
+        //                 axisTick: {
+        //                     alignWithLabel: true
+        //                 }
+        //             }
+        //         ],
+        //         yAxis : [
+        //             {
+        //                 type : 'value'
+        //             }
+        //         ],
+        //         series : [
+        //             {
+        //                 name:'直接访问',
+        //                 type:'bar',
+        //                 barWidth: '60%',
+        //                 data:[10, 52, 200, 334, 390, 330, 220,345]
+        //             }
+        //         ]
+        //     };
+
+
+        var myChart = echarts.init(document.getElementById('chart'));
+        myChart.setOption(option);
+    }
+
     // 页面初始化
     $(function () {
         initData();
         initEvent();
         initTable();
+        initChart();
     });
 })(_path);
