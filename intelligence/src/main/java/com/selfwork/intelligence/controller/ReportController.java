@@ -257,6 +257,16 @@ public class ReportController extends BaseController {
         return modelAndView;
     }
 
+
+    @RequestMapping(value = "/toTargetForRadar")
+    public ModelAndView toTargetForRadar() {
+        ModelAndView modelAndView = new ModelAndView("system/report/targetForRadar");
+        UserInfoPO user = this.getLoginUser();
+        modelAndView.addObject("dataSetCodeEnums", DataSetCodeEnum.values());
+        modelAndView.addObject("nickname", user.getNickname());
+        return modelAndView;
+    }
+
     //----------------------------------装备威力规律
     @ResponseBody
     @RequestMapping(value = "/powerlaw", method = RequestMethod.POST)

@@ -45,7 +45,7 @@
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
-                <a href="${base}/manageindex"><img src="${base}/static/system/img/logo.png" alt="" title="" style="height: 35px;"/></a>
+                <#--<a href="${base}/manageindex"><img src="${base}/static/system/img/logo.png" alt="" title="" style="height: 35px;"/></a>-->
                 <span class="system-name">多源情报信息交叉分析工具开发平台</span>
             </div>
             <nav id="nav-menu-container">
@@ -63,6 +63,7 @@
                             <li><a href="${base}/report/knowledgeReport">知识提取</a></li>
                             <li><a href="${base}/report/arithmetic">数据挖掘</a></li>
                             <li><a href="${base}/report/report1?dataset=qb_sj_dptdzzmb">雷达目标数据</a></li>
+                            <li><a href="${base}/report/toTargetForRadar">雷达捕捉目标活动规律</a></li>
 
                         </ul>
                     </li>

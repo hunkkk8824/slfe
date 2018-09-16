@@ -18,6 +18,7 @@ public enum DataSetCodeEnum implements BaseEnum<DataSetCodeEnum, String> {
     QB_SJ_JZTSMB("qb_sj_jztsmb", "情报_数据_技侦态势目标"),
     QB_SJ_DPTSSMB("qb_sj_dptssmb", "情报_数据_多平台水声目标"),
     QB_SJ_DPTDZZMB("qb_sj_dptdzzmb", "情报_数据_多平台电子战目标"),
+    QB_SJ_LDBZMBHDGL("qb_sj_ldbzmbhdgl", "情报_数据_雷达捕捉目标活动规律"),
 
     ;
 

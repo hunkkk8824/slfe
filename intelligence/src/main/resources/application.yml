@@ -43,5 +43,5 @@ pagehelper:
 logback:
   logdir: /data/intelligence/logs/
   appname: selfwork-intelligence
-  level: INFO
+  level: DEBUG
 
