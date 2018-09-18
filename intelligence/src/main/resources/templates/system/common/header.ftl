@@ -45,7 +45,7 @@
     <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
-                <a href="${base}/manageindex"><img src="${base}/static/system/img/logo.png" alt="" title="" style="height: 35px;"/></a>
+                <#--<a href="${base}/manageindex"><img src="${base}/static/system/img/logo.png" alt="" title="" style="height: 35px;"/></a>-->
                 <span class="system-name">多源情报信息交叉分析工具开发平台</span>
             </div>
             <nav id="nav-menu-container">

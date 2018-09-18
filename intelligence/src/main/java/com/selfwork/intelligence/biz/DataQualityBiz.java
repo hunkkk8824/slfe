@@ -57,6 +57,7 @@ public class DataQualityBiz extends BaseBiz {
             this.setContainerList(DataSetCodeEnum.QB_SJ_YSDZZTMMB.getValue(), "qbSjYsdzztmmbBiz");
             this.setContainerList(DataSetCodeEnum.QB_SJ_YSMB.getValue(), "qbSjYsmbBiz");
             this.setContainerList(DataSetCodeEnum.SCOUT_QB_TABLE_BD.getValue(), "scoutQbTableBdBiz");
+            this.setContainerList(DataSetCodeEnum.QB_SJ_LDBZMBHDGL.getValue(), "ldbzmbhdglBiz");
         }
 
     }
