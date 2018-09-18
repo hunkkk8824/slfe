@@ -92,6 +92,7 @@
                                         <option value="qb_sj_rgmb">人工目标</option>
                                         <option value="qb_sj_ysdzzdzzcmb">电子战电子侦察目标</option>
                                         <option value="qb_sj_ysdzzjgmb">原始电子战激光目标</option>
+                                        <option value="qb_sj_ysdzzjgmb">雷达目标数据</option>
                                         <option value="qb_sj_ysdzztmmb">原始电子战通信目标</option>
                                         <option value="qb_sj_ysmb">情报数据原始目标</option>
                                     </select>

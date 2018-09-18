@@ -11,6 +11,7 @@ public enum DataSetCodeEnum implements BaseEnum<DataSetCodeEnum, String> {
     QB_SJ_YSMB("qb_sj_ysmb", "情报数据原始目标"),
     QB_SJ_YSDZZTMMB("qb_sj_ysdzztmmb", "情报_数据_原始电子战通信目标"),
     QB_SJ_YSDZZJGMB("qb_sj_ysdzzjgmb", "情报_数据_原始电子战激光目标"),
+    QB_SJ_LDDZZJGMB("qb_sj_ysdzzjgmb", "情报_数据_雷达目标数据"),//与电子战激光目标一致
     QB_SJ_YSDZZDZZCMB("qb_sj_ysdzzdzzcmb", "情报_数据_电子战电子侦察目标"),
     QB_SJ_RHMB("qb_sj_rhmb", "情报_数据_融合目标"),
     QB_SJ_RGMB("qb_sj_rgmb", "情报_数据_人工目标"),
@@ -18,6 +19,7 @@ public enum DataSetCodeEnum implements BaseEnum<DataSetCodeEnum, String> {
     QB_SJ_JZTSMB("qb_sj_jztsmb", "情报_数据_技侦态势目标"),
     QB_SJ_DPTSSMB("qb_sj_dptssmb", "情报_数据_多平台水声目标"),
     QB_SJ_DPTDZZMB("qb_sj_dptdzzmb", "情报_数据_多平台电子战目标"),
+
 
     ;
 

@@ -62,7 +62,7 @@
                             <li><a href="${base}/report/toTargetFusionRecognition">目标融合识别</a></li>
                             <li><a href="${base}/report/knowledgeReport">知识提取</a></li>
                             <li><a href="${base}/report/arithmetic">数据挖掘</a></li>
-                            <li><a href="${base}/report/report1?dataset=qb_sj_dptdzzmb">雷达目标数据</a></li>
+                            <#--<li><a href="${base}/report/report1?dataset=qb_sj_dptdzzmb">雷达目标数据</a></li>-->
 
                         </ul>
                     </li>
