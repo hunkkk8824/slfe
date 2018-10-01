@@ -99,8 +99,8 @@
         //监听地图缩放
         map.addEventListener("zoomend", function () {
             hideLog();
-            if (this.getZoom() > 7) {
-                layer.msg("默认只有7级地图, 超过无法显示");
+            if (this.getZoom() > 10) {
+                layer.msg("默认只有10级地图, 超过无法显示");
             }
         });
 
