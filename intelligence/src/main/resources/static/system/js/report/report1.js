@@ -24,11 +24,12 @@
 
     };
 
-
+    var maxZoom = 9,
+        defaultZoom = 7;
     //1.百度地图API功能
     var map = new BMap.Map("map", {
         minZoom: 1,
-        maxZoom: 7
+        maxZoom: maxZoom
     });    // 创建Map实例
 
     //隐藏百度地图商标
@@ -90,17 +91,17 @@
 
     // 初始化地图
     var initMap = function () {
-        map.centerAndZoom(new BMap.Point(116.404, 39.915), 7);  // 初
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), defaultZoom);  // 初
         map.setCurrentCity("武汉");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-        //map.addControl(new BMap.NavigationControl());   //缩放按钮
-        map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
+        map.addControl(new BMap.NavigationControl());   //缩放按钮
+        //map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
 
         //监听地图缩放
         map.addEventListener("zoomend", function () {
             hideLog();
-            if (this.getZoom() > 10) {
-                layer.msg("默认只有10级地图, 超过无法显示");
+            if (this.getZoom() > maxZoom) {
+                layer.msg("默认只有" + maxZoom + "级地图, 超过无法显示");
             }
         });
 

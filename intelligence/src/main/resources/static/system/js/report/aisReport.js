@@ -1,9 +1,12 @@
 (function (_path) {
     /** 通用变量 */
     var publicCache = {};
+
+    var maxZoom = 9,
+        defaultZoom = 7;
     var map = new BMap.Map("gpsMap", {
         minZoom: 1,
-        maxZoom: 7
+        maxZoom: maxZoom
     });
 
 
@@ -11,17 +14,17 @@
     var initData = function () {
         publicCache.path = _path;
         //地图初始化
-        map.centerAndZoom(new BMap.Point(121.55, 24.94), 7);  // 初
+        map.centerAndZoom(new BMap.Point(121.55, 24.94), defaultZoom);  // 初
         // map.setCurrentCity("台北");          // 设置地图中心显示的城市 new！始化地图,设置中心点坐标和地图级别
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
         //map.addControl(new BMap.NavigationControl());   //缩放按钮
-        map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
+        //map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]}));   //添加地图类型控件 离线只支持普通、卫星地图; 三维不支持
 
         //监听地图缩放
         map.addEventListener("zoomend", function () {
             hideLog();
-            if (this.getZoom() > 10) {
-                layer.msg("默认只有10级地图, 超过无法显示");
+            if (this.getZoom() > maxZoom) {
+                layer.msg("默认只有" + maxZoom + "级地图, 超过无法显示");
             }
         });
 
@@ -94,7 +97,7 @@
 
         $("#fenxi").click(function () {
 
-            var strokeColor=['','green','red','yellow'];
+            var strokeColor = ['', 'green', 'red', 'yellow'];
             var rows = $('#table').bootstrapTable('getData');
             var reqPoints = [];
             $.each(rows, function (i, n) {
@@ -125,7 +128,7 @@
 
                         debugger
                         var curve = new BMapLib.CurveLine(points, {
-                            strokeColor: strokeColor[parseInt(3*Math.random())+1],
+                            strokeColor: strokeColor[parseInt(3 * Math.random()) + 1],
                             strokeWeight: 3,
                             strokeOpacity: 0.5
                         }); //创建弧线对象
@@ -133,10 +136,8 @@
                     });
 
 
-
                 }
             });
-
 
 
         });
@@ -272,7 +273,7 @@
 
     }
 
-    function initChart(){
+    function initChart() {
 
         var option = {
             title: {
@@ -290,19 +291,19 @@
                 }
             },
             legend: {
-                top:50,
-                data:['环比增长率']
+                top: 50,
+                data: ['环比增长率']
             },
-            grid:{
-                left:30,
-                right:45,
-                top:80,
-                bottom:20,
+            grid: {
+                left: 30,
+                right: 45,
+                top: 80,
+                bottom: 20,
             },
             xAxis: [
                 {
                     type: 'category',
-                    data: ['1月','2月','3月','4月','5月','6月','7月','8月'],
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月'],
                     axisPointer: {
                         type: 'shadow'
                     }
@@ -333,10 +334,10 @@
             series: [
 
                 {
-                    name:'环比增长率',
-                    type:'line',
+                    name: '环比增长率',
+                    type: 'line',
                     yAxisIndex: 1,
-                    data:[40.46,50.90, 63.67,70.89, 74.67,76.90, 77.69,78.95]
+                    data: [40.46, 50.90, 63.67, 70.89, 74.67, 76.90, 77.69, 78.95]
                 }
             ]
         };
